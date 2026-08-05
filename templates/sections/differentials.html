@@ -1,0 +1,27 @@
+<section id="differentials" class="section differentials-section">
+    <div class="container">
+        <div class="manifesto-card">
+            <div class="section-label">Filosofía de trabajo</div>
+            <h2 class="section-title">{{ manifesto_title }}</h2>
+            <div class="manifesto-body">
+                <p>El software de calidad nace de la claridad conceptual y la escucha atenta. En <strong>GG Solutions</strong> eliminamos las capas innecesarias de gestión y las tecnologías de moda no justificadas.</p>
+                <p>Trabajamos de forma directa para transformar requerimientos complejos en aplicaciones web limpias, seguras y escalables.</p>
+            </div>
+        </div>
+
+        <div class="differentials-block">
+            <div class="section-label">Nuestro diferencial</div>
+            <h2 class="section-title">Principios que guían cada proyecto</h2>
+            <p class="section-subtitle">Construimos relaciones de largo plazo basadas en la confianza y los resultados técnicos concretos.</p>
+            
+            <div class="differentials-grid">
+                {% for diff in differentials %}
+                <div class="diff-card">
+                    <h3>{{ diff.title }}</h3>
+                    <p>{{ diff.desc }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>

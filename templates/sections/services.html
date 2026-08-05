@@ -1,0 +1,17 @@
+<section id="services" class="section services-section">
+    <div class="container">
+        <div class="section-label">Qué hacemos</div>
+        <h2 class="section-title">Soluciones técnicas diseñadas con precisión.</h2>
+        <p class="section-subtitle">Acompañamos a empresas y equipos a resolver desafíos de software reales con un enfoque directo y artesanal.</p>
+        
+        <div class="services-grid">
+            {% for item in services %}
+            <div class="service-card">
+                <span class="service-num">{{ item.num }}</span>
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.desc }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

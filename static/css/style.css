@@ -1,0 +1,1079 @@
+/* ==========================================================================
+   GG Solutions - Premium Tech CSS System
+   Container Alignment, Rich Elevation Shadows & High-End Visual Life
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. DESIGN TOKENS
+   -------------------------------------------------------------------------- */
+:root {
+  /* Surfaces */
+  --bg-main: #ffffff;
+  --bg-surface: #f8fafc;        /* Cool off-white surface */
+  --bg-subtle: #f1f5f9;         /* Light grey background for pills/badges */
+  --bg-card: #ffffff;
+  
+  /* Borders */
+  --border-hairline: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --border-accent: #2563eb;
+
+  /* Typography Colors */
+  --text-headline: #0f172a;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-dim: #94a3b8;
+
+  /* Accent Color (Indigo / Electric Blue Touch) */
+  --accent-blue: #2563eb;
+  --accent-blue-light: rgba(37, 99, 235, 0.08);
+  --accent-blue-glow: rgba(37, 99, 235, 0.25);
+
+  --accent-dark: #0f172a;
+  --accent-dark-hover: #1e293b;
+
+  /* Fonts & Scale */
+  --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Fira Code', Consolas, monospace;
+
+  /* Layout & Spacing */
+  --container-max: 1140px;
+  --section-padding-y: 100px;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-full: 9999px;
+
+  /* Elevation Shadows */
+  --shadow-card: 0 4px 20px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-hover: 0 20px 35px -5px rgba(15, 23, 42, 0.1), 0 8px 12px -6px rgba(15, 23, 42, 0.05);
+  --shadow-float: 0 25px 50px -12px rgba(15, 23, 42, 0.15);
+
+  --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET & BASE STYLES
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-body);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--bg-main);
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------
+   3. UNIFIED CONTAINER & SECTION LAYOUT
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.section {
+  padding-top: var(--section-padding-y);
+  padding-bottom: var(--section-padding-y);
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.section-header {
+  max-width: 760px;
+  margin-bottom: 48px;
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 0.775rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-blue);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 4vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.22;
+  letter-spacing: -0.03em;
+  color: var(--text-headline);
+  margin-bottom: 14px;
+}
+
+.section-subtitle {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   4. BUTTONS & INTERACTIVE ELEMENTS
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 26px;
+  font-size: 0.925rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.3);
+}
+
+.btn-outline {
+  background-color: #ffffff;
+  color: var(--text-headline);
+  border-color: var(--border-hairline);
+  box-shadow: var(--shadow-card);
+}
+
+.btn-outline:hover {
+  border-color: var(--text-headline);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.btn-sm {
+  padding: 9px 18px;
+  font-size: 0.875rem;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   5. HEADER & NAVIGATION
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-headline);
+}
+
+.brand-mark {
+  background: var(--text-headline);
+  color: #ffffff;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a:not(.btn) {
+  color: var(--text-secondary);
+  font-size: 0.925rem;
+  font-weight: 500;
+  transition: color var(--transition-normal);
+}
+
+.nav-links a:not(.btn):hover {
+  color: var(--accent-blue);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.nav-toggle span {
+  width: 22px;
+  height: 2px;
+  background-color: var(--text-headline);
+  border-radius: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   6. HERO SECTION (2-Column Editorial Desktop & 3-Claim Ribbon)
+   -------------------------------------------------------------------------- */
+.hero-section {
+  padding-top: 80px;
+  padding-bottom: 70px;
+  background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.04) 0%, transparent 70%);
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 56px;
+}
+
+.hero-copy-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 6px 14px;
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-hairline);
+  color: var(--text-headline);
+  border-radius: var(--radius-full);
+  font-size: 0.775rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+  margin-bottom: 24px;
+}
+
+.dot-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--accent-blue);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 4.5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  color: var(--text-headline);
+  margin-bottom: 20px;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.05rem, 1.8vw, 1.175rem);
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 32px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hero-visual-col {
+  position: relative;
+  width: 100%;
+}
+
+.hero-image-frame {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-hairline);
+  box-shadow: var(--shadow-hover);
+  background-color: var(--bg-surface);
+}
+
+.hero-editorial-img {
+  width: 100%;
+  height: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition-normal);
+}
+
+.hero-image-frame:hover .hero-editorial-img {
+  transform: scale(1.015);
+}
+
+.hero-floating-glass {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.glass-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.glass-tag {
+  font-family: var(--font-mono);
+  font-size: 0.675rem;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 0.08em;
+}
+
+.glass-quote {
+  font-family: var(--font-display);
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: #f8fafc;
+  line-height: 1.4;
+}
+
+.hero-claims-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-md);
+  padding: 24px 32px;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+}
+
+.claim-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.claim-bullet {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+  background-color: var(--accent-blue-light);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.claim-text {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-headline);
+  letter-spacing: -0.02em;
+}
+
+.claim-divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--border-hairline);
+}
+
+/* --------------------------------------------------------------------------
+   7. METHODOLOGY SECTION ("Cómo trabajamos" - Balanced 2-Column Grid)
+   -------------------------------------------------------------------------- */
+.methodology-section {
+  background-color: var(--bg-main);
+}
+
+.methodology-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: stretch;
+}
+
+.methodology-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.step-item {
+  display: flex;
+  gap: 20px;
+  padding: 24px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-hairline);
+  background-color: var(--bg-card);
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-normal);
+}
+
+.step-item:hover {
+  border-color: var(--border-accent);
+  transform: translateX(4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.step-badge {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--accent-blue);
+  background-color: var(--accent-blue-light);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-headline);
+  margin-bottom: 4px;
+}
+
+.step-info p {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* Image Frame - Equal Height Matching Steps Column */
+.image-frame {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  box-shadow: var(--shadow-float);
+  height: 100%;
+}
+
+.image-wrapper {
+  flex: 1;
+  min-height: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-hairline);
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  display: block;
+}
+
+.image-caption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 8px 4px 8px;
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.dot-live {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   8. SERVICES SECTION ("Qué hacemos" - Layered Surface & Vibrant Cards)
+   -------------------------------------------------------------------------- */
+.services-section {
+  background-color: var(--bg-surface);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.service-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-md);
+  padding: 36px 30px;
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-normal);
+}
+
+.service-card:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+}
+
+.service-num {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--accent-blue);
+  background-color: var(--accent-blue-light);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 20px;
+}
+
+.service-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-headline);
+  margin-bottom: 10px;
+}
+
+.service-card p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   9. MANIFESTO & DIFFERENTIALS SECTION
+   -------------------------------------------------------------------------- */
+.differentials-section {
+  background-color: var(--bg-main);
+}
+
+.manifesto-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-hairline);
+  padding: 52px;
+  border-radius: var(--radius-lg);
+  margin-bottom: 70px;
+  box-shadow: var(--shadow-card);
+}
+
+.manifesto-body p {
+  font-size: 1.075rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.manifesto-body p:last-child {
+  margin-bottom: 0;
+}
+
+.differentials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.diff-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-hairline);
+  padding: 32px 28px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-normal);
+}
+
+.diff-card:hover {
+  border-color: var(--border-accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.diff-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-headline);
+  margin-bottom: 10px;
+}
+
+.diff-card p {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   10. PROJECTS SECTION
+   -------------------------------------------------------------------------- */
+.projects-section {
+  background-color: var(--bg-surface);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-md);
+  padding: 36px 30px;
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-normal);
+}
+
+.project-card:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+}
+
+.project-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.project-client {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: var(--accent-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.project-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  background-color: var(--bg-subtle);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-hairline);
+}
+
+.project-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-headline);
+  margin-bottom: 10px;
+}
+
+.project-card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   11. CONTACT SECTION
+   -------------------------------------------------------------------------- */
+.contact-section {
+  background-color: var(--bg-main);
+  border-bottom: none;
+}
+
+.contact-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-lg);
+  padding: 56px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  box-shadow: var(--shadow-float);
+}
+
+.contact-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-blue);
+  margin-bottom: 16px;
+}
+
+.contact-left h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-headline);
+  margin-bottom: 16px;
+}
+
+.contact-left p {
+  color: var(--text-secondary);
+  font-size: 1.025rem;
+  margin-bottom: 32px;
+}
+
+.contact-direct {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contact-label {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.email-link {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+  transition: opacity var(--transition-normal);
+}
+
+.email-link:hover {
+  opacity: 0.8;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.form-field input,
+.form-field textarea {
+  background-color: #ffffff;
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-sm);
+  padding: 13px;
+  color: var(--text-headline);
+  font-family: inherit;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-card);
+  transition: border-color var(--transition-normal);
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px var(--accent-blue-light);
+}
+
+/* --------------------------------------------------------------------------
+   12. FOOTER
+   -------------------------------------------------------------------------- */
+.site-footer {
+  border-top: 1px solid var(--border-hairline);
+  padding: 40px 0;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  background-color: var(--bg-main);
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-links a {
+  color: var(--text-secondary);
+  transition: color var(--transition-normal);
+}
+
+.footer-links a:hover {
+  color: var(--accent-blue);
+}
+
+/* --------------------------------------------------------------------------
+   12.1. CASES SECTION ("Lo que construimos" - Premium Editorial Visual Showcase)
+   -------------------------------------------------------------------------- */
+.cases-section {
+  background-color: var(--bg-surface);
+}
+
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 16px;
+}
+
+.case-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+  transition: border-color var(--transition-normal), transform var(--transition-normal);
+}
+
+.case-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+
+.case-video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #0f172a;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.case-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.case-video-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.675rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 2;
+}
+
+.dot-live-green {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.case-card-body {
+  padding: 32px 28px 36px 28px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.case-pill {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  background-color: var(--accent-blue-light);
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+
+.case-card-title {
+  font-family: var(--font-display);
+  font-size: 1.175rem;
+  font-weight: 700;
+  color: var(--text-headline);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.case-card-desc {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-top: auto;
+}
+
+/* --------------------------------------------------------------------------
+   13. RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 968px) {
+  :root {
+    --section-padding-y: 70px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    margin-bottom: 40px;
+  }
+
+  .hero-claims-ribbon {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 20px 24px;
+  }
+
+  .claim-divider {
+    display: none;
+  }
+
+  .methodology-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .cases-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .hero-trust-bar {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 76px;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--border-hairline);
+    flex-direction: column;
+    padding: 24px;
+    gap: 16px;
+    box-shadow: var(--shadow-float);
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .contact-card {
+    grid-template-columns: 1fr;
+    padding: 32px 20px;
+    gap: 36px;
+  }
+
+  .manifesto-card {
+    padding: 28px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+}

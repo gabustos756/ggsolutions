@@ -1,0 +1,43 @@
+<section id="cases" class="section cases-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label">Casos en acción</span>
+            <h2 class="section-title">Lo que construimos</h2>
+            <p class="section-subtitle">Demostración directa de nuestra capacidad técnica: plataformas comerciales orientadas a conversión, telemetría de datos en tiempo real y motores de automatización táctica.</p>
+        </div>
+        
+        <div class="cases-grid">
+            {% for case in built_cases %}
+            <article class="case-card">
+                <!-- Marco del Video -->
+                <div class="case-video-wrapper">
+                    <video 
+                        autoplay 
+                        loop 
+                        muted 
+                        playsinline 
+                        preload="metadata"
+                        class="case-video"
+                        title="{{ case.title }}"
+                    >
+                        <source src="{{ url_for('static', filename=case.video) }}" type="video/quicktime">
+                        <source src="{{ url_for('static', filename=case.video) }}" type="video/mp4">
+                        Tu navegador no soporta la reproducción de video HTML5.
+                    </video>
+                    <div class="case-video-badge">
+                        <span class="dot-live-green"></span>
+                        <span>DEMO EN VIVO</span>
+                    </div>
+                </div>
+
+                <!-- Contenido de la Tarjeta -->
+                <div class="case-card-body">
+                    <div class="case-pill">{{ case.badge }}</div>
+                    <h3 class="case-card-title">{{ case.title }}</h3>
+                    <p class="case-card-desc">{{ case.desc }}</p>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>

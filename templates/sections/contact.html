@@ -1,0 +1,94 @@
+<section id="contact" class="section contact-section">
+    <div class="container">
+        <div class="contact-card">
+            <div class="contact-left">
+                <span class="contact-badge">Contacto directo</span>
+                <h2>Iniciemos una conversación</h2>
+                <p>Contanos brevemente sobre tu proyecto o duda técnica. Te respondemos con un diagnóstico inicial sin compromiso.</p>
+                <div class="contact-direct">
+                    <span class="contact-label">Correo electrónico:</span>
+                    <a href="mailto:contacto@ggsolutions.com.ar" class="email-link">contacto@ggsolutions.com.ar</a>
+                </div>
+            </div>
+            
+            <div class="contact-form-container">
+                <div id="contact-alert" class="contact-feedback" style="display: none; padding: 16px; border-radius: 12px; margin-bottom: 20px; font-size: 0.925rem; font-weight: 500;"></div>
+
+                <form id="public-contact-form" class="contact-form">
+                    <div class="form-field">
+                        <label for="name">Nombre / Empresa</label>
+                        <input type="text" id="name" name="name" placeholder="Tu nombre o empresa" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" id="email" name="email" placeholder="tu@empresa.com" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="phone">Teléfono / WhatsApp (con característica)</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Ej: 351 15 555 1234 / +54 9 351..." required>
+                    </div>
+                    <div class="form-field">
+                        <label for="topic">¿Cómo podemos ayudarte?</label>
+                        <textarea id="topic" name="topic" rows="3" placeholder="Describí brevemente tu proyecto o necesidad técnica..." required></textarea>
+                    </div>
+                    <button type="submit" id="btn-contact-submit" class="btn btn-primary btn-full">Enviar mensaje</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.getElementById('public-contact-form');
+    const feedback = document.getElementById('contact-alert');
+    const submitBtn = document.getElementById('btn-contact-submit');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const payload = {
+                nombre: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                telefono: document.getElementById('phone').value.trim(),
+                mensaje: document.getElementById('topic').value.trim()
+            };
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Enviando mensaje...';
+            feedback.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/contacto', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.status === 'ok') {
+                    feedback.style.display = 'block';
+                    feedback.style.backgroundColor = 'rgba(16, 185, 129, 0.12)';
+                    feedback.style.color = '#065f46';
+                    feedback.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+                    feedback.innerText = result.message || '¡Gracias por tu mensaje! Te responderemos a la brevedad.';
+                    contactForm.reset();
+                } else {
+                    throw new Error(result.message || 'No se pudo enviar el mensaje.');
+                }
+            } catch (err) {
+                feedback.style.display = 'block';
+                feedback.style.backgroundColor = 'rgba(239, 68, 68, 0.12)';
+                feedback.style.color = '#991b1b';
+                feedback.style.border = '1px solid rgba(239, 68, 68, 0.4)';
+                feedback.innerText = err.message || 'Ocurrió un error al enviar tu consulta. Por favor reintenta.';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'Enviar mensaje';
+            }
+        });
+    }
+});
+</script>

@@ -1,0 +1,20 @@
+<section id="projects" class="section projects-section">
+    <div class="container">
+        <div class="section-label">Proyectos seleccionados</div>
+        <h2 class="section-title">Casos de éxito y desarrollo aplicado.</h2>
+        <p class="section-subtitle">Ejemplos de cómo ayudamos a nuestros clientes a resolver desafíos reales de software e infraestructura.</p>
+        
+        <div class="projects-grid">
+            {% for project in projects %}
+            <article class="project-card">
+                <div class="project-header">
+                    <span class="project-client">{{ project.client }}</span>
+                    <span class="project-tag">{{ project.tag }}</span>
+                </div>
+                <h3>{{ project.category }}</h3>
+                <p>{{ project.desc }}</p>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>

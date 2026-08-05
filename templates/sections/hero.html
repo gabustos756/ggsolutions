@@ -1,0 +1,68 @@
+<section id="hero" class="hero-section">
+    <div class="container">
+        <!-- GRID DE 2 COLUMNAS EN DESKTOP -->
+        <div class="hero-grid">
+            
+            <!-- COLUMNA IZQUIERDA: COPY & CTAS -->
+            <div class="hero-copy-col">
+                <div class="hero-badge">
+                    <span class="dot-indicator"></span>
+                    <span>ESTUDIO & CONSULTORÍA DE SOFTWARE</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    Software pensado para resolver problemas reales.
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Nos sentemos a tomar un café, te escucho, vemos qué necesitás y encontramos la solución. Sin sobreingeniería, sin ruido y con arquitectura de alto rendimiento.
+                </p>
+                
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-primary">Hablemos de tu idea</a>
+                    <a href="#cases" class="btn btn-outline">Ver casos en acción</a>
+                </div>
+            </div>
+
+            <!-- COLUMNA DERECHA: IMAGEN EDITORIAL & TARJETA TÉCNICA FLOTANTE -->
+            <div class="hero-visual-col">
+                <div class="hero-image-frame">
+                    <img 
+                        src="{{ url_for('static', filename='images/hero_studio.png') }}" 
+                        alt="Estudio de Software GG Solutions - Espacio de trabajo y arquitectura"
+                        class="hero-editorial-img"
+                        loading="eager"
+                    >
+                    <!-- Tarjeta flotante técnica para romper el blanco y dar profundidad -->
+                    <div class="hero-floating-glass">
+                        <div class="glass-status">
+                            <span class="dot-live-green"></span>
+                            <span class="glass-tag">CÓDIGO CON CRITERIO</span>
+                        </div>
+                        <p class="glass-quote">"Escuchar bien antes de construir."</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FRANJA DE RITMO VISUAL (3 CLAIMS CORTOS) -->
+        <div class="hero-claims-ribbon">
+            <div class="claim-item">
+                <span class="claim-bullet">01</span>
+                <span class="claim-text">Trato directo.</span>
+            </div>
+            <div class="claim-divider"></div>
+            <div class="claim-item">
+                <span class="claim-bullet">02</span>
+                <span class="claim-text">Software real.</span>
+            </div>
+            <div class="claim-divider"></div>
+            <div class="claim-item">
+                <span class="claim-bullet">03</span>
+                <span class="claim-text">Resultados visibles.</span>
+            </div>
+        </div>
+
+    </div>
+</section>

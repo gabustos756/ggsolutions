@@ -1,0 +1,73 @@
+/* ==============================================================================
+   GG SOLUTIONS — DESIGN SYSTEM & TOKEN VARIATIONS BY INDUSTRY RUBRO
+   ============================================================================== */
+
+/* SALUD & CLÍNICAS */
+.theme-salud {
+    --theme-bg: #090d16;
+    --theme-card-bg: rgba(15, 23, 42, 0.7);
+    --theme-accent: #00f2fe;
+    --theme-border: rgba(0, 242, 254, 0.2);
+    --theme-glow: 0 0 30px -5px rgba(0, 242, 254, 0.25);
+    --theme-font: 'Outfit', sans-serif;
+}
+
+/* AUTOMOTRIZ & MECÁNICA */
+.theme-automotriz {
+    --theme-bg: #0c0a09;
+    --theme-card-bg: rgba(28, 25, 23, 0.7);
+    --theme-accent: #f97316;
+    --theme-border: rgba(249, 115, 22, 0.2);
+    --theme-glow: 0 0 30px -5px rgba(249, 115, 22, 0.25);
+    --theme-font: 'Oswald', sans-serif;
+}
+
+/* GASTRONOMÍA & RESTAURANTES */
+.theme-gastronomia {
+    --theme-bg: #0d0907;
+    --theme-card-bg: rgba(24, 17, 13, 0.7);
+    --theme-accent: #eab308;
+    --theme-border: rgba(234, 179, 8, 0.2);
+    --theme-glow: 0 0 30px -5px rgba(234, 179, 8, 0.25);
+    --theme-font: 'Playfair Display', serif;
+}
+
+/* RETAIL & TIENDAS */
+.theme-retail {
+    --theme-bg: #0b0b12;
+    --theme-card-bg: rgba(20, 20, 35, 0.7);
+    --theme-accent: #ec4899;
+    --theme-border: rgba(236, 72, 153, 0.2);
+    --theme-glow: 0 0 30px -5px rgba(236, 72, 153, 0.25);
+    --theme-font: 'Outfit', sans-serif;
+}
+
+/* SERVICIOS PROFESIONALES */
+.theme-servicios {
+    --theme-bg: #080c14;
+    --theme-card-bg: rgba(15, 23, 42, 0.7);
+    --theme-accent: #3b82f6;
+    --theme-border: rgba(59, 130, 246, 0.2);
+    --theme-glow: 0 0 30px -5px rgba(59, 130, 246, 0.25);
+    --theme-font: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* INMOBILIARIA & BIENES RAÍCES */
+.theme-inmobiliaria {
+    --theme-bg: #090d0b;
+    --theme-card-bg: rgba(16, 26, 21, 0.7);
+    --theme-accent: #10b981;
+    --theme-border: rgba(16, 185, 129, 0.2);
+    --theme-glow: 0 0 30px -5px rgba(16, 185, 129, 0.25);
+    --theme-font: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* GENERAL / CORPORATIVO */
+.theme-general {
+    --theme-bg: #090a0f;
+    --theme-card-bg: rgba(15, 20, 32, 0.7);
+    --theme-accent: #6366f1;
+    --theme-border: rgba(99, 102, 241, 0.2);
+    --theme-glow: 0 0 30px -5px rgba(99, 102, 241, 0.25);
+    --theme-font: 'Plus Jakarta Sans', sans-serif;
+}

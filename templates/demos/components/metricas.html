@@ -1,0 +1,52 @@
+<!-- MÓDULO INTERACTIVO: DASHBOARD & MÉTRICAS -->
+<div class="glass-card rounded-2xl p-6 sm:p-8 max-w-5xl mx-auto space-y-6">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/10 pb-4">
+        <div>
+            <h4 class="text-lg font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-chart-line text-emerald-400"></i> Dashboard Operativo en Tiempo Real
+            </h4>
+            <p class="text-xs text-slate-400">Métricas consolidadas de conversión, pedidos e ingresos del mes en {{ demo.nombre_negocio }}.</p>
+        </div>
+        <span class="px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 rounded-full text-xs font-semibold">
+            <i class="fa-solid fa-circle animate-pulse text-[10px] mr-1"></i> Live Data Feed
+        </span>
+    </div>
+
+    <!-- TARJETAS DE KPIS -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white/5 border border-white/10 rounded-xl p-4 space-y-1">
+            <p class="text-[11px] text-slate-400 uppercase font-semibold">Consultas Recibidas</p>
+            <p class="text-2xl font-extrabold text-white">142</p>
+            <p class="text-[10px] text-emerald-400 font-bold"><i class="fa-solid fa-arrow-up"></i> +18% vs mes anterior</p>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-xl p-4 space-y-1">
+            <p class="text-[11px] text-slate-400 uppercase font-semibold">Cierres Efectivos</p>
+            <p class="text-2xl font-extrabold text-cyan-400">38</p>
+            <p class="text-[10px] text-cyan-300 font-bold">26.7% Tasa de Conversión</p>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-xl p-4 space-y-1">
+            <p class="text-[11px] text-slate-400 uppercase font-semibold">Tiempo Medio Respuesta</p>
+            <p class="text-2xl font-extrabold text-amber-400">2.4 min</p>
+            <p class="text-[10px] text-amber-300 font-bold">Respuesta Inmediata WA</p>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-xl p-4 space-y-1">
+            <p class="text-[11px] text-slate-400 uppercase font-semibold">Satisfacción Cliente</p>
+            <p class="text-2xl font-extrabold text-emerald-400">{{ demo.rating }} / 5.0</p>
+            <p class="text-[10px] text-slate-400">Basado en Google Reviews</p>
+        </div>
+    </div>
+
+    <!-- BARRA VISUAL DE PROGRESO DE OBJETIVOS -->
+    <div class="bg-slate-900 border border-white/10 rounded-xl p-5 space-y-3">
+        <div class="flex justify-between text-xs font-bold text-slate-200">
+            <span>Objetivo Comercial del Mes: {{ demo.objetivo or 'Crecimiento de Ventas' }}</span>
+            <span class="text-emerald-400">82% Completado</span>
+        </div>
+        <div class="w-full bg-white/10 rounded-full h-3 overflow-hidden p-0.5">
+            <div class="bg-gradient-to-r from-emerald-500 to-cyan-400 h-full rounded-full w-[82%] shadow-sm"></div>
+        </div>
+    </div>
+</div>

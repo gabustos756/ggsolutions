@@ -1,0 +1,81 @@
+<!-- MÓDULO INTERACTIVO: STOCK E INVENTARIO -->
+<div class="glass-card rounded-2xl p-6 sm:p-8 max-w-5xl mx-auto space-y-6">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/10 pb-4">
+        <div>
+            <h4 class="text-lg font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-boxes-stacked text-amber-400"></i> Matriz de Stock & Reposición
+            </h4>
+            <p class="text-xs text-slate-400">Monitoreo continuo de inventarios con indicadores de stock crítico.</p>
+        </div>
+        <div class="flex gap-2">
+            <span class="px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-full text-xs font-semibold">
+                ● En Stock: 14 Categorías
+            </span>
+            <span class="px-3 py-1 bg-rose-500/10 border border-rose-500/30 text-rose-400 rounded-full text-xs font-semibold">
+                ⚠️ Stock Crítico: 2 Items
+            </span>
+        </div>
+    </div>
+
+    <!-- BUSCADOR INTERACTIVO -->
+    <div class="flex gap-3">
+        <input type="text" id="filter-stock" onkeyup="filtrarStock()" placeholder="Buscar producto, repuesto o código..." class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+        <button class="bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2">
+            <i class="fa-solid fa-filter"></i> Filtrar
+        </button>
+    </div>
+
+    <!-- TABLA DE PRODUCTOS -->
+    <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs text-slate-300">
+            <thead class="bg-white/5 uppercase text-slate-400 border-b border-white/10">
+                <tr>
+                    <th class="py-3 px-4">Código / Producto</th>
+                    <th class="py-3 px-4">Categoría</th>
+                    <th class="py-3 px-4">Stock Actual</th>
+                    <th class="py-3 px-4">Estado</th>
+                    <th class="py-3 px-4 text-right">Acción</th>
+                </tr>
+            </thead>
+            <tbody id="stock-tbody" class="divide-y divide-white/5">
+                <tr>
+                    <td class="py-3 px-4 font-semibold text-white">SKU-8841 - Insumo Premium Grade A</td>
+                    <td class="py-3 px-4 text-slate-400">Repuestos & Línea A</td>
+                    <td class="py-3 px-4 font-bold text-emerald-400">42 unidades</td>
+                    <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">ÓPTIMO</span></td>
+                    <td class="py-3 px-4 text-right"><button onclick="pedirReposicion('SKU-8841')" class="bg-white/10 hover:bg-amber-500 hover:text-slate-950 px-2.5 py-1 rounded text-white transition">Solicitar</button></td>
+                </tr>
+                <tr>
+                    <td class="py-3 px-4 font-semibold text-white">SKU-7732 - Kit de Servicio Completo</td>
+                    <td class="py-3 px-4 text-slate-400">Mantenimiento</td>
+                    <td class="py-3 px-4 font-bold text-amber-400">6 unidades</td>
+                    <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">REPOSICIÓN</span></td>
+                    <td class="py-3 px-4 text-right"><button onclick="pedirReposicion('SKU-7732')" class="bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded transition">Pedir Reposición</button></td>
+                </tr>
+                <tr>
+                    <td class="py-3 px-4 font-semibold text-white">SKU-9901 - Componente Especializado X</td>
+                    <td class="py-3 px-4 text-slate-400">Edición Especial</td>
+                    <td class="py-3 px-4 font-bold text-rose-400">1 unidad</td>
+                    <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30 animate-pulse">CRÍTICO</span></td>
+                    <td class="py-3 px-4 text-right"><button onclick="pedirReposicion('SKU-9901')" class="bg-rose-500 text-white font-bold px-2.5 py-1 rounded transition">Urgente WA</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function filtrarStock() {
+        const query = document.getElementById('filter-stock').value.toLowerCase();
+        const rows = document.querySelectorAll('#stock-tbody tr');
+        rows.forEach(r => {
+            const text = r.innerText.toLowerCase();
+            r.style.display = text.includes(query) ? '' : 'none';
+        });
+    }
+
+    function pedirReposicion(sku) {
+        const msg = `Hola {{ demo.nombre_negocio }}, solicito información de costo y disponibilidad para reposición del producto ${sku}.`;
+        window.open(`https://wa.me/{{ wa_clean }}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+</script>

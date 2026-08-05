@@ -71,14 +71,17 @@ def registrar_auditoria(accion: str, detalle: str, user_id: int = None):
 
 def seed_admin_user(app):
     """
-    Crea el usuario administrador inicial leyendo variables de entorno.
+    Crea o actualiza el usuario administrador inicial con la nueva contraseña.
     """
     import os
     with app.app_context():
-        admin_email = os.environ.get("ADMIN_EMAIL", "contacto@ggsolutions.com.ar").lower().strip()
-        admin_password = os.environ.get("ADMIN_PASSWORD", "ggsolutions2026")
+        admin_email = os.environ.get("ADMIN_EMAIL", "admin@ggsolutions.com.ar").lower().strip()
+        admin_password = os.environ.get("ADMIN_PASSWORD", "abl0420-")
         
         user = User.query.filter_by(email=admin_email).first()
+        if not user:
+            user = User.query.filter((User.email == "contacto@ggsolutions.com.ar") | (User.email == "admin")).first()
+
         if not user:
             new_admin = User(
                 email=admin_email,
@@ -89,4 +92,11 @@ def seed_admin_user(app):
             )
             db.session.add(new_admin)
             db.session.commit()
-            print(f"[SECURITY] Usuario Administrador inicial creado ({admin_email}).")
+            print(f"[SECURITY] Usuario Administrador creado ({admin_email}).")
+        else:
+            user.email = admin_email
+            user.password_hash = generate_password_hash(admin_password, method="pbkdf2:sha256")
+            user.activo = True
+            db.session.commit()
+            print(f"[SECURITY] Contraseña de usuario administrador actualizada ({admin_email}).")
+

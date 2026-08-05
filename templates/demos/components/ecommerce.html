@@ -1,0 +1,108 @@
+<!-- MÓDULO INTERACTIVO: E-COMMERCE & CARRITO -->
+<div class="glass-card rounded-2xl p-6 sm:p-8 max-w-5xl mx-auto space-y-6">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/10 pb-4">
+        <div>
+            <h4 class="text-lg font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-cart-shopping text-pink-400"></i> Catálogo Dinámico & Carrito Directo
+            </h4>
+            <p class="text-xs text-slate-400">Catálogo interactivo con selección instantánea de productos y pedido vía WhatsApp.</p>
+        </div>
+        <div class="flex items-center gap-3">
+            <button onclick="verCarrito()" class="bg-pink-500/20 text-pink-300 border border-pink-500/30 px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2 hover:bg-pink-500/30 transition">
+                <i class="fa-solid fa-basket-shopping"></i> Carrito (<span id="cart-count">0</span>)
+            </button>
+        </div>
+    </div>
+
+    <!-- GRILLA DE PRODUCTOS -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        
+        <div class="bg-white/5 border border-white/10 rounded-xl p-4 space-y-3 flex flex-col justify-between">
+            <div class="space-y-1">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-pink-400">Destacado</span>
+                <h5 class="font-bold text-white text-sm">Producto / Servicio Estrellas #1</h5>
+                <p class="text-xs text-slate-400">Especificación técnica, máxima calidad y garantía directa.</p>
+            </div>
+            <div class="flex justify-between items-center pt-2 border-t border-white/10">
+                <span class="font-extrabold text-white text-sm">$18.500</span>
+                <button onclick="agregarAlCarrito('Producto Estrellas #1', 18500)" class="bg-pink-500 hover:bg-pink-400 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-xs transition">
+                    + Agregar
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-xl p-4 space-y-3 flex flex-col justify-between">
+            <div class="space-y-1">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-cyan-400">Popular</span>
+                <h5 class="font-bold text-white text-sm">Pack Solución Integral #2</h5>
+                <p class="text-xs text-slate-400">Ideal para equipamiento completo y uso profesional continuado.</p>
+            </div>
+            <div class="flex justify-between items-center pt-2 border-t border-white/10">
+                <span class="font-extrabold text-white text-sm">$29.900</span>
+                <button onclick="agregarAlCarrito('Pack Solución #2', 29900)" class="bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-xs transition">
+                    + Agregar
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-xl p-4 space-y-3 flex flex-col justify-between">
+            <div class="space-y-1">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-amber-400">Promoción</span>
+                <h5 class="font-bold text-white text-sm">Kit de Mantenimiento #3</h5>
+                <p class="text-xs text-slate-400">Combinación recomendada para máxima vida útil.</p>
+            </div>
+            <div class="flex justify-between items-center pt-2 border-t border-white/10">
+                <span class="font-extrabold text-white text-sm">$12.400</span>
+                <button onclick="agregarAlCarrito('Kit Mantenimiento #3', 12400)" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-xs transition">
+                    + Agregar
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MODAL DE CHECKOUT SIMULADO -->
+    <div id="cart-drawer" class="hidden bg-slate-900 border border-white/10 rounded-xl p-5 space-y-3">
+        <h5 class="font-bold text-white text-sm border-b border-white/10 pb-2">Resumen de tu Carrito</h5>
+        <div id="cart-items-list" class="space-y-1 text-xs text-slate-300"></div>
+        <div class="flex justify-between items-center font-bold text-sm text-white pt-2 border-t border-white/10">
+            <span>Total a pagar:</span>
+            <span id="cart-total" class="text-emerald-400">$0 ARS</span>
+        </div>
+        <button onclick="enviarPedidoWA()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-2.5 rounded-lg text-xs transition flex items-center justify-center gap-2">
+            <i class="fa-brands fa-whatsapp"></i> Finalizar Pedido por WhatsApp
+        </button>
+    </div>
+</div>
+
+<script>
+    let carrito = [];
+
+    function agregarAlCarrito(nombre, precio) {
+        carrito.push({nombre, precio});
+        actualizarCarrito();
+    }
+
+    function actualizarCarrito() {
+        document.getElementById('cart-count').innerText = carrito.length;
+        const drawer = document.getElementById('cart-drawer');
+        if (carrito.length > 0) drawer.classList.remove('hidden');
+
+        const list = document.getElementById('cart-items-list');
+        list.innerHTML = '';
+        let total = 0;
+        carrito.forEach((item, idx) => {
+            total += item.precio;
+            list.innerHTML += `<div class="flex justify-between"><span>• ${item.nombre}</span><span>$${item.precio.toLocaleString('es-AR')}</span></div>`;
+        });
+        document.getElementById('cart-total').innerText = `$${total.toLocaleString('es-AR')} ARS`;
+    }
+
+    function enviarPedidoWA() {
+        if (carrito.length === 0) return;
+        let itemsStr = carrito.map(i => i.nombre).join(', ');
+        const total = document.getElementById('cart-total').innerText;
+        const msg = `Hola {{ demo.nombre_negocio }}, quisiera realizar el pedido de: ${itemsStr}. Total: ${total}.`;
+        window.open(`https://wa.me/{{ wa_clean }}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+</script>

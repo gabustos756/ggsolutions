@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Demos B2B — GG Solutions</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&family=Fira+Code:wght@500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Leaflet CSS for Fallback Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+        :root {
+            --bg-dark: #0b1120;
+            --bg-card: #1e293b;
+            --bg-card-hover: #243347;
+            --border-hairline: #334155;
+            --accent-blue: #2563eb;
+            --accent-indigo: #6366f1;
+            --text-title: #f8fafc;
+            --text-body: #e2e8f0;
+            --text-muted: #94a3b8;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-body);
+            min-height: 100vh;
+            padding-bottom: 80px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .admin-header {
+            background-color: #080d1a;
+            border-bottom: 1px solid var(--border-hairline);
+            padding: 0 32px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+        }
+
+        .admin-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-title);
+        }
+
+        .brand-logo-mark {
+            background-color: var(--accent-blue);
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 8px;
+        }
+
+        .brand-logo-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+        }
+
+        .brand-badge-env {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.675rem;
+            font-weight: 600;
+            color: #38bdf8;
+            background-color: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            padding: 3px 8px;
+            border-radius: 6px;
+            margin-left: 6px;
+        }
+
+        .user-nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .user-profile-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-hairline);
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+        }
+
+        .user-avatar-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #10b981;
+        }
+
+        .btn-logout {
+            color: #fca5a5;
+            text-decoration: none;
+            font-size: 0.825rem;
+            font-weight: 600;
+            padding: 7px 14px;
+            border-radius: 8px;
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.25);
+        }
+
+        .main-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        .page-header-block {
+            margin-bottom: 28px;
+        }
+
+        .page-header-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-title);
+            letter-spacing: -0.03em;
+            margin-bottom: 6px;
+        }
+
+        .page-header-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* FORMULARIO CARD */
+        .form-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-hairline);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+
+        .form-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-title);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            background-color: #0f172a;
+            border: 1px solid var(--border-hairline);
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: var(--text-title);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            border-color: #38bdf8;
+        }
+
+        /* Estilo del Mapa Interactivo */
+        #admin-map-preview {
+            width: 100%;
+            height: 280px;
+            border-radius: 12px;
+            border: 1px solid var(--border-hairline);
+            margin-top: 10px;
+            z-index: 10;
+        }
+
+        .btn-submit-demo {
+            background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 12px 24px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 12px;
+        }
+
+        .btn-submit-demo:hover {
+            opacity: 0.9;
+        }
+
+        /* TABLA DE DEMOS */
+        .demos-table-wrapper {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-hairline);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .demos-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+            text-align: left;
+        }
+
+        .demos-table th {
+            background-color: #0f172a;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.725rem;
+            letter-spacing: 0.05em;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border-hairline);
+        }
+
+        .demos-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            vertical-align: middle;
+        }
+
+        .demos-table tr:hover {
+            background-color: var(--bg-card-hover);
+        }
+
+        .btn-action-icon {
+            background-color: rgba(255,255,255,0.06);
+            border: 1px solid var(--border-hairline);
+            color: var(--text-title);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-action-icon:hover {
+            background-color: #38bdf8;
+            color: #000000;
+        }
+
+        .alert-flash {
+            background-color: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34d399;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+
+        /* Estilo para sugerencias autocompletado en modo oscuro */
+        .pac-container {
+            background-color: #0f172a !important;
+            border: 1px solid #334155 !important;
+            border-radius: 8px !important;
+            font-family: 'Inter', sans-serif !important;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5) !important;
+        }
+        .pac-item {
+            color: #cbd5e1 !important;
+            border-top: 1px solid #1e293b !important;
+            padding: 8px 12px !important;
+        }
+        .pac-item:hover, .pac-item-selected {
+            background-color: #1e293b !important;
+        }
+        .pac-item-query {
+            color: #ffffff !important;
+            font-weight: 600 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header de Administración -->
+    <header class="admin-header">
+        <a href="/" class="admin-brand">
+            <span class="brand-logo-mark">GG</span>
+            <span class="brand-logo-text">Solutions Studio</span>
+            <span class="brand-badge-env">PANEL ADMIN</span>
+        </a>
+
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <a href="/admin" style="color: #94a3b8; font-weight: 600; text-decoration: none; font-size: 0.9rem; transition: color 0.2s;">📬 Leads</a>
+            <a href="/admin/demos" style="color: #38bdf8; font-weight: 700; text-decoration: none; font-size: 0.9rem; border-bottom: 2px solid #38bdf8; padding-bottom: 2px;">⚡ Demos B2B</a>
+        </div>
+
+        <div class="user-nav-actions">
+            <div class="user-profile-badge">
+                <span class="user-avatar-dot"></span>
+                <span>{{ current_user.nombre }}</span>
+            </div>
+            <a href="/admin/logout" class="btn-logout">Cerrar Sesión</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+
+        <div class="page-header-block">
+            <h1 class="page-header-title">Generador de Demos Personalizadas</h1>
+            <p class="page-header-desc">Buscá y seleccioná el negocio en el mapa interactivo para extraer sus datos y generar una demo comercial.</p>
+        </div>
+
+        {% if error %}
+            <div class="alert-flash" style="background-color: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.3); color: #fca5a5;">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        {% if mensaje %}
+            <div class="alert-flash">
+                {{ mensaje }}
+            </div>
+        {% endif %}
+
+        <!-- FORMULARIO DE GENERACIÓN DE DEMOS -->
+        <div class="form-card">
+            <h2 class="form-title">
+                <i class="fa-solid fa-map-location-dot" style="color: #38bdf8;"></i> Buscar y Seleccionar Comercio en Google Maps
+            </h2>
+
+            <form action="/admin/demos/nueva" method="POST" id="form-demo-b2b">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+                <!-- CAMPOS OCULTOS AUTO-COMPLETADOS POR EL MAPA DE GOOGLE PLACES -->
+                <input type="hidden" id="hidden_place_id" name="google_place_id">
+                <input type="hidden" id="hidden_nombre" name="nombre_negocio_override">
+                <input type="hidden" id="hidden_direccion" name="direccion_override">
+                <input type="hidden" id="hidden_ciudad" name="ciudad_override">
+                <input type="hidden" id="hidden_telefono" name="telefono_override">
+                <input type="hidden" id="hidden_whatsapp" name="whatsapp_override">
+                <input type="hidden" id="hidden_rating" name="rating_override">
+                <input type="hidden" id="hidden_reviews_count" name="reviews_count_override">
+
+                <div class="form-grid">
+                    
+                    <!-- BUSCADOR CON AUTOCOMPLETE EN VIVO -->
+                    <div class="form-group full-width">
+                        <label class="form-label">🔍 Buscar Comercio en Google Maps (Autocomplete) (*)</label>
+                        <div style="position: relative;">
+                            <input type="text" id="google_places_autocomplete" name="google_maps_input" required placeholder="Escribí el nombre del comercio (ej. Fiambrería los Hermanos, Sanatorio Allende)..." class="form-input" style="width: 100%; padding-left: 36px;" autocomplete="off">
+                            <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 12px; top: 12px; color: #94a3b8; font-size: 0.9rem;"></i>
+                        </div>
+                        
+                        <!-- MAPA INTERACTIVO DE CONFIRMACIÓN -->
+                        <div id="admin-map-preview"></div>
+                        
+                        <!-- BADGE DE NEGOCIO SELECCIONADO -->
+                        <div id="place-confirmed-badge" style="display: none; margin-top: 10px; padding: 12px 16px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 10px; font-size: 0.875rem; color: #34d399;">
+                            <i class="fa-solid fa-circle-check" style="margin-right: 6px;"></i> Negocio Confirmado: <strong id="selected-place-name" style="color: #ffffff;"></strong> — <span id="selected-place-addr" style="color: #cbd5e1;"></span> (<span id="selected-place-rating">4.9 ★</span>)
+                        </div>
+                    </div>
+
+                    <!-- Tipo de Software -->
+                    <div class="form-group">
+                        <label class="form-label">Tipo de Software (*)</label>
+                        <select name="tipo_software" class="form-select" required>
+                            <option value="ambas" selected>⚡ Ambas (Exposición + Panel de Gestión)</option>
+                            <option value="exposicion">🌐 Exposición / Captación de Clientes</option>
+                            <option value="gestion">🔒 Gestión de Recursos & Administración Interna</option>
+                        </select>
+                    </div>
+
+                    <!-- Rubro -->
+                    <div class="form-group">
+                        <label class="form-label">Rubro / Categoría Visual (*)</label>
+                        <select id="rubro_select" name="rubro" class="form-select" required onchange="actualizarDoloresRubro(this.value)">
+                            <option value="salud">Salud & Clínicas</option>
+                            <option value="automotriz">Automotriz & Mecánica</option>
+                            <option value="gastronomia">Gastronomía & Restaurantes</option>
+                            <option value="retail">Retail & Tiendas</option>
+                            <option value="servicios" selected>Servicios Profesionales</option>
+                            <option value="inmobiliaria">Inmobiliaria & Bienes Raíces</option>
+                            <option value="general">Corporativo / General</option>
+                        </select>
+                    </div>
+
+                    <!-- Módulo de Solución Interactiva -->
+                    <div class="form-group">
+                        <label class="form-label">Módulo Solucionador Interactivo (*)</label>
+                        <select id="modulo_solucion_select" name="modulo_solucion" class="form-select" required>
+                            <option value="agenda">🗓️ Agenda & Turnos Digitales</option>
+                            <option value="stock">📦 Control de Stock e Inventario</option>
+                            <option value="logistica">🚚 Logística & Cotizador Envíos</option>
+                            <option value="decisiones">🧠 Agente de Decisiones & Reglas</option>
+                            <option value="metricas">📊 Dashboard & Métricas en Vivo</option>
+                            <option value="ecommerce">🛒 E-Commerce & Carrito WhatsApp</option>
+                            <option value="cotizador">🧮 Simulador / Cotizador de Servicios</option>
+                        </select>
+                    </div>
+
+                    <!-- Enfoque Comercial -->
+                    <div class="form-group">
+                        <label class="form-label">Enfoque Comercial (*)</label>
+                        <select name="enfoque" class="form-select" required>
+                            <option value="Conversión High-Ticket">Conversión High-Ticket</option>
+                            <option value="Branding & Posicionamiento Premium">Branding & Posicionamiento Premium</option>
+                            <option value="Automatización de Procesos">Automatización de Procesos Operativos</option>
+                            <option value="Agendamiento Inmediato por WA">Agendamiento Inmediato por WhatsApp</option>
+                        </select>
+                    </div>
+
+                    <!-- Dolores a Solucionar con Smart Presets -->
+                    <div class="form-group full-width">
+                        <label class="form-label">Dolores a Solucionar en el Cliente (Opcional)</label>
+                        <input type="text" id="input_dolor_principal" name="dolor_principal" placeholder="Ej: Pérdida de ventas por respuesta tardía en WhatsApp y falta de agendamiento digital" class="form-input">
+                        
+                        <!-- CHIPS DE DOLORES SUGERIDOS -->
+                        <div style="margin-top: 6px;">
+                            <span style="font-size: 0.725rem; color: #94a3b8; font-weight: 600;">💡 Dolores típicos de este rubro (hacé clic para agregar al instante):</span>
+                            <div id="chips-dolores-container" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Objetivo -->
+                    <div class="form-group full-width">
+                        <label class="form-label">Objetivo Estratégico de la Demo (Opcional)</label>
+                        <input type="text" name="objetivo" placeholder="Ej: Agendar llamada de diagnóstico de 15 min" class="form-input">
+                    </div>
+
+                </div>
+
+                <div style="text-align: right; margin-top: 20px;">
+                    <button type="submit" class="btn-submit-demo">
+                        <i class="fa-solid fa-rocket"></i> Generar Demo Personalizada
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- TABLA DE DEMOS GENERADAS -->
+        <h2 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 16px; color: var(--text-title);">
+            Demos Generadas ({{ demos|length }})
+        </h2>
+
+        <div class="demos-table-wrapper">
+            {% if demos %}
+                <table class="demos-table">
+                    <thead>
+                        <tr>
+                            <th>Negocio / Slug</th>
+                            <th>Rubro</th>
+                            <th>Módulo Solución</th>
+                            <th>Vistas</th>
+                            <th>Última Vista</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for d in demos %}
+                        <tr>
+                            <td>
+                                <strong style="color: #ffffff;">{{ d.nombre_negocio }}</strong><br>
+                                <span style="font-family: 'Fira Code', monospace; font-size: 0.75rem; color: #38bdf8;">/demo/{{ d.slug }}</span>
+                            </td>
+                            <td><span style="text-transform: capitalize;">{{ d.rubro }}</span></td>
+                            <td>
+                                <span style="font-family: 'Fira Code', monospace; font-size: 0.75rem; color: #a855f7; background-color: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); padding: 3px 8px; border-radius: 4px;">
+                                    {{ d.modulo_solucion }}
+                                </span>
+                            </td>
+                            <td>
+                                <span style="font-weight: 800; color: {% if d.vistas_count > 0 %}#34d399{% else %}#94a3b8{% endif %}; font-size: 1rem;">
+                                    👁️ {{ d.vistas_count }}
+                                </span>
+                            </td>
+                            <td style="font-size: 0.8rem; color: var(--text-muted);">
+                                {% if d.ultima_vista %}
+                                    {{ d.ultima_vista.strftime("%d/%m/%Y %H:%M hs") }}
+                                {% else %}
+                                    Aún no abierta
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <a href="/demo/{{ d.slug }}" target="_blank" class="btn-action-icon">
+                                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Demo
+                                    </a>
+                                    <button onclick="copiarLink('https://ggsolutions.com.ar/demo/{{ d.slug }}')" class="btn-action-icon">
+                                        <i class="fa-solid fa-copy"></i> Copiar Link
+                                    </button>
+                                    <form action="/admin/demos/{{ d.id }}/eliminar" method="POST" style="display: inline;" onsubmit="return confirm('¿Seguro que deseas eliminar esta demo?');">
+                                        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                                        <button type="submit" class="btn-action-icon" style="color: #fca5a5; border-color: rgba(239, 68, 68, 0.3);">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div style="text-align: center; padding: 48px; color: var(--text-muted);">
+                    <i class="fa-solid fa-folder-open" style="font-size: 2rem; margin-bottom: 12px; color: #475569;"></i>
+                    <p style="font-size: 1rem; font-weight: 600;">No hay demos creadas todavía.</p>
+                    <p style="font-size: 0.85rem;">Buscá un negocio en el mapa para generar la primera demo.</p>
+                </div>
+            {% endif %}
+        </div>
+
+    </main>
+
+    <!-- Leaflet JS for Fallback Interactive Map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        function copiarLink(url) {
+            navigator.clipboard.writeText(url).then(() => {
+                alert('¡Enlace copiado al portapapeles!\n\n' + url);
+            }).catch(err => {
+                prompt('Copia este enlace:', url);
+            });
+        }
+
+        let map, marker, googleMap, googleMarker;
+        const apiKey = "{{ google_maps_api_key }}";
+
+        // Handler automático en caso de error de autenticación/activación de Google Maps (ApiNotActivatedMapError)
+        window.gm_authFailure = function() {
+            console.warn('[GOOGLE MAPS WARN] Maps JavaScript API no activada en Google Cloud Console. Activando mapa alternativo.');
+            initLeafletFallbackMap();
+        };
+
+        // Inicializar Mapa Interactivo
+        function initInteractiveMap() {
+            if (apiKey) {
+                // Cargar script de Google Maps SDK
+
+                const script = document.createElement('script');
+                script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initGoogleMapSDK`;
+                script.async = true;
+                script.defer = true;
+                document.head.appendChild(script);
+            } else {
+                initLeafletFallbackMap();
+            }
+        }
+
+        // 1. Google Maps SDK con Places Autocomplete
+        window.initGoogleMapSDK = function() {
+            const cordobaCoords = { lat: -31.4135, lng: -64.1810 };
+            const mapContainer = document.getElementById('admin-map-preview');
+            
+            googleMap = new google.maps.Map(mapContainer, {
+                center: cordobaCoords,
+                zoom: 13,
+                styles: [
+                    { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
+                    { elementType: "labels.text.stroke", stylers: [{ color: "#242f3e" }] },
+                    { elementType: "labels.text.fill", stylers: [{ color: "#746855" }] },
+                    { featureType: "water", elementType: "geometry", stylers: [{ color: "#17263c" }] }
+                ]
+            });
+
+            googleMarker = new google.maps.Marker({
+                map: googleMap,
+                position: cordobaCoords,
+                draggable: true
+            });
+
+            const input = document.getElementById('google_places_autocomplete');
+            const autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.bindTo('bounds', googleMap);
+
+            autocomplete.addListener('place_changed', function() {
+                const place = autocomplete.getPlace();
+                if (!place.geometry || !place.geometry.location) {
+                    return;
+                }
+
+                if (place.geometry.viewport) {
+                    googleMap.fitBounds(place.geometry.viewport);
+                } else {
+                    googleMap.setCenter(place.geometry.location);
+                    googleMap.setZoom(17);
+                }
+                googleMarker.setPosition(place.geometry.location);
+
+                // Autocompletar datos del lugar
+                seleccionarNegocioDatos({
+                    place_id: place.place_id,
+                    nombre: place.name,
+                    direccion: place.formatted_address,
+                    telefono: place.international_phone_number || place.formatted_phone_number || '',
+                    rating: place.rating || 4.9,
+                    reviews_count: place.user_ratings_total || 24,
+                    types: place.types || []
+                });
+            });
+        };
+
+        // 2. Leaflet Fallback Map (cuando aún no se configuró la API key en .env)
+        function initLeafletFallbackMap() {
+            const mapContainer = document.getElementById('admin-map-preview');
+            map = L.map(mapContainer).setView([-31.4135, -64.1810], 13);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap'
+            }).addTo(map);
+
+            marker = L.marker([-31.4135, -64.1810], { draggable: true }).addTo(map);
+
+            const input = document.getElementById('google_places_autocomplete');
+            input.addEventListener('change', function() {
+                const val = input.value.trim();
+                if (val.length > 2) {
+                    seleccionarNegocioDatos({
+                        place_id: 'place_demo_' + Date.now(),
+                        nombre: val,
+                        direccion: 'Av. Colón 1200, Córdoba',
+                        telefono: '+54 9 351 555-0199',
+                        rating: 4.9,
+                        reviews_count: 32,
+                        types: []
+                    });
+                }
+            });
+        }
+
+        function seleccionarNegocioDatos(info) {
+            document.getElementById('hidden_place_id').value = info.place_id || '';
+            document.getElementById('hidden_nombre').value = info.nombre || '';
+            document.getElementById('hidden_direccion').value = info.direccion || '';
+            document.getElementById('hidden_ciudad').value = info.direccion ? info.direccion.split(',').slice(-2).join(',') : 'Córdoba, Argentina';
+            document.getElementById('hidden_telefono').value = info.telefono || '';
+            document.getElementById('hidden_whatsapp').value = info.telefono ? info.telefono.replace(/\D/g, '') : '';
+            document.getElementById('hidden_rating').value = info.rating || 4.9;
+            document.getElementById('hidden_reviews_count').value = info.reviews_count || 24;
+
+            // Mostrar Badge de Confirmación
+            document.getElementById('selected-place-name').innerText = info.nombre;
+            document.getElementById('selected-place-addr').innerText = info.direccion || '';
+            document.getElementById('selected-place-rating').innerText = (info.rating || 4.9) + ' ★ (' + (info.reviews_count || 24) + ' opiniones)';
+            document.getElementById('place-confirmed-badge').style.display = 'block';
+
+            // Auto-inferir rubro si hay coincidencias
+            const nameLower = info.nombre.toLowerCase();
+            const rubroSel = document.getElementById('rubro_select');
+            const modSel = document.getElementById('modulo_solucion_select');
+
+            if (nameLower.includes('salud') || nameLower.includes('clinica') || nameLower.includes('sanatorio') || nameLower.includes('odontolog') || nameLower.includes('medic')) {
+                rubroSel.value = 'salud';
+                modSel.value = 'agenda';
+            } else if (nameLower.includes('taller') || nameLower.includes('mecanic') || nameLower.includes('auto') || nameLower.includes('repuesto')) {
+                rubroSel.value = 'automotriz';
+                modSel.value = 'stock';
+            } else if (nameLower.includes('bar') || nameLower.includes('resto') || nameLower.includes('restaurante') || nameLower.includes('fiambreria') || nameLower.includes('cafe') || nameLower.includes('pizza')) {
+                rubroSel.value = 'gastronomia';
+                modSel.value = 'ecommerce';
+            } else if (nameLower.includes('tienda') || nameLower.includes('modas') || nameLower.includes('ropa') || nameLower.includes('boutique')) {
+                rubroSel.value = 'retail';
+                modSel.value = 'ecommerce';
+            }
+
+            actualizarDoloresRubro(rubroSel.value);
+        }
+
+        const DOLORES_PRESETS = {
+            salud: [
+                "Ausentismo en turnos agendados sin aviso",
+                "Recepción saturada en horas pico",
+                "Fichas médicas e historias clínicas desordenadas"
+            ],
+            automotriz: [
+                "Presupuestos informales enviados sin detalle claro",
+                "Reparación demorada por falta de stock de repuestos",
+                "Clientes consultando el estado del vehículo"
+            ],
+            gastronomia: [
+                "Desperdicio de insumos por falta de control",
+                "Comandas manuales lentas en mesa",
+                "Falta de catálogo digital interactivo con pedido por WhatsApp"
+            ],
+            retail: [
+                "Stock desincronizado entre local físico y tienda online",
+                "Pérdida de carritos por checkout lento",
+                "Consultas repetitivas por disponibilidad de talles"
+            ],
+            servicios: [
+                "Lógica de cotización manual lenta",
+                "Desorden en el seguimiento de entregables",
+                "Falta de portal de consulta de avances para el cliente"
+            ],
+            inmobiliaria: [
+                "Consultas masivas sobre propiedades ya alquiladas",
+                "Dificultad para coordinar visitas presenciales",
+                "Falta de buscador filtrable por presupuesto"
+            ],
+            general: [
+                "Falta de automatización en la captación de prospectos",
+                "Procesos operativos en planillas desactualizadas"
+            ]
+        };
+
+        function actualizarDoloresRubro(rubro) {
+            const container = document.getElementById('chips-dolores-container');
+            if (!container) return;
+            container.innerHTML = '';
+            const presets = DOLORES_PRESETS[rubro] || DOLORES_PRESETS['general'];
+            presets.forEach(text => {
+                const chip = document.createElement('button');
+                chip.type = 'button';
+                chip.style.cssText = 'background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.25); color: #38bdf8; padding: 4px 10px; border-radius: 6px; font-size: 0.725rem; font-weight: 500; cursor: pointer; transition: all 0.2s;';
+                chip.innerText = '+ ' + text;
+                chip.onclick = function() {
+                    const input = document.getElementById('input_dolor_principal');
+                    if (input.value) {
+                        if (!input.value.includes(text)) {
+                            input.value += '. ' + text;
+                        }
+                    } else {
+                        input.value = text;
+                    }
+                };
+                container.appendChild(chip);
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            initInteractiveMap();
+            actualizarDoloresRubro(document.getElementById('rubro_select').value);
+        });
+    </script>
+</body>
+</html>
+

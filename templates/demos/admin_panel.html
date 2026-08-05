@@ -1,0 +1,157 @@
+<!-- MÓDULO B2B: PANEL DE ADMINISTRACIÓN INTERNO Y GESTIÓN DE RECURSOS -->
+<div class="glass-card rounded-2xl p-6 sm:p-8 max-w-6xl mx-auto space-y-8 border border-white/10 shadow-2xl">
+    
+    <!-- HEADER DEL PANEL INTERNO -->
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/10 pb-5">
+        <div class="space-y-1">
+            <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                    SISTEMA INTERNO B2B
+                </span>
+                <span class="text-xs text-slate-400">Modo Administración de Recursos</span>
+            </div>
+            <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-sliders text-cyan-400"></i> Panel de Control Operativo: {{ demo.nombre_negocio }}
+            </h3>
+        </div>
+        
+        <div class="flex items-center gap-3">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sistema En Línea
+            </span>
+            <button onclick="simularExportarReporte()" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-3.5 py-1.5 rounded-lg text-xs transition flex items-center gap-1.5">
+                <i class="fa-solid fa-file-export"></i> Reporte PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- TARJETAS DE KPIS DE RECURSOS INTERNOS -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-slate-900/80 border border-white/10 rounded-xl p-4 space-y-1">
+            <p class="text-[11px] font-bold text-slate-400 uppercase">Capacidad Operativa</p>
+            <p class="text-2xl font-extrabold text-white">88% Utilizado</p>
+            <p class="text-[10px] text-cyan-400 font-bold"><i class="fa-solid fa-check"></i> Operación fluida</p>
+        </div>
+
+        <div class="bg-slate-900/80 border border-white/10 rounded-xl p-4 space-y-1">
+            <p class="text-[11px] font-bold text-slate-400 uppercase">Cola de Pedidos / Turnos</p>
+            <p class="text-2xl font-extrabold text-amber-400">14 Pendientes</p>
+            <p class="text-[10px] text-amber-300 font-bold">Atención en curso</p>
+        </div>
+
+        <div class="bg-slate-900/80 border border-white/10 rounded-xl p-4 space-y-1">
+            <p class="text-[11px] font-bold text-slate-400 uppercase">Alertas de Stock / Recursos</p>
+            <p class="text-2xl font-extrabold text-emerald-400">2 Alertas</p>
+            <p class="text-[10px] text-emerald-300 font-bold">Reposición programada</p>
+        </div>
+
+        <div class="bg-slate-900/80 border border-white/10 rounded-xl p-4 space-y-1">
+            <p class="text-[11px] font-bold text-slate-400 uppercase">Eficiencia del Equipo</p>
+            <p class="text-2xl font-extrabold text-indigo-400">96.4%</p>
+            <p class="text-[10px] text-indigo-300 font-bold">+4% optimización semanal</p>
+        </div>
+    </div>
+
+    <!-- TABLA OPERATIVA DE RECURSOS INTERNOS -->
+    <div class="space-y-4">
+        <div class="flex justify-between items-center">
+            <h4 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+                <i class="fa-solid fa-list-check text-cyan-400"></i> Gestión de Tareas & Recursos del Día
+            </h4>
+            <div class="flex gap-2 text-xs">
+                <button onclick="filtrarTablaAdmin('TODOS')" class="px-2.5 py-1 rounded bg-white/10 text-white font-semibold">Todos</button>
+                <button onclick="filtrarTablaAdmin('PENDIENTE')" class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 font-semibold">Pendientes</button>
+                <button onclick="filtrarTablaAdmin('PROCESADO')" class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 font-semibold">Completados</button>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto rounded-xl border border-white/10">
+            <table class="w-full text-left text-xs text-slate-300">
+                <thead class="bg-slate-900 uppercase text-slate-400 border-b border-white/10">
+                    <tr>
+                        <th class="py-3 px-4">ID / Referencia</th>
+                        <th class="py-3 px-4">Cliente / Requerimiento</th>
+                        <th class="py-3 px-4">Recurso Asignado</th>
+                        <th class="py-3 px-4">Estado</th>
+                        <th class="py-3 px-4 text-right">Acción Operativa</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-admin-tareas" class="divide-y divide-white/5 bg-slate-950/40">
+                    <tr data-status="PENDIENTE">
+                        <td class="py-3.5 px-4 font-mono text-cyan-400 font-bold">#ORD-9021</td>
+                        <td class="py-3.5 px-4">
+                            <strong class="text-white">Clara M.</strong><br>
+                            <span class="text-slate-400">Solicitud de turno / presupuesto integral</span>
+                        </td>
+                        <td class="py-3.5 px-4 text-slate-300"><i class="fa-solid fa-user-gear mr-1 text-slate-400"></i> Asistente Técnico #1</td>
+                        <td class="py-3.5 px-4">
+                            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">PENDIENTE</span>
+                        </td>
+                        <td class="py-3.5 px-4 text-right">
+                            <button onclick="completarTareaDemo(this, '#ORD-9021')" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-3 py-1 rounded text-xs transition">
+                                <i class="fa-solid fa-check"></i> Aprobar & Procesar
+                            </button>
+                        </td>
+                    </tr>
+                    <tr data-status="PROCESADO">
+                        <td class="py-3.5 px-4 font-mono text-cyan-400 font-bold">#ORD-9018</td>
+                        <td class="py-3.5 px-4">
+                            <strong class="text-white">Luciano G.</strong><br>
+                            <span class="text-slate-400">Entrega de insumo / confirmación de flete</span>
+                        </td>
+                        <td class="py-3.5 px-4 text-slate-300"><i class="fa-solid fa-truck-ram mr-1 text-slate-400"></i> Logística Zona Norte</td>
+                        <td class="py-3.5 px-4">
+                            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">PROCESADO</span>
+                        </td>
+                        <td class="py-3.5 px-4 text-right">
+                            <span class="text-slate-400 italic">Completado hoy 11:20 hs</span>
+                        </td>
+                    </tr>
+                    <tr data-status="PENDIENTE">
+                        <td class="py-3.5 px-4 font-mono text-cyan-400 font-bold">#ORD-9015</td>
+                        <td class="py-3.5 px-4">
+                            <strong class="text-white">Roberto S.</strong><br>
+                            <span class="text-slate-400">Control de inventario & reposición de stock</span>
+                        </td>
+                        <td class="py-3.5 px-4 text-slate-300"><i class="fa-solid fa-boxes-stacked mr-1 text-slate-400"></i> Depósito Central</td>
+                        <td class="py-3.5 px-4">
+                            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">PENDIENTE</span>
+                        </td>
+                        <td class="py-3.5 px-4 text-right">
+                            <button onclick="completarTareaDemo(this, '#ORD-9015')" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-3 py-1 rounded text-xs transition">
+                                <i class="fa-solid fa-check"></i> Aprobar & Procesar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function completarTareaDemo(btn, id) {
+        const tr = btn.closest('tr');
+        tr.dataset.status = 'PROCESADO';
+        const tdStatus = tr.cells[3];
+        const tdAccion = tr.cells[4];
+        tdStatus.innerHTML = '<span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">PROCESADO</span>';
+        tdAccion.innerHTML = '<span class="text-emerald-400 font-semibold"><i class="fa-solid fa-circle-check"></i> Procesado recién</span>';
+    }
+
+    function filtrarTablaAdmin(filtro) {
+        const rows = document.querySelectorAll('#tbody-admin-tareas tr');
+        rows.forEach(r => {
+            if (filtro === 'TODOS' || r.dataset.status === filtro) {
+                r.style.display = '';
+            } else {
+                r.style.display = 'none';
+            }
+        });
+    }
+
+    function simularExportarReporte() {
+        alert(' Exportando reporte ejecutivo de recursos en formato PDF...\n\nIncluye métricas de inventario, turnos procesados y tiempos de respuesta.');
+    }
+</script>

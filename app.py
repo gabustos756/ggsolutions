@@ -1,11 +1,18 @@
 import os
 import re
+import json
+import uuid
 from datetime import datetime
+from dotenv import load_dotenv
+
+# Cargar variables de entorno desde .env
+load_dotenv()
+
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session, abort
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash
 
-from models import db, User, ContactLead, AuditLog
+from models import db, User, ContactLead, AuditLog, DemoSolution, DemoViewLog
 from security_utils import (
     generate_csrf_token,
     validate_csrf_token,
@@ -13,6 +20,9 @@ from security_utils import (
     registrar_auditoria,
     seed_admin_user,
 )
+from services.google_places import obtener_datos_lugar_google
+from services.demo_engine import preparar_contexto_demo
+
 
 app = Flask(__name__)
 
@@ -36,7 +46,8 @@ login_manager.login_message = "Debes iniciar sesión para acceder al panel."
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return db.session.get(User, int(user_id))
+
 
 
 # Inicialización de tablas y seed de administrador
@@ -231,7 +242,9 @@ def admin_login():
         email = (request.form.get("email") or "").strip().lower()
         password = request.form.get("password") or ""
 
-        user = User.query.filter_by(email=email, activo=True).first()
+        search_email = "admin@ggsolutions.com.ar" if email == "admin" else email
+        user = User.query.filter_by(email=search_email, activo=True).first()
+
 
         if user and check_password_hash(user.password_hash, password):
             login_user(user, remember=False)
@@ -331,6 +344,179 @@ def admin_logout():
     return redirect(url_for("admin_login"))
 
 
+def generar_slug(nombre: str) -> str:
+    s = (nombre or "demo").lower()
+    s = re.sub(r"[^\w\s-]", "", s)
+    s = re.sub(r"[\s_-]+", "-", s).strip("-")
+    token = uuid.uuid4().hex[:6]
+    return f"{s}-{token}"
+
+
+# ==============================================================================
+# RUTAS DE GESTIÓN Y CREACIÓN DE DEMOS (/admin/demos)
+# ==============================================================================
+
+@app.route("/admin/demos", methods=["GET"])
+@login_required
+def admin_demos_list():
+    demos = DemoSolution.query.order_by(DemoSolution.fecha_creacion.desc()).all()
+    error = request.args.get("error")
+    mensaje = request.args.get("mensaje")
+    google_maps_api_key = os.environ.get("GOOGLE_MAPS_API_KEY", "")
+    return render_template(
+        "admin/demos.html",
+        demos=demos,
+        error=error,
+        mensaje=mensaje,
+        google_maps_api_key=google_maps_api_key
+    )
+
+
+@app.route("/admin/demos/nueva", methods=["POST"])
+@login_required
+def admin_crear_demo():
+    token = request.form.get("csrf_token")
+    if not validate_csrf_token(token):
+        return redirect(url_for("admin_demos_list", error="Token CSRF inválido. Reintentá."))
+
+    maps_input = (request.form.get("google_maps_input") or "").strip()
+    rubro = (request.form.get("rubro") or "general").strip().lower()
+    enfoque = (request.form.get("enfoque") or "Conversión High-Ticket").strip()
+    modulo_solucion = (request.form.get("modulo_solucion") or "agenda").strip().lower()
+    tipo_software = (request.form.get("tipo_software") or "ambas").strip().lower()
+    dolor_principal = (request.form.get("dolor_principal") or "").strip()
+
+    objetivo = (request.form.get("objetivo") or "").strip()
+
+    # Campos de override desde Autocomplete / Map JS
+    nombre_override = (request.form.get("nombre_negocio_override") or "").strip()
+    place_id_override = (request.form.get("google_place_id") or "").strip()
+    direccion_override = (request.form.get("direccion_override") or "").strip()
+    ciudad_override = (request.form.get("ciudad_override") or "").strip()
+    telefono_override = (request.form.get("telefono_override") or "").strip()
+    whatsapp_override = (request.form.get("whatsapp_override") or "").strip()
+    rating_override = request.form.get("rating_override")
+    reviews_count_override = request.form.get("reviews_count_override")
+
+    if not maps_input and not nombre_override:
+        return redirect(url_for("admin_demos_list", error="Por favor buscá y seleccioná un comercio en el mapa o ingresá su nombre."))
+
+    # Si seleccionó el negocio desde el Autocomplete/Mapa interactivo de JS
+    if nombre_override:
+        try:
+            rating_val = float(rating_override) if rating_override else 4.9
+        except ValueError:
+            rating_val = 4.9
+
+        try:
+            reviews_val = int(reviews_count_override) if reviews_count_override else 24
+        except ValueError:
+            reviews_val = 24
+
+        datos_lugar = {
+            "google_place_id": place_id_override or "place_custom",
+            "nombre_negocio": nombre_override,
+            "direccion": direccion_override or "Av. Principal, Centro",
+            "ciudad": ciudad_override or "Córdoba, Argentina",
+            "telefono": telefono_override or "+54 9 351 555-0199",
+            "whatsapp": whatsapp_override or "5493515550199",
+            "rating": rating_val,
+            "reviews_count": reviews_val,
+            "reviews": [],
+            "fotos": [],
+            "sitio_web_original": ""
+        }
+    else:
+        # Obtener datos de Google Places API o Fallback backend
+        datos_lugar = obtener_datos_lugar_google(maps_input)
+
+    nombre_negocio = datos_lugar.get("nombre_negocio") or "Comercio Prospectado"
+    slug = generar_slug(nombre_negocio)
+
+    try:
+        demo = DemoSolution(
+            slug=slug,
+            nombre_negocio=nombre_negocio,
+            rubro=rubro,
+            enfoque=enfoque,
+            dolor_principal=dolor_principal,
+            objetivo=objetivo,
+            modulo_solucion=modulo_solucion,
+            tipo_software=tipo_software,
+            google_place_id=datos_lugar.get("google_place_id"),
+
+            direccion=datos_lugar.get("direccion"),
+            ciudad=datos_lugar.get("ciudad"),
+            telefono=datos_lugar.get("telefono"),
+            whatsapp=datos_lugar.get("whatsapp"),
+            rating=datos_lugar.get("rating", 4.9),
+            reviews_count=datos_lugar.get("reviews_count", 24),
+            reviews_json=json.dumps(datos_lugar.get("reviews", []), ensure_ascii=False),
+            fotos_json=json.dumps(datos_lugar.get("fotos", []), ensure_ascii=False),
+            sitio_web_original=datos_lugar.get("sitio_web_original", ""),
+            creado_por_id=current_user.id
+        )
+        db.session.add(demo)
+        db.session.commit()
+
+        registrar_auditoria("CREACION_DEMO", f"Demo creada para {nombre_negocio} (slug: {slug})", user_id=current_user.id)
+
+        return redirect(url_for("admin_demos_list", mensaje=f"¡Demo creada exitosamente para '{nombre_negocio}'! Link: /demo/{slug}"))
+
+
+    except Exception as e:
+        db.session.rollback()
+        print(f"[ERROR CREAR DEMO] {e}")
+        return redirect(url_for("admin_demos_list", error="Ocurrió un error interno al guardar la demo."))
+
+
+@app.route("/admin/demos/<int:demo_id>/eliminar", methods=["POST"])
+@login_required
+def admin_eliminar_demo(demo_id):
+    token = request.form.get("csrf_token")
+    if not validate_csrf_token(token):
+        abort(400, description="Token CSRF inválido.")
+
+    demo = DemoSolution.query.get_or_404(demo_id)
+    nombre = demo.nombre_negocio
+    db.session.delete(demo)
+    db.session.commit()
+
+    registrar_auditoria("ELIMINACION_DEMO", f"Demo ID {demo_id} ({nombre}) eliminada", user_id=current_user.id)
+    return redirect(url_for("admin_demos_list", mensaje=f"La demo de '{nombre}' fue eliminada."))
+
+
+# ==============================================================================
+# RUTA PÚBLICA DE LA DEMO CON TRACKING (/demo/<slug>)
+# ==============================================================================
+
+@app.route("/demo/<slug>")
+def ver_demo_publica(slug):
+    demo = DemoSolution.query.filter_by(slug=slug).first_or_404()
+
+    # Registrar visualización
+    try:
+        now = datetime.utcnow()
+        demo.vistas_count = (demo.vistas_count or 0) + 1
+        demo.ultima_vista = now
+
+        log_vista = DemoViewLog(
+            demo_id=demo.id,
+            ip_origen=request.remote_addr or "127.0.0.1",
+            user_agent=request.headers.get("User-Agent", "")[:250],
+            fecha_vista=now
+        )
+        db.session.add(log_vista)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        print(f"[WARN TRACKING DEMO] {e}")
+
+    context = preparar_contexto_demo(demo)
+    return render_template("demos/preview.html", **context)
+
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5050))
     app.run(host="0.0.0.0", port=port, debug=True)
+

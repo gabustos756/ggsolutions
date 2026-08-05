@@ -1,0 +1,95 @@
+<!-- MÓDULO INTERACTIVO: AGENDA & TURNOS DIGITALES -->
+<div class="glass-card rounded-2xl p-6 sm:p-8 max-w-4xl mx-auto space-y-6">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/10 pb-4">
+        <div>
+            <h4 class="text-lg font-bold text-white flex items-center gap-2">
+                <i class="fa-regular fa-calendar-check text-cyan-400"></i> Reservá tu Turno en Línea
+            </h4>
+            <p class="text-xs text-slate-400">Seleccioná el servicio y la fecha deseada para agendar tu consulta al instante.</p>
+        </div>
+        <span class="px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 rounded-full text-xs font-semibold">
+            <i class="fa-solid fa-bolt text-amber-400"></i> Turnos Disponibles Hoy
+        </span>
+    </div>
+
+    <!-- PASO 1: SERVICIO -->
+    <div class="space-y-3">
+        <label class="text-xs font-bold uppercase tracking-wider text-slate-300">1. Seleccioná el Servicio</label>
+        <div class="grid sm:grid-cols-3 gap-3">
+            <button type="button" onclick="selectServicio(this, 'Consulta Inicial / Diagnóstico')" class="srv-btn p-3.5 rounded-xl border border-white/10 bg-white/5 hover:border-cyan-400 text-left transition space-y-1">
+                <p class="text-sm font-semibold text-white">Diagnóstico & Consulta</p>
+                <p class="text-xs text-slate-400">Duración: 30 min | 100% Personalizado</p>
+            </button>
+            <button type="button" onclick="selectServicio(this, 'Atención Especializada')" class="srv-btn p-3.5 rounded-xl border border-cyan-400 bg-cyan-500/10 text-left transition space-y-1">
+                <p class="text-sm font-semibold text-white">Atención Especializada</p>
+                <p class="text-xs text-slate-400">Duración: 45 min | Asesoramiento Premium</p>
+            </button>
+            <button type="button" onclick="selectServicio(this, 'Revisión & Seguimiento')" class="srv-btn p-3.5 rounded-xl border border-white/10 bg-white/5 hover:border-cyan-400 text-left transition space-y-1">
+                <p class="text-sm font-semibold text-white">Revisión de Control</p>
+                <p class="text-xs text-slate-400">Duración: 20 min | Seguimiento rápido</p>
+            </button>
+        </div>
+    </div>
+
+    <!-- PASO 2: HORARIO Y DIA -->
+    <div class="grid sm:grid-cols-2 gap-6 pt-2">
+        <div class="space-y-2">
+            <label class="text-xs font-bold uppercase tracking-wider text-slate-300">2. Fecha Preferida</label>
+            <input type="date" id="fecha-turno" class="w-full bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400" value="2026-08-06">
+        </div>
+        <div class="space-y-2">
+            <label class="text-xs font-bold uppercase tracking-wider text-slate-300">3. Horario Disponible</label>
+            <div class="grid grid-cols-3 gap-2">
+                <button type="button" onclick="selectHora(this, '10:00 hs')" class="hora-btn py-2 text-xs font-medium rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 text-slate-300">10:00 hs</button>
+                <button type="button" onclick="selectHora(this, '11:30 hs')" class="hora-btn py-2 text-xs font-medium rounded-lg border border-cyan-400 bg-cyan-500/20 text-cyan-300 font-bold">11:30 hs</button>
+                <button type="button" onclick="selectHora(this, '16:00 hs')" class="hora-btn py-2 text-xs font-medium rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 text-slate-300">16:00 hs</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DATOS DEL CLIENTE -->
+    <div class="space-y-3 pt-2">
+        <label class="text-xs font-bold uppercase tracking-wider text-slate-300">4. Datos de Confirmación</label>
+        <div class="grid sm:grid-cols-2 gap-3">
+            <input type="text" id="nombre-cliente" placeholder="Tu Nombre Completo" class="bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400">
+            <input type="tel" id="tel-cliente" placeholder="Tu WhatsApp (ej: 3515551234)" class="bg-slate-900 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400">
+        </div>
+    </div>
+
+    <button type="button" onclick="confirmarTurnoDemo()" class="w-full bg-gradient-to-r {{ theme.gradient }} text-slate-950 font-bold py-3.5 rounded-xl shadow-lg hover:opacity-95 transition flex items-center justify-center gap-2 text-base">
+        <i class="fa-solid fa-paper-plane"></i> Confirmar Turno por WhatsApp
+    </button>
+</div>
+
+<script>
+    let servicioSeleccionado = 'Atención Especializada';
+    let horaSeleccionada = '11:30 hs';
+
+    function selectServicio(btn, nombre) {
+        document.querySelectorAll('.srv-btn').forEach(b => {
+            b.classList.remove('border-cyan-400', 'bg-cyan-500/10');
+            b.classList.add('border-white/10', 'bg-white/5');
+        });
+        btn.classList.remove('border-white/10', 'bg-white/5');
+        btn.classList.add('border-cyan-400', 'bg-cyan-500/10');
+        servicioSeleccionado = nombre;
+    }
+
+    function selectHora(btn, hora) {
+        document.querySelectorAll('.hora-btn').forEach(b => {
+            b.classList.remove('border-cyan-400', 'bg-cyan-500/20', 'text-cyan-300', 'font-bold');
+            b.classList.add('border-white/10', 'bg-white/5', 'text-slate-300');
+        });
+        btn.classList.remove('border-white/10', 'bg-white/5', 'text-slate-300');
+        btn.classList.add('border-cyan-400', 'bg-cyan-500/20', 'text-cyan-300', 'font-bold');
+        horaSeleccionada = hora;
+    }
+
+    function confirmarTurnoDemo() {
+        const nombre = document.getElementById('nombre-cliente').value.trim() || 'Cliente';
+        const fecha = document.getElementById('fecha-turno').value || 'Próximo disponible';
+        const msg = `Hola {{ demo.nombre_negocio }}, mi nombre es ${nombre}. Quisiera confirmar la reserva para: ${servicioSeleccionado} el día ${fecha} a las ${horaSeleccionada}.`;
+        const url = `https://wa.me/{{ wa_clean }}?text=${encodeURIComponent(msg)}`;
+        window.open(url, '_blank');
+    }
+</script>

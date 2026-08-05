@@ -1,0 +1,60 @@
+<!-- MÓDULO INTERACTIVO: AGENTE DE DECISIONES & AUTOMATIZACIÓN -->
+<div class="glass-card rounded-2xl p-6 sm:p-8 max-w-4xl mx-auto space-y-6">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/10 pb-4">
+        <div>
+            <h4 class="text-lg font-bold text-white flex items-center gap-2">
+                <i class="fa-solid fa-robot text-purple-400"></i> Agente de Respuestas & Clasificación Automatizada
+            </h4>
+            <p class="text-xs text-slate-400">Motor de lógica algorítmica para filtrar consultas y guiarlas al canal de venta óptimo.</p>
+        </div>
+        <span class="px-3 py-1 bg-purple-500/10 border border-purple-500/30 text-purple-300 rounded-full text-xs font-semibold">
+            <i class="fa-solid fa-brain"></i> Motor de Reglas Activo
+        </span>
+    </div>
+
+    <!-- ASISTENTE DE DECISIÓN SIMULADO -->
+    <div class="bg-slate-900/80 border border-white/10 rounded-xl p-5 space-y-4">
+        <label class="text-xs font-bold uppercase tracking-wider text-slate-300">Seleccioná tu tipo de consulta para recibir asesoramiento instantáneo:</label>
+        
+        <div class="grid sm:grid-cols-3 gap-3">
+            <button type="button" onclick="ejecutarReglaDecison('presupuesto')" class="btn-decision p-4 rounded-xl border border-white/10 bg-white/5 hover:border-purple-400 text-left transition space-y-2">
+                <i class="fa-solid fa-file-invoice-dollar text-purple-400 text-lg"></i>
+                <p class="text-xs font-bold text-white">Solicitud de Presupuesto</p>
+                <p class="text-[11px] text-slate-400">Respuesta automatizada con tabla de valores estimados.</p>
+            </button>
+            <button type="button" onclick="ejecutarReglaDecison('soporte')" class="btn-decision p-4 rounded-xl border border-white/10 bg-white/5 hover:border-purple-400 text-left transition space-y-2">
+                <i class="fa-solid fa-headset text-cyan-400 text-lg"></i>
+                <p class="text-xs font-bold text-white">Soporte Técnico / Postventa</p>
+                <p class="text-[11px] text-slate-400">Derivación directa con especialista asignado.</p>
+            </button>
+            <button type="button" onclick="ejecutarReglaDecison('alianza')" class="btn-decision p-4 rounded-xl border border-white/10 bg-white/5 hover:border-purple-400 text-left transition space-y-2">
+                <i class="fa-solid fa-handshake text-emerald-400 text-lg"></i>
+                <p class="text-xs font-bold text-white">Alianzas / Proveedores</p>
+                <p class="text-[11px] text-slate-400">Canal corporativo prioritario B2B.</p>
+            </button>
+        </div>
+
+        <!-- OUTBOX DE RESPUESTA RECOMENDADA -->
+        <div id="box-resultado-decision" class="mt-4 p-4 rounded-xl bg-purple-500/10 border border-purple-500/30 text-xs space-y-2">
+            <div class="flex items-center gap-2 text-purple-300 font-bold">
+                <i class="fa-solid fa-bolt"></i> Recomendación Algorítmica Generada:
+            </div>
+            <p id="txt-resultado-decision" class="text-slate-200">
+                Seleccioná una de las opciones superiores para ver cómo el Agente procesa y prioriza la atención sin intervención humana.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function ejecutarReglaDecison(tipo) {
+        const txt = document.getElementById('txt-resultado-decision');
+        if (tipo === 'presupuesto') {
+            txt.innerHTML = '<strong>Prioridad Alta (Lead Comercial):</strong> Se ha generado la cotización base. <a href="https://wa.me/{{ wa_clean }}?text=Hola%20{{ demo.nombre_negocio }},%20solicito%20presupuesto" target="_blank" class="underline font-bold text-purple-300">Haz clic aquí para enviarla directamente al WhatsApp de ventas</a>.';
+        } else if (tipo === 'soporte') {
+            txt.innerHTML = '<strong>Derivación Postventa:</strong> Se ha asignado la consulta al equipo técnico. Tiempo estimado de respuesta: &lt; 15 minutos.';
+        } else {
+            txt.innerHTML = '<strong>Contacto Corporativo B2B:</strong> Redirigiendo a la bandeja ejecutiva del director comercial.';
+        }
+    }
+</script>

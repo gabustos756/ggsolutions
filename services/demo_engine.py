@@ -48,6 +48,8 @@ DOLORES_POR_RUBRO = {
 }
 
 
+from services.image_bank_engine import obtener_imagenes_rubro
+
 THEMES_MAP = {
     "salud": {
         "bg": "#070d17",
@@ -56,13 +58,14 @@ THEMES_MAP = {
         "gradient": "from-cyan-400 via-teal-300 to-emerald-400",
         "badge_bg": "bg-cyan-500/15 text-cyan-300 border-cyan-500/30",
         "font_family": "'Plus Jakarta Sans', sans-serif",
-        "title_font": "'Plus Jakarta Sans', sans-serif",
+        "title_font": "'Outfit', sans-serif",
+        "font_google": "https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
         "hero_bg_image": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80",
         "pilares": [
-            {"icon": "fa-user-doctor", "title": "Médicos Especialistas", "desc": "Cuerpo profesional de excelencia"},
-            {"icon": "fa-stethoscope", "title": "Tecnología Médica", "desc": "Diagnóstico de alta precisión"},
-            {"icon": "fa-calendar-check", "title": "Turnos en Línea", "desc": "Reserva ágil sin esperas"},
-            {"icon": "fa-shield-heart", "title": "Atención Humanizada", "desc": "Seguimiento médico continuo"}
+            {"icon": "fa-user-doctor", "title": "Médicos Especialistas", "desc": "Cuerpo profesional de excelencia", "tag": "Atención Médica"},
+            {"icon": "fa-stethoscope", "title": "Tecnología Médica", "desc": "Diagnóstico de alta precisión", "tag": "Equipamiento"},
+            {"icon": "fa-calendar-check", "title": "Turnos en Línea", "desc": "Reserva ágil sin esperas", "tag": "Agendamiento"},
+            {"icon": "fa-shield-heart", "title": "Atención Humanizada", "desc": "Seguimiento médico continuo", "tag": "Cuidado Integral"}
         ]
     },
     "automotriz": {
@@ -72,13 +75,14 @@ THEMES_MAP = {
         "gradient": "from-amber-400 via-orange-500 to-red-500",
         "badge_bg": "bg-orange-500/15 text-orange-300 border-orange-500/30",
         "font_family": "'Plus Jakarta Sans', sans-serif",
-        "title_font": "'Outfit', sans-serif",
+        "title_font": "'Oswald', sans-serif",
+        "font_google": "https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
         "hero_bg_image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=1200&q=80",
         "pilares": [
-            {"icon": "fa-screwdriver-wrench", "title": "Diagnóstico Computarizado", "desc": "Escaneo de módulos multimarca"},
-            {"icon": "fa-shield-halved", "title": "Garantía Escrita", "desc": "Respaldo en cada reparación"},
-            {"icon": "fa-gears", "title": "Repuestos Originales", "desc": "Componentes de fábrica"},
-            {"icon": "fa-clock", "title": "Entrega Puntual", "desc": "Cumplimiento estricto de plazos"}
+            {"icon": "fa-screwdriver-wrench", "title": "Diagnóstico Computarizado", "desc": "Escaneo de módulos multimarca", "tag": "Tecnología"},
+            {"icon": "fa-shield-halved", "title": "Garantía Escrita", "desc": "Respaldo en cada reparación", "tag": "Confianza"},
+            {"icon": "fa-gears", "title": "Repuestos Originales", "desc": "Componentes de fábrica", "tag": "Calidad"},
+            {"icon": "fa-clock", "title": "Entrega Puntual", "desc": "Cumplimiento estricto de plazos", "tag": "Eficiencia"}
         ]
     },
     "gastronomia": {
@@ -88,13 +92,14 @@ THEMES_MAP = {
         "gradient": "from-amber-300 via-orange-400 to-amber-500",
         "badge_bg": "bg-amber-500/15 text-amber-300 border-amber-500/30",
         "font_family": "'Plus Jakarta Sans', sans-serif",
-        "title_font": "'Outfit', sans-serif",
+        "title_font": "'Playfair Display', serif",
+        "font_google": "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
         "hero_bg_image": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80",
         "pilares": [
-            {"icon": "fa-utensils", "title": "Ingredientes Frescos", "desc": "Selección diaria de temporada"},
-            {"icon": "fa-wine-glass", "title": "Carta de Autor", "desc": "Recetas exclusivas y maridaje"},
-            {"icon": "fa-motorcycle", "title": "Delivery Express", "desc": "Empaquetado térmico especial"},
-            {"icon": "fa-chair", "title": "Reservas Online", "desc": "Mesa garantizada en segundos"}
+            {"icon": "fa-utensils", "title": "Ingredientes Frescos", "desc": "Selección diaria de temporada", "tag": "Gourmet"},
+            {"icon": "fa-wine-glass", "title": "Carta de Autor", "desc": "Recetas exclusivas y maridaje", "tag": "Especialidad"},
+            {"icon": "fa-motorcycle", "title": "Delivery Express", "desc": "Empaquetado térmico especial", "tag": "Pedidos Online"},
+            {"icon": "fa-chair", "title": "Reservas Online", "desc": "Mesa garantizada en segundos", "tag": "Reservas"}
         ]
     },
     "retail": {
@@ -105,12 +110,13 @@ THEMES_MAP = {
         "badge_bg": "bg-pink-500/15 text-pink-300 border-pink-500/30",
         "font_family": "'Plus Jakarta Sans', sans-serif",
         "title_font": "'Outfit', sans-serif",
+        "font_google": "https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
         "hero_bg_image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200&q=80",
         "pilares": [
-            {"icon": "fa-tags", "title": "Precios Directos", "desc": "La mejor relación costo-beneficio"},
-            {"icon": "fa-truck-fast", "title": "Envíos en el Día", "desc": "Entregas express a domicilio"},
-            {"icon": "fa-credit-card", "title": "Pagos Flexibles", "desc": "Todas las tarjetas y transferencias"},
-            {"icon": "fa-headset", "title": "Asesoramiento Experto", "desc": "Atención directa por WhatsApp"}
+            {"icon": "fa-tags", "title": "Precios Directos", "desc": "La mejor relación costo-beneficio", "tag": "Promociones"},
+            {"icon": "fa-truck-fast", "title": "Envíos en el Día", "desc": "Entregas express a domicilio", "tag": "Logística"},
+            {"icon": "fa-credit-card", "title": "Pagos Flexibles", "desc": "Todas las tarjetas y transferencias", "tag": "Facilidades"},
+            {"icon": "fa-headset", "title": "Asesoramiento Experto", "desc": "Atención directa por WhatsApp", "tag": "Soporte"}
         ]
     },
     "servicios": {
@@ -120,13 +126,14 @@ THEMES_MAP = {
         "gradient": "from-blue-400 via-sky-400 to-indigo-400",
         "badge_bg": "bg-blue-500/15 text-blue-300 border-blue-500/30",
         "font_family": "'Plus Jakarta Sans', sans-serif",
-        "title_font": "'Plus Jakarta Sans', sans-serif",
+        "title_font": "'Outfit', sans-serif",
+        "font_google": "https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
         "hero_bg_image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
         "pilares": [
-            {"icon": "fa-award", "title": "Calidad Garantizada", "desc": "Procesos estandarizados de precisión"},
-            {"icon": "fa-lightbulb", "title": "Soluciones a Medida", "desc": "Diseño adaptado a tu necesidad"},
-            {"icon": "fa-handshake", "title": "Trato Directo", "desc": "Comunicación clara sin intermediarios"},
-            {"icon": "fa-chart-line", "title": "Resultados Medibles", "desc": "Cumplimiento estricto de metas"}
+            {"icon": "fa-award", "title": "Calidad Garantizada", "desc": "Procesos estandarizados de precisión", "tag": "Estándar ISO"},
+            {"icon": "fa-lightbulb", "title": "Soluciones a Medida", "desc": "Diseño adaptado a tu necesidad", "tag": "Personalizado"},
+            {"icon": "fa-handshake", "title": "Trato Directo", "desc": "Comunicación clara sin intermediarios", "tag": "Transparencia"},
+            {"icon": "fa-chart-line", "title": "Resultados Medibles", "desc": "Cumplimiento estricto de metas", "tag": "Eficiencia"}
         ]
     },
     "inmobiliaria": {
@@ -136,13 +143,14 @@ THEMES_MAP = {
         "gradient": "from-emerald-400 via-teal-300 to-emerald-500",
         "badge_bg": "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
         "font_family": "'Plus Jakarta Sans', sans-serif",
-        "title_font": "'Plus Jakarta Sans', sans-serif",
+        "title_font": "'Outfit', sans-serif",
+        "font_google": "https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
         "hero_bg_image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
         "pilares": [
-            {"icon": "fa-house-circle-check", "title": "Propiedades Verificadas", "desc": "Catálogo auditado de inmuebles"},
-            {"icon": "fa-scale-balanced", "title": "Asesoramiento Legal", "desc": "Acompañamiento en todo el proceso"},
-            {"icon": "fa-camera-retro", "title": "Fotos & Tours HD", "desc": "Visualización completa del inmueble"},
-            {"icon": "fa-handshake-angle", "title": "Atención Personalizada", "desc": "Agentes especializados de zona"}
+            {"icon": "fa-house-circle-check", "title": "Propiedades Verificadas", "desc": "Catálogo auditado de inmuebles", "tag": "Catálogo"},
+            {"icon": "fa-scale-balanced", "title": "Asesoramiento Legal", "desc": "Acompañamiento en todo el proceso", "tag": "Seguridad"},
+            {"icon": "fa-camera-retro", "title": "Fotos & Tours HD", "desc": "Visualización completa del inmueble", "tag": "Experiencia"},
+            {"icon": "fa-handshake-angle", "title": "Atención Personalizada", "desc": "Agentes especializados de zona", "tag": "Servicio"}
         ]
     },
     "general": {
@@ -153,12 +161,13 @@ THEMES_MAP = {
         "badge_bg": "bg-indigo-500/15 text-indigo-300 border-indigo-500/30",
         "font_family": "'Plus Jakarta Sans', sans-serif",
         "title_font": "'Plus Jakarta Sans', sans-serif",
+        "font_google": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap",
         "hero_bg_image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
         "pilares": [
-            {"icon": "fa-star", "title": "Servicio de Excelencia", "desc": "Máxima atención al cliente"},
-            {"icon": "fa-shield-check", "title": "Garantía de Satisfacción", "desc": "Compromiso total en cada trabajo"},
-            {"icon": "fa-bolt", "title": "Respuesta Inmediata", "desc": "Atención rápida por WhatsApp"},
-            {"icon": "fa-users", "title": "Equipo Especializado", "desc": "Profesionales capacitados"}
+            {"icon": "fa-star", "title": "Servicio de Excelencia", "desc": "Máxima atención al cliente", "tag": "Calidad"},
+            {"icon": "fa-shield-check", "title": "Garantía de Satisfacción", "desc": "Compromiso total en cada trabajo", "tag": "Garantía"},
+            {"icon": "fa-bolt", "title": "Respuesta Inmediata", "desc": "Atención rápida por WhatsApp", "tag": "Rapidez"},
+            {"icon": "fa-users", "title": "Equipo Especializado", "desc": "Profesionales capacitados", "tag": "Experiencia"}
         ]
     }
 }
@@ -250,6 +259,19 @@ def preparar_contexto_demo(demo_obj) -> dict:
     # Generar titulares enfocados 100% en el negocio del cliente
     hero_headline, hero_subheadline = generar_copy_negocio(demo_obj.nombre_negocio, rubro_key)
 
+    # Inyección de Banco de Imágenes y Noticias
+    img_data = obtener_imagenes_rubro(rubro_key)
+    
+    # Enriquecer los pilares con imágenes 16:9 del banco
+    pilares_enriquecidos = []
+    for idx, pilar in enumerate(theme["pilares"]):
+        p_copy = dict(pilar)
+        if "pilares" in img_data and idx < len(img_data["pilares"]):
+            p_copy["image"] = img_data["pilares"][idx]
+        else:
+            p_copy["image"] = theme["hero_bg_image"]
+        pilares_enriquecidos.append(p_copy)
+
     # Parsear reseñas de JSON
     reviews = []
     if demo_obj.reviews_json:
@@ -271,6 +293,12 @@ def preparar_contexto_demo(demo_obj) -> dict:
                 "rating": 5,
                 "text": f"Rápidos, prolijos y súper recomendables. Excelente experiencia en {demo_obj.nombre_negocio}.",
                 "relative_time": "hace un mes"
+            },
+            {
+                "author_name": "Marcos Rossi",
+                "rating": 5,
+                "text": f"Atención impecable y respuesta inmediata. Volveré sin dudas a {demo_obj.nombre_negocio}.",
+                "relative_time": "hace 2 semanas"
             }
         ]
 
@@ -296,6 +324,8 @@ def preparar_contexto_demo(demo_obj) -> dict:
     return {
         "demo": demo_obj,
         "theme": theme,
+        "pilares": pilares_enriquecidos,
+        "news": img_data.get("news", []),
         "modulo_info": modulo_info,
         "hero_headline": hero_headline,
         "hero_subheadline": hero_subheadline,
@@ -305,3 +335,4 @@ def preparar_contexto_demo(demo_obj) -> dict:
         "wa_ggsolutions": wa_ggsolutions,
         "maps_embed_query": urllib.parse.quote(f"{demo_obj.nombre_negocio}, {demo_obj.direccion or demo_obj.ciudad or 'Córdoba'}")
     }
+

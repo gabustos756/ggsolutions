@@ -1,59 +1,74 @@
-<!-- MÓDULO INTERACTIVO: E-COMMERCE & CARRITO -->
-<div class="glass-card rounded-2xl p-6 sm:p-8 max-w-5xl mx-auto space-y-6">
+<!-- MÓDULO INTERACTIVO: E-COMMERCE & CARRITO DINÁMICO -->
+<div class="glass-card rounded-2xl p-6 sm:p-8 max-w-5xl mx-auto space-y-6 border border-white/10 shadow-2xl">
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/10 pb-4">
         <div>
-            <h4 class="text-lg font-bold text-white flex items-center gap-2">
-                <i class="fa-solid fa-cart-shopping text-pink-400"></i> Catálogo Dinámico & Carrito Directo
+            <h4 class="text-lg font-bold text-white flex items-center gap-2 font-title">
+                <i class="fa-solid fa-cart-shopping text-pink-400"></i> Catálogo Dinámico & Pedidos por WhatsApp
             </h4>
-            <p class="text-xs text-slate-400">Catálogo interactivo con selección instantánea de productos y pedido vía WhatsApp.</p>
+            <p class="text-xs text-slate-300">Explorá los productos destacados, agregá al pedido y enviá tu solicitud en 1 clic.</p>
         </div>
         <div class="flex items-center gap-3">
-            <button onclick="verCarrito()" class="bg-pink-500/20 text-pink-300 border border-pink-500/30 px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2 hover:bg-pink-500/30 transition">
-                <i class="fa-solid fa-basket-shopping"></i> Carrito (<span id="cart-count">0</span>)
+            <button onclick="verCarrito()" class="bg-pink-500/20 text-pink-300 border border-pink-500/40 px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 hover:bg-pink-500/30 transition shadow-md">
+                <i class="fa-solid fa-basket-shopping text-pink-400"></i> Mi Pedido (<span id="cart-count">0</span>)
             </button>
         </div>
     </div>
 
-    <!-- GRILLA DE PRODUCTOS -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <!-- GRILLA DE PRODUCTOS CON IMÁGENES HD 16:9 Y HOVER ANIMADO -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
         
-        <div class="bg-white/5 border border-white/10 rounded-xl p-4 space-y-3 flex flex-col justify-between">
-            <div class="space-y-1">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-pink-400">Destacado</span>
-                <h5 class="font-bold text-white text-sm">Producto / Servicio Estrellas #1</h5>
-                <p class="text-xs text-slate-400">Especificación técnica, máxima calidad y garantía directa.</p>
+        <div class="glass-card glass-card-hover rounded-2xl overflow-hidden group border border-white/10 flex flex-col justify-between p-4 space-y-3">
+            <div class="relative h-40 w-full rounded-xl overflow-hidden">
+                <img src="{{ theme.hero_bg_image }}" alt="Producto Estrellas #1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30 backdrop-blur-md">
+                    ★ MÁS VENDIDO
+                </span>
             </div>
-            <div class="flex justify-between items-center pt-2 border-t border-white/10">
-                <span class="font-extrabold text-white text-sm">$18.500</span>
-                <button onclick="agregarAlCarrito('Producto Estrellas #1', 18500)" class="bg-pink-500 hover:bg-pink-400 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-xs transition">
+            <div class="space-y-1">
+                <h5 class="font-bold text-white text-sm group-hover:text-pink-300 transition-colors font-title">Producto / Servicio Estrellas #1</h5>
+                <p class="text-xs text-slate-300">Especificación técnica, calidad garantizada y soporte postventa.</p>
+            </div>
+            <div class="flex justify-between items-center pt-3 border-t border-white/10">
+                <span class="font-extrabold text-white text-base font-mono">$18.500</span>
+                <button onclick="agregarAlCarrito('Producto Estrellas #1', 18500)" class="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-400 hover:to-rose-400 text-slate-950 font-extrabold px-3.5 py-1.5 rounded-xl text-xs transition shadow-md">
                     + Agregar
                 </button>
             </div>
         </div>
 
-        <div class="bg-white/5 border border-white/10 rounded-xl p-4 space-y-3 flex flex-col justify-between">
-            <div class="space-y-1">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-cyan-400">Popular</span>
-                <h5 class="font-bold text-white text-sm">Pack Solución Integral #2</h5>
-                <p class="text-xs text-slate-400">Ideal para equipamiento completo y uso profesional continuado.</p>
+        <div class="glass-card glass-card-hover rounded-2xl overflow-hidden group border border-white/10 flex flex-col justify-between p-4 space-y-3">
+            <div class="relative h-40 w-full rounded-xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1556742049-0a674718036d?auto=format&fit=crop&w=800&q=80" alt="Pack Solución #2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 backdrop-blur-md">
+                    RECOMENDADO
+                </span>
             </div>
-            <div class="flex justify-between items-center pt-2 border-t border-white/10">
-                <span class="font-extrabold text-white text-sm">$29.900</span>
-                <button onclick="agregarAlCarrito('Pack Solución #2', 29900)" class="bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-xs transition">
+            <div class="space-y-1">
+                <h5 class="font-bold text-white text-sm group-hover:text-cyan-300 transition-colors font-title">Pack Solución Integral #2</h5>
+                <p class="text-xs text-slate-300">Combo completo diseñado para máxima eficiencia y ahorro.</p>
+            </div>
+            <div class="flex justify-between items-center pt-3 border-t border-white/10">
+                <span class="font-extrabold text-white text-base font-mono">$29.900</span>
+                <button onclick="agregarAlCarrito('Pack Solución #2', 29900)" class="bg-gradient-to-r from-cyan-400 to-teal-400 hover:from-cyan-300 hover:to-teal-300 text-slate-950 font-extrabold px-3.5 py-1.5 rounded-xl text-xs transition shadow-md">
                     + Agregar
                 </button>
             </div>
         </div>
 
-        <div class="bg-white/5 border border-white/10 rounded-xl p-4 space-y-3 flex flex-col justify-between">
-            <div class="space-y-1">
-                <span class="text-[10px] font-bold uppercase tracking-wider text-amber-400">Promoción</span>
-                <h5 class="font-bold text-white text-sm">Kit de Mantenimiento #3</h5>
-                <p class="text-xs text-slate-400">Combinación recomendada para máxima vida útil.</p>
+        <div class="glass-card glass-card-hover rounded-2xl overflow-hidden group border border-white/10 flex flex-col justify-between p-4 space-y-3">
+            <div class="relative h-40 w-full rounded-xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=800&q=80" alt="Kit Mantenimiento #3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <span class="absolute top-2 left-2 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 backdrop-blur-md">
+                    OFERTA
+                </span>
             </div>
-            <div class="flex justify-between items-center pt-2 border-t border-white/10">
-                <span class="font-extrabold text-white text-sm">$12.400</span>
-                <button onclick="agregarAlCarrito('Kit Mantenimiento #3', 12400)" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-xs transition">
+            <div class="space-y-1">
+                <h5 class="font-bold text-white text-sm group-hover:text-amber-300 transition-colors font-title">Kit de Mantenimiento #3</h5>
+                <p class="text-xs text-slate-300">Insumos de alta durabilidad con precio preferencial.</p>
+            </div>
+            <div class="flex justify-between items-center pt-3 border-t border-white/10">
+                <span class="font-extrabold text-white text-base font-mono">$12.400</span>
+                <button onclick="agregarAlCarrito('Kit Mantenimiento #3', 12400)" class="bg-gradient-to-r from-amber-400 to-orange-400 hover:from-amber-300 hover:to-orange-300 text-slate-950 font-extrabold px-3.5 py-1.5 rounded-xl text-xs transition shadow-md">
                     + Agregar
                 </button>
             </div>
@@ -61,16 +76,19 @@
 
     </div>
 
-    <!-- MODAL DE CHECKOUT SIMULADO -->
-    <div id="cart-drawer" class="hidden bg-slate-900 border border-white/10 rounded-xl p-5 space-y-3">
-        <h5 class="font-bold text-white text-sm border-b border-white/10 pb-2">Resumen de tu Carrito</h5>
-        <div id="cart-items-list" class="space-y-1 text-xs text-slate-300"></div>
-        <div class="flex justify-between items-center font-bold text-sm text-white pt-2 border-t border-white/10">
-            <span>Total a pagar:</span>
-            <span id="cart-total" class="text-emerald-400">$0 ARS</span>
+    <!-- RESUMEN DEL PEDIDO -->
+    <div id="cart-drawer" class="hidden bg-slate-900/95 border border-emerald-500/30 rounded-2xl p-5 space-y-4 shadow-2xl backdrop-blur-xl">
+        <h5 class="font-bold text-white text-sm border-b border-white/10 pb-2 flex items-center justify-between font-title">
+            <span><i class="fa-solid fa-receipt text-emerald-400 mr-2"></i> Resumen de Tu Pedido</span>
+            <span class="text-xs text-emerald-400 font-mono">Envío Directo WA</span>
+        </h5>
+        <div id="cart-items-list" class="space-y-2 text-xs text-slate-200"></div>
+        <div class="flex justify-between items-center font-extrabold text-base text-white pt-3 border-t border-white/10">
+            <span>Total Estimado:</span>
+            <span id="cart-total" class="text-emerald-400 font-mono">$0 ARS</span>
         </div>
-        <button onclick="enviarPedidoWA()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-2.5 rounded-lg text-xs transition flex items-center justify-center gap-2">
-            <i class="fa-brands fa-whatsapp"></i> Finalizar Pedido por WhatsApp
+        <button onclick="enviarPedidoWA()" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-3 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-xl">
+            <i class="fa-brands fa-whatsapp text-lg"></i> Enviar Pedido a {{ demo.nombre_negocio }} por WhatsApp
         </button>
     </div>
 </div>
@@ -91,18 +109,25 @@
         const list = document.getElementById('cart-items-list');
         list.innerHTML = '';
         let total = 0;
-        carrito.forEach((item, idx) => {
+        carrito.forEach((item) => {
             total += item.precio;
-            list.innerHTML += `<div class="flex justify-between"><span>• ${item.nombre}</span><span>$${item.precio.toLocaleString('es-AR')}</span></div>`;
+            list.innerHTML += `<div class="flex justify-between items-center py-1 border-b border-white/5"><span>• ${item.nombre}</span><span class="font-mono text-emerald-300">$${item.precio.toLocaleString('es-AR')}</span></div>`;
         });
         document.getElementById('cart-total').innerText = `$${total.toLocaleString('es-AR')} ARS`;
+    }
+
+    function verCarrito() {
+        const drawer = document.getElementById('cart-drawer');
+        if (carrito.length > 0) {
+            drawer.classList.toggle('hidden');
+        }
     }
 
     function enviarPedidoWA() {
         if (carrito.length === 0) return;
         let itemsStr = carrito.map(i => i.nombre).join(', ');
         const total = document.getElementById('cart-total').innerText;
-        const msg = `Hola {{ demo.nombre_negocio }}, quisiera realizar el pedido de: ${itemsStr}. Total: ${total}.`;
-        window.open(`https://wa.me/{{ wa_clean }}?text=${encodeURIComponent(msg)}`, '_blank');
+        const msg = `Hola {{ demo.nombre_negocio }}, quisiera solicitar el siguiente pedido: ${itemsStr}. Total estimado: ${total}.`;
+        window.open(`{{ wa_link }}&text=${encodeURIComponent(msg)}`, '_blank');
     }
 </script>

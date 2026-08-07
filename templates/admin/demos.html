@@ -660,6 +660,9 @@
                                 <div id="osm-autocomplete-results" class="autocomplete-dropdown"></div>
                             </div>
                             
+                            <!-- AVISO DE CONFIGURACIÓN DE RESTRICCIÓN DE API KEY -->
+                            <div id="google-maps-api-notice" style="display: none;"></div>
+
                             <!-- Mapa Interactivo Compacto -->
                             <div id="admin-map-preview"></div>
                         </div>
@@ -990,31 +993,35 @@
                 return;
             }
 
-            // Mostrar mensaje de diagnóstico profesional en el contenedor del mapa
-            const mapContainer = document.getElementById('admin-map-preview');
-            if (mapContainer) {
-                mapContainer.innerHTML = `
-                    <div style="background: rgba(239, 68, 68, 0.15); border: 2px solid rgba(239, 68, 68, 0.4); border-radius: 16px; padding: 24px; color: #fca5a5; font-family: 'Inter', sans-serif; height: 100%; display: flex; flex-direction: column; justify-center; align-items: center; text-align: center;">
-                        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; margin-bottom: 12px; color: #f87171;"></i>
-                        <h4 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">Restricción de Google Maps API en VPS</h4>
-                        <p style="font-size: 0.85rem; max-width: 500px; line-height: 1.5; margin-bottom: 14px;">
-                            La API Key de Google Cloud rechazó las peticiones desde el dominio/IP de la VPS (<strong>${window.location.hostname}</strong>).
+            // Mostrar Banner Explicativo de Google Cloud Console arriba del mapa y activar Leaflet
+            const mapNotice = document.getElementById('google-maps-api-notice');
+            if (mapNotice) {
+                mapNotice.style.display = 'block';
+                mapNotice.innerHTML = `
+                    <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 14px 18px; margin-bottom: 16px; color: #fca5a5; font-size: 0.85rem;">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                            <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem; color: #f87171;"></i>
+                            <strong style="color: #ffffff; font-size: 0.95rem;">Google Maps API: Origen no permitido (${window.location.origin})</strong>
+                        </div>
+                        <p style="margin: 0 0 8px 0; color: #cbd5e1; line-height: 1.4;">
+                            Tu clave de Google Cloud tiene restricciones de "Sitios web" que no incluyen la URL actual (<code>${window.location.origin}/*</code>).
                         </p>
-                        <div style="background: rgba(0,0,0,0.4); padding: 12px 16px; border-radius: 10px; font-size: 0.75rem; text-align: left; font-family: monospace; color: #38bdf8;">
-                            📍 Solución en Google Cloud Console:<br>
-                            1. Ir a Credentials > Restricciones de sitio web (HTTP Referers)<br>
-                            2. Agregar: <code>${window.location.origin}/*</code> y <code>http://147.93.185.126/*</code><br>
-                            3. Verificar que <strong>Places API</strong> y <strong>Maps JavaScript API</strong> estén habilitadas.
+                        <div style="background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 8px; font-family: monospace; font-size: 0.775rem; color: #38bdf8;">
+                            👉 <strong>Solución en Google Cloud Console:</strong><br>
+                            En <em>Restricciones de sitios web</em> agregá: <code>${window.location.origin}/*</code> y <code>https://ggsolutions.com.ar/*</code><br>
+                            <em>(O cambiá temporalmente la restricción a <strong>"Ninguno"</strong> en Google Cloud).</em>
                         </div>
                     </div>
                 `;
             }
+
+            // Inicializar Leaflet para que el usuario SIEMPRE pueda usar el mapa y buscador mientras configura la API Key
+            initLeafletFallbackMap();
         };
 
         function initInteractiveMap() {
             const activeKey = apiKeys[keyIndex] || "{{ google_maps_api_key }}";
             if (activeKey && activeKey.length > 10) {
-                // Eliminar scripts de Google Maps previos si existieran
                 const oldScript = document.getElementById('google-maps-js-sdk');
                 if (oldScript) oldScript.remove();
 
@@ -1023,6 +1030,9 @@
                 script.src = `https://maps.googleapis.com/maps/api/js?key=${activeKey}&libraries=places&callback=initGoogleMapSDK`;
                 script.async = true;
                 script.defer = true;
+                script.onerror = function() {
+                    window.gm_authFailure();
+                };
                 document.head.appendChild(script);
             } else {
                 console.warn('[GOOGLE MAPS] No hay API Key configurada en .env');

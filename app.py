@@ -20,7 +20,11 @@ from security_utils import (
     registrar_auditoria,
     seed_admin_user,
 )
-from services.google_places import obtener_datos_lugar_google
+from services.google_places import (
+    obtener_datos_lugar_google,
+    extrae_ciudad_de_direccion,
+    validar_y_formatear_whatsapp,
+)
 from services.demo_engine import preparar_contexto_demo
 
 
@@ -401,34 +405,37 @@ def admin_crear_demo():
     if not maps_input and not nombre_override:
         return redirect(url_for("admin_demos_list", error="Por favor buscá y seleccioná un comercio en el mapa o ingresá su nombre."))
 
-    # Si seleccionó el negocio desde el Autocomplete/Mapa interactivo de JS
+    # Consultar API de Google Places si hay Place ID o búsqueda
+    query_target = place_id_override if (place_id_override and place_id_override.startswith("ChIJ")) else (maps_input or nombre_override)
+    datos_lugar = obtener_datos_lugar_google(query_target)
+
+    # Sobrescribir con las ediciones personalizadas del usuario si existen
     if nombre_override:
-        try:
-            rating_val = float(rating_override) if rating_override else 4.9
-        except ValueError:
-            rating_val = 4.9
+        datos_lugar["nombre_negocio"] = nombre_override
 
-        try:
-            reviews_val = int(reviews_count_override) if reviews_count_override else 24
-        except ValueError:
-            reviews_val = 24
+    if direccion_override:
+        datos_lugar["direccion"] = direccion_override
+        datos_lugar["ciudad"] = extrae_ciudad_de_direccion(direccion_override)
 
-        datos_lugar = {
-            "google_place_id": place_id_override or "place_custom",
-            "nombre_negocio": nombre_override,
-            "direccion": direccion_override or "Av. Principal, Centro",
-            "ciudad": ciudad_override or "Córdoba, Argentina",
-            "telefono": telefono_override or "+54 9 351 555-0199",
-            "whatsapp": whatsapp_override or "5493515550199",
-            "rating": rating_val,
-            "reviews_count": reviews_val,
-            "reviews": [],
-            "fotos": [],
-            "sitio_web_original": ""
-        }
-    else:
-        # Obtener datos de Google Places API o Fallback backend
-        datos_lugar = obtener_datos_lugar_google(maps_input)
+    if whatsapp_override:
+        phone_meta = validar_y_formatear_whatsapp(whatsapp_override)
+        datos_lugar["whatsapp"] = phone_meta["whatsapp_digits"]
+        if telefono_override:
+            datos_lugar["telefono"] = telefono_override
+        else:
+            datos_lugar["telefono"] = phone_meta["telefono_display"]
+
+    if rating_override:
+        try:
+            datos_lugar["rating"] = float(rating_override)
+        except ValueError:
+            pass
+
+    if reviews_count_override:
+        try:
+            datos_lugar["reviews_count"] = int(reviews_count_override)
+        except ValueError:
+            pass
 
     nombre_negocio = datos_lugar.get("nombre_negocio") or "Comercio Prospectado"
     slug = generar_slug(nombre_negocio)

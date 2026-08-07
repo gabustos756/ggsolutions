@@ -40,6 +40,21 @@ DOLORES_POR_RUBRO = {
         "Dificultad para coordinar visitas presenciales con interesados",
         "Falta de un buscador con mapa e imágenes HD por presupuesto"
     ],
+    "herramientas": [
+        "Stock desincronizado y pérdida de tiempo respondiendo disponibilidad en mostrador",
+        "Tardanza en armar cotizaciones y presupuestos complejos para gremios y obras",
+        "Pérdida de ventas B2B por falta de catálogo digital filtrable por marcas"
+    ],
+    "opticas": [
+        "Ausentismo en pruebas de visión y controles optométricos programados",
+        "Complejidad para mostrar y explicar tratamientos de cristales (Blue Block, Antirreflex)",
+        "Consultas repetitivas de pacientes sobre el estado de entrega de sus cristales"
+    ],
+    "kiosco": [
+        "Pérdida de margen por mercadería congelada o golosinas sin rotación a tiempo",
+        "Consultas repetitivas por WhatsApp sobre combos de bebidas y ofertas para eventos",
+        "Filas lentas en mostrador durante horas pico buscando precios de artículos"
+    ],
     "general": [
         "Falta de automatización en la captación y filtro de prospectos",
         "Procesos operativos en hojas de cálculo desactualizadas",
@@ -48,7 +63,7 @@ DOLORES_POR_RUBRO = {
 }
 
 
-from services.image_bank_engine import obtener_imagenes_rubro
+from services.image_bank_engine import obtener_imagenes_rubro, seleccionar_hero_inteligente
 
 THEMES_MAP = {
     "salud": {
@@ -100,6 +115,57 @@ THEMES_MAP = {
             {"icon": "fa-wine-glass", "title": "Carta de Autor", "desc": "Recetas exclusivas y maridaje", "tag": "Especialidad"},
             {"icon": "fa-motorcycle", "title": "Delivery Express", "desc": "Empaquetado térmico especial", "tag": "Pedidos Online"},
             {"icon": "fa-chair", "title": "Reservas Online", "desc": "Mesa garantizada en segundos", "tag": "Reservas"}
+        ]
+    },
+    "herramientas": {
+        "bg": "#0f0d0a",
+        "card_bg": "rgba(28, 22, 16, 0.75)",
+        "accent": "#eab308",
+        "gradient": "from-amber-400 via-yellow-500 to-amber-600",
+        "badge_bg": "bg-yellow-500/15 text-yellow-300 border-yellow-500/30",
+        "font_family": "'Inter', sans-serif",
+        "title_font": "'Outfit', sans-serif",
+        "font_google": "https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap",
+        "hero_bg_image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80",
+        "pilares": [
+            {"icon": "fa-toolbox", "title": "Marcas Líderes", "desc": "Herramientas e insumos garantizados", "tag": "Industrial"},
+            {"icon": "fa-truck-ramp-box", "title": "Venta por Volumen", "desc": "Descuentos directos para gremios", "tag": "B2B"},
+            {"icon": "fa-calculator", "title": "Cotización de Obras", "desc": "Presupuestos rápidos en el día", "tag": "Cotización"},
+            {"icon": "fa-shield-cat", "title": "Garantía Oficial", "desc": "Respaldo directo de fábrica", "tag": "Confianza"}
+        ]
+    },
+    "opticas": {
+        "bg": "#070c14",
+        "card_bg": "rgba(14, 23, 38, 0.75)",
+        "accent": "#38bdf8",
+        "gradient": "from-sky-400 via-cyan-300 to-blue-500",
+        "badge_bg": "bg-sky-500/15 text-sky-300 border-sky-500/30",
+        "font_family": "'Plus Jakarta Sans', sans-serif",
+        "title_font": "'Plus Jakarta Sans', sans-serif",
+        "font_google": "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap",
+        "hero_bg_image": "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=1200&q=80",
+        "pilares": [
+            {"icon": "fa-glasses", "title": "Diseño & Estilo", "desc": "Armazones de tendencia internacional", "tag": "Colección"},
+            {"icon": "fa-eye", "title": "Examen Optométrico", "desc": "Control de agudeza visual matriculado", "tag": "Salud Visual"},
+            {"icon": "fa-laptop-medical", "title": "Filtro Blue Block", "desc": "Protección para trabajo con pantallas", "tag": "Tecnología"},
+            {"icon": "fa-clock-rotate-left", "title": "Turnos en Línea", "desc": "Agendamiento ágil sin demoras", "tag": "Reserva"}
+        ]
+    },
+    "kiosco": {
+        "bg": "#060f14",
+        "card_bg": "rgba(12, 28, 36, 0.75)",
+        "accent": "#10b981",
+        "gradient": "from-emerald-400 via-teal-400 to-cyan-500",
+        "badge_bg": "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+        "font_family": "'Plus Jakarta Sans', sans-serif",
+        "title_font": "'Outfit', sans-serif",
+        "font_google": "https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
+        "hero_bg_image": "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=1200&q=80",
+        "pilares": [
+            {"icon": "fa-bottle-water", "title": "Bebidas Frías", "desc": "Stock permanente de primeras marcas", "tag": "Express"},
+            {"icon": "fa-box-open", "title": "Combos & Ofertas", "desc": "Promociones exclusivas de fin de semana", "tag": "Ahorro"},
+            {"icon": "fa-bolt-lightning", "title": "Retiro Inmediato", "desc": "Tu pedido listo por mostrador", "tag": "Sin Filas"},
+            {"icon": "fa-basket-shopping", "title": "Almacén de Cercanía", "desc": "Todo lo que necesitás a metros", "tag": "Cercanía"}
         ]
     },
     "retail": {
@@ -233,6 +299,15 @@ def generar_copy_negocio(nombre_negocio, rubro_key):
     elif rubro_key == "inmobiliaria":
         headline = f"Propiedades Exclusivas & Asesoramiento Inmobiliario en {nombre}"
         subheadline = f"Encontrá tu próximo hogar o la inversión ideal en {nombre} con el respaldo y la transparencia de nuestro equipo de profesionales."
+    elif rubro_key == "herramientas":
+        headline = f"Herramientas Profesionales, Insumos & Cotizador de Obras en {nombre}"
+        subheadline = f"En {nombre} abastecemos a gremios y profesionales con las mejores marcas, asesoramiento técnico en mostrador y presupuestos rápidos por WhatsApp."
+    elif rubro_key == "opticas":
+        headline = f"Salud Visual, Armazones de Diseño & Examen Optométrico en {nombre}"
+        subheadline = f"En {nombre} cuidamos tu visión con cristales de alta precisión, filtro Blue Block y atención personalizada por optómetras matriculados."
+    elif rubro_key == "kiosco":
+        headline = f"Tienda Express, Bebidas Frías & Combos en {nombre}"
+        subheadline = f"En {nombre} encontrás todo lo que necesitás al instante: bebidas congeladas, combos para eventos y pedidos rápidos por WhatsApp sin hacer filas."
     elif rubro_key == "servicios":
         headline = f"Soluciones Profesionales a Medida & Asesoramiento Técnico en {nombre}"
         subheadline = f"En {nombre} transformamos tus requerimientos en resultados concretos con la máxima precisión, calidad y cumplimiento de plazos."
@@ -310,6 +385,15 @@ def preparar_contexto_demo(demo_obj) -> dict:
         except Exception:
             fotos = []
 
+    # Seleccionar la imagen Hero HD de más alta definición del banco etiquetado de la carpeta local
+    hero_meta = seleccionar_hero_inteligente(rubro_key, demo_obj.nombre_negocio)
+    hero_bg_url = hero_meta["url"]
+
+    # Asignar Hero HD al tema visual
+    theme_copy = dict(theme)
+    theme_copy["hero_bg_image"] = hero_bg_url
+    theme_copy["hero_meta"] = hero_meta
+
     # Formatear WhatsApp
     wa_clean = re.sub(r"\D", "", demo_obj.whatsapp or demo_obj.telefono or "5493515550199")
 
@@ -323,12 +407,13 @@ def preparar_contexto_demo(demo_obj) -> dict:
 
     return {
         "demo": demo_obj,
-        "theme": theme,
+        "theme": theme_copy,
         "pilares": pilares_enriquecidos,
         "news": img_data.get("news", []),
         "modulo_info": modulo_info,
         "hero_headline": hero_headline,
         "hero_subheadline": hero_subheadline,
+        "hero_meta": hero_meta,
         "reviews": reviews,
         "fotos": fotos,
         "wa_link": wa_link,

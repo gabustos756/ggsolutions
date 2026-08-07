@@ -296,7 +296,7 @@
             background-color: rgba(56, 189, 248, 0.15);
         }
 
-        /* BUSCADOR CON BOTÓN X DE LIMPIEZA */
+        /* BUSCADOR CON BOTÓN X DE LIMPIEZA & DROPDOWN ALTERNATIVO */
         .search-input-wrapper {
             position: relative;
             width: 100%;
@@ -314,10 +314,60 @@
             cursor: pointer;
             padding: 6px;
             display: none;
+            z-index: 15;
         }
 
         .search-clear-btn:hover {
             color: #ffffff;
+        }
+
+        /* DROPDOWN DE AUTOCOMPLETADO REAL (OPENSTREETMAP / PHOTON) */
+        .autocomplete-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 14px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            z-index: 99999;
+            margin-top: 6px;
+            max-height: 280px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .autocomplete-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid #1e293b;
+            color: #e2e8f0;
+            font-size: 0.875rem;
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            transition: background-color 0.15s;
+        }
+
+        .autocomplete-item:last-child {
+            border-bottom: none;
+        }
+
+        .autocomplete-item:hover, .autocomplete-item:active {
+            background-color: #1e293b;
+        }
+
+        .autocomplete-item-name {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+
+        .autocomplete-item-sub {
+            font-size: 0.775rem;
+            color: var(--text-muted);
+            margin-top: 2px;
         }
 
         /* MAPA INTERACTIVO COMPACTO */
@@ -561,7 +611,7 @@
     <main class="main-container">
 
         <div class="page-header-block">
-            <h1 class="page-header-title">Generador de Demos Commerciales</h1>
+            <h1 class="page-header-title">Generador de Demos Comerciales</h1>
             <p class="page-header-desc">Buscá un comercio en el mapa o cargá los datos manualmente para generar una demo de venta en segundos.</p>
         </div>
 
@@ -596,61 +646,64 @@
 
                     <div class="form-grid">
                         
-                        <!-- Buscador Google Places Autocomplete -->
+                        <!-- Buscador Google Places & OpenStreetMap Autocomplete -->
                         <div class="form-group full-width" id="container-google-search">
-                            <label class="form-label">🔍 Buscar Comercio en Google Maps (Autocomplete)</label>
+                            <label class="form-label">🔍 Buscar Comercio en el Mapa (Autocomplete en vivo)</label>
                             <div class="search-input-wrapper">
-                                <input type="text" id="google_places_autocomplete" name="google_maps_input" placeholder="Ej: Fiambrería Los Hermanos, Sanatorio Allende..." class="form-input" style="padding-left: 38px; padding-right: 36px;" autocomplete="off">
+                                <input type="text" id="google_places_autocomplete" name="google_maps_input" placeholder="Escribí el comercio o dirección (ej. La Optica, Sanatorio Allende, Taller Pérez)..." class="form-input" style="padding-left: 38px; padding-right: 36px;" autocomplete="off">
                                 <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.9rem;"></i>
                                 <button type="button" class="search-clear-btn" id="btn-clear-search" onclick="limpiarBuscador()">
                                     <i class="fa-solid fa-xmark"></i>
                                 </button>
+                                
+                                <!-- DROPDOWN DE RESULTADOS DE AUTOCOMPLETADO GEOCÓDICO REAL -->
+                                <div id="osm-autocomplete-results" class="autocomplete-dropdown"></div>
                             </div>
                             
                             <!-- Mapa Interactivo Compacto -->
                             <div id="admin-map-preview"></div>
                         </div>
 
-                        <!-- BADGE DE CONFIRMACIÓN DE GOOGLE PLACES -->
+                        <!-- BADGE DE CONFIRMACIÓN DE NEGOCIO -->
                         <div id="place-confirmed-badge" class="form-group full-width" style="display: none;">
                             <div style="padding: 14px 16px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 12px; font-size: 0.875rem; color: #34d399; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
                                 <div>
                                     <i class="fa-solid fa-circle-check mr-1"></i> Negocio Confirmado: <strong id="selected-place-name" style="color: #ffffff;"></strong> — <span id="selected-place-addr" style="color: #cbd5e1;"></span>
                                 </div>
-                                <span id="selected-place-rating" class="font-bold text-amber-400">4.9 ★</span>
+                                <span id="selected-place-rating" style="font-weight: 800; color: #f59e0b;">4.9 ★</span>
                             </div>
                         </div>
 
                         <!-- CAMPOS EDITABLES VISIBLES DEL NEGOCIO -->
-                        <div class="form-group full-width" id="section-campos-visibles" style="display: none; background: rgba(15, 23, 42, 0.5); p-4; border-radius: 14px; border: 1px solid var(--border-hairline);">
+                        <div class="form-group full-width" id="section-campos-visibles" style="display: none; background: rgba(15, 23, 42, 0.5); padding: 16px; border-radius: 14px; border: 1px solid var(--border-hairline);">
                             <div class="form-grid">
                                 <div class="form-group">
                                     <label class="form-label">Nombre Comercial del Negocio (*)</label>
-                                    <input type="text" id="visible_nombre" name="nombre_negocio_override" placeholder="Ej: Sanatorio Allende" class="form-input" oninput="sincronizarHidden('hidden_nombre', this.value)">
+                                    <input type="text" id="visible_nombre" placeholder="Ej: Sanatorio Allende" class="form-input" oninput="sincronizarHidden('hidden_nombre', this.value)">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Dirección / Ubicación (*)</label>
-                                    <input type="text" id="visible_direccion" name="direccion_override" placeholder="Ej: Av. Colón 1200, Córdoba" class="form-input" oninput="sincronizarHidden('hidden_direccion', this.value)">
+                                    <input type="text" id="visible_direccion" placeholder="Ej: Av. Colón 1200, Córdoba" class="form-input" oninput="sincronizarHidden('hidden_direccion', this.value)">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">WhatsApp de Atención (*)</label>
-                                    <input type="tel" id="visible_whatsapp" name="whatsapp_override" placeholder="Ej: 5493515550199" class="form-input" oninput="sincronizarHidden('hidden_whatsapp', this.value)">
+                                    <input type="tel" id="visible_whatsapp" placeholder="Ej: 5493515550199" class="form-input" oninput="sincronizarHidden('hidden_whatsapp', this.value)">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label">Rating Estimado en Google</label>
-                                    <input type="number" step="0.1" id="visible_rating" name="rating_override" value="4.9" class="form-input" oninput="sincronizarHidden('hidden_rating', this.value)">
+                                    <input type="number" step="0.1" id="visible_rating" value="4.9" class="form-input" oninput="sincronizarHidden('hidden_rating', this.value)">
                                 </div>
                             </div>
                         </div>
 
-                        <!-- CAMPOS OCULTOS COMPATIBLES -->
+                        <!-- CAMPOS OCULTOS COMPATIBLES EXACTOS CON APP.PY -->
                         <input type="hidden" id="hidden_place_id" name="google_place_id">
-                        <input type="hidden" id="hidden_nombre" name="nombre_negocio_hidden">
-                        <input type="hidden" id="hidden_direccion" name="direccion_hidden">
+                        <input type="hidden" id="hidden_nombre" name="nombre_negocio_override">
+                        <input type="hidden" id="hidden_direccion" name="direccion_override">
                         <input type="hidden" id="hidden_ciudad" name="ciudad_override">
                         <input type="hidden" id="hidden_telefono" name="telefono_override">
-                        <input type="hidden" id="hidden_whatsapp" name="whatsapp_hidden">
-                        <input type="hidden" id="hidden_rating" name="rating_hidden" value="4.9">
+                        <input type="hidden" id="hidden_whatsapp" name="whatsapp_override">
+                        <input type="hidden" id="hidden_rating" name="rating_override" value="4.9">
                         <input type="hidden" id="hidden_reviews_count" name="reviews_count_override" value="28">
 
                     </div>
@@ -680,9 +733,12 @@
                         <div class="form-group">
                             <label class="form-label">Rubro / Categoría Visual (*)</label>
                             <select id="rubro_select" name="rubro" class="form-select" required onchange="actualizarDoloresRubro(this.value)">
-                                <option value="salud">Salud & Clínicas</option>
-                                <option value="automotriz">Automotriz & Mecánica</option>
                                 <option value="gastronomia">Gastronomía & Restaurantes</option>
+                                <option value="automotriz">Automotriz & Mecánica</option>
+                                <option value="herramientas">Herramientas, Ferreterías & Materiales</option>
+                                <option value="opticas">Ópticas & Salud Visual</option>
+                                <option value="kiosco">Kioscos, Minimarkets & Supermercados</option>
+                                <option value="salud">Salud & Clínicas</option>
                                 <option value="retail">Retail & Tiendas</option>
                                 <option value="servicios" selected>Servicios Profesionales</option>
                                 <option value="inmobiliaria">Inmobiliaria & Bienes Raíces</option>
@@ -901,20 +957,25 @@
         function limpiarBuscador() {
             const input = document.getElementById('google_places_autocomplete');
             if (input) input.value = '';
+            document.getElementById('hidden_nombre').value = '';
+            document.getElementById('hidden_direccion').value = '';
+            document.getElementById('hidden_place_id').value = '';
             document.getElementById('btn-clear-search').style.display = 'none';
             document.getElementById('place-confirmed-badge').style.display = 'none';
+            const dropdown = document.getElementById('osm-autocomplete-results');
+            if (dropdown) dropdown.style.display = 'none';
         }
 
         let map, marker, googleMap, googleMarker;
         const apiKey = "{{ google_maps_api_key }}";
 
         window.gm_authFailure = function() {
-            console.warn('[GOOGLE MAPS WARN] Maps API falló. Activando fallback.');
+            console.warn('[GOOGLE MAPS WARN] Maps API de Google no devolvió datos válidos. Activando Fallback con OpenStreetMap & Photon.');
             initLeafletFallbackMap();
         };
 
         function initInteractiveMap() {
-            if (apiKey) {
+            if (apiKey && apiKey.length > 10) {
                 const script = document.createElement('script');
                 script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initGoogleMapSDK`;
                 script.async = true;
@@ -929,6 +990,11 @@
             const cordobaCoords = { lat: -31.4135, lng: -64.1810 };
             const mapContainer = document.getElementById('admin-map-preview');
             
+            if (typeof google === 'undefined' || !google.maps || !google.maps.places) {
+                initLeafletFallbackMap();
+                return;
+            }
+
             googleMap = new google.maps.Map(mapContainer, {
                 center: cordobaCoords,
                 zoom: 13,
@@ -950,15 +1016,32 @@
             const clearBtn = document.getElementById('btn-clear-search');
 
             input.addEventListener('input', function() {
-                if (clearBtn) clearBtn.style.display = input.value ? 'block' : 'none';
+                const val = input.value.trim();
+                if (clearBtn) clearBtn.style.display = val ? 'block' : 'none';
+                
+                sincronizarHidden('hidden_nombre', val);
+                document.getElementById('visible_nombre').value = val;
             });
 
-            const autocomplete = new google.maps.places.Autocomplete(input);
+            const autocomplete = new google.maps.places.Autocomplete(input, {
+                types: ['establishment', 'geocode']
+            });
             autocomplete.bindTo('bounds', googleMap);
 
             autocomplete.addListener('place_changed', function() {
                 const place = autocomplete.getPlace();
-                if (!place.geometry || !place.geometry.location) {
+                if (!place || !place.geometry || !place.geometry.location) {
+                    const textVal = input.value.trim();
+                    if (textVal) {
+                        seleccionarNegocioDatos({
+                            place_id: 'place_manual_' + Date.now(),
+                            nombre: textVal,
+                            direccion: 'Córdoba, Argentina',
+                            telefono: '+54 9 351 555-0199',
+                            rating: 4.9,
+                            reviews_count: 24
+                        });
+                    }
                     return;
                 }
 
@@ -982,8 +1065,13 @@
             });
         };
 
+        // AUTOCOMPLETADO GEOCÓDICO REAL CON OPENSTREETMAP & PHOTON (Soportado sin API Key)
+        let searchTimeout = null;
+
         function initLeafletFallbackMap() {
             const mapContainer = document.getElementById('admin-map-preview');
+            if (!mapContainer) return;
+
             map = L.map(mapContainer).setView([-31.4135, -64.1810], 13);
             
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -994,20 +1082,104 @@
             marker = L.marker([-31.4135, -64.1810], { draggable: true }).addTo(map);
 
             const input = document.getElementById('google_places_autocomplete');
-            input.addEventListener('change', function() {
+            const clearBtn = document.getElementById('btn-clear-search');
+            const dropdown = document.getElementById('osm-autocomplete-results');
+
+            input.addEventListener('input', function() {
                 const val = input.value.trim();
-                if (val.length > 2) {
-                    seleccionarNegocioDatos({
-                        place_id: 'place_demo_' + Date.now(),
-                        nombre: val,
-                        direccion: 'Av. Colón 1200, Córdoba',
-                        telefono: '+54 9 351 555-0199',
-                        rating: 4.9,
-                        reviews_count: 32,
-                        types: []
-                    });
+                if (clearBtn) clearBtn.style.display = val ? 'block' : 'none';
+                
+                sincronizarHidden('hidden_nombre', val);
+                document.getElementById('visible_nombre').value = val;
+                
+                if (val.length < 2) {
+                    if (dropdown) dropdown.style.display = 'none';
+                    return;
+                }
+
+                // Debounce de búsqueda de 250ms
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    buscarComerciosPhoton(val);
+                }, 250);
+            });
+
+            // Ocultar dropdown al hacer click fuera
+            document.addEventListener('click', function(e) {
+                if (dropdown && !dropdown.contains(e.target) && e.target !== input) {
+                    dropdown.style.display = 'none';
                 }
             });
+        }
+
+        // Búsqueda en vivo usando Photon OpenStreetMap API
+        function buscarComerciosPhoton(query) {
+            const dropdown = document.getElementById('osm-autocomplete-results');
+            if (!dropdown) return;
+
+            // Coordenadas centro de Córdoba para priorizar resultados locales
+            const url = `https://photon.komoot.io/api/?q=${encodeURIComponent(query)}&lat=-31.4135&lon=-64.1810&limit=6`;
+
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    dropdown.innerHTML = '';
+                    if (!data || !data.features || data.features.length === 0) {
+                        dropdown.style.display = 'none';
+                        return;
+                    }
+
+                    data.features.forEach(feat => {
+                        const props = feat.properties || {};
+                        const coords = feat.geometry ? feat.geometry.coordinates : null;
+                        
+                        const nombreLugar = props.name || props.street || query;
+                        const direccionLugar = [
+                            props.street ? (props.housenumber ? props.street + ' ' + props.housenumber : props.street) : '',
+                            props.city || props.county || 'Córdoba',
+                            props.state || 'Córdoba',
+                            props.country || 'Argentina'
+                        ].filter(Boolean).join(', ');
+
+                        const item = document.createElement('div');
+                        item.className = 'autocomplete-item';
+                        item.innerHTML = `
+                            <i class="fa-solid fa-location-dot" style="color: var(--accent-cyan); margin-top: 3px;"></i>
+                            <div>
+                                <div class="autocomplete-item-name">${nombreLugar}</div>
+                                <div class="autocomplete-item-sub">${direccionLugar}</div>
+                            </div>
+                        `;
+
+                        item.onclick = function() {
+                            document.getElementById('google_places_autocomplete').value = nombreLugar;
+                            dropdown.style.display = 'none';
+
+                            if (coords && map && marker) {
+                                const lat = coords[1];
+                                const lng = coords[0];
+                                map.setView([lat, lng], 16);
+                                marker.setLatLng([lat, lng]);
+                            }
+
+                            seleccionarNegocioDatos({
+                                place_id: 'osm_' + (props.osm_id || Date.now()),
+                                nombre: nombreLugar,
+                                direccion: direccionLugar,
+                                telefono: '+54 9 351 555-0199',
+                                rating: 4.9,
+                                reviews_count: 28
+                            });
+                        };
+
+                        dropdown.appendChild(item);
+                    });
+
+                    dropdown.style.display = 'block';
+                })
+                .catch(err => {
+                    console.warn('[PHOTON API WARN] Fallo geocodificador libre:', err);
+                });
         }
 
         function seleccionarNegocioDatos(info) {
@@ -1025,7 +1197,6 @@
             document.getElementById('visible_direccion').value = info.direccion || '';
             document.getElementById('visible_whatsapp').value = info.telefono ? info.telefono.replace(/\D/g, '') : '';
             document.getElementById('visible_rating').value = info.rating || 4.9;
-            document.getElementById('section-campos-visibles').style.display = 'block';
 
             // Mostrar Badge de Confirmación
             document.getElementById('selected-place-name').innerText = info.nombre;
@@ -1034,12 +1205,12 @@
             document.getElementById('place-confirmed-badge').style.display = 'block';
 
             // Auto-inferir rubro
-            const nameLower = info.nombre.toLowerCase();
+            const nameLower = (info.nombre || '').toLowerCase();
             const rubroSel = document.getElementById('rubro_select');
             const modSel = document.getElementById('modulo_solucion_select');
 
-            if (nameLower.includes('salud') || nameLower.includes('clinica') || nameLower.includes('sanatorio') || nameLower.includes('odontolog') || nameLower.includes('medic')) {
-                rubroSel.value = 'salud';
+            if (nameLower.includes('salud') || nameLower.includes('clinica') || nameLower.includes('sanatorio') || nameLower.includes('odontolog') || nameLower.includes('medic') || nameLower.includes('optica')) {
+                rubroSel.value = nameLower.includes('optica') ? 'servicios' : 'salud';
                 modSel.value = 'agenda';
             } else if (nameLower.includes('taller') || nameLower.includes('mecanic') || nameLower.includes('auto') || nameLower.includes('repuesto')) {
                 rubroSel.value = 'automotriz';

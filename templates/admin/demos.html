@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Generador de Demos B2B — GG Solutions</title>
     
     <!-- Google Fonts -->
@@ -24,6 +24,7 @@
             --border-hairline: #334155;
             --accent-blue: #2563eb;
             --accent-indigo: #6366f1;
+            --accent-cyan: #38bdf8;
             --text-title: #f8fafc;
             --text-body: #e2e8f0;
             --text-muted: #94a3b8;
@@ -42,13 +43,15 @@
             min-height: 100vh;
             padding-bottom: 80px;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
+        /* HEADER ADMINISTRATIVO RESPONSIVO */
         .admin-header {
             background-color: #080d1a;
             border-bottom: 1px solid var(--border-hairline);
-            padding: 0 32px;
-            height: 72px;
+            padding: 12px 24px;
+            min-height: 64px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -56,12 +59,14 @@
             top: 0;
             z-index: 100;
             backdrop-filter: blur(12px);
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .admin-brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             text-decoration: none;
             color: var(--text-title);
         }
@@ -78,37 +83,58 @@
 
         .brand-logo-text {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 800;
         }
 
         .brand-badge-env {
             font-family: 'Fira Code', monospace;
-            font-size: 0.675rem;
+            font-size: 0.65rem;
             font-weight: 600;
-            color: #38bdf8;
+            color: var(--accent-cyan);
             background-color: rgba(56, 189, 248, 0.12);
             border: 1px solid rgba(56, 189, 248, 0.25);
             padding: 3px 8px;
             border-radius: 6px;
-            margin-left: 6px;
         }
 
-        .user-nav-actions {
+        .header-nav-links {
             display: flex;
             align-items: center;
             gap: 16px;
         }
 
+        .header-nav-link {
+            color: var(--text-muted);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+            padding: 6px 10px;
+            border-radius: 6px;
+        }
+
+        .header-nav-link.active {
+            color: var(--accent-cyan);
+            font-weight: 700;
+            background-color: rgba(56, 189, 248, 0.1);
+        }
+
+        .user-nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
         .user-profile-badge {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background-color: var(--bg-card);
             border: 1px solid var(--border-hairline);
-            padding: 6px 14px;
+            padding: 6px 12px;
             border-radius: 9999px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
         .user-avatar-dot {
@@ -121,9 +147,9 @@
         .btn-logout {
             color: #fca5a5;
             text-decoration: none;
-            font-size: 0.825rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            padding: 7px 14px;
+            padding: 6px 12px;
             border-radius: 8px;
             background-color: rgba(239, 68, 68, 0.1);
             border: 1px solid rgba(239, 68, 68, 0.25);
@@ -132,16 +158,16 @@
         .main-container {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 32px 24px;
+            padding: 24px 16px;
         }
 
         .page-header-block {
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
 
         .page-header-title {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 800;
             color: var(--text-title);
             letter-spacing: -0.03em;
@@ -150,33 +176,67 @@
 
         .page-header-desc {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
 
-        /* FORMULARIO CARD */
+        /* FORMULARIO CARD CON PASOS LÓGICOS */
         .form-card {
             background-color: var(--bg-card);
             border: 1px solid var(--border-hairline);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 24px;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
             box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
         }
 
-        .form-title {
+        .form-step-section {
+            border-bottom: 1px solid var(--border-hairline);
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+        }
+
+        .form-step-section:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .step-title {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--text-title);
-            margin-bottom: 16px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
+        .step-number-badge {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
+            color: #ffffff;
+            font-size: 0.85rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 16px;
         }
 
@@ -191,8 +251,8 @@
         }
 
         .form-label {
-            font-size: 0.8rem;
-            font-weight: 600;
+            font-size: 0.775rem;
+            font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.04em;
@@ -201,55 +261,144 @@
         .form-input, .form-select, .form-textarea {
             background-color: #0f172a;
             border: 1px solid var(--border-hairline);
-            border-radius: 8px;
-            padding: 10px 14px;
+            border-radius: 12px;
+            padding: 12px 14px;
             color: var(--text-title);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            min-height: 48px;
             outline: none;
-            transition: border-color 0.2s;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            width: 100%;
         }
 
         .form-input:focus, .form-select:focus, .form-textarea:focus {
-            border-color: #38bdf8;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
         }
 
-        /* Estilo del Mapa Interactivo */
+        /* TOGGLE MODO MANUAL VS MAPA */
+        .mode-toggle-btn {
+            background-color: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-hairline);
+            color: var(--accent-cyan);
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .mode-toggle-btn:hover {
+            background-color: rgba(56, 189, 248, 0.15);
+        }
+
+        /* BUSCADOR CON BOTÓN X DE LIMPIEZA */
+        .search-input-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-clear-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 6px;
+            display: none;
+        }
+
+        .search-clear-btn:hover {
+            color: #ffffff;
+        }
+
+        /* MAPA INTERACTIVO COMPACTO */
         #admin-map-preview {
             width: 100%;
-            height: 280px;
-            border-radius: 12px;
+            height: 220px;
+            border-radius: 14px;
             border: 1px solid var(--border-hairline);
-            margin-top: 10px;
+            margin-top: 12px;
             z-index: 10;
+        }
+
+        /* CHIPS DE DOLORES CON SCROLL HORIZONTAL FLUIDO */
+        .chips-scroll-container {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 6px 2px 10px 2px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .chips-scroll-container::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .chips-scroll-container::-webkit-scrollbar-thumb {
+            background: var(--border-hairline);
+            border-radius: 4px;
+        }
+
+        .chip-btn {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            color: var(--accent-cyan);
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 0.775rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .chip-btn:hover, .chip-btn:active {
+            background: var(--accent-cyan);
+            color: #000000;
         }
 
         .btn-submit-demo {
             background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
             color: #ffffff;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 700;
-            font-size: 0.95rem;
-            padding: 12px 24px;
-            border-radius: 10px;
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 14px 28px;
+            border-radius: 14px;
             border: none;
             cursor: pointer;
-            transition: opacity 0.2s;
+            transition: transform 0.2s, opacity 0.2s;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             justify-content: center;
-            margin-top: 12px;
+            width: 100%;
+            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
+            min-height: 52px;
         }
 
         .btn-submit-demo:hover {
-            opacity: 0.9;
+            opacity: 0.95;
+            transform: translateY(-1px);
         }
 
-        /* TABLA DE DEMOS */
+        /* TABLA Y CARDS RESPONSIVAS DE DEMOS */
         .demos-table-wrapper {
             background-color: var(--bg-card);
             border: 1px solid var(--border-hairline);
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
         }
 
@@ -263,7 +412,7 @@
         .demos-table th {
             background-color: #0f172a;
             color: var(--text-muted);
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
             font-size: 0.725rem;
             letter-spacing: 0.05em;
@@ -277,28 +426,44 @@
             vertical-align: middle;
         }
 
-        .demos-table tr:hover {
-            background-color: var(--bg-card-hover);
+        .demos-cards-mobile {
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            padding: 16px;
+        }
+
+        .demo-card-item {
+            background-color: #0f172a;
+            border: 1px solid var(--border-hairline);
+            border-radius: 14px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         .btn-action-icon {
             background-color: rgba(255,255,255,0.06);
             border: 1px solid var(--border-hairline);
             color: var(--text-title);
-            padding: 6px 12px;
-            border-radius: 6px;
+            padding: 10px 14px;
+            border-radius: 10px;
             font-size: 0.8rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
             transition: all 0.2s;
+            min-height: 42px;
+            flex: 1;
         }
 
         .btn-action-icon:hover {
-            background-color: #38bdf8;
+            background-color: var(--accent-cyan);
             color: #000000;
         }
 
@@ -306,47 +471,82 @@
             background-color: rgba(16, 185, 129, 0.15);
             border: 1px solid rgba(16, 185, 129, 0.3);
             color: #34d399;
-            padding: 12px 18px;
-            border-radius: 10px;
+            padding: 14px 18px;
+            border-radius: 14px;
             font-size: 0.9rem;
             margin-bottom: 24px;
         }
 
-        /* Estilo para sugerencias autocompletado en modo oscuro */
+        /* GOOGLE PLACES AUTOCOMPLETE OVERLAY DARK EN MOBILE */
         .pac-container {
             background-color: #0f172a !important;
             border: 1px solid #334155 !important;
-            border-radius: 8px !important;
+            border-radius: 14px !important;
             font-family: 'Inter', sans-serif !important;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5) !important;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8) !important;
+            z-index: 99999 !important;
+            margin-top: 6px !important;
+            padding: 4px 0 !important;
         }
         .pac-item {
             color: #cbd5e1 !important;
             border-top: 1px solid #1e293b !important;
-            padding: 8px 12px !important;
+            padding: 12px 16px !important;
+            font-size: 0.9rem !important;
+            cursor: pointer !important;
         }
         .pac-item:hover, .pac-item-selected {
             background-color: #1e293b !important;
         }
         .pac-item-query {
             color: #ffffff !important;
-            font-weight: 600 !important;
+            font-weight: 700 !important;
+            font-size: 0.95rem !important;
+        }
+
+        /* MEDIA QUERIES PARA ADAPTACIÓN MÓVIL (< 768px) */
+        @media (max-width: 768px) {
+            .admin-header {
+                padding: 12px 16px;
+            }
+            .main-container {
+                padding: 16px 12px;
+            }
+            .page-header-title {
+                font-size: 1.35rem;
+            }
+            .form-card {
+                padding: 16px;
+                border-radius: 16px;
+            }
+            .btn-submit-demo {
+                width: 100%;
+            }
+            .demos-table {
+                display: none;
+            }
+            .demos-cards-mobile {
+                display: flex;
+            }
+            #admin-map-preview {
+                height: 180px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header de Administración -->
+    <!-- Header de Administración Responsivo -->
     <header class="admin-header">
         <a href="/" class="admin-brand">
             <span class="brand-logo-mark">GG</span>
-            <span class="brand-logo-text">Solutions Studio</span>
-            <span class="brand-badge-env">PANEL ADMIN</span>
+            <span class="brand-logo-text">Solutions</span>
+            <span class="brand-badge-env">ADMIN</span>
         </a>
 
-        <div style="display: flex; align-items: center; gap: 20px;">
-            <a href="/admin" style="color: #94a3b8; font-weight: 600; text-decoration: none; font-size: 0.9rem; transition: color 0.2s;">📬 Leads</a>
-            <a href="/admin/demos" style="color: #38bdf8; font-weight: 700; text-decoration: none; font-size: 0.9rem; border-bottom: 2px solid #38bdf8; padding-bottom: 2px;">⚡ Demos B2B</a>
+        <div class="header-nav-links">
+            <a href="/admin" class="header-nav-link">📬 Leads</a>
+            <a href="/admin/demos" class="header-nav-link active">⚡ Demos B2B</a>
         </div>
 
         <div class="user-nav-actions">
@@ -354,137 +554,200 @@
                 <span class="user-avatar-dot"></span>
                 <span>{{ current_user.nombre }}</span>
             </div>
-            <a href="/admin/logout" class="btn-logout">Cerrar Sesión</a>
+            <a href="/admin/logout" class="btn-logout">Salir</a>
         </div>
     </header>
 
     <main class="main-container">
 
         <div class="page-header-block">
-            <h1 class="page-header-title">Generador de Demos Personalizadas</h1>
-            <p class="page-header-desc">Buscá y seleccioná el negocio en el mapa interactivo para extraer sus datos y generar una demo comercial.</p>
+            <h1 class="page-header-title">Generador de Demos Commerciales</h1>
+            <p class="page-header-desc">Buscá un comercio en el mapa o cargá los datos manualmente para generar una demo de venta en segundos.</p>
         </div>
 
         {% if error %}
             <div class="alert-flash" style="background-color: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.3); color: #fca5a5;">
-                {{ error }}
+                <i class="fa-solid fa-triangle-exclamation mr-1"></i> {{ error }}
             </div>
         {% endif %}
 
         {% if mensaje %}
             <div class="alert-flash">
-                {{ mensaje }}
+                <i class="fa-solid fa-circle-check mr-1"></i> {{ mensaje }}
             </div>
         {% endif %}
 
-        <!-- FORMULARIO DE GENERACIÓN DE DEMOS -->
+        <!-- FORMULARIO EN 3 PASOS LÓGICOS TÁCTILES -->
         <div class="form-card">
-            <h2 class="form-title">
-                <i class="fa-solid fa-map-location-dot" style="color: #38bdf8;"></i> Buscar y Seleccionar Comercio en Google Maps
-            </h2>
-
             <form action="/admin/demos/nueva" method="POST" id="form-demo-b2b">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 
-                <!-- CAMPOS OCULTOS AUTO-COMPLETADOS POR EL MAPA DE GOOGLE PLACES -->
-                <input type="hidden" id="hidden_place_id" name="google_place_id">
-                <input type="hidden" id="hidden_nombre" name="nombre_negocio_override">
-                <input type="hidden" id="hidden_direccion" name="direccion_override">
-                <input type="hidden" id="hidden_ciudad" name="ciudad_override">
-                <input type="hidden" id="hidden_telefono" name="telefono_override">
-                <input type="hidden" id="hidden_whatsapp" name="whatsapp_override">
-                <input type="hidden" id="hidden_rating" name="rating_override">
-                <input type="hidden" id="hidden_reviews_count" name="reviews_count_override">
-
-                <div class="form-grid">
-                    
-                    <!-- BUSCADOR CON AUTOCOMPLETE EN VIVO -->
-                    <div class="form-group full-width">
-                        <label class="form-label">🔍 Buscar Comercio en Google Maps (Autocomplete) (*)</label>
-                        <div style="position: relative;">
-                            <input type="text" id="google_places_autocomplete" name="google_maps_input" required placeholder="Escribí el nombre del comercio (ej. Fiambrería los Hermanos, Sanatorio Allende)..." class="form-input" style="width: 100%; padding-left: 36px;" autocomplete="off">
-                            <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 12px; top: 12px; color: #94a3b8; font-size: 0.9rem;"></i>
+                <!-- PASO 1: DATOS & UBICACIÓN DEL COMERCIO -->
+                <div class="form-step-section">
+                    <div class="step-header">
+                        <div class="step-title">
+                            <span class="step-number-badge">1</span>
+                            <span>Datos del Comercio & Ubicación</span>
                         </div>
+                        <button type="button" class="mode-toggle-btn" onclick="toggleModoCarga()">
+                            <i class="fa-solid fa-pen-to-square"></i> <span id="toggle-modo-text">Editar Datos Manualmente</span>
+                        </button>
+                    </div>
+
+                    <div class="form-grid">
                         
-                        <!-- MAPA INTERACTIVO DE CONFIRMACIÓN -->
-                        <div id="admin-map-preview"></div>
-                        
-                        <!-- BADGE DE NEGOCIO SELECCIONADO -->
-                        <div id="place-confirmed-badge" style="display: none; margin-top: 10px; padding: 12px 16px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 10px; font-size: 0.875rem; color: #34d399;">
-                            <i class="fa-solid fa-circle-check" style="margin-right: 6px;"></i> Negocio Confirmado: <strong id="selected-place-name" style="color: #ffffff;"></strong> — <span id="selected-place-addr" style="color: #cbd5e1;"></span> (<span id="selected-place-rating">4.9 ★</span>)
+                        <!-- Buscador Google Places Autocomplete -->
+                        <div class="form-group full-width" id="container-google-search">
+                            <label class="form-label">🔍 Buscar Comercio en Google Maps (Autocomplete)</label>
+                            <div class="search-input-wrapper">
+                                <input type="text" id="google_places_autocomplete" name="google_maps_input" placeholder="Ej: Fiambrería Los Hermanos, Sanatorio Allende..." class="form-input" style="padding-left: 38px; padding-right: 36px;" autocomplete="off">
+                                <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 0.9rem;"></i>
+                                <button type="button" class="search-clear-btn" id="btn-clear-search" onclick="limpiarBuscador()">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Mapa Interactivo Compacto -->
+                            <div id="admin-map-preview"></div>
                         </div>
-                    </div>
 
-                    <!-- Tipo de Software -->
-                    <div class="form-group">
-                        <label class="form-label">Tipo de Software (*)</label>
-                        <select name="tipo_software" class="form-select" required>
-                            <option value="ambas" selected>⚡ Ambas (Exposición + Panel de Gestión)</option>
-                            <option value="exposicion">🌐 Exposición / Captación de Clientes</option>
-                            <option value="gestion">🔒 Gestión de Recursos & Administración Interna</option>
-                        </select>
-                    </div>
-
-                    <!-- Rubro -->
-                    <div class="form-group">
-                        <label class="form-label">Rubro / Categoría Visual (*)</label>
-                        <select id="rubro_select" name="rubro" class="form-select" required onchange="actualizarDoloresRubro(this.value)">
-                            <option value="salud">Salud & Clínicas</option>
-                            <option value="automotriz">Automotriz & Mecánica</option>
-                            <option value="gastronomia">Gastronomía & Restaurantes</option>
-                            <option value="retail">Retail & Tiendas</option>
-                            <option value="servicios" selected>Servicios Profesionales</option>
-                            <option value="inmobiliaria">Inmobiliaria & Bienes Raíces</option>
-                            <option value="general">Corporativo / General</option>
-                        </select>
-                    </div>
-
-                    <!-- Módulo de Solución Interactiva -->
-                    <div class="form-group">
-                        <label class="form-label">Módulo Solucionador Interactivo (*)</label>
-                        <select id="modulo_solucion_select" name="modulo_solucion" class="form-select" required>
-                            <option value="agenda">🗓️ Agenda & Turnos Digitales</option>
-                            <option value="stock">📦 Control de Stock e Inventario</option>
-                            <option value="logistica">🚚 Logística & Cotizador Envíos</option>
-                            <option value="decisiones">🧠 Agente de Decisiones & Reglas</option>
-                            <option value="metricas">📊 Dashboard & Métricas en Vivo</option>
-                            <option value="ecommerce">🛒 E-Commerce & Carrito WhatsApp</option>
-                            <option value="cotizador">🧮 Simulador / Cotizador de Servicios</option>
-                        </select>
-                    </div>
-
-                    <!-- Enfoque Comercial -->
-                    <div class="form-group">
-                        <label class="form-label">Enfoque Comercial (*)</label>
-                        <select name="enfoque" class="form-select" required>
-                            <option value="Conversión High-Ticket">Conversión High-Ticket</option>
-                            <option value="Branding & Posicionamiento Premium">Branding & Posicionamiento Premium</option>
-                            <option value="Automatización de Procesos">Automatización de Procesos Operativos</option>
-                            <option value="Agendamiento Inmediato por WA">Agendamiento Inmediato por WhatsApp</option>
-                        </select>
-                    </div>
-
-                    <!-- Dolores a Solucionar con Smart Presets -->
-                    <div class="form-group full-width">
-                        <label class="form-label">Dolores a Solucionar en el Cliente (Opcional)</label>
-                        <input type="text" id="input_dolor_principal" name="dolor_principal" placeholder="Ej: Pérdida de ventas por respuesta tardía en WhatsApp y falta de agendamiento digital" class="form-input">
-                        
-                        <!-- CHIPS DE DOLORES SUGERIDOS -->
-                        <div style="margin-top: 6px;">
-                            <span style="font-size: 0.725rem; color: #94a3b8; font-weight: 600;">💡 Dolores típicos de este rubro (hacé clic para agregar al instante):</span>
-                            <div id="chips-dolores-container" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px;"></div>
+                        <!-- BADGE DE CONFIRMACIÓN DE GOOGLE PLACES -->
+                        <div id="place-confirmed-badge" class="form-group full-width" style="display: none;">
+                            <div style="padding: 14px 16px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 12px; font-size: 0.875rem; color: #34d399; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                                <div>
+                                    <i class="fa-solid fa-circle-check mr-1"></i> Negocio Confirmado: <strong id="selected-place-name" style="color: #ffffff;"></strong> — <span id="selected-place-addr" style="color: #cbd5e1;"></span>
+                                </div>
+                                <span id="selected-place-rating" class="font-bold text-amber-400">4.9 ★</span>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Objetivo -->
-                    <div class="form-group full-width">
-                        <label class="form-label">Objetivo Estratégico de la Demo (Opcional)</label>
-                        <input type="text" name="objetivo" placeholder="Ej: Agendar llamada de diagnóstico de 15 min" class="form-input">
-                    </div>
+                        <!-- CAMPOS EDITABLES VISIBLES DEL NEGOCIO -->
+                        <div class="form-group full-width" id="section-campos-visibles" style="display: none; background: rgba(15, 23, 42, 0.5); p-4; border-radius: 14px; border: 1px solid var(--border-hairline);">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">Nombre Comercial del Negocio (*)</label>
+                                    <input type="text" id="visible_nombre" name="nombre_negocio_override" placeholder="Ej: Sanatorio Allende" class="form-input" oninput="sincronizarHidden('hidden_nombre', this.value)">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Dirección / Ubicación (*)</label>
+                                    <input type="text" id="visible_direccion" name="direccion_override" placeholder="Ej: Av. Colón 1200, Córdoba" class="form-input" oninput="sincronizarHidden('hidden_direccion', this.value)">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">WhatsApp de Atención (*)</label>
+                                    <input type="tel" id="visible_whatsapp" name="whatsapp_override" placeholder="Ej: 5493515550199" class="form-input" oninput="sincronizarHidden('hidden_whatsapp', this.value)">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Rating Estimado en Google</label>
+                                    <input type="number" step="0.1" id="visible_rating" name="rating_override" value="4.9" class="form-input" oninput="sincronizarHidden('hidden_rating', this.value)">
+                                </div>
+                            </div>
+                        </div>
 
+                        <!-- CAMPOS OCULTOS COMPATIBLES -->
+                        <input type="hidden" id="hidden_place_id" name="google_place_id">
+                        <input type="hidden" id="hidden_nombre" name="nombre_negocio_hidden">
+                        <input type="hidden" id="hidden_direccion" name="direccion_hidden">
+                        <input type="hidden" id="hidden_ciudad" name="ciudad_override">
+                        <input type="hidden" id="hidden_telefono" name="telefono_override">
+                        <input type="hidden" id="hidden_whatsapp" name="whatsapp_hidden">
+                        <input type="hidden" id="hidden_rating" name="rating_hidden" value="4.9">
+                        <input type="hidden" id="hidden_reviews_count" name="reviews_count_override" value="28">
+
+                    </div>
                 </div>
 
-                <div style="text-align: right; margin-top: 20px;">
+                <!-- PASO 2: CONFIGURACIÓN DEL SOFTWARE & RUBRO -->
+                <div class="form-step-section">
+                    <div class="step-header">
+                        <div class="step-title">
+                            <span class="step-number-badge">2</span>
+                            <span>Configuración de la Demo & Rubro</span>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <!-- Tipo de Software -->
+                        <div class="form-group">
+                            <label class="form-label">Tipo de Software (*)</label>
+                            <select name="tipo_software" class="form-select" required>
+                                <option value="ambas" selected>⚡ Ambas (Exposición + Panel de Gestión)</option>
+                                <option value="exposicion">🌐 Exposición / Captación de Clientes</option>
+                                <option value="gestion">🔒 Gestión de Recursos Interna</option>
+                            </select>
+                        </div>
+
+                        <!-- Rubro -->
+                        <div class="form-group">
+                            <label class="form-label">Rubro / Categoría Visual (*)</label>
+                            <select id="rubro_select" name="rubro" class="form-select" required onchange="actualizarDoloresRubro(this.value)">
+                                <option value="salud">Salud & Clínicas</option>
+                                <option value="automotriz">Automotriz & Mecánica</option>
+                                <option value="gastronomia">Gastronomía & Restaurantes</option>
+                                <option value="retail">Retail & Tiendas</option>
+                                <option value="servicios" selected>Servicios Profesionales</option>
+                                <option value="inmobiliaria">Inmobiliaria & Bienes Raíces</option>
+                                <option value="general">Corporativo / General</option>
+                            </select>
+                        </div>
+
+                        <!-- Módulo Solucionador -->
+                        <div class="form-group">
+                            <label class="form-label">Módulo Interactivo (*)</label>
+                            <select id="modulo_solucion_select" name="modulo_solucion" class="form-select" required>
+                                <option value="agenda">🗓️ Agenda & Turnos Digitales</option>
+                                <option value="stock">📦 Control de Stock e Inventario</option>
+                                <option value="logistica">🚚 Logística & Cotizador Envíos</option>
+                                <option value="decisiones">🧠 Agente de Decisiones & Reglas</option>
+                                <option value="metricas">📊 Dashboard & Métricas en Vivo</option>
+                                <option value="ecommerce">🛒 E-Commerce & Carrito WhatsApp</option>
+                                <option value="cotizador">🧮 Simulador / Cotizador de Servicios</option>
+                            </select>
+                        </div>
+
+                        <!-- Enfoque Comercial -->
+                        <div class="form-group">
+                            <label class="form-label">Enfoque Comercial (*)</label>
+                            <select name="enfoque" class="form-select" required>
+                                <option value="Conversión High-Ticket">Conversión High-Ticket</option>
+                                <option value="Branding & Posicionamiento Premium">Branding & Posicionamiento Premium</option>
+                                <option value="Automatización de Procesos">Automatización de Procesos</option>
+                                <option value="Agendamiento Inmediato por WA">Agendamiento por WhatsApp</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PASO 3: ESTRATEGIA COMERCIAL & DOLORES -->
+                <div class="form-step-section">
+                    <div class="step-header">
+                        <div class="step-title">
+                            <span class="step-number-badge">3</span>
+                            <span>Estrategia Comercial & Dolores</span>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <!-- Dolores a Solucionar -->
+                        <div class="form-group full-width">
+                            <label class="form-label">Dolores a Solucionar en el Cliente (Opcional)</label>
+                            <input type="text" id="input_dolor_principal" name="dolor_principal" placeholder="Ej: Pérdida de ventas por respuesta tardía en WhatsApp..." class="form-input">
+                            
+                            <!-- CHIPS CON SCROLL HORIZONTAL TÁCTIL -->
+                            <div style="margin-top: 8px;">
+                                <span style="font-size: 0.725rem; color: var(--text-muted); font-weight: 600;">💡 Dolores sugeridos (toca para agregar):</span>
+                                <div id="chips-dolores-container" class="chips-scroll-container" style="margin-top: 6px;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Objetivo Strategico -->
+                        <div class="form-group full-width">
+                            <label class="form-label">Objetivo Estratégico de la Demo (Opcional)</label>
+                            <input type="text" name="objetivo" placeholder="Ej: Agendar llamada de diagnóstico de 15 min" class="form-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 24px;">
                     <button type="submit" class="btn-submit-demo">
                         <i class="fa-solid fa-rocket"></i> Generar Demo Personalizada
                     </button>
@@ -492,13 +755,14 @@
             </form>
         </div>
 
-        <!-- TABLA DE DEMOS GENERADAS -->
-        <h2 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 16px; color: var(--text-title);">
+        <!-- VISTA DE DEMOS GENERADAS (TABLA EN DESKTOP / CARDS EN MOBILE) -->
+        <h2 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 800; margin-bottom: 16px; color: var(--text-title);">
             Demos Generadas ({{ demos|length }})
         </h2>
 
         <div class="demos-table-wrapper">
             {% if demos %}
+                <!-- TABLA DESKTOP -->
                 <table class="demos-table">
                     <thead>
                         <tr>
@@ -515,16 +779,16 @@
                         <tr>
                             <td>
                                 <strong style="color: #ffffff;">{{ d.nombre_negocio }}</strong><br>
-                                <span style="font-family: 'Fira Code', monospace; font-size: 0.75rem; color: #38bdf8;">/demo/{{ d.slug }}</span>
+                                <span style="font-family: 'Fira Code', monospace; font-size: 0.75rem; color: var(--accent-cyan);">/demo/{{ d.slug }}</span>
                             </td>
                             <td><span style="text-transform: capitalize;">{{ d.rubro }}</span></td>
                             <td>
-                                <span style="font-family: 'Fira Code', monospace; font-size: 0.75rem; color: #a855f7; background-color: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); padding: 3px 8px; border-radius: 4px;">
+                                <span style="font-family: 'Fira Code', monospace; font-size: 0.75rem; color: #a855f7; background-color: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); padding: 3px 8px; border-radius: 6px;">
                                     {{ d.modulo_solucion }}
                                 </span>
                             </td>
                             <td>
-                                <span style="font-weight: 800; color: {% if d.vistas_count > 0 %}#34d399{% else %}#94a3b8{% endif %}; font-size: 1rem;">
+                                <span style="font-weight: 800; color: {% if d.vistas_count > 0 %}#34d399{% else %}#94a3b8{% endif %}; font-size: 0.95rem;">
                                     👁️ {{ d.vistas_count }}
                                 </span>
                             </td>
@@ -536,7 +800,7 @@
                                 {% endif %}
                             </td>
                             <td>
-                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <div style="display: flex; gap: 8px;">
                                     <a href="/demo/{{ d.slug }}" target="_blank" class="btn-action-icon">
                                         <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Demo
                                     </a>
@@ -555,11 +819,48 @@
                         {% endfor %}
                     </tbody>
                 </table>
+
+                <!-- CARDS MOBILE -->
+                <div class="demos-cards-mobile">
+                    {% for d in demos %}
+                    <div class="demo-card-item">
+                        <div style="display: flex; justify-content: space-between; align-items: start;">
+                            <div>
+                                <h3 style="font-size: 1rem; font-weight: 800; color: #ffffff;">{{ d.nombre_negocio }}</h3>
+                                <p style="font-family: 'Fira Code', monospace; font-size: 0.75rem; color: var(--accent-cyan); margin-top: 2px;">/demo/{{ d.slug }}</p>
+                            </div>
+                            <span style="font-weight: 800; color: {% if d.vistas_count > 0 %}#34d399{% else %}#94a3b8{% endif %}; font-size: 0.85rem; background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 6px;">
+                                👁️ {{ d.vistas_count }}
+                            </span>
+                        </div>
+
+                        <div style="display: flex; gap: 8px; font-size: 0.75rem; flex-wrap: wrap;">
+                            <span style="background: rgba(255,255,255,0.08); padding: 3px 8px; border-radius: 6px; text-transform: capitalize;">{{ d.rubro }}</span>
+                            <span style="color: #a855f7; background-color: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); padding: 3px 8px; border-radius: 6px; font-family: 'Fira Code', monospace;">{{ d.modulo_solucion }}</span>
+                        </div>
+
+                        <div style="display: flex; gap: 8px; margin-top: 4px;">
+                            <a href="/demo/{{ d.slug }}" target="_blank" class="btn-action-icon">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Demo
+                            </a>
+                            <button onclick="copiarLink('https://ggsolutions.com.ar/demo/{{ d.slug }}')" class="btn-action-icon">
+                                <i class="fa-solid fa-copy"></i> Copiar
+                            </button>
+                            <form action="/admin/demos/{{ d.id }}/eliminar" method="POST" style="display: inline; flex: 0.5;" onsubmit="return confirm('¿Seguro que deseas eliminar esta demo?');">
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                                <button type="submit" class="btn-action-icon" style="color: #fca5a5; border-color: rgba(239, 68, 68, 0.3); width: 100%;">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             {% else %}
-                <div style="text-align: center; padding: 48px; color: var(--text-muted);">
+                <div style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
                     <i class="fa-solid fa-folder-open" style="font-size: 2rem; margin-bottom: 12px; color: #475569;"></i>
-                    <p style="font-size: 1rem; font-weight: 600;">No hay demos creadas todavía.</p>
-                    <p style="font-size: 0.85rem;">Buscá un negocio en el mapa para generar la primera demo.</p>
+                    <p style="font-size: 0.95rem; font-weight: 700;">No hay demos creadas todavía.</p>
+                    <p style="font-size: 0.8rem; margin-top: 4px;">Buscá un negocio en el mapa para generar la primera demo.</p>
                 </div>
             {% endif %}
         </div>
@@ -573,25 +874,47 @@
         function copiarLink(url) {
             navigator.clipboard.writeText(url).then(() => {
                 alert('¡Enlace copiado al portapapeles!\n\n' + url);
-            }).catch(err => {
+            }).catch(() => {
                 prompt('Copia este enlace:', url);
             });
+        }
+
+        let modoManual = false;
+        function toggleModoCarga() {
+            modoManual = !modoManual;
+            const sectionVisibles = document.getElementById('section-campos-visibles');
+            const toggleText = document.getElementById('toggle-modo-text');
+            if (modoManual) {
+                sectionVisibles.style.display = 'block';
+                toggleText.innerText = 'Ocultar Edición Manual';
+            } else {
+                sectionVisibles.style.display = 'none';
+                toggleText.innerText = 'Editar Datos Manualmente';
+            }
+        }
+
+        function sincronizarHidden(hiddenId, val) {
+            const el = document.getElementById(hiddenId);
+            if (el) el.value = val;
+        }
+
+        function limpiarBuscador() {
+            const input = document.getElementById('google_places_autocomplete');
+            if (input) input.value = '';
+            document.getElementById('btn-clear-search').style.display = 'none';
+            document.getElementById('place-confirmed-badge').style.display = 'none';
         }
 
         let map, marker, googleMap, googleMarker;
         const apiKey = "{{ google_maps_api_key }}";
 
-        // Handler automático en caso de error de autenticación/activación de Google Maps (ApiNotActivatedMapError)
         window.gm_authFailure = function() {
-            console.warn('[GOOGLE MAPS WARN] Maps JavaScript API no activada en Google Cloud Console. Activando mapa alternativo.');
+            console.warn('[GOOGLE MAPS WARN] Maps API falló. Activando fallback.');
             initLeafletFallbackMap();
         };
 
-        // Inicializar Mapa Interactivo
         function initInteractiveMap() {
             if (apiKey) {
-                // Cargar script de Google Maps SDK
-
                 const script = document.createElement('script');
                 script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initGoogleMapSDK`;
                 script.async = true;
@@ -602,7 +925,6 @@
             }
         }
 
-        // 1. Google Maps SDK con Places Autocomplete
         window.initGoogleMapSDK = function() {
             const cordobaCoords = { lat: -31.4135, lng: -64.1810 };
             const mapContainer = document.getElementById('admin-map-preview');
@@ -625,6 +947,12 @@
             });
 
             const input = document.getElementById('google_places_autocomplete');
+            const clearBtn = document.getElementById('btn-clear-search');
+
+            input.addEventListener('input', function() {
+                if (clearBtn) clearBtn.style.display = input.value ? 'block' : 'none';
+            });
+
             const autocomplete = new google.maps.places.Autocomplete(input);
             autocomplete.bindTo('bounds', googleMap);
 
@@ -642,7 +970,6 @@
                 }
                 googleMarker.setPosition(place.geometry.location);
 
-                // Autocompletar datos del lugar
                 seleccionarNegocioDatos({
                     place_id: place.place_id,
                     nombre: place.name,
@@ -655,7 +982,6 @@
             });
         };
 
-        // 2. Leaflet Fallback Map (cuando aún no se configuró la API key en .env)
         function initLeafletFallbackMap() {
             const mapContainer = document.getElementById('admin-map-preview');
             map = L.map(mapContainer).setView([-31.4135, -64.1810], 13);
@@ -694,13 +1020,20 @@
             document.getElementById('hidden_rating').value = info.rating || 4.9;
             document.getElementById('hidden_reviews_count').value = info.reviews_count || 24;
 
+            // Sincronizar Campos Visibles
+            document.getElementById('visible_nombre').value = info.nombre || '';
+            document.getElementById('visible_direccion').value = info.direccion || '';
+            document.getElementById('visible_whatsapp').value = info.telefono ? info.telefono.replace(/\D/g, '') : '';
+            document.getElementById('visible_rating').value = info.rating || 4.9;
+            document.getElementById('section-campos-visibles').style.display = 'block';
+
             // Mostrar Badge de Confirmación
             document.getElementById('selected-place-name').innerText = info.nombre;
             document.getElementById('selected-place-addr').innerText = info.direccion || '';
             document.getElementById('selected-place-rating').innerText = (info.rating || 4.9) + ' ★ (' + (info.reviews_count || 24) + ' opiniones)';
             document.getElementById('place-confirmed-badge').style.display = 'block';
 
-            // Auto-inferir rubro si hay coincidencias
+            // Auto-inferir rubro
             const nameLower = info.nombre.toLowerCase();
             const rubroSel = document.getElementById('rubro_select');
             const modSel = document.getElementById('modulo_solucion_select');
@@ -726,36 +1059,36 @@
             salud: [
                 "Ausentismo en turnos agendados sin aviso",
                 "Recepción saturada en horas pico",
-                "Fichas médicas e historias clínicas desordenadas"
+                "Fichas médicas desordenadas"
             ],
             automotriz: [
                 "Presupuestos informales enviados sin detalle claro",
-                "Reparación demorada por falta de stock de repuestos",
+                "Reparación demorada por falta de stock",
                 "Clientes consultando el estado del vehículo"
             ],
             gastronomia: [
                 "Desperdicio de insumos por falta de control",
                 "Comandas manuales lentas en mesa",
-                "Falta de catálogo digital interactivo con pedido por WhatsApp"
+                "Falta de catálogo digital con pedido por WA"
             ],
             retail: [
-                "Stock desincronizado entre local físico y tienda online",
+                "Stock desincronizado entre local y tienda online",
                 "Pérdida de carritos por checkout lento",
-                "Consultas repetitivas por disponibilidad de talles"
+                "Consultas repetitivas por disponibilidad"
             ],
             servicios: [
                 "Lógica de cotización manual lenta",
                 "Desorden en el seguimiento de entregables",
-                "Falta de portal de consulta de avances para el cliente"
+                "Falta de portal de consulta para el cliente"
             ],
             inmobiliaria: [
-                "Consultas masivas sobre propiedades ya alquiladas",
+                "Consultas masivas sobre propiedades alquiladas",
                 "Dificultad para coordinar visitas presenciales",
                 "Falta de buscador filtrable por presupuesto"
             ],
             general: [
-                "Falta de automatización en la captación de prospectos",
-                "Procesos operativos en planillas desactualizadas"
+                "Falta de automatización en captación de prospectos",
+                "Procesos en planillas desactualizadas"
             ]
         };
 
@@ -767,7 +1100,7 @@
             presets.forEach(text => {
                 const chip = document.createElement('button');
                 chip.type = 'button';
-                chip.style.cssText = 'background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.25); color: #38bdf8; padding: 4px 10px; border-radius: 6px; font-size: 0.725rem; font-weight: 500; cursor: pointer; transition: all 0.2s;';
+                chip.className = 'chip-btn';
                 chip.innerText = '+ ' + text;
                 chip.onclick = function() {
                     const input = document.getElementById('input_dolor_principal');
@@ -790,4 +1123,3 @@
     </script>
 </body>
 </html>
-

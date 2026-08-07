@@ -218,8 +218,9 @@ Al generar una demo desde el panel admin (`/admin/demos`), el sistema fusiona es
    - **Ópticas:** Palette salud/elegancia (Cyan, Teal, Slate) con fuente `Plus Jakarta Sans` + `Inter`.
    - **Kioscos / Supermercados:** Palette vibrante (Emerald, Orange, Navy) con fuente `Plus Jakarta Sans`.
 
-### 9. Adición del Nuevo Rubro: Deportes, Tenis & Complejos Deportivos / Clubes 🎾
-- **Estrategia & Playbook ([docs/rubros_demo_playbook.md](file:///Users/fgabrielbustos/Documents/Apps/ggsolutions/ggsolutions/docs/rubros_demo_playbook.md)):** Se estructuró el perfil target (clubes de tenis, complejos de polvo de ladrillo, academias y pro shops) resolviendo sus 4 dolores clave (superposición de reservas por WhatsApp, canchas vacías en horarios valle, cobro manual de cuotas de alumnos y seguimiento de encordados).
-- **Banco de Imágenes HD Local (`/static/img/bank/deportes/`):** Incorporación de fotografías nítidas de canchas de polvo de ladrillo con iluminación LED, profesores dictando clases particulares y raquetas con pelotas.
-- **Experiencia de Cliente & Reserva 24/7:** La agenda interactiva permite reservar canchas de polvo de ladrillo (turnos de 90 min), agendar clases particulares con profesores AAT y encargar encordado digital.
-- **Panel de Gestión B2B para Clubes:** Stock de insumos reales (tubos de pelotas Penn/Wilson, cuerdas Luxilon Alu Power, raquetas Wilson Blade 98), comisiones de profesores, turnos en cancha y proveedores oficiales (Wilson, Babolat).
+### 10. Forzado Estricto de Google Maps API en la VPS & Multi-Key Fallback
+- **Diagnóstico del Fallback Previas:** En la VPS, el mapa conmutaba a OpenStreetMap porque la API Key de Google Maps tenía una falla de autenticación (`gm_authFailure`) provocada por restricciones de dominio/IP o desactivación de la sustitución dinámica.
+- **Resolución Implementada:**
+  1. **Tolerancia a Múltiples Claves (Multi-Key JS):** `app.py` ahora resuelve la lista completa de API Keys de Google configuradas en `.env` (`GOOGLE_MAPS_API_KEY`, `GOOGLE_MAPS_API_KEY_BACKUP`, `GOOGLE_MAPS_API_KEY_ALT`). Si la clave #1 falla, el JavaScript reintenta automáticamente con la clave #2.
+  2. **Eliminación del Fallback Silencioso a OpenStreetMap:** El panel admin fuerza **exclusivamente Google Maps JS API & Places Autocomplete**.
+  3. **Diagnóstico Flotante en Pantalla:** Si la clave es rechazada en la VPS por restricciones de HTTP Referers en Google Cloud Console, el sistema muestra en pantalla la instrucción exacta para agregar `https://ggsolutions.com.ar/*` y `http://147.93.185.126/*` en las credenciales de Google Cloud.

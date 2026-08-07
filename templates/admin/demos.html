@@ -968,22 +968,65 @@
         }
 
         let map, marker, googleMap, googleMarker;
-        const apiKey = "{{ google_maps_api_key }}";
+        const apiKeys = [
+            {% if google_maps_api_keys %}
+                {% for k in google_maps_api_keys %}"{{ k }}",{% endfor %}
+            {% else %}
+                "{{ google_maps_api_key }}"
+            {% endif %}
+        ].filter(k => k && k.length > 10);
+
+        let keyIndex = 0;
 
         window.gm_authFailure = function() {
-            console.warn('[GOOGLE MAPS WARN] Maps API de Google no devolvió datos válidos. Activando Fallback con OpenStreetMap & Photon.');
-            initLeafletFallbackMap();
+            const currentKey = apiKeys[keyIndex] || "{{ google_maps_api_key }}";
+            console.error('[GOOGLE MAPS ERROR] La API Key (' + currentKey.substring(0, 8) + '...) fue rechazada por Google. Error de restricciones de HTTP Referers o API no habilitada.');
+            
+            // Si hay otra clave de respaldo en la lista, intentar con la siguiente
+            if (keyIndex + 1 < apiKeys.length) {
+                keyIndex++;
+                console.log('[GOOGLE MAPS FALLBACK] Reintentando con API Key de respaldo #' + (keyIndex + 1));
+                initInteractiveMap();
+                return;
+            }
+
+            // Mostrar mensaje de diagnóstico profesional en el contenedor del mapa
+            const mapContainer = document.getElementById('admin-map-preview');
+            if (mapContainer) {
+                mapContainer.innerHTML = `
+                    <div style="background: rgba(239, 68, 68, 0.15); border: 2px solid rgba(239, 68, 68, 0.4); border-radius: 16px; padding: 24px; color: #fca5a5; font-family: 'Inter', sans-serif; height: 100%; display: flex; flex-direction: column; justify-center; align-items: center; text-align: center;">
+                        <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.5rem; margin-bottom: 12px; color: #f87171;"></i>
+                        <h4 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">Restricción de Google Maps API en VPS</h4>
+                        <p style="font-size: 0.85rem; max-width: 500px; line-height: 1.5; margin-bottom: 14px;">
+                            La API Key de Google Cloud rechazó las peticiones desde el dominio/IP de la VPS (<strong>${window.location.hostname}</strong>).
+                        </p>
+                        <div style="background: rgba(0,0,0,0.4); padding: 12px 16px; border-radius: 10px; font-size: 0.75rem; text-align: left; font-family: monospace; color: #38bdf8;">
+                            📍 Solución en Google Cloud Console:<br>
+                            1. Ir a Credentials > Restricciones de sitio web (HTTP Referers)<br>
+                            2. Agregar: <code>${window.location.origin}/*</code> y <code>http://147.93.185.126/*</code><br>
+                            3. Verificar que <strong>Places API</strong> y <strong>Maps JavaScript API</strong> estén habilitadas.
+                        </div>
+                    </div>
+                `;
+            }
         };
 
         function initInteractiveMap() {
-            if (apiKey && apiKey.length > 10) {
+            const activeKey = apiKeys[keyIndex] || "{{ google_maps_api_key }}";
+            if (activeKey && activeKey.length > 10) {
+                // Eliminar scripts de Google Maps previos si existieran
+                const oldScript = document.getElementById('google-maps-js-sdk');
+                if (oldScript) oldScript.remove();
+
                 const script = document.createElement('script');
-                script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initGoogleMapSDK`;
+                script.id = 'google-maps-js-sdk';
+                script.src = `https://maps.googleapis.com/maps/api/js?key=${activeKey}&libraries=places&callback=initGoogleMapSDK`;
                 script.async = true;
                 script.defer = true;
                 document.head.appendChild(script);
             } else {
-                initLeafletFallbackMap();
+                console.warn('[GOOGLE MAPS] No hay API Key configurada en .env');
+                window.gm_authFailure();
             }
         }
 

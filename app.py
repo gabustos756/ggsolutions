@@ -24,6 +24,7 @@ from services.google_places import (
     obtener_datos_lugar_google,
     extrae_ciudad_de_direccion,
     validar_y_formatear_whatsapp,
+    obtener_api_keys,
 )
 from services.demo_engine import preparar_contexto_demo
 
@@ -366,13 +367,15 @@ def admin_demos_list():
     demos = DemoSolution.query.order_by(DemoSolution.fecha_creacion.desc()).all()
     error = request.args.get("error")
     mensaje = request.args.get("mensaje")
-    google_maps_api_key = os.environ.get("GOOGLE_MAPS_API_KEY", "")
+    keys = obtener_api_keys()
+    google_maps_api_key = keys[0] if (keys and len(keys) > 0) else os.environ.get("GOOGLE_MAPS_API_KEY", "")
     return render_template(
         "admin/demos.html",
         demos=demos,
         error=error,
         mensaje=mensaje,
-        google_maps_api_key=google_maps_api_key
+        google_maps_api_key=google_maps_api_key,
+        google_maps_api_keys=keys
     )
 
 

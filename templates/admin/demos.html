@@ -733,6 +733,7 @@
                         <div class="form-group">
                             <label class="form-label">Rubro / Categoría Visual (*)</label>
                             <select id="rubro_select" name="rubro" class="form-select" required onchange="actualizarDoloresRubro(this.value)">
+                                <option value="deportes">🎾 Deportes, Tenis & Clubes</option>
                                 <option value="gastronomia">Gastronomía & Restaurantes</option>
                                 <option value="automotriz">Automotriz & Mecánica</option>
                                 <option value="herramientas">Herramientas, Ferreterías & Materiales</option>
@@ -1209,8 +1210,11 @@
             const rubroSel = document.getElementById('rubro_select');
             const modSel = document.getElementById('modulo_solucion_select');
 
-            if (nameLower.includes('salud') || nameLower.includes('clinica') || nameLower.includes('sanatorio') || nameLower.includes('odontolog') || nameLower.includes('medic') || nameLower.includes('optica')) {
-                rubroSel.value = nameLower.includes('optica') ? 'servicios' : 'salud';
+            if (nameLower.includes('tenis') || nameLower.includes('padel') || nameLower.includes('club') || nameLower.includes('cancha') || nameLower.includes('deport')) {
+                rubroSel.value = 'deportes';
+                modSel.value = 'agenda';
+            } else if (nameLower.includes('salud') || nameLower.includes('clinica') || nameLower.includes('sanatorio') || nameLower.includes('odontolog') || nameLower.includes('medic') || nameLower.includes('optica')) {
+                rubroSel.value = nameLower.includes('optica') ? 'opticas' : 'salud';
                 modSel.value = 'agenda';
             } else if (nameLower.includes('taller') || nameLower.includes('mecanic') || nameLower.includes('auto') || nameLower.includes('repuesto')) {
                 rubroSel.value = 'automotriz';
@@ -1227,6 +1231,11 @@
         }
 
         const DOLORES_PRESETS = {
+            deportes: [
+                "Superposición de turnos y reservas caóticas por WhatsApp",
+                "Canchas vacías en horarios valle (mañanas y mediodías)",
+                "Cobro manual de cuotas de alumnos y falta de seguimiento en encordados"
+            ],
             salud: [
                 "Ausentismo en turnos agendados sin aviso",
                 "Recepción saturada en horas pico",

@@ -163,10 +163,10 @@
         <!-- 3. HERO SECTION ULTRA-LEGIBLE CON IMAGEN DE FONDO HD DE NUESTRO BANCO -->
         <section class="relative pt-16 pb-24 md:pt-28 md:pb-32 overflow-hidden border-b border-white/10">
             
-            <!-- FONDO FOTOGRÁFICO DE ALTA VISIBILIDAD DE NUESTRO BANCO HD -->
-            <div class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-1000 scale-105" style="background-image: url('{{ theme.hero_bg_image }}'); filter: brightness(0.85) contrast(1.05);"></div>
-            <div class="absolute inset-0 z-0 bg-gradient-to-r from-slate-950/90 via-slate-950/60 to-slate-950/30"></div>
-            <div class="absolute inset-0 z-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40"></div>
+            <!-- FONDO FOTOGRÁFICO REAL, NÍTIDO Y GENUINO (SIN FILTROS NI HUMO) -->
+            <div class="absolute inset-0 z-0 bg-cover bg-center" style="background-image: url('{{ theme.hero_bg_image }}');"></div>
+            <div class="absolute inset-0 z-0 bg-gradient-to-r from-slate-950/90 via-slate-950/60 to-slate-950/15"></div>
+            <div class="absolute inset-0 z-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/30"></div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div class="grid md:grid-cols-12 gap-10 items-center">
@@ -351,44 +351,76 @@
         </section>
         {% endif %}
 
-        <!-- 6. OPINIONES VERIFICADAS DE CLIENTES ESTILO GOOGLE MAPS -->
-        <section id="testimonios" class="py-16">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-10">
-                    <div>
-                        <h3 class="text-2xl sm:text-3xl font-extrabold text-white font-title">Opiniones de Nuestros Clientes</h3>
-                        <p class="text-sm text-slate-300 font-medium">Reseñas reales verificadas en Google Maps</p>
+        <!-- 6. OPINIONES VERIFICADAS DE CLIENTES CON MÁXIMO IMPACTO VISUAL -->
+        <section id="testimonios" class="py-20 relative overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900/90 to-slate-950 border-b border-white/5">
+            <!-- Glow ambiental de fondo -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 bg-slate-900/80 border border-white/10 p-6 rounded-2xl backdrop-blur-md shadow-2xl">
+                    <div class="space-y-1.5">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">Reseñas Verificadas</span>
+                            <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                                <i class="fa-brands fa-google text-cyan-400 mr-1"></i> Google Places API
+                            </span>
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-white font-title">Opiniones Reales de Clientes</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 font-medium">Experiencias reales ordenadas de mayor a menor satisfacción.</p>
                     </div>
-                    <div class="flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 px-4 py-2 rounded-xl">
-                        <i class="fa-solid fa-star text-amber-400 text-base"></i>
-                        <span class="font-extrabold text-white text-base">{{ demo.rating }} / 5.0</span>
-                        <span class="text-xs text-slate-300 font-medium">({{ demo.reviews_count }} opiniones)</span>
+
+                    <div class="flex items-center gap-4 bg-slate-950/90 border border-amber-500/30 px-5 py-3 rounded-2xl shadow-xl">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center text-2xl font-black shadow-inner">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-extrabold text-white text-xl font-title leading-none">{{ demo.rating }}</span>
+                                <div class="flex text-amber-400 text-xs gap-0.5">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-300 font-medium mt-0.5">{{ demo.reviews_count }} opiniones verificadas en Google Maps</p>
+                        </div>
                     </div>
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {% for rev in reviews %}
-                    <div class="glass-card glass-card-hover rounded-2xl p-6 space-y-4 border border-white/10">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br {{ theme.gradient }} text-slate-950 font-black text-sm flex items-center justify-center shadow-md">
-                                    {{ rev.author_name[0]|upper }}
+                    <div class="glass-card glass-card-hover rounded-2xl p-6 space-y-4 border border-white/10 relative group flex flex-col justify-between overflow-hidden">
+                        <!-- Comilla marca de agua en fondo -->
+                        <i class="fa-solid fa-quote-right absolute -bottom-2 -right-2 text-7xl text-white/[0.03] group-hover:text-cyan-400/10 transition-colors pointer-events-none"></i>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    {% if rev.profile_photo_url %}
+                                    <div class="w-11 h-11 rounded-xl overflow-hidden border border-white/20 shadow-md flex-shrink-0">
+                                        <img src="{{ rev.profile_photo_url }}" alt="{{ rev.author_name }}" class="w-full h-full object-cover">
+                                    </div>
+                                    {% else %}
+                                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br {{ theme.gradient }} text-slate-950 font-black text-base flex items-center justify-center shadow-md flex-shrink-0">
+                                        {{ rev.author_name[0]|upper }}
+                                    </div>
+                                    {% endif %}
+                                    <div>
+                                        <span class="font-bold text-white text-sm block leading-snug">{{ rev.author_name }}</span>
+                                        <span class="text-[10px] text-emerald-400 font-semibold flex items-center gap-1 mt-0.5">
+                                            <i class="fa-solid fa-circle-check text-[9px]"></i> Cliente Verificado
+                                        </span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span class="font-bold text-white text-sm block leading-none">{{ rev.author_name }}</span>
-                                    <span class="text-[10px] text-emerald-400 flex items-center gap-1 mt-1">
-                                        <i class="fa-solid fa-circle-check text-[9px]"></i> Opinión Verificada
-                                    </span>
-                                </div>
+                                <span class="text-[11px] text-slate-400 font-mono flex items-center gap-1 bg-white/5 border border-white/10 px-2.5 py-1 rounded-lg">
+                                    <i class="fa-brands fa-google text-cyan-400"></i> {{ rev.relative_time }}
+                                </span>
                             </div>
-                            <span class="text-[11px] text-slate-400 font-mono flex items-center gap-1">
-                                <i class="fa-brands fa-google text-slate-400"></i> {{ rev.relative_time }}
-                            </span>
+
+                            <div class="flex text-amber-400 text-xs gap-1">
+                                {% for i in range(rev.rating) %}<i class="fa-solid fa-star"></i>{% endfor %}
+                            </div>
+
+                            <p class="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed italic">"{{ rev.text }}"</p>
                         </div>
-                        <div class="flex text-amber-400 text-xs gap-1">
-                            {% for i in range(rev.rating) %}<i class="fa-solid fa-star"></i>{% endfor %}
-                        </div>
-                        <p class="text-xs text-slate-200 font-medium leading-relaxed italic">"{{ rev.text }}"</p>
                     </div>
                     {% endfor %}
                 </div>

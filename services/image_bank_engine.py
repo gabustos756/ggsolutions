@@ -9,90 +9,60 @@ import os
 HERO_BANK_POR_RUBRO = {
     "gastronomia": [
         {
-            "tag": "gourmet",
-            "label": "Restaurante Gourmet & Salón de Autor",
-            "url": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=90"
-        },
-        {
             "tag": "smash_burger",
             "label": "Hamburguesería & Fast Food Premium",
-            "url": "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=1600&q=90"
+            "url": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1600&q=90"
+        },
+        {
+            "tag": "gourmet",
+            "label": "Restaurante Gourmet & Salón de Autor",
+            "url": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=90"
         },
         {
             "tag": "bakery_cafe",
             "label": "Cafetería de Especialidad & Pastelería",
-            "url": "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1600&q=90"
-        },
-        {
-            "tag": "bar_cocktails",
-            "label": "Bar de Cervezas & Coctelería",
-            "url": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1600&q=90"
+            "url": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1600&q=90"
         }
     ],
     "automotriz": [
         {
             "tag": "mecanica_general",
             "label": "Taller Mecánico & Elevadores",
-            "url": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=1600&q=90"
+            "url": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=1600&q=90"
         },
         {
             "tag": "lubricentro",
             "label": "Service & Escaneo Computarizado OBD2",
-            "url": "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1600&q=90"
-        },
-        {
-            "tag": "repuestos",
-            "label": "Frenos, Tren Delantero & Insumos",
-            "url": "https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?auto=format&fit=crop&w=1600&q=90"
-        },
-        {
-            "tag": "detailing",
-            "label": "Detailing & Estética Vehicular",
-            "url": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1600&q=90"
+            "url": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=1600&q=90"
         }
     ],
     "herramientas": [
         {
             "tag": "herramientas_electricas",
             "label": "Herramientas Inalámbricas & Taller",
-            "url": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1600&q=90"
+            "url": "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1600&q=90"
         },
         {
             "tag": "ferreteria_industrial",
             "label": "Insumos Industriales & Obras",
-            "url": "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1600&q=90"
-        },
-        {
-            "tag": "corralon_materiales",
-            "label": "Materiales de Construcción & Gremios",
-            "url": "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&w=1600&q=90"
-        },
-        {
-            "tag": "maquinaria",
-            "label": "Maquinaria Pesada & Equipos de Perforación",
-            "url": "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=1600&q=90"
+            "url": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1600&q=90"
         }
     ],
     "opticas": [
         {
             "tag": "optica_boutique",
             "label": "Armazones de Diseño & Colección",
-            "url": "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?auto=format&fit=crop&w=1600&q=90"
+            "url": "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=1600&q=90"
         },
         {
             "tag": "examen_optometrico",
             "label": "Gabinete de Examen & Salud Visual",
-            "url": "https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=1600&q=90"
+            "url": "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1600&q=90"
         },
         {
             "tag": "lentes_sol",
             "label": "Colección Lentes de Sol UV400",
             "url": "https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=1600&q=90"
-        },
-        {
-            "tag": "cristales_blueblock",
-            "label": "Cristales Antirreflex & Filtro Pantallas",
-            "url": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=1600&q=90"
         }
     ],
     "kiosco": [
@@ -115,6 +85,23 @@ HERO_BANK_POR_RUBRO = {
             "tag": "golosinas_snacks",
             "label": "Snacks, Chocolates & Golosinas XL",
             "url": "https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?auto=format&fit=crop&w=1600&q=90"
+        }
+    ],
+    "deportes": [
+        {
+            "tag": "canchas_tenis",
+            "label": "Complejo de Tenis & Canchas Polvo de Ladrillo",
+            "url": "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=1600&q=90"
+        },
+        {
+            "tag": "academia_tenis",
+            "label": "Academia de Tenis & Clases Particulares",
+            "url": "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1600&q=90"
+        },
+        {
+            "tag": "canchas_nocturnas",
+            "label": "Canchas de Tenis Iluminadas & Club",
+            "url": "https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=1600&q=90"
         }
     ],
     "salud": [
@@ -215,6 +202,38 @@ IMAGE_BANK_POR_RUBRO = {
                 "snippet": "Chequeos anuales y hábitos clave recomendados por nuestro cuerpo médico.",
                 "read_time": "4 min",
                 "image": "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=800&q=80"
+            }
+        ]
+    },
+    "deportes": {
+        "hero": HERO_BANK_POR_RUBRO["deportes"][0]["url"],
+        "pilares": [
+            "/static/img/bank/deportes/pilar_1.jpg",
+            "/static/img/bank/deportes/pilar_2.jpg",
+            "/static/img/bank/deportes/pilar_3.jpg",
+            "/static/img/bank/deportes/pilar_4.jpg"
+        ],
+        "news": [
+            {
+                "title": "Técnicas de Saque & Control de Tensión en Raquetas",
+                "date": "Tenis & Rendimiento",
+                "snippet": "Optimizá tu potencia y precisión ajustando el encordado y la tensión a tu estilo de juego.",
+                "read_time": "3 min",
+                "image": "/static/img/bank/deportes/pilar_2.jpg"
+            },
+            {
+                "title": "Mantenimiento de Canchas de Polvo de Ladrillo",
+                "date": "Infraestructura Club",
+                "snippet": "Riego, cepillado y nivelación diaria para garantizar el mejor pique de la pelota.",
+                "read_time": "4 min",
+                "image": "/static/img/bank/deportes/pilar_1.jpg"
+            },
+            {
+                "title": "Torneos Internos & Ranking de Socios 2026",
+                "date": "Competencias",
+                "snippet": "Inscripciones abiertas para el Torneo Abierto de Singles y Dobles de Otoño.",
+                "read_time": "2 min",
+                "image": "/static/img/bank/deportes/pilar_3.jpg"
             }
         ]
     },

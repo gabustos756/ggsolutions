@@ -202,6 +202,23 @@ THEMES_MAP = {
             {"icon": "fa-chart-line", "title": "Resultados Medibles", "desc": "Cumplimiento estricto de metas", "tag": "Eficiencia"}
         ]
     },
+    "deportes": {
+        "bg": "#06120e",
+        "card_bg": "rgba(10, 26, 20, 0.75)",
+        "accent": "#10b981",
+        "gradient": "from-emerald-400 via-teal-300 to-lime-400",
+        "badge_bg": "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+        "font_family": "'Plus Jakarta Sans', sans-serif",
+        "title_font": "'Outfit', sans-serif",
+        "font_google": "https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
+        "hero_bg_image": "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=1200&q=80",
+        "pilares": [
+            {"icon": "fa-table-tennis-paddle-ball", "title": "Canchas Polvo de Ladrillo", "desc": "Mantenimiento diario & luz LED nocturna", "tag": "Infraestructura"},
+            {"icon": "fa-user-graduate", "title": "Academia de Tenis", "desc": "Clases individuales & grupales AAT", "tag": "Entrenamiento"},
+            {"icon": "fa-screwdriver-wrench", "title": "Encordado Digital Express", "desc": "Calibración exacta de tensión en raquetas", "tag": "Pro Shop"},
+            {"icon": "fa-trophy", "title": "Torneos & Rankings", "desc": "Competencias internas de socios todo el año", "tag": "Club Life"}
+        ]
+    },
     "inmobiliaria": {
         "bg": "#070f0c",
         "card_bg": "rgba(16, 28, 22, 0.75)",
@@ -240,14 +257,24 @@ THEMES_MAP = {
 
 MODULOS_TITULOS = {
     "agenda": {
-        "badge": "AGENDA & TURNO DIGITAL 24/7",
-        "titulo": "Reservá tu Cita o Turno en Línea en 3 Pasos",
-        "subtitulo": "Elegí el servicio, el profesional y la fecha que mejor se adapte a tus horarios sin demoras ni llamadas.",
+        "badge": "AGENDA & RESERVAS DIGITALES 24/7",
+        "titulo": "Agendá tu Turno o Reserva en 3 Pasos",
+        "subtitulo": "Elegí la modalidad, el horario y confirmá directamente por WhatsApp sin llamadas ni esperas.",
     },
     "stock": {
         "badge": "CATÁLOGO & DISPONIBILIDAD EN VIVO",
         "titulo": "Explorá Nuestro Catálogo & Consultá Disponibilidad",
         "subtitulo": "Productos seleccionados con la mejor garantía, precios competitivos y atención personalizada.",
+    },
+    "ecommerce": {
+        "badge": "PEDIDOS & CARTA DIGITAL EN VIVO",
+        "titulo": "Hacé tu Pedido Online con Envíos Directos",
+        "subtitulo": "Armá tu carrito con nuestros productos estrella y enviá tu orden armada directamente a nuestro WhatsApp.",
+    },
+    "cotizador": {
+        "badge": "PRESUPUESTADOR Y SIMULADOR B2B",
+        "titulo": "Cotizá tus Insumos & Materiales en el Acto",
+        "subtitulo": "Seleccioná las cantidades requeridas y calculá el costo estimado con precios actualizados.",
     },
     "logistica": {
         "badge": "ENVÍOS RÁPIDOS A DOMICILIO",
@@ -273,6 +300,423 @@ MODULOS_TITULOS = {
         "badge": "SIMULADOR DE PRESUPUESTOS",
         "titulo": "Cotizá Tu Requerimiento al Instante",
         "subtitulo": "Seleccioná las características de tu servicio o proyecto y obtené una estimación transparente.",
+    }
+}
+
+
+AGENDA_CONFIG_POR_RUBRO = {
+    "deportes": {
+        "badge": "Reserva de Canchas & Clases 24/7",
+        "titulo": "Reservá tu Cancha de Tenis o Clase en Línea",
+        "subtitulo": "Elegí la cancha, la fecha y el horario sin llamadas ni superposición de turnos.",
+        "paso1_label": "1. Seleccioná el Tipo de Reserva / Servicio",
+        "opcion1": {
+            "title": "Cancha Polvo de Ladrillo (90 min)",
+            "desc": "Turnos de singles o dobles | Iluminación LED",
+            "tag": "Canchas",
+            "icon": "fa-table-tennis-paddle-ball"
+        },
+        "opcion2": {
+            "title": "Clase Particular / Academia",
+            "desc": "Profesor matriculado AAT | Canasto de pelotas",
+            "tag": "Recomendado",
+            "icon": "fa-graduation-cap"
+        },
+        "opcion3": {
+            "title": "Encordado & Servicio Pro Shop",
+            "desc": "Calibración digital de tensión | Luxilon / Babolat",
+            "tag": "Pro Shop",
+            "icon": "fa-screwdriver-wrench"
+        },
+        "paso2_label": "2. Fecha de Juego / Clase",
+        "paso3_label": "3. Horarios Disponibles en Grilla",
+        "paso4_label": "4. Datos del Jugador / Socio",
+        "input_nombre_placeholder": "Tu Nombre Completo (Socio / Jugador)",
+        "input_tel_placeholder": "Tu WhatsApp de Contacto",
+        "cta_text": "🎾 Confirmar Reserva de Cancha por WA"
+    },
+    "gastronomia": {
+        "badge": "Reserva de Mesas & Take Away",
+        "titulo": "Reservá tu Mesa o Encargá para Llevar",
+        "subtitulo": "Garantizá tu lugar en el salón o programá tu pedido para retirar en el horario que prefieras.",
+        "paso1_label": "1. Seleccioná el Tipo de Reserva / Servicio",
+        "opcion1": {
+            "title": "Reserva de Mesa Salón",
+            "desc": "Capacidad de 2 a 8 comensales | Salón principal",
+            "tag": "Recomendado",
+            "icon": "fa-utensils"
+        },
+        "opcion2": {
+            "title": "Pedido Take Away / Retiro",
+            "desc": "Retiro express por mostrador | Sin esperas",
+            "tag": "Express",
+            "icon": "fa-bag-shopping"
+        },
+        "opcion3": {
+            "title": "Mesa Especial / Evento",
+            "desc": "Cumpleaños y reuniones de grupo | Reserva previa",
+            "tag": "Grupos",
+            "icon": "fa-wine-glass"
+        },
+        "paso2_label": "2. Fecha de Reserva",
+        "paso3_label": "3. Horarios Disponibles",
+        "paso4_label": "4. Datos de la Reserva",
+        "input_nombre_placeholder": "Tu Nombre Completo",
+        "input_tel_placeholder": "Tu WhatsApp (ej: 3515551234)",
+        "cta_text": "🍷 Confirmar Reserva por WhatsApp"
+    },
+    "automotriz": {
+        "badge": "Agendamiento de Taller Computarizado",
+        "titulo": "Agendá un Turno de Mantenimiento o Escaneo",
+        "subtitulo": "Elegí la fecha y hora para el diagnóstico computarizado, service de aceite o revisión de frenos de tu vehículo.",
+        "paso1_label": "1. Seleccioná el Servicio Mecánico",
+        "opcion1": {
+            "title": "Service Completo & Aceite",
+            "desc": "Cambio de lubricante, filtro de aire y fluidos",
+            "tag": "Mantenimiento",
+            "icon": "fa-oil-can"
+        },
+        "opcion2": {
+            "title": "Diagnóstico Escaneado OBD2",
+            "desc": "Escaneo computarizado de módulos y sensores",
+            "tag": "Recomendado",
+            "icon": "fa-laptop-code"
+        },
+        "opcion3": {
+            "title": "Frenos & Tren Delantero",
+            "desc": "Revisión de pastillas, discos y amortiguadores",
+            "tag": "Seguridad",
+            "icon": "fa-shield-halved"
+        },
+        "paso2_label": "2. Fecha de Ingreso",
+        "paso3_label": "3. Horarios Disponibles en Taller",
+        "paso4_label": "4. Datos del Vehículo & Propietario",
+        "input_nombre_placeholder": "Tu Nombre y Modelo / Patente del Auto",
+        "input_tel_placeholder": "Tu WhatsApp de Contacto",
+        "cta_text": "🔧 Confirmar Turno de Taller por WhatsApp"
+    },
+    "herramientas": {
+        "badge": "Cotización B2B & Asesoramiento",
+        "titulo": "Solicitá Cotización de Insumos o Demostración",
+        "subtitulo": "Agendá asesoramiento técnico en mostrador o enviá tu lista de materiales para cotizar con descuento gremial.",
+        "paso1_label": "1. Seleccioná el Tipo de Requerimiento",
+        "opcion1": {
+            "title": "Cotización de Lista de Obras",
+            "desc": "Presupuestos de volumen para contratistas y gremios",
+            "tag": "Venta B2B",
+            "icon": "fa-file-invoice-dollar"
+        },
+        "opcion2": {
+            "title": "Asesoramiento de Maquinaria",
+            "desc": "Demostración de herramientas inalámbricas e insumos",
+            "tag": "Recomendado",
+            "icon": "fa-toolbox"
+        },
+        "opcion3": {
+            "title": "Alta de Cuenta Gremial",
+            "desc": "Apertura de cuenta corriente y descuentos por gremio",
+            "tag": "Beneficio",
+            "icon": "fa-id-card"
+        },
+        "paso2_label": "2. Fecha Estimada",
+        "paso3_label": "3. Horario Preferido de Atención",
+        "paso4_label": "4. Datos de Empresa / Gremio",
+        "input_nombre_placeholder": "Empresa / Nombre de Contratista",
+        "input_tel_placeholder": "WhatsApp de Contacto",
+        "cta_text": "🔨 Enviar Lista para Cotizar por WA"
+    },
+    "opticas": {
+        "badge": "Gabinete Optométrico Registrado",
+        "titulo": "Agendá tu Examen Optométrico o Prueba de Armazones",
+        "subtitulo": "Reservá tu turno con nuestros optómetras matriculados para control de graduación y cristales Blue Block.",
+        "paso1_label": "1. Seleccioná el Motivo de Consulta",
+        "opcion1": {
+            "title": "Examen Visual & Graduación",
+            "desc": "Control de agudeza visual y prescripción médica",
+            "tag": "Salud Visual",
+            "icon": "fa-eye"
+        },
+        "opcion2": {
+            "title": "Prueba de Armazones & Sol",
+            "desc": "Asesoramiento de estéticas y marcas de tendencia",
+            "tag": "Recomendado",
+            "icon": "fa-glasses"
+        },
+        "opcion3": {
+            "title": "Contactología & Cristales",
+            "desc": "Adaptación de lentes de contacto y filtro Blue Block",
+            "tag": "Especializado",
+            "icon": "fa-circle-dot"
+        },
+        "paso2_label": "2. Fecha deseada de Atención",
+        "paso3_label": "3. Horarios Disponibles en Gabinete",
+        "paso4_label": "4. Datos del Paciente",
+        "input_nombre_placeholder": "Nombre y Apellido del Paciente",
+        "input_tel_placeholder": "Tu WhatsApp para Confirmación",
+        "cta_text": "👓 Confirmar Turno Optométrico por WA"
+    },
+    "kiosco": {
+        "badge": "Pedidos Express & Combos Previa",
+        "titulo": "Encargá tu Combo de Bebidas o Pedido Express sin Filas",
+        "subtitulo": "Armá tu pedido con bebidas frías y snacks listos para pasar a buscar por mostrador.",
+        "paso1_label": "1. Seleccioná la Modalidad de Pedido",
+        "opcion1": {
+            "title": "Combo Previa & Eventos",
+            "desc": "Bebidas congeladas + Fernet + Hielo + Snacks XL",
+            "tag": "Oferta",
+            "icon": "fa-wine-bottle"
+        },
+        "opcion2": {
+            "title": "Pedido Express Mostrador",
+            "desc": "Retiro inmediato sin hacer filas en horas pico",
+            "tag": "Sin Filas",
+            "icon": "fa-bolt"
+        },
+        "opcion3": {
+            "title": "Caja Regalo & Chocolates",
+            "desc": "Golosinas seleccionadas y regalería especial",
+            "tag": "Regalos",
+            "icon": "fa-gift"
+        },
+        "paso2_label": "2. Fecha de Retiro",
+        "paso3_label": "3. Horario de Retiro por Mostrador",
+        "paso4_label": "4. Datos para el Retiro",
+        "input_nombre_placeholder": "Tu Nombre Completo",
+        "input_tel_placeholder": "Tu WhatsApp",
+        "cta_text": "🛍️ Confirmar Pedido Express por WA"
+    },
+    "salud": {
+        "badge": "Turnos Médicos Digitales",
+        "titulo": "Agendá tu Consulta Médica o Chequeo de Salud",
+        "subtitulo": "Seleccioná la especialidad médica, fecha y horario de atención sin esperas.",
+        "paso1_label": "1. Seleccioná el Servicio / Especialidad",
+        "opcion1": {
+            "title": "Consulta Clínica General",
+            "desc": "Evaluación médica e historia clínica",
+            "tag": "Atención Médica",
+            "icon": "fa-user-doctor"
+        },
+        "opcion2": {
+            "title": "Chequeo Preventivo Anual",
+            "desc": "Análisis clínicos y electrocardiograma",
+            "tag": "Recomendado",
+            "icon": "fa-heart-pulse"
+        },
+        "opcion3": {
+            "title": "Estudios & Diagnóstico",
+            "desc": "Imagenología y laboratorio de análisis",
+            "tag": "Diagnóstico",
+            "icon": "fa-stethoscope"
+        },
+        "paso2_label": "2. Fecha Preferida",
+        "paso3_label": "3. Horarios Disponibles",
+        "paso4_label": "4. Datos del Paciente",
+        "input_nombre_placeholder": "Nombre del Paciente",
+        "input_tel_placeholder": "Tu WhatsApp de Contacto",
+        "cta_text": "🩺 Confirmar Turno Médico por WA"
+    },
+    "general": {
+        "badge": "Agendamiento en Línea 24/7",
+        "titulo": "Reservá tu Turno o Asesoramiento Personalizado",
+        "subtitulo": "Seleccioná la fecha y horario disponible para coordinar tu atención sin demoras.",
+        "paso1_label": "1. Seleccioná el Tipo de Atención",
+        "opcion1": {
+            "title": "Asesoramiento Inicial",
+            "desc": "Evaluación de requerimientos y consulta",
+            "tag": "Consulta",
+            "icon": "fa-comments"
+        },
+        "opcion2": {
+            "title": "Servicio Especializado",
+            "desc": "Atención directa con nuestro equipo",
+            "tag": "Recomendado",
+            "icon": "fa-star"
+        },
+        "opcion3": {
+            "title": "Revisión & Seguimiento",
+            "desc": "Control de avances y gestión",
+            "tag": "Seguimiento",
+            "icon": "fa-circle-check"
+        },
+        "paso2_label": "2. Fecha Preferida",
+        "paso3_label": "3. Horario Disponible",
+        "paso4_label": "4. Datos de Contacto",
+        "input_nombre_placeholder": "Tu Nombre Completo",
+        "input_tel_placeholder": "Tu WhatsApp",
+        "cta_text": "📅 Confirmar Turno por WhatsApp"
+    }
+}
+
+
+ADMIN_PANEL_POR_RUBRO = {
+    "deportes": {
+        "kpi_capacidad": "94% Canchas Ocupadas",
+        "kpi_pedidos": "28 Reservas / Turnos",
+        "kpi_stock": "3 Encordados Faltantes",
+        "kpi_facturacion": "$580.000 Caja Hoy",
+        "productos_stock": [
+            {"sku": "TEN-101", "nombre": "Tubo de Pelotas Penn Tour Presurizadas (3u)", "stock": 36, "unidad": "tubos", "alerta": "Normal", "precio": "$14.000"},
+            {"sku": "TEN-102", "nombre": "Cuerda Luxilon Alu Power 1.25mm (Set)", "stock": 4, "unidad": "sets", "alerta": "Bajo Stock", "precio": "$16.500"},
+            {"sku": "TEN-103", "nombre": "Overgrip Wilson Pro Comfort (Pack x3)", "stock": 25, "unidad": "packs", "alerta": "Normal", "precio": "$6.800"},
+            {"sku": "TEN-104", "nombre": "Raqueta Wilson Blade 98 V8 (Grip 3)", "stock": 2, "unidad": "unidades", "alerta": "Reposición", "precio": "$320.000"}
+        ],
+        "pedidos": [
+            {"id": "#RES-101", "cliente": "Juan Cruz V. vs Matías S.", "detalle": "Reserva Cancha #1 Polvo de Ladrillo (90 min) + Luz LED", "monto": "$12.000", "hora": "Turno 19:30 hs", "estado": "CONFIRMADO"},
+            {"id": "#RES-100", "cliente": "Federico B. (Alumno)", "detalle": "Clase Particular de Tenis 60 min con Prof. Nico M.", "monto": "$18.000", "hora": "Hace 20 min", "estado": "EN CURSO"},
+            {"id": "#ENC-099", "cliente": "Gonzalo L.", "detalle": "Encordado Luxilon 52 lbs - Raqueta Babolat Pure Aero", "monto": "$16.500", "hora": "Hace 2 horas", "estado": "LISTO PARA RETIRAR"}
+        ],
+        "mensajes": [
+            {"cliente": "Esteban R.", "tel": "3517654321", "consulta": "Hola! ¿Tienen cancha de polvo libre hoy a las 20:30hs para dobles?", "hora": "13:30 hs", "estado": "PENDIENTE"},
+            {"cliente": "Facundo B.", "tel": "3512345678", "consulta": "Quería saber cuánto demora el encordado de una raqueta Wilson con Luxilon.", "hora": "11:15 hs", "estado": "RESPONDIDO"}
+        ],
+        "proveedores": [
+            {"nombre": "Wilson Sporting Goods Argentina", "rubro": "Raquetas & Pelotas de Tenis", "deuda": "$240.000", "estado": "Al día"},
+            {"nombre": "Babolat Argentina S.A.", "rubro": "Cuerdas, Encordadoras & Grips", "deuda": "$130.000", "estado": "Vence 20/08"}
+        ]
+    },
+    "gastronomia": {
+        "kpi_capacidad": "85% Salón Lleno",
+        "kpi_pedidos": "18 Pedidos / Comandas",
+        "kpi_stock": "4 Insumos Críticos",
+        "kpi_facturacion": "$485.000 Caja Hoy",
+        "productos_stock": [
+            {"sku": "GAST-101", "nombre": "Materia Prima Smash Burgers (Medallón 120g)", "stock": 42, "unidad": "kg", "alerta": "Normal", "precio": "$8.500/kg"},
+            {"sku": "GAST-102", "nombre": "Pan Brioche de Papa Artesanal", "stock": 8, "unidad": "docenas", "alerta": "Bajo Stock", "precio": "$4.200/doc"},
+            {"sku": "GAST-103", "nombre": "Queso Cheddar Inglés Feteado", "stock": 15, "unidad": "kg", "alerta": "Normal", "precio": "$12.000/kg"},
+            {"sku": "GAST-104", "nombre": "Cerveza IPA Tirada 50L (Barril)", "stock": 3, "unidad": "barriles", "alerta": "Reposición", "precio": "$45.000/u"}
+        ],
+        "pedidos": [
+            {"id": "#CMD-1042", "cliente": "Juan Pablo M.", "detalle": "2x Double Bacon Smash + 2x Pintas IPA", "monto": "$24.500", "hora": "Hace 8 min", "estado": "EN COCINA"},
+            {"id": "#CMD-1041", "cliente": "Carolina R.", "detalle": "1x Veggie Burger + Papas Rústicas + Gaseosa", "monto": "$14.200", "hora": "Hace 15 min", "estado": "LISTO PARA SERVIR"},
+            {"id": "#CMD-1040", "cliente": "Lucas V.", "detalle": "Combo Familia: 4x Cheeseburger + 2x Papas XL", "monto": "$38.000", "hora": "Hace 28 min", "estado": "ENTREGADO"}
+        ],
+        "mensajes": [
+            {"cliente": "Mariana Gómez", "tel": "3515123456", "consulta": "Hola, ¿tienen mesas disponibles para 6 personas hoy a las 21:30hs?", "hora": "12:45 hs", "estado": "PENDIENTE"},
+            {"cliente": "Esteban F.", "tel": "3516987654", "consulta": "Quisiera consultar si hacen envíos a domicilio a Zona Norte.", "hora": "11:20 hs", "estado": "RESPONDIDO"}
+        ],
+        "proveedores": [
+            {"nombre": "Frigorífico San Juan S.A.", "rubro": "Carnes & Medallones", "deuda": "$120.000", "estado": "Al día"},
+            {"nombre": "Distribuidora Bebidas del Sur", "rubro": "Cervezas & Gaseosas", "deuda": "$85.000", "estado": "Vence 15/08"}
+        ]
+    },
+    "automotriz": {
+        "kpi_capacidad": "92% Elevadores Ocupados",
+        "kpi_pedidos": "12 Turnos Taller",
+        "kpi_stock": "3 Aceites / Filtros Bajos",
+        "kpi_facturacion": "$890.000 Caja Hoy",
+        "productos_stock": [
+            {"sku": "AUTO-201", "nombre": "Aceite Sintético Shell Helix 5W30 (4L)", "stock": 14, "unidad": "bidones", "alerta": "Normal", "precio": "$38.500"},
+            {"sku": "AUTO-202", "nombre": "Filtro de Aceite Mann W712", "stock": 5, "unidad": "unidades", "alerta": "Bajo Stock", "precio": "$8.200"},
+            {"sku": "AUTO-203", "nombre": "Pastillas de Freno Fras-le VW Gol/Polo", "stock": 8, "unidad": "juegos", "alerta": "Normal", "precio": "$26.000"},
+            {"sku": "AUTO-204", "nombre": "Líquido de Frenos DOT4 Bosch (500ml)", "stock": 2, "unidad": "unidades", "alerta": "Reposición", "precio": "$7.500"}
+        ],
+        "pedidos": [
+            {"id": "#TRN-809", "cliente": "Martín G. (Toyota Hilux)", "detalle": "Service Completo 100.000km + Cambio de Pastillas", "monto": "$145.000", "hora": "En taller", "estado": "EN REPARACIÓN"},
+            {"id": "#TRN-808", "cliente": "Gonzalo B. (Ford Ranger)", "detalle": "Escaneo Computarizado OBD2 + Check Engine", "monto": "$35.000", "hora": "Hace 30 min", "estado": "LISTO DENTRO DE 1H"},
+            {"id": "#TRN-807", "cliente": "Sebastián L. (Peugeot 208)", "detalle": "Cambio de Aceite 5W30 + Filtros de Aire", "monto": "$52.000", "hora": "Hace 2 horas", "estado": "ENTREGADO"}
+        ],
+        "mensajes": [
+            {"cliente": "Ricardo Méndez", "tel": "3514223344", "consulta": "Hola, ¿cuánto sale hacer el service de los 50 mil km a una Tracker 2021?", "hora": "13:10 hs", "estado": "PENDIENTE"},
+            {"cliente": "Fabiana C.", "tel": "3516554433", "consulta": "Tengo turno para las 16hs para alineación y balanceo. ¿Están a término?", "hora": "12:05 hs", "estado": "RESPONDIDO"}
+        ],
+        "proveedores": [
+            {"nombre": "Distribuidora Shell Argentina", "rubro": "Lubricantes & Fluidos", "deuda": "$340.000", "estado": "Al día"},
+            {"nombre": "Bosch Autopartes S.R.L.", "rubro": "Frenos & Escáneres", "deuda": "$190.000", "estado": "Vence 20/08"}
+        ]
+    },
+    "opticas": {
+        "kpi_capacidad": "78% Turnos Gabinete",
+        "kpi_pedidos": "15 Recetas / Cristales",
+        "kpi_stock": "5 Armazones en Faltante",
+        "kpi_facturacion": "$640.000 Caja Hoy",
+        "productos_stock": [
+            {"sku": "OPT-301", "nombre": "Cristal Monofocal Blue Block Antirreflex 1.56", "stock": 28, "unidad": "pares", "alerta": "Normal", "precio": "$32.000"},
+            {"sku": "OPT-302", "nombre": "Armazón de Acetato Ray-Ban Wayfarer Classic", "stock": 3, "unidad": "unidades", "alerta": "Bajo Stock", "precio": "$89.000"},
+            {"sku": "OPT-303", "nombre": "Lentes de Contacto Blandos Acuvue Oasys (Caja 6u)", "stock": 12, "unidad": "cajas", "alerta": "Normal", "precio": "$45.000"},
+            {"sku": "OPT-304", "nombre": "Solución Multiuso para Lentes Renu 355ml", "stock": 4, "unidad": "unidades", "alerta": "Reposición", "precio": "$14.500"}
+        ],
+        "pedidos": [
+            {"id": "#REC-504", "cliente": "Dr. Fernando M. (Paciente)", "detalle": "Multifocal Digital Antirreflex HD + Armazón Titanium", "monto": "$168.000", "hora": "En laboratorio", "estado": "EN LABORATORIO"},
+            {"id": "#REC-503", "cliente": "Valeria K.", "detalle": "Lentes Monofocales Filtro Pantalla PC + Armazón Acetato", "monto": "$78.000", "hora": "Hace 40 min", "estado": "LISTO PARA RETIRAR"},
+            {"id": "#REC-502", "cliente": "Ignacio B.", "detalle": "Anteojo de Sol Polarizado UV400 Oakley", "monto": "$92.000", "hora": "Hace 3 horas", "estado": "ENTREGADO"}
+        ],
+        "mensajes": [
+            {"cliente": "Camila Soria", "tel": "3517889900", "consulta": "Hola! ¿Tienen convenio con OSDE o prevención salud para reembolso de receta?", "hora": "13:15 hs", "estado": "PENDIENTE"},
+            {"cliente": "Gabriel R.", "tel": "3512334455", "consulta": "Quería saber si ya llegaron mis cristales multifocales encargados el martes.", "hora": "10:30 hs", "estado": "RESPONDIDO"}
+        ],
+        "proveedores": [
+            {"nombre": "Laboratorio Óptico EssilorLuxottica", "rubro": "Cristales & Lentes Multifocales", "deuda": "$280.000", "estado": "Al día"},
+            {"nombre": "Distribuidora Armazones Italia", "rubro": "Armazones & Gafas de Sol", "deuda": "$145.000", "estado": "Vence 18/08"}
+        ]
+    },
+    "herramientas": {
+        "kpi_capacidad": "89% Mostrador Gremial",
+        "kpi_pedidos": "22 Presupuestos Obras",
+        "kpi_stock": "6 Discos / Brocas Críticas",
+        "kpi_facturacion": "$1.450.000 Caja Hoy",
+        "productos_stock": [
+            {"sku": "HERR-401", "nombre": "Taladro Percutor Inalámbrico Bosch GSB 18V-50 (2 Baterías)", "stock": 6, "unidad": "unidades", "alerta": "Normal", "precio": "$185.000"},
+            {"sku": "HERR-402", "nombre": "Amoladora Angular DeWalt 4 1/2' 800W DWE4010", "stock": 2, "unidad": "unidades", "alerta": "Bajo Stock", "precio": "$78.000"},
+            {"sku": "HERR-403", "nombre": "Disco de Corte Diamantado Continuo 115mm Bosch", "stock": 35, "unidad": "unidades", "alerta": "Normal", "precio": "$12.500"},
+            {"sku": "HERR-404", "nombre": "Juego de Llaves Bocallave 108 Piezas Stanley", "stock": 1, "unidad": "caja", "alerta": "Reposición", "precio": "$120.000"}
+        ],
+        "pedidos": [
+            {"id": "#COT-701", "cliente": "Constructora Edisur S.A.", "detalle": "5x Taladros 20V + 50x Discos Diamantados + 10x Antiparras", "monto": "$890.000", "hora": "Cotización B2B", "estado": "EN PREPARACIÓN"},
+            {"id": "#COT-700", "cliente": "Plomería El Rayo", "detalle": "Termofusora 1500W + 20x Caños Termofusión 25mm", "monto": "$145.000", "hora": "Hace 20 min", "estado": "LISTO PARA DESPACHO"},
+            {"id": "#COT-699", "cliente": "Electricidad Córdoba", "detalle": "Pinza Amperométrica Digital Fluke + Cable 2.5mm", "monto": "$230.000", "hora": "Hace 2 horas", "estado": "ENTREGADO"}
+        ],
+        "mensajes": [
+            {"cliente": "Ing. Marcelo Torres", "tel": "3513445566", "consulta": "Hola, necesito cotizar 20 cajas de tornillos T2 autoperforantes y envío a obra en Manantiales.", "hora": "13:20 hs", "estado": "PENDIENTE"},
+            {"cliente": "David M.", "tel": "3518776655", "consulta": "Tienen cuotas sin interés en herramientas inalámbricas DeWalt con Tarjeta Cordobesa?", "hora": "11:45 hs", "estado": "RESPONDIDO"}
+        ],
+        "proveedores": [
+            {"nombre": "Robert Bosch Argentina S.A.", "rubro": "Herramientas Eléctricas", "deuda": "$620.000", "estado": "Al día"},
+            {"nombre": "Stanley Black & Decker S.A.", "rubro": "Herramientas Manuales & Discos", "deuda": "$410.000", "estado": "Vence 25/08"}
+        ]
+    },
+    "kiosco": {
+        "kpi_capacidad": "95% Rotación Góndola",
+        "kpi_pedidos": "34 Pedidos Express",
+        "kpi_stock": "8 Snacks / Bebidas Bajas",
+        "kpi_facturacion": "$390.000 Caja Hoy",
+        "productos_stock": [
+            {"sku": "KIOS-501", "nombre": "Fernet Branca 750ml (Caja x6)", "stock": 18, "unidad": "cajas", "alerta": "Normal", "precio": "$11.500/u"},
+            {"sku": "KIOS-502", "nombre": "Coca-Cola Sabor Original 2.25L", "stock": 9, "unidad": "botellas", "alerta": "Bajo Stock", "precio": "$2.800/u"},
+            {"sku": "KIOS-503", "nombre": "Papas Fritas Lay's Corte Americano 140g", "stock": 24, "unidad": "paquetes", "alerta": "Normal", "precio": "$2.400/u"},
+            {"sku": "KIOS-504", "nombre": "Cerveza Stella Artois 710ml Retornable", "stock": 6, "unidad": "botellas", "alerta": "Reposición", "precio": "$3.200/u"}
+        ],
+        "pedidos": [
+            {"id": "#EXP-309", "cliente": "Facundo T.", "detalle": "Combo Previa: 1x Fernet Branca + 2x Coca-Cola + Bolsa Hielo XL", "monto": "$18.500", "hora": "Hace 5 min", "estado": "EN MOSTRADOR"},
+            {"id": "#EXP-308", "cliente": "Sonia M.", "detalle": "2x Chocolates Milka + 1x Alfajor Havanna + 1x Monster Energy", "monto": "$8.200", "hora": "Hace 18 min", "estado": "ENTREGADO"},
+            {"id": "#EXP-307", "cliente": "Joaquín R.", "detalle": "1x Pack Cerveza Corona 6u + Lay's Stack", "monto": "$16.400", "hora": "Hace 40 min", "estado": "ENTREGADO"}
+        ],
+        "mensajes": [
+            {"cliente": "Nicolás Peralta", "tel": "3519998877", "consulta": "Hola bro! Tienen hielo congelado y fernet frío para pasar a buscar ya?", "hora": "13:25 hs", "estado": "PENDIENTE"},
+            {"cliente": "Romina G.", "tel": "3511112233", "consulta": "Quería encargar una caja de golosinas para un cumpleaños para retirar a las 18hs.", "hora": "12:10 hs", "estado": "RESPONDIDO"}
+        ],
+        "proveedores": [
+            {"nombre": "Distribuidora Coca-Cola Andina", "rubro": "Gaseosas & Aguas", "deuda": "$190.000", "estado": "Al día"},
+            {"nombre": "Fratelli Branca Destilerías", "rubro": "Aperitivos & Licores", "deuda": "$140.000", "estado": "Vence 22/08"}
+        ]
+    },
+    "general": {
+        "kpi_capacidad": "88% Operativa",
+        "kpi_pedidos": "14 Solicitudes",
+        "kpi_stock": "2 Insumos Críticos",
+        "kpi_facturacion": "$520.000 Caja Hoy",
+        "productos_stock": [
+            {"sku": "GEN-101", "nombre": "Insumo Principal de Servicio", "stock": 15, "unidad": "unidades", "alerta": "Normal", "precio": "$15.000"},
+            {"sku": "GEN-102", "nombre": "Material de Reposición Directa", "stock": 4, "unidad": "unidades", "alerta": "Bajo Stock", "precio": "$8.500"}
+        ],
+        "pedidos": [
+            {"id": "#ORD-9021", "cliente": "Clara M.", "detalle": "Solicitud de turno / presupuesto integral", "monto": "$45.000", "hora": "Hace 15 min", "estado": "EN PREPARACIÓN"}
+        ],
+        "mensajes": [
+            {"cliente": "Roberto Gómez", "tel": "3515550199", "consulta": "Hola, quisiera consultar presupuesto de servicio.", "hora": "11:00 hs", "estado": "PENDIENTE"}
+        ],
+        "proveedores": [
+            {"nombre": "Proveedor Central S.A.", "rubro": "Insumos Generales", "deuda": "$85.000", "estado": "Al día"}
+        ]
     }
 }
 
@@ -308,6 +752,9 @@ def generar_copy_negocio(nombre_negocio, rubro_key):
     elif rubro_key == "kiosco":
         headline = f"Tienda Express, Bebidas Frías & Combos en {nombre}"
         subheadline = f"En {nombre} encontrás todo lo que necesitás al instante: bebidas congeladas, combos para eventos y pedidos rápidos por WhatsApp sin hacer filas."
+    elif rubro_key in ["deportes", "tenis", "club"]:
+        headline = f"Reserva de Canchas de Tenis, Clases & Pro Shop en {nombre}"
+        subheadline = f"En {nombre} disfrutás del mejor tenis: canchas de polvo de ladrillo en excelente estado, clases con profesores matriculados y encordado profesional de raquetas."
     elif rubro_key == "servicios":
         headline = f"Soluciones Profesionales a Medida & Asesoramiento Técnico en {nombre}"
         subheadline = f"En {nombre} transformamos tus requerimientos en resultados concretos con la máxima precisión, calidad y cumplimiento de plazos."
@@ -347,7 +794,7 @@ def preparar_contexto_demo(demo_obj) -> dict:
             p_copy["image"] = theme["hero_bg_image"]
         pilares_enriquecidos.append(p_copy)
 
-    # Parsear reseñas de JSON
+    # Parsear reseñas de JSON y ordenar de mejor a peor (5★ a 1★)
     reviews = []
     if demo_obj.reviews_json:
         try:
@@ -377,6 +824,13 @@ def preparar_contexto_demo(demo_obj) -> dict:
             }
         ]
 
+    # Ordenar reseñas de mejor a peor (5 estrellas primero) y filtrar valoraciones bajas < 4
+    reviews = [r for r in reviews if int(r.get("rating", 5)) >= 4]
+    reviews.sort(key=lambda r: (int(r.get("rating", 5)), len(r.get("text", ""))), reverse=True)
+
+    # Configuración adaptada de la Agenda por Rubro
+    agenda_config = AGENDA_CONFIG_POR_RUBRO.get(rubro_key, AGENDA_CONFIG_POR_RUBRO["general"])
+
     # Parsear fotos reales de Google Places si existen
     fotos = []
     if demo_obj.fotos_json:
@@ -405,12 +859,17 @@ def preparar_contexto_demo(demo_obj) -> dict:
     msg_gg = f"Hola GG Solutions, estuve revisando la demo creada para {demo_obj.nombre_negocio} y quisiera consultar para implementar nuestro sistema."
     wa_ggsolutions = f"https://wa.me/5493513360533?text={urllib.parse.quote(msg_gg)}"
 
+    # Configuración del Panel de Control Interno por Rubro
+    admin_config = ADMIN_PANEL_POR_RUBRO.get(rubro_key, ADMIN_PANEL_POR_RUBRO["general"])
+
     return {
         "demo": demo_obj,
         "theme": theme_copy,
         "pilares": pilares_enriquecidos,
         "news": img_data.get("news", []),
         "modulo_info": modulo_info,
+        "agenda_config": agenda_config,
+        "admin_config": admin_config,
         "hero_headline": hero_headline,
         "hero_subheadline": hero_subheadline,
         "hero_meta": hero_meta,

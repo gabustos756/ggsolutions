@@ -1,81 +1,91 @@
-<!-- MÓDULO INTERACTIVO: AGENDA & TURNOS DIGITALES -->
-<div class="glass-card rounded-2xl p-6 sm:p-8 max-w-4xl mx-auto space-y-6 border border-white/10 shadow-2xl">
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/10 pb-4">
+<!-- MÓDULO INTERACTIVO: AGENDA & TURNOS DIGITALES ADAPTADO AL RUBRO -->
+<div class="glass-card rounded-2xl p-6 sm:p-8 max-w-4xl mx-auto space-y-7 border border-white/10 shadow-2xl">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/10 pb-5">
         <div>
-            <h4 class="text-lg font-bold text-white flex items-center gap-2 font-title">
-                <i class="fa-regular fa-calendar-check text-cyan-400"></i> Reservá tu Turno en Línea
+            <h4 class="text-xl font-extrabold text-white flex items-center gap-2.5 font-title">
+                <i class="fa-regular fa-calendar-check text-cyan-400 text-2xl"></i> {{ agenda_config.titulo }}
             </h4>
-            <p class="text-xs text-slate-300">Seleccioná el servicio, especialista y la fecha deseada sin llamadas ni esperas.</p>
+            <p class="text-xs sm:text-sm text-slate-300 font-medium mt-1">{{ agenda_config.subtitulo }}</p>
         </div>
-        <span class="px-3.5 py-1.5 bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-md">
-            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Turnos Disponibles Hoy
+        <span class="px-3.5 py-1.5 bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 rounded-full text-xs font-extrabold flex items-center gap-1.5 shadow-md flex-shrink-0">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span> {{ agenda_config.badge }}
         </span>
     </div>
 
-    <!-- PASO 1: SELECCIÓN VISUAL DE SERVICIO -->
+    <!-- PASO 1: SELECCIÓN VISUAL DE SERVICIO ADAPTADO AL RUBRO -->
     <div class="space-y-3">
-        <label class="text-xs font-bold uppercase tracking-wider text-cyan-400">1. Seleccioná la Modalidad o Servicio</label>
+        <label class="text-xs font-extrabold uppercase tracking-wider text-cyan-400">{{ agenda_config.paso1_label }}</label>
         <div class="grid sm:grid-cols-3 gap-4">
-            <button type="button" onclick="selectServicio(this, 'Consulta Inicial / Diagnóstico')" class="srv-btn glass-card glass-card-hover p-4 rounded-xl border border-white/10 bg-white/5 hover:border-cyan-400 text-left transition space-y-1.5">
+            <button type="button" onclick="selectServicio(this, '{{ agenda_config.opcion1.title }}')" class="srv-btn glass-card glass-card-hover p-4 rounded-xl border border-white/10 bg-white/5 hover:border-cyan-400 text-left transition space-y-2 group">
                 <div class="flex justify-between items-center">
-                    <span class="text-xs font-bold text-cyan-400">Paso 1</span>
-                    <i class="fa-solid fa-stethoscope text-slate-400"></i>
+                    <span class="text-[11px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">{{ agenda_config.opcion1.tag }}</span>
+                    <i class="fa-solid {{ agenda_config.opcion1.icon }} text-slate-400 group-hover:text-cyan-400 text-base transition"></i>
                 </div>
-                <p class="text-sm font-bold text-white font-title">Diagnóstico & Consulta</p>
-                <p class="text-xs text-slate-300">Duración: 30 min | Evaluación integral</p>
+                <p class="text-sm font-bold text-white font-title group-hover:text-cyan-300 transition">{{ agenda_config.opcion1.title }}</p>
+                <p class="text-xs text-slate-300 font-medium leading-snug">{{ agenda_config.opcion1.desc }}</p>
             </button>
-            <button type="button" onclick="selectServicio(this, 'Atención Especializada')" class="srv-btn glass-card glass-card-hover p-4 rounded-xl border-2 border-cyan-400 bg-cyan-500/10 text-left transition space-y-1.5">
+
+            <button type="button" onclick="selectServicio(this, '{{ agenda_config.opcion2.title }}')" class="srv-btn glass-card glass-card-hover p-4 rounded-xl border-2 border-cyan-400 bg-cyan-500/10 text-left transition space-y-2 group">
                 <div class="flex justify-between items-center">
-                    <span class="text-xs font-bold text-cyan-300">Recomendado</span>
-                    <i class="fa-solid fa-star text-amber-400"></i>
+                    <span class="text-[11px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">{{ agenda_config.opcion2.tag }}</span>
+                    <i class="fa-solid {{ agenda_config.opcion2.icon }} text-cyan-300 text-base"></i>
                 </div>
-                <p class="text-sm font-bold text-white font-title">Atención Especializada</p>
-                <p class="text-xs text-slate-300">Duración: 45 min | Asesoramiento Premium</p>
+                <p class="text-sm font-bold text-white font-title text-cyan-300">{{ agenda_config.opcion2.title }}</p>
+                <p class="text-xs text-slate-200 font-medium leading-snug">{{ agenda_config.opcion2.desc }}</p>
             </button>
-            <button type="button" onclick="selectServicio(this, 'Revisión de Control')" class="srv-btn glass-card glass-card-hover p-4 rounded-xl border border-white/10 bg-white/5 hover:border-cyan-400 text-left transition space-y-1.5">
+
+            <button type="button" onclick="selectServicio(this, '{{ agenda_config.opcion3.title }}')" class="srv-btn glass-card glass-card-hover p-4 rounded-xl border border-white/10 bg-white/5 hover:border-cyan-400 text-left transition space-y-2 group">
                 <div class="flex justify-between items-center">
-                    <span class="text-xs font-bold text-slate-400">Control</span>
-                    <i class="fa-solid fa-shield-check text-slate-400"></i>
+                    <span class="text-[11px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-white/10 text-slate-300 border border-white/15">{{ agenda_config.opcion3.tag }}</span>
+                    <i class="fa-solid {{ agenda_config.opcion3.icon }} text-slate-400 group-hover:text-cyan-400 text-base transition"></i>
                 </div>
-                <p class="text-sm font-bold text-white font-title">Revisión de Control</p>
-                <p class="text-xs text-slate-300">Duración: 20 min | Seguimiento rápido</p>
+                <p class="text-sm font-bold text-white font-title group-hover:text-cyan-300 transition">{{ agenda_config.opcion3.title }}</p>
+                <p class="text-xs text-slate-300 font-medium leading-snug">{{ agenda_config.opcion3.desc }}</p>
             </button>
         </div>
     </div>
 
-    <!-- PASO 2: FECHA Y HORARIO CON CHIPS ANIMADOS -->
+    <!-- PASO 2 Y 3: FECHA Y HORARIO -->
     <div class="grid sm:grid-cols-2 gap-6 pt-2">
         <div class="space-y-2">
-            <label class="text-xs font-bold uppercase tracking-wider text-cyan-400">2. Fecha Preferida</label>
-            <input type="date" id="fecha-turno" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400 transition" value="2026-08-06">
+            <label class="text-xs font-extrabold uppercase tracking-wider text-cyan-400">{{ agenda_config.paso2_label }}</label>
+            <input type="date" id="fecha-turno" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400 transition shadow-inner">
         </div>
         <div class="space-y-2">
-            <label class="text-xs font-bold uppercase tracking-wider text-cyan-400">3. Horario Disponible</label>
+            <label class="text-xs font-extrabold uppercase tracking-wider text-cyan-400">{{ agenda_config.paso3_label }}</label>
             <div class="grid grid-cols-3 gap-2">
-                <button type="button" onclick="selectHora(this, '10:00 hs')" class="hora-btn py-2.5 text-xs font-semibold rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-slate-300 transition">10:00 hs</button>
-                <button type="button" onclick="selectHora(this, '11:30 hs')" class="hora-btn py-2.5 text-xs rounded-xl border-2 border-cyan-400 bg-cyan-500/20 text-cyan-300 font-extrabold shadow-md">11:30 hs</button>
-                <button type="button" onclick="selectHora(this, '16:00 hs')" class="hora-btn py-2.5 text-xs font-semibold rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-slate-300 transition">16:00 hs</button>
+                <button type="button" onclick="selectHora(this, '10:00 hs')" class="hora-btn py-3 text-xs font-semibold rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-slate-300 transition">10:00 hs</button>
+                <button type="button" onclick="selectHora(this, '12:30 hs')" class="hora-btn py-3 text-xs rounded-xl border-2 border-cyan-400 bg-cyan-500/20 text-cyan-300 font-extrabold shadow-md">12:30 hs</button>
+                <button type="button" onclick="selectHora(this, '17:00 hs')" class="hora-btn py-3 text-xs font-semibold rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-slate-300 transition">17:00 hs</button>
             </div>
         </div>
     </div>
 
-    <!-- DATOS DE CONFIRMACIÓN -->
+    <!-- PASO 4: DATOS DE CONFIRMACIÓN -->
     <div class="space-y-3 pt-2">
-        <label class="text-xs font-bold uppercase tracking-wider text-cyan-400">4. Datos de Confirmación</label>
+        <label class="text-xs font-extrabold uppercase tracking-wider text-cyan-400">{{ agenda_config.paso4_label }}</label>
         <div class="grid sm:grid-cols-2 gap-3">
-            <input type="text" id="nombre-cliente" placeholder="Tu Nombre Completo" class="bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400 transition">
-            <input type="tel" id="tel-cliente" placeholder="Tu WhatsApp (ej: 3515551234)" class="bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400 transition">
+            <input type="text" id="nombre-cliente" placeholder="{{ agenda_config.input_nombre_placeholder }}" class="bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400 transition">
+            <input type="tel" id="tel-cliente" placeholder="{{ agenda_config.input_tel_placeholder }}" class="bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400 transition">
         </div>
     </div>
 
-    <button type="button" onclick="confirmarTurnoDemo()" class="w-full bg-gradient-to-r {{ theme.gradient }} text-slate-950 font-extrabold py-3.5 rounded-xl shadow-xl hover:scale-[1.01] transition flex items-center justify-center gap-2 text-base">
-        <i class="fa-brands fa-whatsapp text-lg"></i> Confirmar Turno por WhatsApp
+    <button type="button" onclick="confirmarTurnoDemo()" class="w-full bg-gradient-to-r {{ theme.gradient }} text-slate-950 font-extrabold py-4 rounded-xl shadow-2xl hover:scale-[1.01] transition flex items-center justify-center gap-2.5 text-base tracking-wide">
+        <i class="fa-brands fa-whatsapp text-xl"></i> {{ agenda_config.cta_text }}
     </button>
 </div>
 
 <script>
-    let servicioSeleccionado = 'Atención Especializada';
-    let horaSeleccionada = '11:30 hs';
+    let servicioSeleccionado = '{{ agenda_config.opcion2.title }}';
+    let horaSeleccionada = '12:30 hs';
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const fechaInput = document.getElementById('fecha-turno');
+        if (fechaInput) {
+            const today = new Date().toISOString().split('T')[0];
+            fechaInput.value = today;
+        }
+    });
 
     function selectServicio(btn, nombre) {
         document.querySelectorAll('.srv-btn').forEach(b => {
@@ -100,7 +110,7 @@
     function confirmarTurnoDemo() {
         const nombre = document.getElementById('nombre-cliente').value.trim() || 'Cliente';
         const fecha = document.getElementById('fecha-turno').value || 'Próximo disponible';
-        const msg = `Hola {{ demo.nombre_negocio }}, mi nombre es ${nombre}. Quisiera reservar el turno para: ${servicioSeleccionado} el día ${fecha} a las ${horaSeleccionada}.`;
+        const msg = `Hola {{ demo.nombre_negocio }}, mi nombre es ${nombre}. Quisiera solicitar: ${servicioSeleccionado} para el día ${fecha} a las ${horaSeleccionada}.`;
         window.open(`{{ wa_link }}&text=${encodeURIComponent(msg)}`, '_blank');
     }
 </script>

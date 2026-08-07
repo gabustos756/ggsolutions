@@ -171,6 +171,40 @@ Este documento establece la arquitectura de contenido, dolores operativos, propu
 
 ---
 
+## 🎾 6. Rubro: Deportes, Tenis & Complejos Deportivos / Clubes
+
+### A. Perfil del Negocio Target
+- Complejos de tenis y pádel (canchas de polvo de ladrillo / hard court / césped sintético), clubes deportivos, academias de tenis, entrenadores particulares y pro shops especializados.
+- **Canal principal:** Reservas telefónicas/WhatsApp a deshora + Alquiler presencial de canchas + Cuotas de academia + Venta de artículos e insumos (encordados, tubos de pelotas, grips).
+
+### B. Dolores Operativos & Comerciales Críticos
+1. **Superposición de Turnos y Gestión Caótica por WhatsApp:** Mensajes constantes a toda hora preguntando por disponibilidad de Cancha 1, 2 o 3, generando doble reserva o demoras.
+2. **Canchas Vacías en Horarios Valle:** Dificultad para ocupar turnos matutinos y de primera tarde fuera del horario pico nocturno.
+3. **Control Manual de Clases y Alumnos:** Desorden en la cobranza de cuotas mensuales de academia de tenis, fichas de alumnos y clases canceladas por lluvia.
+4. **Falta de Seguimiento en Encordados & Pro Shop:** Demoras en comunicar la finalización del encordado con la tensión exacta solicitada (ej. 52 lbs con Luxilon Alu Power).
+
+### C. Configuración Recomendada de la Demo
+- **Tipo de Software:** Ambas (Grilla de Reservas 24/7 + Gestión de Socios / Alumnos).
+- **Módulo Interactivo Recomendado:** `agenda` (Reserva de Canchas & Clases) o `stock` (Pro Shop & Encordados).
+- **Enfoque Comercial:** Reservas Automatizadas 24/7 + Posicionamiento del Club / Academia.
+
+### D. Copywriting & Contenidos Específicos
+- **Hero Title:** `Reserva de Canchas de Tenis, Clases & Pro Shop para {{ nombre_negocio }}`
+- **Hero Subtitle:** `Permití a tus socios y jugadores reservar canchas de polvo de ladrillo, agendar clases con profesores matriculados y solicitar encordado de raquetas 24/7 sin esperas.`
+- **Pilares de Solución:**
+  1. `Grilla de Canchas en Tiempo Real`: Reserva instantánea de turnos de 90 min en polvo de ladrillo con iluminación LED.
+  2. `Academia & Clases Particulares`: Agendamiento directo con profesores matriculados AAT por nivel (Principiante, Intermedio, Competencia).
+  3. `Servicio de Encordado & Pro Shop`: Encordado express con calibración digital de tensión y catálogo de insumos de tenis.
+- **CTA Principal WhatsApp:** `🎾 Reservar Cancha de Tenis en {{ nombre_negocio }}`
+
+### E. Banco de Servicios & Productos de Ejemplo (Módulo Agenda / Stock)
+1. **Turno Cancha Polvo de Ladrillo (90 min):** Luz LED nocturna incluida + Red oficial — *$12.000*
+2. **Clase Particular de Tenis (60 min):** Profesor matriculado AAT + Canasto de pelotas incluido — *$18.000*
+3. **Encordado Profesional Digital:** Cuerda Luxilon Alu Power / Babolat RPM Blast + Calibración de tensión — *$16.500*
+4. **Tubo de Pelotas Penn Tour / Wilson US Open (3u):** Presurizadas de alta durabilidad para polvo de ladrillo — *$14.000*
+
+---
+
 ## ⚡ Estrategia de Enriquecimiento Dinámico con Google Places
 
 Al generar una demo desde el panel admin (`/admin/demos`), el sistema fusiona este contenido estandarizado con los datos en vivo extraídos del comercio en Google Maps:
@@ -183,3 +217,9 @@ Al generar una demo desde el panel admin (`/admin/demos`), el sistema fusiona es
    - **Ferretería & Herramientas:** Palette alta visibilidad (Amber, Charcoal, Titanium) con fuente `Outfit` + `Inter`.
    - **Ópticas:** Palette salud/elegancia (Cyan, Teal, Slate) con fuente `Plus Jakarta Sans` + `Inter`.
    - **Kioscos / Supermercados:** Palette vibrante (Emerald, Orange, Navy) con fuente `Plus Jakarta Sans`.
+
+### 9. Adición del Nuevo Rubro: Deportes, Tenis & Complejos Deportivos / Clubes 🎾
+- **Estrategia & Playbook ([docs/rubros_demo_playbook.md](file:///Users/fgabrielbustos/Documents/Apps/ggsolutions/ggsolutions/docs/rubros_demo_playbook.md)):** Se estructuró el perfil target (clubes de tenis, complejos de polvo de ladrillo, academias y pro shops) resolviendo sus 4 dolores clave (superposición de reservas por WhatsApp, canchas vacías en horarios valle, cobro manual de cuotas de alumnos y seguimiento de encordados).
+- **Banco de Imágenes HD Local (`/static/img/bank/deportes/`):** Incorporación de fotografías nítidas de canchas de polvo de ladrillo con iluminación LED, profesores dictando clases particulares y raquetas con pelotas.
+- **Experiencia de Cliente & Reserva 24/7:** La agenda interactiva permite reservar canchas de polvo de ladrillo (turnos de 90 min), agendar clases particulares con profesores AAT y encargar encordado digital.
+- **Panel de Gestión B2B para Clubes:** Stock de insumos reales (tubos de pelotas Penn/Wilson, cuerdas Luxilon Alu Power, raquetas Wilson Blade 98), comisiones de profesores, turnos en cancha y proveedores oficiales (Wilson, Babolat).

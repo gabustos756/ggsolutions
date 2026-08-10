@@ -629,7 +629,7 @@
 
         <!-- FORMULARIO EN 3 PASOS LÓGICOS TÁCTILES -->
         <div class="form-card">
-            <form action="/admin/demos/nueva" method="POST" id="form-demo-b2b">
+            <form action="/admin/demos/nueva" method="POST" enctype="multipart/form-data" id="form-demo-b2b">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 
                 <!-- PASO 1: DATOS & UBICACIÓN DEL COMERCIO -->
@@ -712,12 +712,12 @@
                     </div>
                 </div>
 
-                <!-- PASO 2: CONFIGURACIÓN DEL SOFTWARE & RUBRO -->
+                <!-- PASO 2: CONFIGURACIÓN DEL SOFTWARE, MÓDULOS MULTIPLES & BRANDING -->
                 <div class="form-step-section">
                     <div class="step-header">
                         <div class="step-title">
                             <span class="step-number-badge">2</span>
-                            <span>Configuración de la Demo & Rubro</span>
+                            <span>Configuración de Módulos & Branding</span>
                         </div>
                     </div>
 
@@ -736,6 +736,7 @@
                         <div class="form-group">
                             <label class="form-label">Rubro / Categoría Visual (*)</label>
                             <select id="rubro_select" name="rubro" class="form-select" required onchange="actualizarDoloresRubro(this.value)">
+                                <option value="pilates_wellness">🧘 Pilates, Yoga & Wellness Studio</option>
                                 <option value="deportes">🎾 Deportes, Tenis & Clubes</option>
                                 <option value="gastronomia">Gastronomía & Restaurantes</option>
                                 <option value="automotriz">Automotriz & Mecánica</option>
@@ -750,20 +751,6 @@
                             </select>
                         </div>
 
-                        <!-- Módulo Solucionador -->
-                        <div class="form-group">
-                            <label class="form-label">Módulo Interactivo (*)</label>
-                            <select id="modulo_solucion_select" name="modulo_solucion" class="form-select" required>
-                                <option value="agenda">🗓️ Agenda & Turnos Digitales</option>
-                                <option value="stock">📦 Control de Stock e Inventario</option>
-                                <option value="logistica">🚚 Logística & Cotizador Envíos</option>
-                                <option value="decisiones">🧠 Agente de Decisiones & Reglas</option>
-                                <option value="metricas">📊 Dashboard & Métricas en Vivo</option>
-                                <option value="ecommerce">🛒 E-Commerce & Carrito WhatsApp</option>
-                                <option value="cotizador">🧮 Simulador / Cotizador de Servicios</option>
-                            </select>
-                        </div>
-
                         <!-- Enfoque Comercial -->
                         <div class="form-group">
                             <label class="form-label">Enfoque Comercial (*)</label>
@@ -774,6 +761,162 @@
                                 <option value="Agendamiento Inmediato por WA">Agendamiento por WhatsApp</option>
                             </select>
                         </div>
+
+                        <!-- SELECCIÓN DE PLANTILLA DE DISEÑO / TEMPLATE -->
+                        <div class="form-group full-width" style="background: rgba(15, 23, 42, 0.6); padding: 18px; border-radius: 16px; border: 1px solid var(--border-hairline);">
+                            <label class="form-label" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; color: var(--accent-cyan);">
+                                <span><i class="fa-solid fa-palette mr-1"></i> Plantilla / Estilo de Diseño (*)</span>
+                                <span style="font-size: 0.725rem; font-weight: normal; color: var(--text-muted);">Layout visual de la demo</span>
+                            </label>
+
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px;">
+                                <label style="display: flex; align-items: flex-start; gap: 12px; padding: 14px; background: rgba(30, 41, 59, 0.8); border: 1px solid var(--border-hairline); border-radius: 12px; cursor: pointer; transition: all 0.2s;" class="template-card-option">
+                                    <input type="radio" name="diseno_template" value="classic" checked style="margin-top: 3px; accent-color: var(--accent-cyan);">
+                                    <div>
+                                        <div style="font-weight: 800; color: #ffffff; font-size: 0.9rem; display: flex; align-items: center; gap: 6px;">
+                                            <i class="fa-solid fa-gem text-cyan-400"></i> Classic Glassmorphism
+                                        </div>
+                                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Diseño oscuro ultra-premium con tarjetas translúcidas y brillos neón.</div>
+                                    </div>
+                                </label>
+
+                                <label style="display: flex; align-items: flex-start; gap: 12px; padding: 14px; background: rgba(30, 41, 59, 0.8); border: 1px solid var(--border-hairline); border-radius: 12px; cursor: pointer; transition: all 0.2s;" class="template-card-option">
+                                    <input type="radio" name="diseno_template" value="horizontal-scroll" style="margin-top: 3px; accent-color: var(--accent-cyan);">
+                                    <div>
+                                        <div style="font-weight: 800; color: #ffffff; font-size: 0.9rem; display: flex; align-items: center; gap: 6px;">
+                                            <i class="fa-solid fa-newspaper text-amber-400"></i> Horizontal Scroll Editorial
+                                        </div>
+                                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Estilo editorial luxury con tipografía oversized y track horizontal en desktop.</div>
+                                    </div>
+                                </label>
+
+                                <label style="display: flex; align-items: flex-start; gap: 12px; padding: 14px; background: rgba(30, 41, 59, 0.8); border: 1px solid var(--border-hairline); border-radius: 12px; cursor: pointer; transition: all 0.2s;" class="template-card-option">
+                                    <input type="radio" name="diseno_template" value="layered-reveal" style="margin-top: 3px; accent-color: var(--accent-cyan);">
+                                    <div>
+                                        <div style="font-weight: 800; color: #ffffff; font-size: 0.9rem; display: flex; align-items: center; gap: 6px;">
+                                            <i class="fa-solid fa-layer-group text-purple-400"></i> Layered Reveal Narrative
+                                        </div>
+                                        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 2px;">Narrativa por capas superpuestas en profundidad y spotlight interactivo.</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- SELECCIÓN MÚLTIPLE DE MÓDULOS INTERACTIVOS -->
+                        <div class="form-group full-width" style="background: rgba(15, 23, 42, 0.6); padding: 18px; border-radius: 16px; border: 1px solid var(--border-hairline);">
+                            <label class="form-label" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; color: var(--accent-cyan);">
+                                <span><i class="fa-solid fa-cubes mr-1"></i> Módulos Interactivos (Seleccioná 1 o varios para incluir en la demo)</span>
+                                <span style="font-size: 0.725rem; font-weight: normal; color: var(--text-muted);">Integración múltiple</span>
+                            </label>
+                            
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+                                <label style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: rgba(30, 41, 59, 0.8); border: 1px solid var(--border-hairline); border-radius: 12px; cursor: pointer; transition: all 0.2s;" class="module-checkbox-card">
+                                    <input type="checkbox" name="modulos_solucion" value="agenda" checked style="width: 18px; height: 18px; accent-color: var(--accent-cyan);">
+                                    <div>
+                                        <div style="font-weight: 700; color: #ffffff; font-size: 0.875rem;">🗓️ Agenda & Turnos</div>
+                                        <div style="font-size: 0.725rem; color: var(--text-muted);">Agendamiento 24/7</div>
+                                    </div>
+                                </label>
+
+                                <label style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: rgba(30, 41, 59, 0.8); border: 1px solid var(--border-hairline); border-radius: 12px; cursor: pointer; transition: all 0.2s;" class="module-checkbox-card">
+                                    <input type="checkbox" name="modulos_solucion" value="ecommerce" style="width: 18px; height: 18px; accent-color: var(--accent-cyan);">
+                                    <div>
+                                        <div style="font-weight: 700; color: #ffffff; font-size: 0.875rem;">🛒 E-Commerce & Carrito</div>
+                                        <div style="font-size: 0.725rem; color: var(--text-muted);">Catálogo y pedidos WA</div>
+                                    </div>
+                                </label>
+
+                                <label style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: rgba(30, 41, 59, 0.8); border: 1px solid var(--border-hairline); border-radius: 12px; cursor: pointer; transition: all 0.2s;" class="module-checkbox-card">
+                                    <input type="checkbox" name="modulos_solucion" value="cotizador" style="width: 18px; height: 18px; accent-color: var(--accent-cyan);">
+                                    <div>
+                                        <div style="font-weight: 700; color: #ffffff; font-size: 0.875rem;">🧮 Presupuestador / Cotizador</div>
+                                        <div style="font-size: 0.725rem; color: var(--text-muted);">Cálculo dinámico de precios</div>
+                                    </div>
+                                </label>
+
+                                <label style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: rgba(30, 41, 59, 0.8); border: 1px solid var(--border-hairline); border-radius: 12px; cursor: pointer; transition: all 0.2s;" class="module-checkbox-card">
+                                    <input type="checkbox" name="modulos_solucion" value="stock" style="width: 18px; height: 18px; accent-color: var(--accent-cyan);">
+                                    <div>
+                                        <div style="font-weight: 700; color: #ffffff; font-size: 0.875rem;">📦 Control de Stock</div>
+                                        <div style="font-size: 0.725rem; color: var(--text-muted);">Consultas e inventario</div>
+                                    </div>
+                                </label>
+
+                                <label style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: rgba(30, 41, 59, 0.8); border: 1px solid var(--border-hairline); border-radius: 12px; cursor: pointer; transition: all 0.2s;" class="module-checkbox-card">
+                                    <input type="checkbox" name="modulos_solucion" value="logistica" style="width: 18px; height: 18px; accent-color: var(--accent-cyan);">
+                                    <div>
+                                        <div style="font-weight: 700; color: #ffffff; font-size: 0.875rem;">🚚 Logística & Envíos</div>
+                                        <div style="font-size: 0.725rem; color: var(--text-muted);">Cálculo de fletes y zonas</div>
+                                    </div>
+                                </label>
+
+                                <label style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: rgba(30, 41, 59, 0.8); border: 1px solid var(--border-hairline); border-radius: 12px; cursor: pointer; transition: all 0.2s;" class="module-checkbox-card">
+                                    <input type="checkbox" name="modulos_solucion" value="decisiones" style="width: 18px; height: 18px; accent-color: var(--accent-cyan);">
+                                    <div>
+                                        <div style="font-weight: 700; color: #ffffff; font-size: 0.875rem;">🧠 Agente de Decisiones</div>
+                                        <div style="font-size: 0.725rem; color: var(--text-muted);">Asesoramiento guiado</div>
+                                    </div>
+                                </label>
+
+                                <label style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: rgba(30, 41, 59, 0.8); border: 1px solid var(--border-hairline); border-radius: 12px; cursor: pointer; transition: all 0.2s;" class="module-checkbox-card">
+                                    <input type="checkbox" name="modulos_solucion" value="metricas" style="width: 18px; height: 18px; accent-color: var(--accent-cyan);">
+                                    <div>
+                                        <div style="font-weight: 700; color: #ffffff; font-size: 0.875rem;">📊 Dashboard de Métricas</div>
+                                        <div style="font-size: 0.725rem; color: var(--text-muted);">Indicadores de satisfacción</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- SECCIÓN PERSONALIZACIÓN DE MARCA (LOGO & COLORES) -->
+                        <div class="form-group full-width" style="background: rgba(15, 23, 42, 0.6); padding: 18px; border-radius: 16px; border: 1px solid var(--border-hairline);">
+                            <label class="form-label" style="display: flex; align-items: center; gap: 6px; margin-bottom: 12px; color: var(--accent-cyan);">
+                                <i class="fa-solid fa-palette"></i> Personalización de Marca & Estilos (Opcional)
+                            </label>
+
+                            <div class="form-grid">
+                                <!-- Upload de Logo -->
+                                <div class="form-group">
+                                    <label class="form-label">Upload de Logo (Archivo)</label>
+                                    <input type="file" name="logo_file" accept="image/*" class="form-input" id="input_logo_file">
+                                </div>
+
+                                <!-- URL Externa de Logo -->
+                                <div class="form-group">
+                                    <label class="form-label">O URL Externa de Logo</label>
+                                    <input type="url" name="logo_url" placeholder="https://ejemplo.com/logo.png" class="form-input" id="input_logo_url">
+                                </div>
+
+                                <!-- Picker Color Primario / Acento -->
+                                <div class="form-group">
+                                    <label class="form-label">Color Primario / Acento</label>
+                                    <div style="display: flex; gap: 8px; align-items: center;">
+                                        <input type="color" id="picker_color_primario" name="color_primario" value="#00f2fe" class="form-input" style="width: 60px; height: 48px; padding: 4px; cursor: pointer;">
+                                        <input type="text" placeholder="#00f2fe" class="form-input" style="flex: 1;" oninput="document.getElementById('picker_color_primario').value = this.value">
+                                    </div>
+                                </div>
+
+                                <!-- Picker Color Header -->
+                                <div class="form-group">
+                                    <label class="form-label">Color del Header</label>
+                                    <div style="display: flex; gap: 8px; align-items: center;">
+                                        <input type="color" id="picker_color_header" name="color_header" value="#080c16" class="form-input" style="width: 60px; height: 48px; padding: 4px; cursor: pointer;">
+                                        <input type="text" placeholder="#080c16" class="form-input" style="flex: 1;" oninput="document.getElementById('picker_color_header').value = this.value">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Paletas Rápidas Predefinidas -->
+                            <div style="margin-top: 12px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                <span style="font-size: 0.725rem; color: var(--text-muted); font-weight: 600;">🎨 Paletas recomendadas:</span>
+                                <button type="button" class="chip-btn" onclick="aplicarPaletaRapida('#00f2fe', '#080c16')">Cyan Neo</button>
+                                <button type="button" class="chip-btn" onclick="aplicarPaletaRapida('#10b981', '#06120e')">Emerald Glow</button>
+                                <button type="button" class="chip-btn" onclick="aplicarPaletaRapida('#f59e0b', '#0f0b08')">Amber Gold</button>
+                                <button type="button" class="chip-btn" onclick="aplicarPaletaRapida('#ec4899', '#0a0814')">Rose Luxe</button>
+                                <button type="button" class="chip-btn" onclick="aplicarPaletaRapida('#6366f1', '#080a14')">Indigo Pro</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -1347,6 +1490,13 @@
                 };
                 container.appendChild(chip);
             });
+        }
+
+        function aplicarPaletaRapida(primario, header) {
+            const pPicker = document.getElementById('picker_color_primario');
+            const hPicker = document.getElementById('picker_color_header');
+            if (pPicker) pPicker.value = primario;
+            if (hPicker) hPicker.value = header;
         }
 
         window.addEventListener('DOMContentLoaded', function() {

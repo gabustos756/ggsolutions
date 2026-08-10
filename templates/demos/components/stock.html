@@ -94,6 +94,7 @@
 <script>
     function pedirReposicion(item) {
         const msg = `Hola {{ demo.nombre_negocio }}, quisiera consultar disponibilidad y precio de ${item}.`;
-        window.open(`{{ wa_link }}&text=${encodeURIComponent(msg)}`, '_blank');
+        const waNum = "{{ demo.whatsapp or demo.telefono or '5493515550199' }}".replace(/\D/g, '') || "5493515550199";
+        window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 </script>

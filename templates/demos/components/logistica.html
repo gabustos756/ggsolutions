@@ -92,6 +92,7 @@
     function solicitarFleteDemo() {
         const costo = document.getElementById('costo-flete-result').innerText;
         const msg = `Hola {{ demo.nombre_negocio }}, estuve cotizando el envío en su plataforma web y el valor dio ${costo}. Quisiera acordar la entrega.`;
-        window.open(`https://wa.me/{{ wa_clean }}?text=${encodeURIComponent(msg)}`, '_blank');
+        const waNum = "{{ demo.whatsapp or demo.telefono or '5493515550199' }}".replace(/\D/g, '') || "5493515550199";
+        window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 </script>

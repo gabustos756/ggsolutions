@@ -11,6 +11,7 @@ load_dotenv()
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session, abort
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash
+from werkzeug.utils import secure_filename
 
 from models import db, User, ContactLead, AuditLog, DemoSolution, DemoViewLog
 from security_utils import (
@@ -35,6 +36,11 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "ggsolutions-secret-key-cordoba-2026-secure")
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///ggsolutions.db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+# Configuración de carpeta para uploads (logos)
+UPLOAD_FOLDER = os.path.join(app.root_path, "static", "uploads", "logos")
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 # Sesiones seguras
 app.config["SESSION_COOKIE_HTTPONLY"] = True
@@ -389,11 +395,34 @@ def admin_crear_demo():
     maps_input = (request.form.get("google_maps_input") or "").strip()
     rubro = (request.form.get("rubro") or "general").strip().lower()
     enfoque = (request.form.get("enfoque") or "Conversión High-Ticket").strip()
-    modulo_solucion = (request.form.get("modulo_solucion") or "agenda").strip().lower()
+
+    # Procesar múltiples módulos seleccionados
+    modulos_seleccionados = request.form.getlist("modulos_solucion")
+    if not modulos_seleccionados:
+        modulos_seleccionados = [ (request.form.get("modulo_solucion") or "agenda").strip().lower() ]
+    modulo_solucion_principal = modulos_seleccionados[0]
+    modulos_json = json.dumps(modulos_seleccionados, ensure_ascii=False)
+
     tipo_software = (request.form.get("tipo_software") or "ambas").strip().lower()
     dolor_principal = (request.form.get("dolor_principal") or "").strip()
-
     objetivo = (request.form.get("objetivo") or "").strip()
+
+    # Personalización de marca, colores y plantilla de diseño
+    color_primario = (request.form.get("color_primario") or "").strip()
+    color_header = (request.form.get("color_header") or "").strip()
+    logo_url = (request.form.get("logo_url") or "").strip()
+    diseno_template = (request.form.get("diseno_template") or "classic").strip().lower()
+
+    # Manejar subida de archivo de logo si se adjuntó
+    if "logo_file" in request.files:
+        file = request.files["logo_file"]
+        if file and file.filename != "":
+            ext = os.path.splitext(file.filename)[1].lower()
+            if ext in [".jpg", ".jpeg", ".png", ".webp", ".svg", ".gif"]:
+                filename = f"{uuid.uuid4().hex[:8]}_{secure_filename(file.filename)}"
+                filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+                file.save(filepath)
+                logo_url = f"/static/uploads/logos/{filename}"
 
     # Campos de override desde Autocomplete / Map JS
     nombre_override = (request.form.get("nombre_negocio_override") or "").strip()
@@ -451,8 +480,13 @@ def admin_crear_demo():
             enfoque=enfoque,
             dolor_principal=dolor_principal,
             objetivo=objetivo,
-            modulo_solucion=modulo_solucion,
+            modulo_solucion=modulo_solucion_principal,
             tipo_software=tipo_software,
+            logo_url=logo_url,
+            color_primario=color_primario,
+            color_header=color_header,
+            modulos_json=modulos_json,
+            diseno_template=diseno_template,
             google_place_id=datos_lugar.get("google_place_id"),
 
             direccion=datos_lugar.get("direccion"),
@@ -503,6 +537,7 @@ def admin_eliminar_demo(demo_id):
 @app.route("/demo/<slug>")
 def ver_demo_publica(slug):
     demo = DemoSolution.query.filter_by(slug=slug).first_or_404()
+    template_override = request.args.get("template")
 
     # Registrar visualización
     try:
@@ -522,7 +557,7 @@ def ver_demo_publica(slug):
         db.session.rollback()
         print(f"[WARN TRACKING DEMO] {e}")
 
-    context = preparar_contexto_demo(demo)
+    context = preparar_contexto_demo(demo, template_override=template_override)
     return render_template("demos/preview.html", **context)
 
 

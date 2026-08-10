@@ -83,6 +83,13 @@ class DemoSolution(db.Model):
     modulo_solucion = db.Column(db.String(50), nullable=False, default="agenda")
     tipo_software = db.Column(db.String(30), nullable=False, default="ambas")  # "exposicion", "gestion", "ambas"
 
+    # Personalización de Marca y Estilo
+    logo_url = db.Column(db.String(250), nullable=True)
+    color_primario = db.Column(db.String(30), nullable=True)
+    color_header = db.Column(db.String(30), nullable=True)
+    modulos_json = db.Column(db.Text, nullable=True)
+    diseno_template = db.Column(db.String(50), nullable=False, default="classic")
+
     # Datos de Google Maps / Negocio
 
     google_place_id = db.Column(db.String(100), nullable=True)
@@ -117,6 +124,11 @@ class DemoSolution(db.Model):
             "objetivo": self.objetivo or "",
             "modulo_solucion": self.modulo_solucion,
             "tipo_software": self.tipo_software or "ambas",
+            "logo_url": self.logo_url or "",
+            "color_primario": self.color_primario or "",
+            "color_header": self.color_header or "",
+            "modulos_json": self.modulos_json or "",
+            "diseno_template": self.diseno_template or "classic",
 
             "direccion": self.direccion or "",
             "ciudad": self.ciudad or "",

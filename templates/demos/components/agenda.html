@@ -111,6 +111,7 @@
         const nombre = document.getElementById('nombre-cliente').value.trim() || 'Cliente';
         const fecha = document.getElementById('fecha-turno').value || 'Próximo disponible';
         const msg = `Hola {{ demo.nombre_negocio }}, mi nombre es ${nombre}. Quisiera solicitar: ${servicioSeleccionado} para el día ${fecha} a las ${horaSeleccionada}.`;
-        window.open(`{{ wa_link }}&text=${encodeURIComponent(msg)}`, '_blank');
+        const waNum = "{{ demo.whatsapp or demo.telefono or '5493515550199' }}".replace(/\D/g, '') || "5493515550199";
+        window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 </script>

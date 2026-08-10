@@ -1,0 +1,244 @@
+<!-- PLANTILLA VISUAL: HORIZONTAL SCROLL EDITORIAL -->
+<style>
+    .editorial-title {
+        font-family: 'Oswald', 'Outfit', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: -0.02em;
+    }
+    .horizontal-track-wrapper {
+        position: relative;
+        width: 100%;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding: 1.5rem 0;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+    .horizontal-track-inner {
+        display: flex;
+        gap: 2rem;
+        width: max-content;
+        min-width: 100%;
+    }
+    .horizontal-scene-panel {
+        scroll-snap-align: center;
+        flex: 0 0 85vw;
+        max-width: 850px;
+    }
+    @media (min-width: 1024px) {
+        .horizontal-scene-panel {
+            flex: 0 0 65vw;
+        }
+    }
+    .reveal-on-scroll {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-on-scroll.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
+
+<!-- 1. EDITORIAL INTRO HERO (MANIFESTO) -->
+<section class="relative pt-20 pb-28 bg-slate-950 text-white border-b border-white/10 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div class="flex items-center justify-between border-b border-white/10 pb-4 text-xs tracking-widest uppercase font-mono text-cyan-400">
+            <span>[01 / EDITORIAL EDITION]</span>
+            <span>{{ demo.ciudad or 'Córdoba' }} — AR</span>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-12 items-end">
+            <div class="lg:col-span-8 space-y-6 reveal-on-scroll">
+                <span class="inline-block px-3 py-1 bg-amber-500/15 text-amber-300 border border-amber-500/30 text-xs font-mono font-bold rounded">
+                    ★ {{ demo.rating }} GOOGLE RATING ({{ demo.reviews_count }} REVIEWS)
+                </span>
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-none editorial-title">
+                    {{ hero_headline }}
+                </h1>
+                <p class="text-base sm:text-xl text-slate-300 font-light max-w-2xl leading-relaxed">
+                    {{ hero_subheadline }}
+                </p>
+            </div>
+
+            <div class="lg:col-span-4 space-y-4 reveal-on-scroll">
+                <div class="relative h-64 w-full rounded-2xl overflow-hidden border border-white/15 shadow-2xl">
+                    <img src="{{ theme.hero_bg_image }}" alt="{{ demo.nombre_negocio }}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs text-white">
+                        <span class="font-bold">{{ demo.nombre_negocio }}</span>
+                        <span class="text-cyan-400 font-mono">EDITION 2026</span>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <a href="#solucion" class="flex-1 bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-black py-3.5 px-5 rounded-xl text-center text-xs uppercase tracking-wider transition">
+                        Explorar Experiencia
+                    </a>
+                    <a href="{{ wa_link }}" target="_blank" class="bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-emerald-300 font-bold p-3.5 rounded-xl flex items-center justify-center transition">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 2. EDITORIAL SPLIT SECTION (PILARES Y NARRATIVA) -->
+<section id="pilares" class="py-24 bg-slate-900 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-white/10 pb-6 reveal-on-scroll">
+            <div>
+                <span class="text-xs font-mono uppercase tracking-widest text-cyan-400">[02 / VALORES & INFRAESTRUCTURA]</span>
+                <h2 class="text-3xl sm:text-5xl font-bold text-white editorial-title mt-2">Fundamentos de {{ demo.nombre_negocio }}</h2>
+            </div>
+            <p class="text-xs sm:text-sm text-slate-300 max-w-md">Diseño de experiencia enfocado en calidad estructural, precisión y satisfacción del usuario final.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8 items-center">
+            {% if pilares and pilares|length > 0 %}
+            <div class="relative h-[420px] rounded-2xl overflow-hidden border border-white/15 shadow-2xl reveal-on-scroll">
+                <img src="{{ pilares[0].image }}" alt="{{ pilares[0].title }}" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent"></div>
+                <div class="absolute bottom-6 left-6 right-6 space-y-2">
+                    <span class="px-2.5 py-1 bg-cyan-500/20 text-cyan-300 text-[10px] font-mono font-bold rounded uppercase">01. Pilar Principal</span>
+                    <h3 class="text-2xl font-bold text-white font-title">{{ pilares[0].title }}</h3>
+                    <p class="text-xs text-slate-300">{{ pilares[0].desc }}</p>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="space-y-6">
+                {% for p in pilares[1:] %}
+                <div class="p-6 rounded-2xl bg-slate-950/70 border border-white/10 flex items-start gap-5 hover:border-cyan-400/40 transition reveal-on-scroll">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-xl flex-shrink-0">
+                        <i class="fa-solid {{ p.icon }}"></i>
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-mono text-cyan-400 font-bold uppercase tracking-wider">0{{ loop.index + 1 }}. {{ p.tag or 'Ventaja' }}</span>
+                        <h4 class="text-lg font-bold text-white font-title mt-0.5">{{ p.title }}</h4>
+                        <p class="text-xs text-slate-300 mt-1 leading-relaxed">{{ p.desc }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 3. TRACK DE NARRATIVA HORIZONTAL EN DESKTOP CON WHEEL-SCROLL DRIVER -->
+<section id="solucion" class="py-24 bg-slate-950 border-b border-white/10 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div class="flex justify-between items-end border-b border-white/10 pb-6 reveal-on-scroll">
+            <div>
+                <span class="text-xs font-mono uppercase tracking-widest text-amber-400">[03 / MÓDULOS INTERACTIVOS EN SCROLL HORIZONTAL]</span>
+                <h2 class="text-3xl sm:text-5xl font-bold text-white editorial-title mt-2">Solución Digital & Experiencia</h2>
+            </div>
+            <div class="hidden lg:flex items-center gap-2 text-xs font-mono text-cyan-300">
+                <i class="fa-solid fa-arrows-left-right animate-pulse"></i> Usa la rueda del mouse o desliza lateralmente
+            </div>
+        </div>
+
+        <div class="horizontal-track-wrapper" id="horizontal-modules-track">
+            {% if not (modulos_info_list and modulos_info_list|length > 1) %}
+            <div class="text-center max-w-3xl mx-auto mb-10 space-y-3">
+                <span class="inline-block px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider {{ theme.badge_bg }} border shadow-sm">
+                    {{ modulo_info.badge }}
+                </span>
+                <h3 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-title">
+                    {{ modulo_info.titulo }}
+                </h3>
+            </div>
+            {% endif %}
+
+            {% include "demos/templates/_modules_render.html" %}
+        </div>
+    </div>
+</section>
+
+<!-- 4. RESEÑAS EDITORIALES DE GOOGLE MAPS -->
+<section id="testimonios" class="py-24 bg-slate-900 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 border-b border-white/10 pb-6 reveal-on-scroll">
+            <div>
+                <span class="text-xs font-mono uppercase tracking-widest text-emerald-400">[04 / TESTIMONIOS VERIFICADOS]</span>
+                <h2 class="text-3xl sm:text-5xl font-bold text-white editorial-title mt-2">Voces de Nuestros Clientes</h2>
+            </div>
+            <div class="text-right">
+                <span class="text-2xl font-bold text-amber-400 font-mono">{{ demo.rating }} ★</span>
+                <span class="text-xs text-slate-400 block font-mono">{{ demo.reviews_count }} opiniones en Google</span>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            {% for rev in reviews %}
+            <div class="p-6 rounded-2xl bg-slate-950 border border-white/10 space-y-4 flex flex-col justify-between reveal-on-scroll">
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="font-bold text-white">{{ rev.author_name }}</span>
+                        <span class="text-[10px] text-emerald-400 font-mono">Verificado</span>
+                    </div>
+                    <div class="text-amber-400 text-xs">
+                        {% for i in range(rev.rating) %}★{% endfor %}
+                    </div>
+                    <p class="text-xs text-slate-300 italic leading-relaxed">"{{ rev.text }}"</p>
+                </div>
+                <span class="text-[10px] font-mono text-slate-400 block border-t border-white/5 pt-3">{{ rev.relative_time }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- 5. UBICACIÓN GOOGLE MAPS EDITORIAL -->
+<section id="ubicacion" class="py-20 bg-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-5 space-y-5 reveal-on-scroll">
+            <span class="text-xs font-mono uppercase tracking-widest text-cyan-400">[05 / UBICACIÓN PÚBLICA]</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-white editorial-title">Visitanos en {{ demo.ciudad or 'Córdoba' }}</h2>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">{{ demo.direccion or 'Av. Principal 123' }}</p>
+            <a href="https://www.google.com/maps/search/?api=1&query={{ maps_embed_query }}" target="_blank" class="inline-flex items-center gap-2 text-xs font-bold text-cyan-400 hover:text-cyan-300 uppercase tracking-wider font-mono">
+                Abrir Mapa Completo ➔
+            </a>
+        </div>
+        <div class="lg:col-span-7 rounded-2xl overflow-hidden border border-white/15 shadow-2xl p-1 bg-slate-900 reveal-on-scroll">
+            <iframe 
+                title="Google Maps Location"
+                class="w-full h-80 rounded-xl map-dark-filter" 
+                loading="lazy" 
+                src="https://maps.google.com/maps?q={{ maps_embed_query }}&t=&z=15&ie=UTF8&iwloc=&output=embed">
+            </iframe>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Observer de scroll para animación suave de secciones
+        const elements = document.querySelectorAll('.reveal-on-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.15 });
+        elements.forEach(el => observer.observe(el));
+
+        // Horizontal wheel driver para desktop en el contenedor de módulos
+        const track = document.getElementById('horizontal-modules-track');
+        if (track && window.innerWidth >= 1024) {
+            track.addEventListener('wheel', function(e) {
+                if (e.deltaY !== 0) {
+                    const isAtEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 10;
+                    const isAtStart = track.scrollLeft <= 10;
+
+                    if ((e.deltaY > 0 && !isAtEnd) || (e.deltaY < 0 && !isAtStart)) {
+                        e.preventDefault();
+                        track.scrollLeft += e.deltaY * 1.5;
+                    }
+                }
+            }, { passive: false });
+        }
+    });
+</script>

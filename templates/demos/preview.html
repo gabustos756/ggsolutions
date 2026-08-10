@@ -1,19 +1,11 @@
 {% extends "demos/base_demo.html" %}
 
-{% block modulo_solucion %}
-    {% if demo.modulo_solucion == 'stock' %}
-        {% include "demos/components/stock.html" %}
-    {% elif demo.modulo_solucion == 'logistica' %}
-        {% include "demos/components/logistica.html" %}
-    {% elif demo.modulo_solucion == 'decisiones' %}
-        {% include "demos/components/decisiones.html" %}
-    {% elif demo.modulo_solucion == 'metricas' %}
-        {% include "demos/components/metricas.html" %}
-    {% elif demo.modulo_solucion == 'ecommerce' %}
-        {% include "demos/components/ecommerce.html" %}
-    {% elif demo.modulo_solucion == 'cotizador' %}
-        {% include "demos/components/cotizador.html" %}
+{% block public_content %}
+    {% if diseno_template == 'horizontal-scroll' %}
+        {% include "demos/templates/horizontal_scroll.html" %}
+    {% elif diseno_template == 'layered-reveal' %}
+        {% include "demos/templates/layered_reveal.html" %}
     {% else %}
-        {% include "demos/components/agenda.html" %}
+        {% include "demos/templates/classic.html" %}
     {% endif %}
 {% endblock %}

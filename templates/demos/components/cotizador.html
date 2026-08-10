@@ -3,9 +3,20 @@
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/10 pb-4">
         <div>
             <h4 class="text-lg font-bold text-white flex items-center gap-2 font-title">
-                <i class="fa-solid fa-sliders text-cyan-400"></i> Simulador de Presupuesto en Vivo
+                <i class="fa-solid fa-sliders text-cyan-400"></i>
+                {% if demo.rubro == 'pilates_wellness' %}
+                Simulador de Planes de Pilates & Yoga
+                {% else %}
+                Simulador de Presupuesto en Vivo
+                {% endif %}
             </h4>
-            <p class="text-xs text-slate-300">Seleccioná las características de tu requerimiento y obtené una estimación transparente al instante.</p>
+            <p class="text-xs text-slate-300">
+                {% if demo.rubro == 'pilates_wellness' %}
+                Elegí la frecuencia semanal de tus clases y calculá el valor mensual estimado al instante.
+                {% else %}
+                Seleccioná las características de tu requerimiento y obtené una estimación transparente al instante.
+                {% endif %}
+            </p>
         </div>
         <span class="px-3.5 py-1.5 bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-md">
             <i class="fa-solid fa-bolt text-amber-400"></i> Cotización Inmediata 0ms
@@ -16,17 +27,46 @@
     <div class="space-y-6">
         
         <div class="space-y-2">
-            <label class="text-xs font-bold uppercase tracking-wider text-cyan-400">1. Alcance / Tipo de Servicio</label>
+            <label class="text-xs font-bold uppercase tracking-wider text-cyan-400">
+                {% if demo.rubro == 'pilates_wellness' %}
+                1. Selección de Plan & Frecuencia Semanal
+                {% else %}
+                1. Alcance / Tipo de Servicio
+                {% endif %}
+            </label>
             <select id="cotiz-tipo" onchange="recalcularCotizacion()" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-400 transition font-medium">
+                {% if demo.rubro == 'pilates_wellness' %}
+                <option value="50000">Plan 1 Vez por Semana — ($50.000 ARS / mes)</option>
+                <option value="70000" selected>Plan 2 Veces por Semana — ($70.000 ARS / mes)</option>
+                <option value="80000">Plan 3 Veces por Semana — ($80.000 ARS / mes)</option>
+                <option value="90000">Pase Libre Ilimitado — ($90.000 ARS / mes)</option>
+                {% else %}
                 <option value="45000">Servicio Básico / Estándar — ($45.000 ARS)</option>
                 <option value="85000" selected>Servicio Profesional Completo — ($85.000 ARS)</option>
                 <option value="150000">Servicio Premium / Enterprise — ($150.000 ARS)</option>
+                {% endif %}
             </select>
         </div>
 
         <div class="space-y-2">
             <label class="text-xs font-bold uppercase tracking-wider text-cyan-400">2. Adicionales & Cobertura</label>
             <div class="grid sm:grid-cols-2 gap-4 text-xs">
+                {% if demo.rubro == 'pilates_wellness' %}
+                <label class="glass-card glass-card-hover flex items-center gap-3 p-4 rounded-xl cursor-pointer border border-white/10 hover:border-cyan-400/50 transition">
+                    <input type="checkbox" id="add-urgente" onchange="recalcularCotizacion()" class="w-4 h-4 rounded border-white/20 bg-slate-900 text-cyan-400 focus:ring-0">
+                    <div>
+                        <span class="font-bold text-white block">Evaluación Postural Inicial (+10%)</span>
+                        <span class="text-[11px] text-slate-300">Diagnóstico de columna, ejes y movilidad</span>
+                    </div>
+                </label>
+                <label class="glass-card glass-card-hover flex items-center gap-3 p-4 rounded-xl cursor-pointer border border-white/10 hover:border-cyan-400/50 transition">
+                    <input type="checkbox" id="add-garantia" onchange="recalcularCotizacion()" class="w-4 h-4 rounded border-white/20 bg-slate-900 text-cyan-400 focus:ring-0" checked>
+                    <div>
+                        <span class="font-bold text-white block">Equipamiento & Mat Personal (+10%)</span>
+                        <span class="text-[11px] text-slate-300">Uso de kit de elasticidad y mat ecológico</span>
+                    </div>
+                </label>
+                {% else %}
                 <label class="glass-card glass-card-hover flex items-center gap-3 p-4 rounded-xl cursor-pointer border border-white/10 hover:border-cyan-400/50 transition">
                     <input type="checkbox" id="add-urgente" onchange="recalcularCotizacion()" class="w-4 h-4 rounded border-white/20 bg-slate-900 text-cyan-400 focus:ring-0">
                     <div>
@@ -41,6 +81,7 @@
                         <span class="text-[11px] text-slate-300">Respaldo escrito y soporte preferencial</span>
                     </div>
                 </label>
+                {% endif %}
             </div>
         </div>
 
@@ -48,13 +89,24 @@
         <div class="glass-card bg-gradient-to-r from-slate-900/90 via-slate-900 to-indigo-950/90 border border-cyan-500/40 rounded-2xl p-6 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-2xl">
             <div>
                 <p class="text-xs text-cyan-400 uppercase font-extrabold tracking-wider">Estimación de Presupuesto</p>
-                <p id="total-cotizacion" class="text-3xl sm:text-4xl font-extrabold text-white font-mono mt-1">$93.500 ARS</p>
+                <p id="total-cotizacion" class="text-3xl sm:text-4xl font-extrabold text-white font-mono mt-1">
+                    {% if demo.rubro == 'pilates_wellness' %}
+                    $77.000 ARS / mes
+                    {% else %}
+                    $93.500 ARS
+                    {% endif %}
+                </p>
                 <p class="text-[11px] text-slate-300 mt-1 flex items-center gap-1">
                     <i class="fa-solid fa-circle-info text-cyan-400"></i> Sujeto a confirmación final sin compromiso.
                 </p>
             </div>
             <button onclick="enviarCotizacionWA()" class="bg-gradient-to-r {{ theme.gradient }} text-slate-950 font-extrabold px-6 py-3.5 rounded-xl shadow-xl hover:scale-[1.02] transition flex items-center gap-2 text-sm w-full sm:w-auto justify-center">
-                <i class="fa-brands fa-whatsapp text-lg"></i> Solicitar Presupuesto Oficial
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                {% if demo.rubro == 'pilates_wellness' %}
+                Reservar Plan por WhatsApp
+                {% else %}
+                Solicitar Presupuesto Oficial
+                {% endif %}
             </button>
         </div>
 
@@ -62,18 +114,25 @@
 </div>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        recalcularCotizacion();
+    });
+
     function recalcularCotizacion() {
         let base = parseFloat(document.getElementById('cotiz-tipo').value);
-        if (document.getElementById('add-urgente').checked) base *= 1.20;
+        if (document.getElementById('add-urgente').checked) base *= 1.10;
         if (document.getElementById('add-garantia').checked) base *= 1.10;
 
         const total = Math.round(base);
-        document.getElementById('total-cotizacion').innerText = `$${total.toLocaleString('es-AR')} ARS`;
+        const suffix = "{{ demo.rubro }}" === "pilates_wellness" ? " ARS / mes" : " ARS";
+        document.getElementById('total-cotizacion').innerText = `$${total.toLocaleString('es-AR')}${suffix}`;
     }
 
     function enviarCotizacionWA() {
         const total = document.getElementById('total-cotizacion').innerText;
-        const msg = `Hola {{ demo.nombre_negocio }}, estuve simulando un presupuesto en su sitio web y me dio un valor estimado de ${total}. Me gustaría solicitar la cotización formal.`;
-        window.open(`{{ wa_link }}&text=${encodeURIComponent(msg)}`, '_blank');
+        const planText = document.getElementById('cotiz-tipo').options[document.getElementById('cotiz-tipo').selectedIndex].text;
+        const msg = `Hola {{ demo.nombre_negocio }}, estuve consultando el simulador de planes en su sitio web para "${planText}" con un estimado de ${total}. Me gustaría solicitar la inscripción formal.`;
+        const waNum = "{{ demo.whatsapp or demo.telefono or '5493515550199' }}".replace(/\D/g, '') || "5493515550199";
+        window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 </script>

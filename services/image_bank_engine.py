@@ -104,6 +104,23 @@ HERO_BANK_POR_RUBRO = {
             "url": "https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=1600&q=90"
         }
     ],
+    "pilates_wellness": [
+        {
+            "tag": "pilates_reformer",
+            "label": "Estudio de Pilates Reformer & Cuidado Postural",
+            "url": "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1600&q=90"
+        },
+        {
+            "tag": "yoga_mindfulness",
+            "label": "Yoga Vinyasa & Meditación Guiada",
+            "url": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1600&q=90"
+        },
+        {
+            "tag": "wellness_rehab",
+            "label": "Rehabilitación Postural & Salud Activa",
+            "url": "https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1600&q=90"
+        }
+    ],
     "salud": [
         {
             "tag": "clinica_medica",
@@ -461,6 +478,38 @@ IMAGE_BANK_POR_RUBRO = {
             }
         ]
     },
+    "pilates_wellness": {
+        "hero": HERO_BANK_POR_RUBRO["pilates_wellness"][0]["url"],
+        "pilares": [
+            "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1599447421416-3414500d18a5?auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=800&q=80"
+        ],
+        "news": [
+            {
+                "title": "Beneficios del Pilates Reformer en la Columna & Postura",
+                "date": "Salud Postural",
+                "snippet": "Descubrí cómo el fortalecimiento del core previene dolores lumbares y mejora la alineación.",
+                "read_time": "3 min",
+                "image": "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                "title": "Yoga & Meditación Guiada para Reducir el Estrés",
+                "date": "Mindfulness",
+                "snippet": "Técnicas de respiración consciente y movilidad articular para recuperar el equilibrio vital.",
+                "read_time": "4 min",
+                "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                "title": "Evaluación de Progreso & Movilidad Funcional",
+                "date": "Crecimiento",
+                "snippet": "Medición periódica de flexibilidad, fuerza y rango articular con docentes especializados.",
+                "read_time": "2 min",
+                "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80"
+            }
+        ]
+    },
     "servicios": {
         "hero": HERO_BANK_POR_RUBRO["servicios"][0]["url"],
         "pilares": [
@@ -557,6 +606,16 @@ def obtener_imagenes_rubro(rubro_key: str) -> dict:
     res_data = dict(raw_data)
     res_data["hero"] = hero_resuelto
     res_data["pilares"] = pilares_resueltos
+
+    # Generar banco completo de 5 imágenes de capas para Layered Reveal
+    layer_imgs = [hero_resuelto] + pilares_resueltos
+    for n in raw_data.get("news", []):
+        if n.get("image") and n["image"] not in layer_imgs:
+            layer_imgs.append(n["image"])
+    while len(layer_imgs) < 5:
+        layer_imgs.append(hero_resuelto)
+
+    res_data["layer_images"] = layer_imgs[:5]
     return res_data
 
 

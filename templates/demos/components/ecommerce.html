@@ -128,6 +128,7 @@
         let itemsStr = carrito.map(i => i.nombre).join(', ');
         const total = document.getElementById('cart-total').innerText;
         const msg = `Hola {{ demo.nombre_negocio }}, quisiera solicitar el siguiente pedido: ${itemsStr}. Total estimado: ${total}.`;
-        window.open(`{{ wa_link }}&text=${encodeURIComponent(msg)}`, '_blank');
+        const waNum = "{{ demo.whatsapp or demo.telefono or '5493515550199' }}".replace(/\D/g, '') || "5493515550199";
+        window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 </script>

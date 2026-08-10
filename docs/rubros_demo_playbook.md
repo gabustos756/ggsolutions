@@ -218,9 +218,8 @@ Al generar una demo desde el panel admin (`/admin/demos`), el sistema fusiona es
    - **Ópticas:** Palette salud/elegancia (Cyan, Teal, Slate) con fuente `Plus Jakarta Sans` + `Inter`.
    - **Kioscos / Supermercados:** Palette vibrante (Emerald, Orange, Navy) con fuente `Plus Jakarta Sans`.
 
-### 10. Forzado Estricto de Google Maps API en la VPS & Multi-Key Fallback
-- **Diagnóstico del Fallback Previas:** En la VPS, el mapa conmutaba a OpenStreetMap porque la API Key de Google Maps tenía una falla de autenticación (`gm_authFailure`) provocada por restricciones de dominio/IP o desactivación de la sustitución dinámica.
-- **Resolución Implementada:**
-  1. **Tolerancia a Múltiples Claves (Multi-Key JS):** `app.py` ahora resuelve la lista completa de API Keys de Google configuradas en `.env` (`GOOGLE_MAPS_API_KEY`, `GOOGLE_MAPS_API_KEY_BACKUP`, `GOOGLE_MAPS_API_KEY_ALT`). Si la clave #1 falla, el JavaScript reintenta automáticamente con la clave #2.
-  2. **Eliminación del Fallback Silencioso a OpenStreetMap:** El panel admin fuerza **exclusivamente Google Maps JS API & Places Autocomplete**.
-  3. **Diagnóstico Flotante en Pantalla:** Si la clave es rechazada en la VPS por restricciones de HTTP Referers en Google Cloud Console, el sistema muestra en pantalla la instrucción exacta para agregar `https://ggsolutions.com.ar/*` y `http://147.93.185.126/*` en las credenciales de Google Cloud.
+### 11. Diagnóstico del Entorno VPS & Carga de `GOOGLE_MAPS_API_KEY` en `.env`
+- **Falla Identificada:** La consola del navegador en la VPS reportó `[GOOGLE MAPS] No hay API Key configurada en .env` porque la clave `GOOGLE_MAPS_API_KEY` no estaba presente en el archivo `/var/www/ggsolutions/.env` de la VPS.
+- **Resolución:**
+  1. Se actualizó [DEPLOY.md](file:///Users/fgabrielbustos/Documents/Apps/ggsolutions/ggsolutions/DEPLOY.md) con la directiva explícita de `GOOGLE_MAPS_API_KEY`.
+  2. Comando de 1 línea para ejecutar en el servidor VPS: `echo "GOOGLE_MAPS_API_KEY=AIzaSyD3iVRc6On16yJTaV_8dfx4ZVPp459QrjQ" >> /var/www/ggsolutions/.env && sudo systemctl restart ggsolutions`.

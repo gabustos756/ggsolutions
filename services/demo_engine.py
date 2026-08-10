@@ -219,6 +219,23 @@ THEMES_MAP = {
             {"icon": "fa-trophy", "title": "Torneos & Rankings", "desc": "Competencias internas de socios todo el año", "tag": "Club Life"}
         ]
     },
+    "pilates_wellness": {
+        "bg": "#061310",
+        "card_bg": "rgba(12, 30, 24, 0.75)",
+        "accent": "#34d399",
+        "gradient": "from-emerald-400 via-teal-300 to-cyan-400",
+        "badge_bg": "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
+        "font_family": "'Plus Jakarta Sans', sans-serif",
+        "title_font": "'Outfit', sans-serif",
+        "font_google": "https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
+        "hero_bg_image": "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80",
+        "pilares": [
+            {"icon": "fa-child-reaching", "title": "Pilates Reformer & Postura", "desc": "Alineación corporal, tono muscular y flexibilidad en máquinas de última generación", "tag": "Reformer Pro"},
+            {"icon": "fa-spa", "title": "Yoga & Mindful Wellbeing", "desc": "Vinyasa, Hatha y meditación guiada para reducir el estrés y renovar energía", "tag": "Mente & Cuerpo"},
+            {"icon": "fa-users-between-lines", "title": "Grupos Reducidos & Personalizado", "desc": "Atención enfocada en las necesidades de cada alumno", "tag": "Atención Exclusiva"},
+            {"icon": "fa-heart-pulse", "title": "Rehabilitación & Salud Integral", "desc": "Prevención del dolor de espalda y mejora de la movilidad funcional", "tag": "Salud Activa"}
+        ]
+    },
     "inmobiliaria": {
         "bg": "#070f0c",
         "card_bg": "rgba(16, 28, 22, 0.75)",
@@ -305,6 +322,36 @@ MODULOS_TITULOS = {
 
 
 AGENDA_CONFIG_POR_RUBRO = {
+    "pilates_wellness": {
+        "badge": "Reserva de Clases & Evaluación Postural 24/7",
+        "titulo": "Reservá tu Clase de Pilates, Yoga o Evaluación Saludable",
+        "subtitulo": "Elegí la modalidad de clase, la fecha y confirmá tu lugar directamente por WhatsApp.",
+        "paso1_label": "1. Seleccioná el Tipo de Clase / Servicio",
+        "opcion1": {
+            "title": "Clase de Pilates Reformer",
+            "desc": "Entrenamiento en máquinas Reformer | Máximo 5 alumnos por clase",
+            "tag": "Más Solicitado",
+            "icon": "fa-child-reaching"
+        },
+        "opcion2": {
+            "title": "Yoga Vinyasa & Meditación",
+            "desc": "Fluidez corporal, respiración guiada y relajación profunda",
+            "tag": "Mindfulness",
+            "icon": "fa-spa"
+        },
+        "opcion3": {
+            "title": "Evaluación Postural & Salud",
+            "desc": "Diagnóstico inicial de movilidad, columna y plan personalizado",
+            "tag": "Diagnóstico",
+            "icon": "fa-heart-pulse"
+        },
+        "paso2_label": "2. Fecha de Clase / Sesión",
+        "paso3_label": "3. Horarios Disponibles en Estudio",
+        "paso4_label": "4. Datos del Alumno / Paciente",
+        "input_nombre_placeholder": "Tu Nombre Completo",
+        "input_tel_placeholder": "Tu WhatsApp (ej: 3515551234)",
+        "cta_text": "🧘 Confirmar Reserva de Clase por WhatsApp"
+    },
     "deportes": {
         "badge": "Reserva de Canchas & Clases 24/7",
         "titulo": "Reservá tu Cancha de Tenis o Clase en Línea",
@@ -549,6 +596,28 @@ AGENDA_CONFIG_POR_RUBRO = {
 
 
 ADMIN_PANEL_POR_RUBRO = {
+    "pilates_wellness": {
+        "kpi_capacidad": "88% Ocupación Camas Reformer",
+        "kpi_pedidos": "18 Alumnos / Reservas Hoy",
+        "kpi_stock": "4 Bonos de Clases Activos",
+        "kpi_facturacion": "$480.000 Caja Hoy",
+        "productos_stock": [
+            {"sku": "WELL-101", "nombre": "Pase Mensual Pilates Reformer (8 Clases)", "stock": 25, "unidad": "pases", "alerta": "Disponible", "precio": "$45.000"},
+            {"sku": "WELL-102", "nombre": "Pase Libre Yoga & Meditación (Ilimitado)", "stock": 18, "unidad": "pases", "alerta": "Disponible", "precio": "$38.000"},
+            {"sku": "WELL-103", "nombre": "Mat de Yoga Antideslizante Pro Eco-Friendly", "stock": 3, "unidad": "unidades", "alerta": "Bajo Stock", "precio": "$22.000"},
+            {"sku": "WELL-104", "nombre": "Sesión Individual Evaluación Postural", "stock": 10, "unidad": "sesiones", "alerta": "Disponible", "precio": "$18.000"}
+        ],
+        "pedidos": [
+            {"id": "#RES-401", "cliente": "Lucía P.", "detalle": "Reserva Clase Pilates Reformer (18:00 hs)", "monto": "$45.000", "hora": "Hoy 18:00 hs", "estado": "CONFIRMADO"},
+            {"id": "#RES-402", "cliente": "Mariana V.", "detalle": "Evaluación Postural & Movilidad", "monto": "$18.000", "hora": "Hace 20 min", "estado": "EN ESTUDIO"}
+        ],
+        "mensajes": [
+            {"cliente": "Carolina Rossi", "tel": "3516778899", "consulta": "Hola! Quisiera saber si tienen cupos disponibles en Pilates Reformer por la tarde.", "hora": "12:15 hs", "estado": "PENDIENTE"}
+        ],
+        "proveedores": [
+            {"nombre": "Equipamientos Reformer Pro Argentina", "rubro": "Camas & Resortes Pilates", "deuda": "$120.000", "estado": "Al día"}
+        ]
+    },
     "deportes": {
         "kpi_capacidad": "94% Canchas Ocupadas",
         "kpi_pedidos": "28 Reservas / Turnos",
@@ -728,7 +797,10 @@ def generar_copy_negocio(nombre_negocio, rubro_key):
     """
     nombre = nombre_negocio.strip()
     
-    if rubro_key == "salud":
+    if rubro_key == "pilates_wellness":
+        headline = f"Pilates Reformer, Yoga & Cuidado Postural en {nombre}"
+        subheadline = f"En {nombre} impulsamos tu crecimiento personal, salud y movilidad con clases en grupos reducidos, profesores certificados y equipamiento de última generación."
+    elif rubro_key == "salud":
         headline = f"Atención Médica Integral & Cuidado de Confianza en {nombre}"
         subheadline = f"En {nombre} combinamos profesionales de excelencia, equipamiento moderno y atención personalizada. Reservá tu turno online de forma rápida."
     elif rubro_key == "automotriz":
@@ -765,7 +837,7 @@ def generar_copy_negocio(nombre_negocio, rubro_key):
     return headline, subheadline
 
 
-def preparar_contexto_demo(demo_obj) -> dict:
+def preparar_contexto_demo(demo_obj, template_override=None) -> dict:
     """
     Toma una instancia de DemoSolution de la BD y genera el diccionario de contexto
     completo para renderizar `templates/demos/preview.html`.
@@ -774,9 +846,70 @@ def preparar_contexto_demo(demo_obj) -> dict:
     if rubro_key not in THEMES_MAP:
         rubro_key = "general"
 
+    # Determinar plantilla de diseño activa
+    raw_template = template_override or getattr(demo_obj, "diseno_template", "classic") or "classic"
+    diseno_template = str(raw_template).lower().strip()
+    if diseno_template not in ["classic", "horizontal-scroll", "layered-reveal"]:
+        diseno_template = "classic"
+
+    templates_disponibles = [
+        {"id": "classic", "nombre": "Classic Glassmorphism", "icon": "fa-gem", "badge": "Predeterminado"},
+        {"id": "horizontal-scroll", "nombre": "Horizontal Scroll Editorial", "icon": "fa-newspaper", "badge": "Luxury Editorial"},
+        {"id": "layered-reveal", "nombre": "Layered Reveal Narrative", "icon": "fa-layer-group", "badge": "Depth Parallax"}
+    ]
+
     theme = THEMES_MAP[rubro_key]
-    modulo_key = (demo_obj.modulo_solucion or "agenda").lower()
-    modulo_info = MODULOS_TITULOS.get(modulo_key, MODULOS_TITULOS["agenda"])
+    
+    # Procesar lista de módulos activos (múltiples módulos)
+    modulos_activos = []
+    if demo_obj.modulos_json:
+        try:
+            modulos_activos = json.loads(demo_obj.modulos_json)
+        except Exception:
+            modulos_activos = []
+
+    if not modulos_activos:
+        modulos_activos = [(demo_obj.modulo_solucion or "agenda").lower()]
+
+    # Garantizar que los módulos sean válidos y únicos manteniendo orden
+    validos = ["agenda", "stock", "ecommerce", "cotizador", "logistica", "decisiones", "metricas"]
+    modulos_activos_filtrados = []
+    for m in modulos_activos:
+        m_lower = str(m).lower()
+        if m_lower in validos and m_lower not in modulos_activos_filtrados:
+            modulos_activos_filtrados.append(m_lower)
+    if not modulos_activos_filtrados:
+        modulos_activos_filtrados = ["agenda"]
+
+    MODULOS_NOMBRES_ICONOS = {
+        "agenda": {"nombre": "Agenda & Reservas", "icon": "fa-calendar-check"},
+        "stock": {"nombre": "Catálogo & Stock", "icon": "fa-boxes-stacked"},
+        "ecommerce": {"nombre": "E-Commerce / Carta", "icon": "fa-cart-shopping"},
+        "cotizador": {"nombre": "Cotizador B2B", "icon": "fa-calculator"},
+        "logistica": {"nombre": "Logística & Envíos", "icon": "fa-truck-fast"},
+        "decisiones": {"nombre": "Agente de Decisiones", "icon": "fa-robot"},
+        "metricas": {"nombre": "Métricas de Eficiencia", "icon": "fa-chart-line"}
+    }
+
+    modulos_info_list = []
+    for m_key in modulos_activos_filtrados:
+        info = dict(MODULOS_TITULOS.get(m_key, MODULOS_TITULOS["agenda"]))
+        meta = MODULOS_NOMBRES_ICONOS.get(m_key, {"nombre": m_key.title(), "icon": "fa-cube"})
+        info["key"] = m_key
+        info["id"] = m_key
+        info["nombre"] = meta["nombre"]
+        info["icon"] = meta["icon"]
+        info["template"] = f"demos/components/{m_key}.html"
+        modulos_info_list.append(info)
+
+    modulo_key = modulos_activos_filtrados[0]
+    modulo_info = dict(MODULOS_TITULOS.get(modulo_key, MODULOS_TITULOS["agenda"]))
+    meta_main = MODULOS_NOMBRES_ICONOS.get(modulo_key, {"nombre": modulo_key.title(), "icon": "fa-cube"})
+    modulo_info["key"] = modulo_key
+    modulo_info["id"] = modulo_key
+    modulo_info["nombre"] = meta_main["nombre"]
+    modulo_info["icon"] = meta_main["icon"]
+    modulo_info["template"] = f"demos/components/{modulo_key}.html"
 
     # Generar titulares enfocados 100% en el negocio del cliente
     hero_headline, hero_subheadline = generar_copy_negocio(demo_obj.nombre_negocio, rubro_key)
@@ -843,10 +976,15 @@ def preparar_contexto_demo(demo_obj) -> dict:
     hero_meta = seleccionar_hero_inteligente(rubro_key, demo_obj.nombre_negocio)
     hero_bg_url = hero_meta["url"]
 
-    # Asignar Hero HD al tema visual
+    # Asignar Hero HD y aplicar Overrides de Colores Personalizados al Tema
     theme_copy = dict(theme)
     theme_copy["hero_bg_image"] = hero_bg_url
     theme_copy["hero_meta"] = hero_meta
+
+    if demo_obj.color_primario:
+        theme_copy["accent"] = demo_obj.color_primario
+    if demo_obj.color_header:
+        theme_copy["header_bg"] = demo_obj.color_header
 
     # Formatear WhatsApp
     wa_clean = re.sub(r"\D", "", demo_obj.whatsapp or demo_obj.telefono or "5493515550199")
@@ -862,12 +1000,56 @@ def preparar_contexto_demo(demo_obj) -> dict:
     # Configuración del Panel de Control Interno por Rubro
     admin_config = ADMIN_PANEL_POR_RUBRO.get(rubro_key, ADMIN_PANEL_POR_RUBRO["general"])
 
+    # Construir banco de imágenes de capas (Layered Reveal & Sections) SIN REPETICIONES
+    # Priorizando fotos reales subidas por clientes o el negocio en Google Places
+    layer_images_unicas = []
+    if fotos:
+        for f_url in fotos:
+            if f_url and f_url not in layer_images_unicas:
+                layer_images_unicas.append(f_url)
+
+    # Rellenar con imágenes HD únicas del banco de imágenes del rubro
+    for img_candidate in img_data.get("layer_images", []):
+        if len(layer_images_unicas) >= 5:
+            break
+        if img_candidate and img_candidate not in layer_images_unicas:
+            layer_images_unicas.append(img_candidate)
+
+    # Si por alguna razón faltan imágenes para llegar a 5 sin repetir, usar pool global diversificado
+    pool_reserva = [
+        "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1599447421416-3414500d18a5?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
+        "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=1200&q=80"
+    ]
+    for fb in pool_reserva:
+        if len(layer_images_unicas) >= 5:
+            break
+        if fb not in layer_images_unicas:
+            layer_images_unicas.append(fb)
+
+    final_layer_images = layer_images_unicas[:5]
+
+    # Si hay fotos reales de Google Places, enriquecer también las tarjetas de pilares
+    if fotos and len(fotos) >= 4:
+        for idx in range(len(pilares_enriquecidos)):
+            if idx < len(fotos):
+                pilares_enriquecidos[idx]["image"] = fotos[idx]
+
     return {
         "demo": demo_obj,
         "theme": theme_copy,
+        "diseno_template": diseno_template,
+        "templates_disponibles": templates_disponibles,
         "pilares": pilares_enriquecidos,
         "news": img_data.get("news", []),
+        "layer_images": final_layer_images,
         "modulo_info": modulo_info,
+        "modulos_activos": modulos_activos_filtrados,
+        "modulos_info_list": modulos_info_list,
         "agenda_config": agenda_config,
         "admin_config": admin_config,
         "hero_headline": hero_headline,

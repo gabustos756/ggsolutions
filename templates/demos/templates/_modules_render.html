@@ -1,0 +1,78 @@
+<!-- SUB-PARCIAL MODULAR PARA RENDEREAR LOS MÓDULOS INTERACTIVOS SELECCIONADOS -->
+
+{% if modulos_info_list and modulos_info_list|length > 1 %}
+<!-- CONMUTADOR DE PESTAÑAS CUANDO HAY MÚLTIPLES MÓDULOS ACTIVOS -->
+<div class="mb-10 flex flex-wrap justify-center gap-2 max-w-4xl mx-auto p-2 bg-slate-900/90 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-md">
+    {% for minfo in modulos_info_list %}
+    <button type="button" onclick="switchModuleTab('{{ minfo.id }}')" id="tab-btn-{{ minfo.id }}" class="module-tab-btn px-5 py-3 rounded-xl text-xs font-extrabold flex items-center gap-2.5 transition-all shadow-md {% if loop.first %}bg-cyan-500 text-slate-950 shadow-cyan-500/25{% else %}bg-white/5 text-slate-300 hover:bg-white/10 border border-white/5{% endif %}">
+        <i class="fa-solid {{ minfo.icon }} text-sm"></i>
+        <span>{{ minfo.nombre }}</span>
+    </button>
+    {% endfor %}
+</div>
+
+<!-- CONTENEDORES DE CADA MÓDULO ACTIVO -->
+<div class="space-y-8">
+    {% for minfo in modulos_info_list %}
+    <div id="module-container-{{ minfo.key or minfo.id }}" class="module-content-container {% if not loop.first %}hidden{% endif %} animate-fade-in">
+        {% if minfo.key == 'stock' or minfo.id == 'stock' %}
+            {% include "demos/components/stock.html" %}
+        {% elif minfo.key == 'logistica' or minfo.id == 'logistica' %}
+            {% include "demos/components/logistica.html" %}
+        {% elif minfo.key == 'decisiones' or minfo.id == 'decisiones' %}
+            {% include "demos/components/decisiones.html" %}
+        {% elif minfo.key == 'metricas' or minfo.id == 'metricas' %}
+            {% include "demos/components/metricas.html" %}
+        {% elif minfo.key == 'ecommerce' or minfo.id == 'ecommerce' %}
+            {% include "demos/components/ecommerce.html" %}
+        {% elif minfo.key == 'cotizador' or minfo.id == 'cotizador' %}
+            {% include "demos/components/cotizador.html" %}
+        {% else %}
+            {% include "demos/components/agenda.html" %}
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    function switchModuleTab(modId) {
+        document.querySelectorAll('.module-tab-btn').forEach(btn => {
+            btn.classList.remove('bg-cyan-500', 'text-slate-950', 'shadow-cyan-500/25');
+            btn.classList.add('bg-white/5', 'text-slate-300', 'hover:bg-white/10', 'border', 'border-white/5');
+        });
+        const activeBtn = document.getElementById('tab-btn-' + modId);
+        if (activeBtn) {
+            activeBtn.classList.remove('bg-white/5', 'text-slate-300', 'hover:bg-white/10', 'border', 'border-white/5');
+            activeBtn.classList.add('bg-cyan-500', 'text-slate-950', 'shadow-cyan-500/25');
+        }
+
+        document.querySelectorAll('.module-content-container').forEach(c => {
+            c.classList.add('hidden');
+        });
+        const activeContainer = document.getElementById('module-container-' + modId);
+        if (activeContainer) {
+            activeContainer.classList.remove('hidden');
+        }
+    }
+</script>
+
+{% else %}
+<!-- UN SOLO MÓDULO ACTIVO -->
+<div class="max-w-4xl mx-auto">
+    {% if modulo_info.key == 'stock' %}
+        {% include "demos/components/stock.html" %}
+    {% elif modulo_info.key == 'logistica' %}
+        {% include "demos/components/logistica.html" %}
+    {% elif modulo_info.key == 'decisiones' %}
+        {% include "demos/components/decisiones.html" %}
+    {% elif modulo_info.key == 'metricas' %}
+        {% include "demos/components/metricas.html" %}
+    {% elif modulo_info.key == 'ecommerce' %}
+        {% include "demos/components/ecommerce.html" %}
+    {% elif modulo_info.key == 'cotizador' %}
+        {% include "demos/components/cotizador.html" %}
+    {% else %}
+        {% include "demos/components/agenda.html" %}
+    {% endif %}
+</div>
+{% endif %}

@@ -50,10 +50,11 @@ pip install -r requirements.txt
 Crea el archivo `.env` de producción en `/var/www/ggsolutions/.env`:
 
 ```bash
-cat << 'EOF' > /var/www/ggsolutions/.env
-SECRET_KEY=cambiar_por_clave_super_segura_aleatoria_2026
-ADMIN_EMAIL=contacto@ggsolutions.com.ar
-ADMIN_PASSWORD=TuPasswordSuperSeguro2026
+cat << 'EOF' > ~/apps/ggsolutions/.env
+SECRET_KEY=ggsolutions-secret-key-cordoba-2026-secure
+ADMIN_EMAIL=admin@ggsolutions.com.ar
+ADMIN_PASSWORD=abl0420-
+GOOGLE_MAPS_API_KEY=AIzaSyD3iVRc6On16yJTaV_8dfx4ZVPp459QrjQ
 PORT=5050
 EOF
 ```

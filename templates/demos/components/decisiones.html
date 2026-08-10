@@ -49,8 +49,9 @@
 <script>
     function ejecutarReglaDecison(tipo) {
         const txt = document.getElementById('txt-resultado-decision');
+        const waNum = "{{ demo.whatsapp or demo.telefono or '5493515550199' }}".replace(/\D/g, '') || "5493515550199";
         if (tipo === 'presupuesto') {
-            txt.innerHTML = '<strong>Prioridad Alta (Lead Comercial):</strong> Se ha generado la cotización base. <a href="https://wa.me/{{ wa_clean }}?text=Hola%20{{ demo.nombre_negocio }},%20solicito%20presupuesto" target="_blank" class="underline font-bold text-purple-300">Haz clic aquí para enviarla directamente al WhatsApp de ventas</a>.';
+            txt.innerHTML = `<strong>Prioridad Alta (Lead Comercial):</strong> Se ha generado la cotización base. <a href="https://wa.me/${waNum}?text=Hola%20{{ demo.nombre_negocio }},%20solicito%20presupuesto" target="_blank" class="underline font-bold text-purple-300">Haz clic aquí para enviarla directamente al WhatsApp de ventas</a>.`;
         } else if (tipo === 'soporte') {
             txt.innerHTML = '<strong>Derivación Postventa:</strong> Se ha asignado la consulta al equipo técnico. Tiempo estimado de respuesta: &lt; 15 minutos.';
         } else {

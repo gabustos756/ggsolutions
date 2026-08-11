@@ -20,6 +20,7 @@ from security_utils import (
     check_rate_limit,
     registrar_auditoria,
     seed_admin_user,
+    asegurar_esquema_bd,
 )
 from services.google_places import (
     obtener_datos_lugar_google,
@@ -61,9 +62,9 @@ def load_user(user_id):
 
 
 
-# Inicialización de tablas y seed de administrador
+# Inicialización de tablas, migración automática de columnas y seed de administrador
 with app.app_context():
-    db.create_all()
+    asegurar_esquema_bd(app)
     seed_admin_user(app)
 
 
@@ -370,7 +371,18 @@ def generar_slug(nombre: str) -> str:
 @app.route("/admin/demos", methods=["GET"])
 @login_required
 def admin_demos_list():
-    demos = DemoSolution.query.order_by(DemoSolution.fecha_creacion.desc()).all()
+    try:
+        demos = DemoSolution.query.order_by(DemoSolution.fecha_creacion.desc()).all()
+    except Exception as e:
+        db.session.rollback()
+        print(f"[ERROR ADMIN DEMOS QUERY] {e}")
+        try:
+            asegurar_esquema_bd(app)
+            demos = DemoSolution.query.order_by(DemoSolution.fecha_creacion.desc()).all()
+        except Exception as err:
+            print(f"[ERROR ADMIN DEMOS RECOVERY FAILED] {err}")
+            demos = []
+
     error = request.args.get("error")
     mensaje = request.args.get("mensaje")
     keys = obtener_api_keys()

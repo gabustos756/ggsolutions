@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 import secrets
 from flask import request, session, abort
 from werkzeug.security import generate_password_hash
-from models import db, User, AuditLog
+from models import db, User, ContactLead, AuditLog, DemoSolution, DemoViewLog
 
 # Almacenamiento en memoria para Rate Limiting (IP -> list of timestamps)
 _rate_limit_store = {}
@@ -69,6 +69,52 @@ def registrar_auditoria(accion: str, detalle: str, user_id: int = None):
         print(f"[ERROR AUDITORIA] {e}")
 
 
+def asegurar_esquema_bd(app):
+    """
+    Inspecciona las tablas de la base de datos SQLite y agrega automáticamente
+    las tablas y columnas faltantes definidas en los modelos SQLAlchemy (ALTER TABLE).
+    Garantiza compatibilidad sin pérdida de datos en entornos donde la BD ya existía.
+    """
+    from sqlalchemy import inspect, text
+    with app.app_context():
+        # 1. Crear tablas que no existan aún
+        db.create_all()
+
+        try:
+            inspector = inspect(db.engine)
+            existing_tables = inspector.get_table_names()
+
+            def get_sqlite_type(column):
+                col_type = str(column.type).lower()
+                if "int" in col_type:
+                    return "INTEGER"
+                elif "float" in col_type or "numeric" in col_type:
+                    return "REAL"
+                elif "bool" in col_type:
+                    return "BOOLEAN"
+                elif "datetime" in col_type or "date" in col_type:
+                    return "DATETIME"
+                elif "text" in col_type:
+                    return "TEXT"
+                else:
+                    return "VARCHAR(250)"
+
+            for model_class in [User, ContactLead, AuditLog, DemoSolution, DemoViewLog]:
+                table_name = model_class.__tablename__
+                if table_name in existing_tables:
+                    existing_columns = {col["name"] for col in inspector.get_columns(table_name)}
+                    for column in model_class.__table__.columns:
+                        if column.name not in existing_columns:
+                            sq_type = get_sqlite_type(column)
+                            alter_stmt = text(f'ALTER TABLE "{table_name}" ADD COLUMN "{column.name}" {sq_type}')
+                            db.session.execute(alter_stmt)
+                            print(f"[DB MIGRATION] Agregada columna faltante '{column.name}' ({sq_type}) a la tabla '{table_name}'.")
+                    db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            print(f"[WARN DB MIGRATION] Error al verificar/migrar esquema: {e}")
+
+
 def seed_admin_user(app):
     """
     Crea o actualiza el usuario administrador inicial con la nueva contraseña.
@@ -99,4 +145,5 @@ def seed_admin_user(app):
             user.activo = True
             db.session.commit()
             print(f"[SECURITY] Contraseña de usuario administrador actualizada ({admin_email}).")
+
 

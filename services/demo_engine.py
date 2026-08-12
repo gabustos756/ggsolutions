@@ -55,6 +55,11 @@ DOLORES_POR_RUBRO = {
         "Consultas repetitivas por WhatsApp sobre combos de bebidas y ofertas para eventos",
         "Filas lentas en mostrador durante horas pico buscando precios de artículos"
     ],
+    "indumentaria": [
+        "Consultas repetitivas sobre disponibilidad de talles, colores y medidas por WhatsApp",
+        "Dificultad para mostrar la caída, género y detalles de las prendas sin tienda física",
+        "Pérdida de carritos de compra por falta de catálogo filtrable por categoría"
+    ],
     "general": [
         "Falta de automatización en la captación y filtro de prospectos",
         "Procesos operativos en hojas de cálculo desactualizadas",
@@ -183,6 +188,23 @@ THEMES_MAP = {
             {"icon": "fa-truck-fast", "title": "Envíos en el Día", "desc": "Entregas express a domicilio", "tag": "Logística"},
             {"icon": "fa-credit-card", "title": "Pagos Flexibles", "desc": "Todas las tarjetas y transferencias", "tag": "Facilidades"},
             {"icon": "fa-headset", "title": "Asesoramiento Experto", "desc": "Atención directa por WhatsApp", "tag": "Soporte"}
+        ]
+    },
+    "indumentaria": {
+        "bg": "#0b0813",
+        "card_bg": "rgba(22, 16, 35, 0.75)",
+        "accent": "#d946ef",
+        "gradient": "from-fuchsia-400 via-pink-500 to-purple-500",
+        "badge_bg": "bg-fuchsia-500/15 text-fuchsia-300 border-fuchsia-500/30",
+        "font_family": "'Plus Jakarta Sans', sans-serif",
+        "title_font": "'Outfit', sans-serif",
+        "font_google": "https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
+        "hero_bg_image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=80",
+        "pilares": [
+            {"icon": "fa-shirt", "title": "Diseño & Confección", "desc": "Prendas seleccionadas de calidad noble", "tag": "Lookbook"},
+            {"icon": "fa-ruler-horizontal", "title": "Talles Reales", "desc": "Asesoramiento de calce e información de medidas", "tag": "Guía Talles"},
+            {"icon": "fa-truck-fast", "title": "Envíos en el Día", "desc": "Entregas express a domicilio y todo el país", "tag": "Logística"},
+            {"icon": "fa-rotate-left", "title": "Cambios Sin Cargo", "desc": "Garantía de satisfacción y cambio ágil", "tag": "Confianza"}
         ]
     },
     "servicios": {
@@ -532,6 +554,36 @@ AGENDA_CONFIG_POR_RUBRO = {
         "input_tel_placeholder": "Tu WhatsApp",
         "cta_text": "🛍️ Confirmar Pedido Express por WA"
     },
+    "indumentaria": {
+        "badge": "Asesoramiento de Imagen & Showroom 24/7",
+        "titulo": "Agendá tu Cita en Showroom o Consulta de Talles",
+        "subtitulo": "Coordiná tu visita privada o consultá calce de prendas directamente por WhatsApp.",
+        "paso1_label": "1. Seleccioná el Tipo de Atención",
+        "opcion1": {
+            "title": "Prueba de Colección en Showroom",
+            "desc": "Cita privada para probar prendas y asesoramiento de imagen",
+            "tag": "Exclusivo",
+            "icon": "fa-shirt"
+        },
+        "opcion2": {
+            "title": "Consulta de Talles & Envíos",
+            "desc": "Asistencia por WhatsApp sobre medidas y despacho",
+            "tag": "Recomendado",
+            "icon": "fa-ruler-horizontal"
+        },
+        "opcion3": {
+            "title": "Reserva de Prendas / Lookbook",
+            "desc": "Apartado de artículos seleccionados de nueva temporada",
+            "tag": "Tendencia",
+            "icon": "fa-bag-shopping"
+        },
+        "paso2_label": "2. Fecha de Cita / Atención",
+        "paso3_label": "3. Horarios Disponibles",
+        "paso4_label": "4. Datos de Contacto",
+        "input_nombre_placeholder": "Tu Nombre Completo",
+        "input_tel_placeholder": "Tu WhatsApp para Confirmación",
+        "cta_text": "🛍️ Confirmar Cita / Consulta por WA"
+    },
     "salud": {
         "badge": "Turnos Médicos Digitales",
         "titulo": "Agendá tu Consulta Médica o Chequeo de Salud",
@@ -768,6 +820,28 @@ ADMIN_PANEL_POR_RUBRO = {
             {"nombre": "Fratelli Branca Destilerías", "rubro": "Aperitivos & Licores", "deuda": "$140.000", "estado": "Vence 22/08"}
         ]
     },
+    "indumentaria": {
+        "kpi_capacidad": "91% Rotación de Stock",
+        "kpi_pedidos": "26 Ventas / Pedidos Hoy",
+        "kpi_stock": "5 Talles Críticos en Faltante",
+        "kpi_facturacion": "$680.000 Caja Hoy",
+        "productos_stock": [
+            {"sku": "IND-101", "nombre": "Campera Oversize Denim Premium (Talle M)", "stock": 5, "unidad": "unidades", "alerta": "Normal", "precio": "$68.000"},
+            {"sku": "IND-102", "nombre": "Jean Straight Fit Urban Tailored (Talle 42)", "stock": 2, "unidad": "unidades", "alerta": "Bajo Stock", "precio": "$45.000"},
+            {"sku": "IND-103", "nombre": "Remera Básica Organic Cotton Pack x2", "stock": 18, "unidad": "packs", "alerta": "Normal", "precio": "$24.000"},
+            {"sku": "IND-104", "nombre": "Blazer Tailored Black Edition (Talle L)", "stock": 1, "unidad": "unidad", "alerta": "Reposición", "precio": "$75.000"}
+        ],
+        "pedidos": [
+            {"id": "#PED-601", "cliente": "Sofía M.", "detalle": "1x Campera Denim M + 1x Jean Straight 40", "monto": "$113.000", "hora": "Hace 10 min", "estado": "EN EMPAQUE"},
+            {"id": "#PED-600", "cliente": "Valentina G.", "detalle": "2x Remeras Orgánicas S + Envío Express", "monto": "$52.000", "hora": "Hace 35 min", "estado": "DESPACHADO"}
+        ],
+        "mensajes": [
+            {"cliente": "Camila R.", "tel": "3516558899", "consulta": "Hola! Quisiera saber si la campera denim cede o si me conviene talle M o L.", "hora": "12:50 hs", "estado": "PENDIENTE"}
+        ],
+        "proveedores": [
+            {"nombre": "Textil Denim Argentina S.A.", "rubro": "Tejidos & Confección", "deuda": "$190.000", "estado": "Al día"}
+        ]
+    },
     "general": {
         "kpi_capacidad": "88% Operativa",
         "kpi_pedidos": "14 Solicitudes",
@@ -787,6 +861,504 @@ ADMIN_PANEL_POR_RUBRO = {
             {"nombre": "Proveedor Central S.A.", "rubro": "Insumos Generales", "deuda": "$85.000", "estado": "Al día"}
         ]
     }
+}
+
+
+PRODUCTOS_POR_RUBRO = {
+    "gastronomia": [
+        {
+            "id": 1,
+            "nombre": "Double Bacon Smash Burger",
+            "descripcion": "Doble medallón 120g de pella madurada, cheddar inglés, panceta crocante y salsa especial en pan brioche artesanal.",
+            "precio": 18500,
+            "precio_display": "$18.500",
+            "badge": "MÁS VENDIDO",
+            "badge_color": "bg-pink-500/20 text-pink-300 border-pink-500/30",
+            "btn_color": "from-pink-500 to-rose-500 text-slate-950",
+            "stock_count": 35,
+            "imagen_url": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 2,
+            "nombre": "Combo Gourmet Salón & Papas XL",
+            "descripcion": "Burger de Autor + Papas Rústicas con provolone frito y dip de alioli + Pinta Cerveza Tirada IPA.",
+            "precio": 29900,
+            "precio_display": "$29.900",
+            "badge": "RECOMENDADO",
+            "badge_color": "bg-amber-500/20 text-amber-300 border-amber-500/30",
+            "btn_color": "from-amber-400 to-orange-400 text-slate-950",
+            "stock_count": 20,
+            "imagen_url": "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 3,
+            "nombre": "Cerveza IPA de Autor (500ml)",
+            "descripcion": "Elaboración artesanal de alta tomabilidad con notas cítricas y lupulado intenso.",
+            "precio": 8500,
+            "precio_display": "$8.500",
+            "badge": "PROMO",
+            "badge_color": "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
+            "btn_color": "from-emerald-400 to-teal-400 text-slate-950",
+            "stock_count": 50,
+            "imagen_url": "https://images.unsplash.com/photo-1535958636474-b021ee887b13?auto=format&fit=crop&w=800&q=80"
+        }
+    ],
+    "indumentaria": [
+        {
+            "id": 1,
+            "nombre": "Campera Oversize Denim Premium",
+            "descripcion": "Confección en algodón 100% denim pesado con lavada vintage y botones grabado láser.",
+            "precio": 68000,
+            "precio_display": "$68.000",
+            "badge": "NUEVA COLECCIÓN",
+            "badge_color": "bg-purple-500/20 text-purple-300 border-purple-500/30",
+            "btn_color": "from-purple-500 to-pink-500 text-white",
+            "stock_count": 12,
+            "imagen_url": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 2,
+            "nombre": "Jean Straight Fit Urban Tailored",
+            "descripcion": "Calce recto de tendencia con elastano para máxima comodidad. Talles 38 al 48.",
+            "precio": 45000,
+            "precio_display": "$45.000",
+            "badge": "MÁS VENDIDO",
+            "badge_color": "bg-pink-500/20 text-pink-300 border-pink-500/30",
+            "btn_color": "from-pink-500 to-rose-500 text-slate-950",
+            "stock_count": 28,
+            "imagen_url": "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 3,
+            "nombre": "Remera Básica Organic Cotton (Pack x2)",
+            "descripcion": "Tejido jersey 24/1 peinado super suave en colores neutros. Talles S al XL.",
+            "precio": 24000,
+            "precio_display": "$24.000",
+            "badge": "BÁSICO",
+            "badge_color": "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+            "btn_color": "from-cyan-400 to-blue-500 text-slate-950",
+            "stock_count": 40,
+            "imagen_url": "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=800&q=80"
+        }
+    ],
+    "automotriz": [
+        {
+            "id": 1,
+            "nombre": "Aceite Sintético Shell Helix 5W30 (4L) + Filtro",
+            "descripcion": "Bidón 4 litros lubricante 100% sintético para motores nafta y diesel + filtro de aceite Mann.",
+            "precio": 46700,
+            "precio_display": "$46.700",
+            "badge": "MÁS VENDIDO",
+            "badge_color": "bg-orange-500/20 text-orange-300 border-orange-500/30",
+            "btn_color": "from-orange-500 to-red-500 text-white",
+            "stock_count": 18,
+            "imagen_url": "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 2,
+            "nombre": "Diagnóstico Escaneado Computarizado OBD2",
+            "descripcion": "Escaneo de módulos de inyección, ABS, Airbag y diagnóstico de sensores con informe impreso.",
+            "precio": 35000,
+            "precio_display": "$35.000",
+            "badge": "RECOMENDADO",
+            "badge_color": "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+            "btn_color": "from-cyan-400 to-teal-400 text-slate-950",
+            "stock_count": 15,
+            "imagen_url": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 3,
+            "nombre": "Juego Pastillas de Freno Fras-le / Bosch",
+            "descripcion": "Pastillas cerámicas de alto rendimiento con colocación y revisión de discos incluida.",
+            "precio": 38500,
+            "precio_display": "$38.500",
+            "badge": "SEGURIDAD",
+            "badge_color": "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
+            "btn_color": "from-emerald-400 to-teal-400 text-slate-950",
+            "stock_count": 10,
+            "imagen_url": "https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?auto=format&fit=crop&w=800&q=80"
+        }
+    ],
+    "herramientas": [
+        {
+            "id": 1,
+            "nombre": "Taladro Percutor Inalámbrico Bosch GSB 18V-50",
+            "descripcion": "Motor Brushless sin carbones + 2 Baterías 2.0Ah + Cargador rápido en maletín rígido.",
+            "precio": 185000,
+            "precio_display": "$185.000",
+            "badge": "GARANTÍA BOSCH",
+            "badge_color": "bg-yellow-500/20 text-yellow-300 border-yellow-500/30",
+            "btn_color": "from-yellow-400 to-amber-500 text-slate-950",
+            "stock_count": 6,
+            "imagen_url": "https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 2,
+            "nombre": "Amoladora Angular DeWalt 4 1/2' 800W",
+            "descripcion": "Eje 5/8' reforzado, guarda sin llave y sistema de expulsión de polvo.",
+            "precio": 78000,
+            "precio_display": "$78.000",
+            "badge": "OFERTA OBRA",
+            "badge_color": "bg-amber-500/20 text-amber-300 border-amber-500/30",
+            "btn_color": "from-amber-400 to-orange-400 text-slate-950",
+            "stock_count": 12,
+            "imagen_url": "https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 3,
+            "nombre": "Juego de Bocallaves Stanley 108 Piezas Chrome Vanadium",
+            "descripcion": "Crique 1/2' y 1/4' con tubos encastre milimétrico e insumos profesionales.",
+            "precio": 120000,
+            "precio_display": "$120.000",
+            "badge": "PROFESIONAL",
+            "badge_color": "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
+            "btn_color": "from-emerald-400 to-teal-400 text-slate-950",
+            "stock_count": 4,
+            "imagen_url": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80"
+        }
+    ],
+    "opticas": [
+        {
+            "id": 1,
+            "nombre": "Cristales Monofocales Blue Block Antirreflex",
+            "descripcion": "Tratamiento de alta gama para protección contra luz azul de pantallas de PC y celulares.",
+            "precio": 32000,
+            "precio_display": "$32.000",
+            "badge": "MÁS SOLICITADO",
+            "badge_color": "bg-sky-500/20 text-sky-300 border-sky-500/30",
+            "btn_color": "from-sky-400 to-blue-500 text-slate-950",
+            "stock_count": 28,
+            "imagen_url": "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 2,
+            "nombre": "Armazón Acetato Ray-Ban Wayfarer Classic",
+            "descripcion": "Diseño icónico con patillas flexibles y estuche rígido original.",
+            "precio": 89000,
+            "precio_display": "$89.000",
+            "badge": "TENDENCIA",
+            "badge_color": "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+            "btn_color": "from-cyan-400 to-teal-400 text-slate-950",
+            "stock_count": 5,
+            "imagen_url": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 3,
+            "nombre": "Lentes de Contacto Acuvue Oasys (Caja 6u)",
+            "descripcion": "Hidratación superior con tecnología Hydraclear Plus para uso prolongado.",
+            "precio": 45000,
+            "precio_display": "$45.000",
+            "badge": "DISPONIBLE",
+            "badge_color": "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
+            "btn_color": "from-emerald-400 to-teal-400 text-slate-950",
+            "stock_count": 14,
+            "imagen_url": "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80"
+        }
+    ],
+    "kiosco": [
+        {
+            "id": 1,
+            "nombre": "Combo Previa XL: Fernet Branca + 2x Coca + Hielo",
+            "descripcion": "Fernet 750ml helado + 2 Gaseosas 2.25L + Bolsa de hielo rolito 3kg.",
+            "precio": 18500,
+            "precio_display": "$18.500",
+            "badge": "OFERTA PREVIA",
+            "badge_color": "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
+            "btn_color": "from-emerald-400 to-teal-400 text-slate-950",
+            "stock_count": 25,
+            "imagen_url": "https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 2,
+            "nombre": "Pack Cerveza Corona 6u + Papas Lay's XL",
+            "descripcion": "Porrón Corona 330ml congelado + Papas Fritas Corte Americano 140g.",
+            "precio": 16400,
+            "precio_display": "$16.400",
+            "badge": "RECOMENDADO",
+            "badge_color": "bg-amber-500/20 text-amber-300 border-amber-500/30",
+            "btn_color": "from-amber-400 to-yellow-400 text-slate-950",
+            "stock_count": 18,
+            "imagen_url": "https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 3,
+            "nombre": "Caja Selección Chocolates Milka & Golosinas",
+            "descripcion": "Mix de tabletas Milka, alfajores Havanna y gomitas premium.",
+            "precio": 12500,
+            "precio_display": "$12.500",
+            "badge": "PROMO",
+            "badge_color": "bg-pink-500/20 text-pink-300 border-pink-500/30",
+            "btn_color": "from-pink-500 to-purple-400 text-white",
+            "stock_count": 30,
+            "imagen_url": "https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?auto=format&fit=crop&w=800&q=80"
+        }
+    ],
+    "deportes": [
+        {
+            "id": 1,
+            "nombre": "Tubo de Pelotas Penn Tour Presurizadas (3u)",
+            "descripcion": "Pelotas de fieltro sintético especial para máxima durabilidad en polvo de ladrillo.",
+            "precio": 14000,
+            "precio_display": "$14.000",
+            "badge": "OFICIAL AAT",
+            "badge_color": "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
+            "btn_color": "from-emerald-400 to-teal-400 text-slate-950",
+            "stock_count": 36,
+            "imagen_url": "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 2,
+            "nombre": "Encordado Luxilon Alu Power 1.25mm + Overgrip",
+            "descripcion": "Calibración digital de tensión de acuerdo a tu estilo de juego + placement de overgrip Wilson.",
+            "precio": 22500,
+            "precio_display": "$22.500",
+            "badge": "PRO SHOP",
+            "badge_color": "bg-amber-500/20 text-amber-300 border-amber-500/30",
+            "btn_color": "from-amber-400 to-orange-400 text-slate-950",
+            "stock_count": 15,
+            "imagen_url": "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 3,
+            "nombre": "Raqueta Wilson Blade 98 V8 (Grip 3)",
+            "descripcion": "Patrón de encordado 16x19 para jugadores competitivos buscando sensación y control absoluto.",
+            "precio": 320000,
+            "precio_display": "$320.000",
+            "badge": "EDICIÓN PRO",
+            "badge_color": "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+            "btn_color": "from-cyan-400 to-blue-500 text-slate-950",
+            "stock_count": 2,
+            "imagen_url": "https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=800&q=80"
+        }
+    ],
+    "pilates_wellness": [
+        {
+            "id": 1,
+            "nombre": "Pase Mensual Pilates Reformer (8 Clases)",
+            "descripcion": "Entrenamiento en camas Reformer con atención personalizada en grupos reducidos.",
+            "precio": 45000,
+            "precio_display": "$45.000",
+            "badge": "MÁS SOLICITADO",
+            "badge_color": "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
+            "btn_color": "from-emerald-400 to-teal-400 text-slate-950",
+            "stock_count": 25,
+            "imagen_url": "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 2,
+            "nombre": "Pase Libre Yoga Vinyasa & Meditación",
+            "descripcion": "Acceso ilimitado a clases de postura, respiración consciente y bienestar integral.",
+            "precio": 38000,
+            "precio_display": "$38.000",
+            "badge": "WELLNESS",
+            "badge_color": "bg-teal-500/20 text-teal-300 border-teal-500/30",
+            "btn_color": "from-teal-400 to-cyan-400 text-slate-950",
+            "stock_count": 18,
+            "imagen_url": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 3,
+            "nombre": "Mat de Yoga Eco-Friendly Antideslizante Pro",
+            "descripcion": "Superficie de caucho natural 6mm con guías de alineación corporal lavables.",
+            "precio": 22000,
+            "precio_display": "$22.000",
+            "badge": "ACCESORIO",
+            "badge_color": "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+            "btn_color": "from-cyan-400 to-blue-500 text-slate-950",
+            "stock_count": 8,
+            "imagen_url": "https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=800&q=80"
+        }
+    ],
+    "salud": [
+        {
+            "id": 1,
+            "nombre": "Consulta Médica General & Historia Clínica",
+            "descripcion": "Evaluación clínica integral con seguimiento digital de historia de salud.",
+            "precio": 25000,
+            "precio_display": "$25.000",
+            "badge": "ATENCIÓN MÉDICA",
+            "badge_color": "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+            "btn_color": "from-cyan-400 to-teal-400 text-slate-950",
+            "stock_count": 30,
+            "imagen_url": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 2,
+            "nombre": "Chequeo Preventivo Anual Salud Integral",
+            "descripcion": "Análisis clínicos de laboratorio + Electrocardiograma de reposo e informe médico.",
+            "precio": 48000,
+            "precio_display": "$48.000",
+            "badge": "PREVENCIÓN",
+            "badge_color": "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
+            "btn_color": "from-emerald-400 to-teal-400 text-slate-950",
+            "stock_count": 15,
+            "imagen_url": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 3,
+            "nombre": "Estudio Diagnóstico por Imágenes HD",
+            "descripcion": "Estudios de alta precisión con resultados digitales enviados a tu WhatsApp.",
+            "precio": 38000,
+            "precio_display": "$38.000",
+            "badge": "DIAGNÓSTICO",
+            "badge_color": "bg-blue-500/20 text-blue-300 border-blue-500/30",
+            "btn_color": "from-blue-400 to-indigo-500 text-white",
+            "stock_count": 20,
+            "imagen_url": "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80"
+        }
+    ],
+    "retail": [
+        {
+            "id": 1,
+            "nombre": "Producto Destacado Colección Premium",
+            "descripcion": "Calidad garantizada directos de fábrica con entrega inmediata en el día.",
+            "precio": 28500,
+            "precio_display": "$28.500",
+            "badge": "MÁS VENDIDO",
+            "badge_color": "bg-pink-500/20 text-pink-300 border-pink-500/30",
+            "btn_color": "from-pink-500 to-rose-500 text-slate-950",
+            "stock_count": 42,
+            "imagen_url": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 2,
+            "nombre": "Pack Solución Equipamiento Integral",
+            "descripcion": "Combo completo diseñado para máxima eficiencia con envío gratis a domicilio.",
+            "precio": 42000,
+            "precio_display": "$42.000",
+            "badge": "RECOMENDADO",
+            "badge_color": "bg-purple-500/20 text-purple-300 border-purple-500/30",
+            "btn_color": "from-purple-500 to-pink-500 text-white",
+            "stock_count": 18,
+            "imagen_url": "https://images.unsplash.com/photo-1556742049-0a674718036d?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 3,
+            "nombre": "Kit Accesorio & Mantenimiento Multiuso",
+            "descripcion": "Componente esencial con garantía postventa extendida de 12 meses.",
+            "precio": 19900,
+            "precio_display": "$19.900",
+            "badge": "PROMO",
+            "badge_color": "bg-amber-500/20 text-amber-300 border-amber-500/30",
+            "btn_color": "from-amber-400 to-orange-400 text-slate-950",
+            "stock_count": 25,
+            "imagen_url": "https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=800&q=80"
+        }
+    ],
+    "inmobiliaria": [
+        {
+            "id": 1,
+            "nombre": "Informe de Tasación Profesional & Mercado",
+            "descripcion": "Valuación comercial auditada de inmuebles urbanos y comerciales.",
+            "precio": 35000,
+            "precio_display": "$35.000",
+            "badge": "TASACIÓN",
+            "badge_color": "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
+            "btn_color": "from-emerald-400 to-teal-400 text-slate-950",
+            "stock_count": 10,
+            "imagen_url": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 2,
+            "nombre": "Paquete Fotografía HD & Tour Virtual 360°",
+            "descripcion": "Producción audiovisual profesional para potenciar la venta o alquiler de tu propiedad.",
+            "precio": 65000,
+            "precio_display": "$65.000",
+            "badge": "RECOMENDADO",
+            "badge_color": "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+            "btn_color": "from-cyan-400 to-teal-400 text-slate-950",
+            "stock_count": 15,
+            "imagen_url": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 3,
+            "nombre": "Asesoramiento Jurídico & Gestión de Contratos",
+            "descripcion": "Redacción de contratos de locación y revisión registral de títulos.",
+            "precio": 40000,
+            "precio_display": "$40.000",
+            "badge": "SEGURIDAD",
+            "badge_color": "bg-amber-500/20 text-amber-300 border-amber-500/30",
+            "btn_color": "from-amber-400 to-orange-400 text-slate-950",
+            "stock_count": 20,
+            "imagen_url": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80"
+        }
+    ],
+    "servicios": [
+        {
+            "id": 1,
+            "nombre": "Servicio de Consultoría & Diagnóstico Operativo",
+            "descripcion": "Revisión integral de procesos y plan de optimización comercial.",
+            "precio": 85000,
+            "precio_display": "$85.000",
+            "badge": "MÁS SOLICITADO",
+            "badge_color": "bg-blue-500/20 text-blue-300 border-blue-500/30",
+            "btn_color": "from-blue-400 to-indigo-500 text-white",
+            "stock_count": 10,
+            "imagen_url": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 2,
+            "nombre": "Desarrollo & Implementación de Solución Técnica",
+            "descripcion": "Ejecución a medida con cumplimiento estricto de metas y garantía de calidad.",
+            "precio": 140000,
+            "precio_display": "$140.000",
+            "badge": "RECOMENDADO",
+            "badge_color": "bg-purple-500/20 text-purple-300 border-purple-500/30",
+            "btn_color": "from-purple-500 to-indigo-500 text-white",
+            "stock_count": 8,
+            "imagen_url": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 3,
+            "nombre": "Abono de Soporte & Mantenimiento Preventivo",
+            "descripcion": "Asistencia continua de respuesta inmediata y supervisión periodica.",
+            "precio": 45000,
+            "precio_display": "$45.000",
+            "badge": "MANTENIMIENTO",
+            "badge_color": "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+            "btn_color": "from-cyan-400 to-blue-400 text-slate-950",
+            "stock_count": 15,
+            "imagen_url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80"
+        }
+    ],
+    "general": [
+        {
+            "id": 1,
+            "nombre": "Producto / Servicio Principal Destacado",
+            "descripcion": "Solución de máxima calidad orientada a resolver las necesidades clave de tu negocio.",
+            "precio": 25000,
+            "precio_display": "$25.000",
+            "badge": "DESTACADO",
+            "badge_color": "bg-indigo-500/20 text-indigo-300 border-indigo-500/30",
+            "btn_color": "from-indigo-500 to-purple-500 text-white",
+            "stock_count": 30,
+            "imagen_url": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 2,
+            "nombre": "Pack Solución Integral Personalizada",
+            "descripcion": "Paquete estructurado con acompañamiento profesional y soporte directo.",
+            "precio": 45000,
+            "precio_display": "$45.000",
+            "badge": "RECOMENDADO",
+            "badge_color": "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+            "btn_color": "from-cyan-400 to-teal-400 text-slate-950",
+            "stock_count": 15,
+            "imagen_url": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
+        },
+        {
+            "id": 3,
+            "nombre": "Servicio de Asesoría Directa & Diagnóstico",
+            "descripcion": "Atención rápida por WhatsApp con respuesta en el día.",
+            "precio": 18000,
+            "precio_display": "$18.000",
+            "badge": "CONSULTA",
+            "badge_color": "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
+            "btn_color": "from-emerald-400 to-teal-400 text-slate-950",
+            "stock_count": 25,
+            "imagen_url": "https://images.unsplash.com/photo-1556742049-0a674718036d?auto=format&fit=crop&w=800&q=80"
+        }
+    ]
 }
 
 
@@ -824,6 +1396,9 @@ def generar_copy_negocio(nombre_negocio, rubro_key):
     elif rubro_key == "kiosco":
         headline = f"Tienda Express, Bebidas Frías & Combos en {nombre}"
         subheadline = f"En {nombre} encontrás todo lo que necesitás al instante: bebidas congeladas, combos para eventos y pedidos rápidos por WhatsApp sin hacer filas."
+    elif rubro_key == "indumentaria":
+        headline = f"Colecciones Exclusivas, Tendencia & Talles Reales en {nombre}"
+        subheadline = f"En {nombre} combinamos diseño de autor, géneros seleccionados y envíos rápidos a todo el país. Conocé nuestro catálogo y consultá por WhatsApp."
     elif rubro_key in ["deportes", "tenis", "club"]:
         headline = f"Reserva de Canchas de Tenis, Clases & Pro Shop en {nombre}"
         subheadline = f"En {nombre} disfrutás del mejor tenis: canchas de polvo de ladrillo en excelente estado, clases con profesores matriculados y encordado profesional de raquetas."
@@ -1039,6 +1614,38 @@ def preparar_contexto_demo(demo_obj, template_override=None) -> dict:
             if idx < len(fotos):
                 pilares_enriquecidos[idx]["image"] = fotos[idx]
 
+    # --- LÓGICA DE CATÁLOGO DE PRODUCTOS Y DOBLE RUBRO ---
+    rubro_secundario_key = (getattr(demo_obj, "rubro_secundario", "") or "").lower().strip()
+    if rubro_secundario_key and rubro_secundario_key not in THEMES_MAP:
+        rubro_secundario_key = None
+
+    # Obtener catálogo base del rubro principal
+    prods_primario = [dict(p) for p in PRODUCTOS_POR_RUBRO.get(rubro_key, PRODUCTOS_POR_RUBRO["general"])]
+
+    if rubro_secundario_key:
+        prods_secundario = [dict(p) for p in PRODUCTOS_POR_RUBRO.get(rubro_secundario_key, [])]
+        # Mezclar productos: 2 del primario + 1 o 2 del secundario
+        productos_combinados = prods_primario[:2] + prods_secundario[:2]
+
+        # Fusionar pilares visuales si hay rubro secundario
+        theme_sec = THEMES_MAP[rubro_secundario_key]
+        if len(pilares_enriquecidos) >= 4 and len(theme_sec["pilares"]) >= 2:
+            p_sec_1 = dict(theme_sec["pilares"][0])
+            p_sec_1["image"] = theme_sec["hero_bg_image"]
+            p_sec_2 = dict(theme_sec["pilares"][1])
+            p_sec_2["image"] = theme_sec["hero_bg_image"]
+            pilares_enriquecidos[2] = p_sec_1
+            pilares_enriquecidos[3] = p_sec_2
+    else:
+        productos_combinados = prods_primario
+
+    # Si se extrajeron fotos reales de Google Places, priorizarlas en los productos del catálogo
+    for idx, prod in enumerate(productos_combinados):
+        if fotos and idx < len(fotos) and fotos[idx]:
+            prod["imagen_url"] = fotos[idx]
+
+    productos_catalogo = productos_combinados
+
     return {
         "demo": demo_obj,
         "theme": theme_copy,
@@ -1057,6 +1664,8 @@ def preparar_contexto_demo(demo_obj, template_override=None) -> dict:
         "hero_meta": hero_meta,
         "reviews": reviews,
         "fotos": fotos,
+        "productos_catalogo": productos_catalogo,
+        "rubro_secundario_key": rubro_secundario_key,
         "wa_link": wa_link,
         "wa_ggsolutions": wa_ggsolutions,
         "maps_embed_query": urllib.parse.quote(f"{demo_obj.nombre_negocio}, {demo_obj.direccion or demo_obj.ciudad or 'Córdoba'}")

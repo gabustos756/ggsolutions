@@ -155,6 +155,23 @@ HERO_BANK_POR_RUBRO = {
             "url": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=90"
         }
     ],
+    "indumentaria": [
+        {
+            "tag": "moda_urbana",
+            "label": "Boutique & Colección de Indumentaria",
+            "url": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1600&q=90"
+        },
+        {
+            "tag": "lookbook_temporada",
+            "label": "Lookbook & Tendencias de Temporada",
+            "url": "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=1600&q=90"
+        },
+        {
+            "tag": "calzado_accesorios",
+            "label": "Calzado Premium & Accesorios",
+            "url": "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=1600&q=90"
+        }
+    ],
     "inmobiliaria": [
         {
             "tag": "casas_modernas",
@@ -443,6 +460,38 @@ IMAGE_BANK_POR_RUBRO = {
                 "snippet": "Cuotas sin interés, transferencias directas y atención personalizada.",
                 "read_time": "2 min",
                 "image": "https://images.unsplash.com/photo-1556742049-0a674718036d?auto=format&fit=crop&w=800&q=80"
+            }
+        ]
+    },
+    "indumentaria": {
+        "hero": HERO_BANK_POR_RUBRO["indumentaria"][0]["url"],
+        "pilares": [
+            "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=800&q=80",
+            "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80"
+        ],
+        "news": [
+            {
+                "title": "Lanzamiento Colección Nueva Temporada",
+                "date": "Lookbook Exclusivo",
+                "snippet": "Descubrí las tendencias en prendas urbanas, géneros nobles y confección de autor.",
+                "read_time": "3 min",
+                "image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                "title": "Guía de Talles, Ajuste & Asesoramiento de Imagen",
+                "date": "Atención Personalizada",
+                "snippet": "Consulta de talles reales y calce por WhatsApp con nuestros asesores.",
+                "read_time": "2 min",
+                "image": "https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                "title": "Envíos Express a Todo el País & Cambios Sin Cargo",
+                "date": "Experiencia Shopper",
+                "snippet": "Recibí tu compra en empaque exclusivo con garantía de cambio ágil.",
+                "read_time": "2 min",
+                "image": "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=800&q=80"
             }
         ]
     },

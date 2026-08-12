@@ -132,18 +132,19 @@ def seed_admin_user(app):
             new_admin = User(
                 email=admin_email,
                 password_hash=generate_password_hash(admin_password, method="pbkdf2:sha256"),
-                nombre="GG Admin",
-                rol="admin",
+                nombre="GG Superadmin",
+                rol="superadmin",
                 activo=True
             )
             db.session.add(new_admin)
             db.session.commit()
-            print(f"[SECURITY] Usuario Administrador creado ({admin_email}).")
+            print(f"[SECURITY] Usuario Superadministrador creado ({admin_email}).")
         else:
             user.email = admin_email
             user.password_hash = generate_password_hash(admin_password, method="pbkdf2:sha256")
+            user.rol = "superadmin"
             user.activo = True
             db.session.commit()
-            print(f"[SECURITY] Contraseña de usuario administrador actualizada ({admin_email}).")
+            print(f"[SECURITY] Contraseña y rol de usuario administrador actualizada ({admin_email}).")
 
 

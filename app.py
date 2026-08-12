@@ -8,9 +8,10 @@ from dotenv import load_dotenv
 # Cargar variables de entorno desde .env
 load_dotenv()
 
+from functools import wraps
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session, abort
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 
 from models import db, User, ContactLead, AuditLog, DemoSolution, DemoViewLog
@@ -72,6 +73,18 @@ with app.app_context():
 @app.context_processor
 def inject_csrf_token():
     return dict(csrf_token=generate_csrf_token())
+
+
+def solo_superadmin(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not current_user.is_authenticated:
+            return redirect(url_for("admin_login"))
+        rol_usuario = (getattr(current_user, "rol", "") or "").strip().lower()
+        if rol_usuario not in ["superadmin", "admin"]:
+            return redirect(url_for("admin_demos_list", error="Acceso restringido: Se requieren permisos de Superadministrador."))
+        return f(*args, **kwargs)
+    return decorated_function
 
 
 # ==============================================================================
@@ -406,6 +419,8 @@ def admin_crear_demo():
 
     maps_input = (request.form.get("google_maps_input") or "").strip()
     rubro = (request.form.get("rubro") or "general").strip().lower()
+    rubro_secundario_raw = (request.form.get("rubro_secundario") or "").strip().lower()
+    rubro_secundario = rubro_secundario_raw if (rubro_secundario_raw and rubro_secundario_raw != "ninguno" and rubro_secundario_raw != rubro) else None
     enfoque = (request.form.get("enfoque") or "Conversión High-Ticket").strip()
 
     # Procesar múltiples módulos seleccionados
@@ -489,6 +504,7 @@ def admin_crear_demo():
             slug=slug,
             nombre_negocio=nombre_negocio,
             rubro=rubro,
+            rubro_secundario=rubro_secundario,
             enfoque=enfoque,
             dolor_principal=dolor_principal,
             objetivo=objetivo,
@@ -540,6 +556,160 @@ def admin_eliminar_demo(demo_id):
 
     registrar_auditoria("ELIMINACION_DEMO", f"Demo ID {demo_id} ({nombre}) eliminada", user_id=current_user.id)
     return redirect(url_for("admin_demos_list", mensaje=f"La demo de '{nombre}' fue eliminada."))
+
+
+# ==============================================================================
+# RUTAS DE ADMINISTRACIÓN Y ABM DE USUARIOS
+# ==============================================================================
+
+@app.route("/admin/usuarios")
+@login_required
+@solo_superadmin
+def admin_usuarios_list():
+    usuarios = User.query.order_by(User.fecha_creacion.desc()).all()
+    cant_superadmins = sum(1 for u in usuarios if u.rol in ["superadmin", "admin"])
+    cant_comerciales = sum(1 for u in usuarios if u.rol == "comercial")
+    cant_activos = sum(1 for u in usuarios if u.activo)
+    
+    mensaje = request.args.get("mensaje")
+    error = request.args.get("error")
+    
+    return render_template(
+        "admin/usuarios.html",
+        usuarios=usuarios,
+        cant_superadmins=cant_superadmins,
+        cant_comerciales=cant_comerciales,
+        cant_activos=cant_activos,
+        mensaje=mensaje,
+        error=error,
+    )
+
+
+@app.route("/admin/usuarios/nuevo", methods=["POST"])
+@login_required
+@solo_superadmin
+def admin_crear_usuario():
+    token = request.form.get("csrf_token")
+    if not validate_csrf_token(token):
+        return redirect(url_for("admin_usuarios_list", error="Token CSRF inválido. Reintentá."))
+
+    nombre = (request.form.get("nombre") or "").strip()
+    email = (request.form.get("email") or "").strip().lower()
+    password = request.form.get("password") or ""
+    rol = (request.form.get("rol") or "comercial").strip().lower()
+    activo = bool(request.form.get("activo"))
+
+    if not nombre or not email or not password:
+        return redirect(url_for("admin_usuarios_list", error="Todos los campos marcados con (*) son obligatorios."))
+
+    if User.query.filter_by(email=email).first():
+        return redirect(url_for("admin_usuarios_list", error=f"El correo '{email}' ya se encuentra registrado."))
+
+    try:
+        nuevo_user = User(
+            nombre=nombre,
+            email=email,
+            password_hash=generate_password_hash(password, method="pbkdf2:sha256"),
+            rol=rol,
+            activo=activo,
+        )
+        db.session.add(nuevo_user)
+        db.session.commit()
+
+        registrar_auditoria("CREACION_USUARIO", f"Creado usuario {email} con rol {rol}", user_id=current_user.id)
+        return redirect(url_for("admin_usuarios_list", mensaje=f"¡Usuario '{nombre}' ({email}) creado exitosamente!"))
+
+    except Exception as e:
+        db.session.rollback()
+        print(f"[ERROR CREAR USUARIO] {e}")
+        return redirect(url_for("admin_usuarios_list", error="Ocurrió un error al intentar crear el usuario."))
+
+
+@app.route("/admin/usuarios/<int:user_id>/editar", methods=["POST"])
+@login_required
+@solo_superadmin
+def admin_editar_usuario(user_id):
+    token = request.form.get("csrf_token")
+    if not validate_csrf_token(token):
+        return redirect(url_for("admin_usuarios_list", error="Token CSRF inválido. Reintentá."))
+
+    user = User.query.get_or_404(user_id)
+
+    nombre = (request.form.get("nombre") or "").strip()
+    email = (request.form.get("email") or "").strip().lower()
+    password = request.form.get("password") or ""
+    rol = (request.form.get("rol") or "comercial").strip().lower()
+    activo = bool(request.form.get("activo"))
+
+    if not nombre or not email:
+        return redirect(url_for("admin_usuarios_list", error="Nombre y Correo son obligatorios."))
+
+    existente = User.query.filter_by(email=email).first()
+    if existente and existente.id != user.id:
+        return redirect(url_for("admin_usuarios_list", error=f"El correo '{email}' ya pertenece a otro usuario."))
+
+    try:
+        user.nombre = nombre
+        user.email = email
+        user.rol = rol
+        
+        if user.id == current_user.id:
+            user.activo = True
+        else:
+            user.activo = activo
+
+        if password and len(password.strip()) >= 6:
+            user.password_hash = generate_password_hash(password.strip(), method="pbkdf2:sha256")
+
+        db.session.commit()
+        registrar_auditoria("EDICION_USUARIO", f"Actualizados datos de usuario ID {user.id} ({user.email})", user_id=current_user.id)
+        return redirect(url_for("admin_usuarios_list", mensaje=f"¡Usuario '{user.nombre}' actualizado correctamente!"))
+
+    except Exception as e:
+        db.session.rollback()
+        print(f"[ERROR EDITAR USUARIO] {e}")
+        return redirect(url_for("admin_usuarios_list", error="Error al actualizar los datos del usuario."))
+
+
+@app.route("/admin/usuarios/<int:user_id>/estado", methods=["POST"])
+@login_required
+@solo_superadmin
+def admin_cambiar_estado_usuario(user_id):
+    token = request.form.get("csrf_token")
+    if not validate_csrf_token(token):
+        return redirect(url_for("admin_usuarios_list", error="Token CSRF inválido. Reintentá."))
+
+    user = User.query.get_or_404(user_id)
+    if user.id == current_user.id:
+        return redirect(url_for("admin_usuarios_list", error="No podés desactivar tu propia cuenta actual."))
+
+    user.activo = not user.activo
+    db.session.commit()
+    
+    estado_str = "activado" if user.activo else "desactivado"
+    registrar_auditoria("CAMBIO_ESTADO_USUARIO", f"Usuario ID {user.id} ({user.email}) {estado_str}", user_id=current_user.id)
+    return redirect(url_for("admin_usuarios_list", mensaje=f"Usuario '{user.nombre}' fue {estado_str}."))
+
+
+@app.route("/admin/usuarios/<int:user_id>/eliminar", methods=["POST"])
+@login_required
+@solo_superadmin
+def admin_eliminar_usuario(user_id):
+    token = request.form.get("csrf_token")
+    if not validate_csrf_token(token):
+        return redirect(url_for("admin_usuarios_list", error="Token CSRF inválido. Reintentá."))
+
+    user = User.query.get_or_404(user_id)
+    if user.id == current_user.id:
+        return redirect(url_for("admin_usuarios_list", error="No podés eliminar tu propia cuenta de usuario."))
+
+    nombre = user.nombre
+    email = user.email
+    db.session.delete(user)
+    db.session.commit()
+
+    registrar_auditoria("ELIMINACION_USUARIO", f"Usuario {email} (ID {user_id}) eliminado", user_id=current_user.id)
+    return redirect(url_for("admin_usuarios_list", mensaje=f"El usuario '{nombre}' ({email}) fue eliminado."))
 
 
 # ==============================================================================

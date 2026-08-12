@@ -77,6 +77,7 @@ class DemoSolution(db.Model):
     slug = db.Column(db.String(100), unique=True, nullable=False, index=True)
     nombre_negocio = db.Column(db.String(150), nullable=False)
     rubro = db.Column(db.String(50), nullable=False, default="general")
+    rubro_secundario = db.Column(db.String(50), nullable=True)
     enfoque = db.Column(db.String(100), nullable=False, default="conversion")
     dolor_principal = db.Column(db.Text, nullable=True)
     objetivo = db.Column(db.String(150), nullable=True)
@@ -119,6 +120,7 @@ class DemoSolution(db.Model):
             "slug": self.slug,
             "nombre_negocio": self.nombre_negocio,
             "rubro": self.rubro,
+            "rubro_secundario": self.rubro_secundario or "",
             "enfoque": self.enfoque,
             "dolor_principal": self.dolor_principal or "",
             "objetivo": self.objetivo or "",

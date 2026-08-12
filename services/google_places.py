@@ -132,8 +132,8 @@ def obtener_datos_lugar_google(input_str: str) -> dict:
                         place_id = candidates[0].get("place_id")
 
             if place_id:
-                # 2. Place Details API con todos los campos extendidos incluyendo icon
-                fields = "name,formatted_address,international_phone_number,formatted_phone_number,rating,user_ratings_total,website,reviews,photos,opening_hours,icon"
+                # 2. Place Details API con todos los campos extendidos incluyendo icon, types y editorial_summary
+                fields = "name,formatted_address,international_phone_number,formatted_phone_number,rating,user_ratings_total,website,reviews,photos,opening_hours,icon,types,editorial_summary"
                 details_url = f"https://maps.googleapis.com/maps/api/place/details/json?place_id={place_id}&fields={fields}&language=es&key={api_key}"
                 req = urllib.request.Request(details_url, headers={"User-Agent": "GGSolutions-DemoEngine/1.0"})
                 
@@ -147,8 +147,8 @@ def obtener_datos_lugar_google(input_str: str) -> dict:
 
                     result = res_data.get("result", {})
                     if result:
-                        # Extraer hasta 6 fotos en alta definición (1200px)
-                        photos_refs = [p.get("photo_reference") for p in result.get("photos", [])[:6]]
+                        # Extraer hasta 8 fotos en alta definición (1200px)
+                        photos_refs = [p.get("photo_reference") for p in result.get("photos", [])[:8]]
                         photos_urls = [
                             f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=1200&photo_reference={pref}&key={api_key}"
                             for pref in photos_refs
@@ -170,6 +170,8 @@ def obtener_datos_lugar_google(input_str: str) -> dict:
                         formatted_addr = result.get("formatted_address", "")
                         ciudad = extrae_ciudad_de_direccion(formatted_addr)
                         logo_url = photos_urls[0] if (photos_urls and len(photos_urls) > 0) else result.get("icon", "")
+                        editorial = result.get("editorial_summary", {}).get("overview", "")
+                        place_types = result.get("types", [])
 
                         return {
                             "google_place_id": place_id,
@@ -187,6 +189,8 @@ def obtener_datos_lugar_google(input_str: str) -> dict:
                             "logo_url": logo_url,
                             "sitio_web_original": result.get("website", ""),
                             "horarios": result.get("opening_hours", {}).get("weekday_text", []),
+                            "editorial_summary": editorial,
+                            "place_types": place_types,
                             "origen": "google_api"
                         }
         except Exception as e:

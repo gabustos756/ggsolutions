@@ -574,12 +574,16 @@
         <div style="display: flex; align-items: center; gap: 20px;">
             <a href="/admin" style="color: #38bdf8; font-weight: 700; text-decoration: none; font-size: 0.9rem; border-bottom: 2px solid #38bdf8; padding-bottom: 2px;">📬 Leads</a>
             <a href="/admin/demos" style="color: #94a3b8; font-weight: 600; text-decoration: none; font-size: 0.9rem; transition: color 0.2s;">⚡ Demos B2B</a>
+            {% if current_user.rol in ['superadmin', 'admin'] %}
+            <a href="/admin/usuarios" style="color: #94a3b8; font-weight: 600; text-decoration: none; font-size: 0.9rem; transition: color 0.2s;">👥 Usuarios</a>
+            {% endif %}
         </div>
 
         <div class="user-nav-actions">
             <div class="user-profile-badge">
                 <span class="user-avatar-dot"></span>
-                <span>{{ current_user.nombre }} ({{ current_user.email }})</span>
+                <span>{{ current_user.nombre }}</span>
+                <span style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); padding: 2px 6px; border-radius: 4px;">{{ current_user.rol }}</span>
             </div>
             <a href="/admin/logout" class="btn-logout">Cerrar Sesión</a>
         </div>

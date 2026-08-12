@@ -97,11 +97,11 @@
 <body class="antialiased selection:bg-cyan-500 selection:text-black">
 
     <!-- 1. DOCK COMERCIAL SUPERIOR (GG SOLUTIONS BAR + TAB SWITCHER) -->
-    <div id="demo-top-dock" class="bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950 border-b border-indigo-500/20 text-xs py-2.5 px-4 sticky top-0 z-50 shadow-xl transition-all duration-300 ease-in-out max-h-20 opacity-100 overflow-hidden">
+    <div id="demo-top-dock" class="bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950 border-b border-indigo-500/20 text-xs py-2.5 px-4 sticky top-0 z-50 shadow-xl transition-all duration-300 ease-in-out max-h-[300px] opacity-100 overflow-hidden">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
             
             <div class="flex items-center gap-2">
-                <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex-shrink-0">
                     <i class="fa-solid fa-flask mr-1"></i> DEMO B2B
                 </span>
                 <span class="text-slate-300 font-medium hidden sm:inline">
@@ -126,20 +126,20 @@
             {% if demo.tipo_software == 'ambas' or not demo.tipo_software %}
             <div class="flex items-center gap-1 bg-slate-900/90 border border-white/10 p-1 rounded-xl shadow-inner">
                 <button type="button" id="tab-btn-publico" onclick="switchSoftwareView('publico')" class="px-3 py-1 rounded-lg text-xs font-bold transition bg-cyan-500 text-slate-950 shadow-md">
-                    <i class="fa-solid fa-globe mr-1"></i> Vista Pública (Clientes)
+                    <i class="fa-solid fa-globe mr-1"></i> Vista Pública
                 </button>
                 <button type="button" id="tab-btn-admin" onclick="switchSoftwareView('admin')" class="px-3 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">
-                    <i class="fa-solid fa-user-shield mr-1"></i> Panel de Gestión (Interno)
+                    <i class="fa-solid fa-user-shield mr-1"></i> Gestión
                 </button>
             </div>
             {% endif %}
 
             <div class="flex items-center gap-2">
                 <button type="button" onclick="abrirModalCompartir()" class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold px-3 py-1 rounded-lg transition flex items-center gap-1.5 shadow-md border border-emerald-400/30 text-xs">
-                    <i class="fa-solid fa-share-nodes"></i> Compartir Demo
+                    <i class="fa-solid fa-share-nodes"></i> Compartir
                 </button>
                 <a href="{{ wa_ggsolutions }}" target="_blank" class="bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-400 hover:to-blue-500 text-white font-semibold px-3 py-1 rounded-lg transition duration-200 flex items-center gap-1.5 shadow-sm text-xs">
-                    <i class="fa-brands fa-whatsapp text-sm"></i> Agendar propuesta
+                    <i class="fa-brands fa-whatsapp text-sm"></i> Propuesta
                 </a>
             </div>
 
@@ -165,9 +165,9 @@
                 </div>
                 {% endif %}
                 <div>
-                    <h1 class="text-lg font-bold tracking-tight text-white leading-none font-title flex items-center gap-2">
-                        {{ demo.nombre_negocio }}
-                        <span class="inline-flex items-center text-[10px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 px-2 py-0.5 rounded-full font-sans font-bold">
+                    <h1 class="text-base sm:text-lg font-bold tracking-tight text-white leading-none font-title flex items-center gap-2">
+                        <span class="truncate max-w-[140px] sm:max-w-[240px]">{{ demo.nombre_negocio }}</span>
+                        <span class="inline-flex items-center text-[10px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 px-2 py-0.5 rounded-full font-sans font-bold flex-shrink-0">
                             <i class="fa-solid fa-circle-check text-cyan-400 mr-1 text-[9px]"></i> Verificado
                         </span>
                     </h1>
@@ -177,18 +177,50 @@
                 </div>
             </div>
 
-            <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-200">
-                <a href="#pilares" class="hover:text-cyan-300 transition">Ventajas</a>
-                <a href="#solucion" class="hover:text-cyan-300 transition">Catálogo / Servicios</a>
+            <!-- DESKTOP NAV -->
+            <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-200">
+                <a href="#pilares" onclick="navigateToSection(1)" class="hover:text-cyan-300 transition">Ventajas</a>
+                <a href="#solucion" onclick="navigateToSection(2)" class="hover:text-cyan-300 transition">Catálogo / Servicios</a>
                 {% if news %}
-                <a href="#novedades" class="hover:text-cyan-300 transition">Novedades</a>
+                <a href="#novedades" onclick="navigateToSection(3)" class="hover:text-cyan-300 transition">Novedades</a>
                 {% endif %}
-                <a href="#testimonios" class="hover:text-cyan-300 transition">Opiniones</a>
-                <a href="#ubicacion" class="hover:text-cyan-300 transition">Ubicación</a>
+                <a href="#testimonios" onclick="navigateToSection(3)" class="hover:text-cyan-300 transition">Opiniones</a>
+                <a href="#ubicacion" onclick="navigateToSection(4)" class="hover:text-cyan-300 transition">Ubicación</a>
                 <a href="{{ wa_link }}" target="_blank" class="bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/30 px-4 py-1.5 rounded-lg transition flex items-center gap-2 font-bold shadow-sm">
                     <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i> Contactar Negocio
                 </a>
             </nav>
+
+            <!-- BOTÓN HAMBURGUESA EN MOBILE -->
+            <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Abrir menú de navegación" class="md:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-slate-900/90 border border-white/20 text-cyan-300 hover:text-white hover:bg-slate-800 transition shadow-md">
+                <i class="fa-solid fa-bars text-lg" id="mobile-menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- MOBILE MENU DRAWER DESPLEGABLE -->
+        <div id="mobile-menu-drawer" class="hidden md:hidden bg-slate-950/95 border-b border-cyan-500/30 px-5 py-5 space-y-3 backdrop-blur-2xl transition-all duration-300 shadow-2xl">
+            <div class="flex flex-col gap-2.5 text-sm font-bold text-slate-200">
+                <a href="#pilares" onclick="navigateToSection(1); closeMobileMenu();" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl bg-slate-900/80 border border-white/10 hover:border-cyan-400/50 hover:text-cyan-300 transition">
+                    <i class="fa-solid fa-star text-amber-400 w-5"></i> Ventajas & Pilares
+                </a>
+                <a href="#solucion" onclick="navigateToSection(2); closeMobileMenu();" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl bg-slate-900/80 border border-white/10 hover:border-cyan-400/50 hover:text-cyan-300 transition">
+                    <i class="fa-solid fa-layer-group text-cyan-400 w-5"></i> Catálogo / Servicios
+                </a>
+                {% if news %}
+                <a href="#novedades" onclick="navigateToSection(3); closeMobileMenu();" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl bg-slate-900/80 border border-white/10 hover:border-cyan-400/50 hover:text-cyan-300 transition">
+                    <i class="fa-solid fa-newspaper text-purple-400 w-5"></i> Novedades
+                </a>
+                {% endif %}
+                <a href="#testimonios" onclick="navigateToSection(3); closeMobileMenu();" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl bg-slate-900/80 border border-white/10 hover:border-cyan-400/50 hover:text-cyan-300 transition">
+                    <i class="fa-solid fa-comments text-emerald-400 w-5"></i> Opiniones de Clientes
+                </a>
+                <a href="#ubicacion" onclick="navigateToSection(4); closeMobileMenu();" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl bg-slate-900/80 border border-white/10 hover:border-cyan-400/50 hover:text-cyan-300 transition">
+                    <i class="fa-solid fa-location-dot text-rose-400 w-5"></i> Ubicación & Instalaciones
+                </a>
+                <a href="{{ wa_link }}" target="_blank" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black py-3 rounded-xl text-center flex items-center justify-center gap-2 shadow-lg mt-1 text-xs">
+                    <i class="fa-brands fa-whatsapp text-base"></i> Contactar {{ demo.nombre_negocio }} por WA
+                </a>
+            </div>
         </div>
     </header>
 
@@ -331,6 +363,48 @@
                     if (btnTexto) btnTexto.textContent = "¡Copiado!";
                     setTimeout(() => { if (btnTexto) btnTexto.textContent = "Copiar"; }, 2500);
                 });
+            }
+        }
+
+        // CONTROL DE MENÚ HAMBURGUESA EN MOBILE
+        function toggleMobileMenu() {
+            const drawer = document.getElementById('mobile-menu-drawer');
+            const icon = document.getElementById('mobile-menu-icon');
+            if (!drawer) return;
+            
+            if (drawer.classList.contains('hidden')) {
+                drawer.classList.remove('hidden');
+                if (icon) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                }
+            } else {
+                closeMobileMenu();
+            }
+        }
+
+        function closeMobileMenu() {
+            const drawer = document.getElementById('mobile-menu-drawer');
+            const icon = document.getElementById('mobile-menu-icon');
+            if (drawer) drawer.classList.add('hidden');
+            if (icon) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        // NAVEGACIÓN UNIFICADA DE SECCIONES PARA MOBILE Y DESKTOP
+        function navigateToSection(indexOrId) {
+            if (typeof scrollToLayer === 'function') {
+                const layerIdx = typeof indexOrId === 'number' ? indexOrId : 0;
+                scrollToLayer(layerIdx);
+            } else {
+                const ids = ['hero', 'pilares', 'solucion', 'novedades', 'testimonios', 'ubicacion'];
+                const targetId = typeof indexOrId === 'number' ? (ids[indexOrId] || 'pilares') : indexOrId;
+                const el = document.getElementById(targetId) || document.querySelector(targetId);
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             }
         }
 

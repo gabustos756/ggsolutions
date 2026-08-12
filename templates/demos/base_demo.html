@@ -27,6 +27,7 @@
             --accent-color: {{ theme.accent }};
             --font-main: {{ theme.font_family|safe }};
             --font-title: {{ theme.title_font|safe }};
+            --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
         }
         body {
             background-color: var(--bg-main);
@@ -40,26 +41,31 @@
         }
         .glass-card {
             background: {{ theme.card_bg }};
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.14);
             box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.6s var(--ease-apple), box-shadow 0.6s var(--ease-apple), border-color 0.4s ease, opacity 0.6s var(--ease-apple);
+            will-change: transform, opacity, box-shadow;
+        }
+        .glass-card-hover {
+            transition: transform 0.5s var(--ease-apple), box-shadow 0.5s var(--ease-apple), border-color 0.4s ease;
         }
         .glass-card-hover:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 25px 50px -12px {{ theme.accent }}25;
+            transform: translateY(-6px) scale(1.015);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 28px 55px -12px {{ theme.accent }}35;
         }
         .glass-nav {
             background: {% if theme.header_bg %}{{ theme.header_bg }}{% else %}rgba(8, 12, 22, 0.9){% endif %};
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s var(--ease-apple);
         }
         .map-dark-filter {
             filter: invert(90%) hue-rotate(180deg) contrast(120%) grayscale(20%);
-            transition: filter 0.4s ease;
+            transition: filter 0.5s var(--ease-apple);
         }
         .map-dark-filter:hover {
             filter: none;
@@ -73,6 +79,18 @@
         }
         .animate-float {
             animation: floatSlow 4s ease-in-out infinite;
+        }
+
+        /* Utilidades para revelado suave */
+        .smooth-reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.8s var(--ease-apple), transform 0.8s var(--ease-apple);
+            will-change: opacity, transform;
+        }
+        .smooth-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>

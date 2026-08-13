@@ -1121,21 +1121,31 @@
             });
         }
 
-        function obtenerDetalleEspecifico(rubro) {
+        function generarMensajeWhatsAppRubro(nombreNegocio, rubro, demoUrl) {
             const r = (rubro || '').toLowerCase();
+            let especificidad = "";
+
             if (r.includes('gastro') || r.includes('restaurante') || r.includes('bar') || r.includes('cafe') || r.includes('pizza') || r.includes('fiambreria')) {
-                return 'se nota que la propuesta gastronómica y la carta tienen muy buena recepción';
-            } else if (r.includes('pilates') || r.includes('wellness') || r.includes('salud') || r.includes('optica')) {
-                return 'se nota la excelente valoración en las clases y el profesionalismo de la atención';
-            } else if (r.includes('auto') || r.includes('taller') || r.includes('herramientas')) {
-                return 'se nota el gran concepto en servicios técnicos y diagnósticos de precisión';
+                especificidad = "la automatización de comandas, menú digital interactivo y pedidos por WhatsApp, y sabemos la cantidad de tiempo y plata que se ahorra al eliminar errores en mesa y filas en mostrador";
+            } else if (r.includes('pilates') || r.includes('wellness')) {
+                especificidad = "la gestión de reservas online, cupos en vivo y control de ausentismo, y sabemos el tiempo y plata que se gana cuando los alumnos agendan solos sin colapsar el chat";
+            } else if (r.includes('salud') || r.includes('optica')) {
+                especificidad = "la reserva de turnos online y confirmación automática de citas, y sabemos la cantidad de tiempo y plata que se ahorra reduciendo ausentismo y descongestionando la recepción";
+            } else if (r.includes('auto') || r.includes('taller')) {
+                especificidad = "la cotización rápida de servicios y el seguimiento de estados de reparación, y sabemos cuánto tiempo y plata se ahorra evitando llamadas repetitivas de estado de vehículos";
             } else if (r.includes('indumentaria') || r.includes('retail') || r.includes('kiosco')) {
-                return 'se nota el atractivo de la colección y la buena rotación del catálogo';
+                especificidad = "la digitalización de catálogo, control de stock y checkout directo a WhatsApp, y sabemos el tiempo y plata que se ahorra evitando consultas repetitivas de precios y talles";
+            } else if (r.includes('herramientas') || r.includes('corralon')) {
+                especificidad = "cotizadores de obra express para gremios y presupuestos por WhatsApp, y sabemos el tiempo y plata que se gana al acelerar respuestas en mostrador";
             } else if (r.includes('deporte') || r.includes('tenis') || r.includes('club')) {
-                return 'se nota la alta concurrencia y las excelentes opiniones de los usuarios';
+                especificidad = "la reserva online de canchas y cobro de turnos en horarios clave, y sabemos el tiempo y plata que se ahorra eliminando superposiciones y cubriendo horas valle";
+            } else if (r.includes('inmobiliaria')) {
+                especificidad = "la exhibición filtrable de propiedades y coordinación de visitas por WhatsApp, y sabemos la cantidad de tiempo y plata que se gana al calificar prospectos antes de la muestra";
             } else {
-                return 'se nota la excelente reputación y opinión de tus clientes';
+                especificidad = "la digitalización de procesos de atención, catálogo y captación de clientes por WhatsApp, y sabemos la cantidad de tiempo y plata que se ahorra con herramientas a medida";
             }
+
+            return `Hola! Soy Gabi, de GG Solutions. Venimos trabajando con sistemas del rubro en ${especificidad}. Nos venimos perfeccionando cliente a cliente aprendiendo cada vez más del sector. Hoy me topé con ${nombreNegocio} en Google Maps, me gustó mucho la propuesta y decidí hacer una pequeña demo basada en tus datos para que veas lo que hacemos: ${demoUrl}\n\nSi te interesa implementar alguna de las soluciones o quizás comentar algún otro dolor avísame, me mantengo atento. Gracias!!`;
         }
 
         function prospectarWhatsApp(nombreNegocio, rubro, telefono, slug) {
@@ -1146,9 +1156,8 @@
                 num = num.replace(/\D/g, '');
             }
 
-            const detalle = obtenerDetalleEspecifico(rubro);
             const demoUrl = `${window.location.origin}/demo/${slug}`;
-            const msg = `Hola! Soy Gabi, de GG Solutions, trabajo con negocios de Córdoba armando soluciones digitales a medida. Vi ${nombreNegocio} en Google Maps (las reseñas están muy bien, ${detalle}) y se me ocurrió algo puntual para el pedido por WhatsApp/catálogo. ¿Te interesa que te cuente en 2 minutos?\n\nPodés ver una propuesta que armé acá: ${demoUrl}`;
+            const msg = generarMensajeWhatsAppRubro(nombreNegocio, rubro, demoUrl);
 
             window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`, '_blank');
         }

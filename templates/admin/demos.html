@@ -972,6 +972,14 @@
                             <label class="form-label">Objetivo Estratégico de la Demo (Opcional)</label>
                             <input type="text" name="objetivo" placeholder="Ej: Agendar llamada de diagnóstico de 15 min" class="form-input">
                         </div>
+
+                        <!-- Checkbox Mostrar Novedades -->
+                        <div class="form-group full-width" style="margin-top: 8px;">
+                            <label class="form-label" style="display: flex; align-items: center; gap: 10px; cursor: pointer; user-select: none;">
+                                <input type="checkbox" name="mostrar_novedades" value="1" style="width: 18px; height: 18px; accent-color: var(--accent-cyan); cursor: pointer;">
+                                <span style="font-weight: 600; color: var(--text-title);">Incluir sección de Novedades / Blog (usa imágenes de stock genéricas)</span>
+                            </label>
+                        </div>
                     </div>
                 </div>
 
@@ -1029,15 +1037,18 @@
                             </td>
                             <td>
                                 <div style="display: flex; gap: 8px;">
-                                    <a href="/demo/{{ d.slug }}" target="_blank" class="btn-action-icon">
+                                    <a href="/demo/{{ d.slug }}" target="_blank" class="btn-action-icon" title="Ver Demo">
                                         <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Demo
                                     </a>
-                                    <button onclick="copiarLink('https://ggsolutions.com.ar/demo/{{ d.slug }}')" class="btn-action-icon">
+                                    <button onclick="copiarLink(window.location.origin + '/demo/{{ d.slug }}')" class="btn-action-icon" title="Copiar Link">
                                         <i class="fa-solid fa-copy"></i> Copiar Link
+                                    </button>
+                                    <button onclick="prospectarWhatsApp('{{ d.nombre_negocio|e }}', '{{ d.rubro }}', '{{ d.whatsapp or d.telefono or '' }}', '{{ d.slug }}')" class="btn-action-icon" style="color: #34d399; border-color: rgba(52, 211, 153, 0.3);" title="Prospectar por WhatsApp">
+                                        <i class="fa-brands fa-whatsapp"></i> Prospectar WA
                                     </button>
                                     <form action="/admin/demos/{{ d.id }}/eliminar" method="POST" style="display: inline;" onsubmit="return confirm('¿Seguro que deseas eliminar esta demo?');">
                                         <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-                                        <button type="submit" class="btn-action-icon" style="color: #fca5a5; border-color: rgba(239, 68, 68, 0.3);">
+                                        <button type="submit" class="btn-action-icon" style="color: #fca5a5; border-color: rgba(239, 68, 68, 0.3);" title="Eliminar Demo">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </form>
@@ -1067,16 +1078,19 @@
                             <span style="color: #a855f7; background-color: rgba(168, 85, 247, 0.1); border: 1px solid rgba(168, 85, 247, 0.3); padding: 3px 8px; border-radius: 6px; font-family: 'Fira Code', monospace;">{{ d.modulo_solucion }}</span>
                         </div>
 
-                        <div style="display: flex; gap: 8px; margin-top: 4px;">
+                        <div style="display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap;">
                             <a href="/demo/{{ d.slug }}" target="_blank" class="btn-action-icon">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Demo
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver
                             </a>
-                            <button onclick="copiarLink('https://ggsolutions.com.ar/demo/{{ d.slug }}')" class="btn-action-icon">
+                            <button onclick="copiarLink(window.location.origin + '/demo/{{ d.slug }}')" class="btn-action-icon">
                                 <i class="fa-solid fa-copy"></i> Copiar
                             </button>
-                            <form action="/admin/demos/{{ d.id }}/eliminar" method="POST" style="display: inline; flex: 0.5;" onsubmit="return confirm('¿Seguro que deseas eliminar esta demo?');">
+                            <button onclick="prospectarWhatsApp('{{ d.nombre_negocio|e }}', '{{ d.rubro }}', '{{ d.whatsapp or d.telefono or '' }}', '{{ d.slug }}')" class="btn-action-icon" style="color: #34d399; border-color: rgba(52, 211, 153, 0.3);">
+                                <i class="fa-brands fa-whatsapp"></i> Prospectar
+                            </button>
+                            <form action="/admin/demos/{{ d.id }}/eliminar" method="POST" style="display: inline;" onsubmit="return confirm('¿Seguro que deseas eliminar esta demo?');">
                                 <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-                                <button type="submit" class="btn-action-icon" style="color: #fca5a5; border-color: rgba(239, 68, 68, 0.3); width: 100%;">
+                                <button type="submit" class="btn-action-icon" style="color: #fca5a5; border-color: rgba(239, 68, 68, 0.3);">
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                             </form>
@@ -1105,6 +1119,38 @@
             }).catch(() => {
                 prompt('Copia este enlace:', url);
             });
+        }
+
+        function obtenerDetalleEspecifico(rubro) {
+            const r = (rubro || '').toLowerCase();
+            if (r.includes('gastro') || r.includes('restaurante') || r.includes('bar') || r.includes('cafe') || r.includes('pizza') || r.includes('fiambreria')) {
+                return 'se nota que la propuesta gastronómica y la carta tienen muy buena recepción';
+            } else if (r.includes('pilates') || r.includes('wellness') || r.includes('salud') || r.includes('optica')) {
+                return 'se nota la excelente valoración en las clases y el profesionalismo de la atención';
+            } else if (r.includes('auto') || r.includes('taller') || r.includes('herramientas')) {
+                return 'se nota el gran concepto en servicios técnicos y diagnósticos de precisión';
+            } else if (r.includes('indumentaria') || r.includes('retail') || r.includes('kiosco')) {
+                return 'se nota el atractivo de la colección y la buena rotación del catálogo';
+            } else if (r.includes('deporte') || r.includes('tenis') || r.includes('club')) {
+                return 'se nota la alta concurrencia y las excelentes opiniones de los usuarios';
+            } else {
+                return 'se nota la excelente reputación y opinión de tus clientes';
+            }
+        }
+
+        function prospectarWhatsApp(nombreNegocio, rubro, telefono, slug) {
+            let num = (telefono || '').replace(/\D/g, '');
+            if (!num) {
+                num = prompt(`Ingresá el número de WhatsApp para ${nombreNegocio} (ej: 549351...):`, '');
+                if (!num) return;
+                num = num.replace(/\D/g, '');
+            }
+
+            const detalle = obtenerDetalleEspecifico(rubro);
+            const demoUrl = `${window.location.origin}/demo/${slug}`;
+            const msg = `Hola! Soy Gabi, de GG Solutions, trabajo con negocios de Córdoba armando soluciones digitales a medida. Vi ${nombreNegocio} en Google Maps (las reseñas están muy bien, ${detalle}) y se me ocurrió algo puntual para el pedido por WhatsApp/catálogo. ¿Te interesa que te cuente en 2 minutos?\n\nPodés ver una propuesta que armé acá: ${demoUrl}`;
+
+            window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
         let modoManual = false;

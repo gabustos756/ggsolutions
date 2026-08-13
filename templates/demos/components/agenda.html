@@ -70,8 +70,9 @@
         </div>
     </div>
 
-    <button type="button" onclick="confirmarTurnoDemo()" class="w-full bg-gradient-to-r {{ theme.gradient }} text-slate-950 font-extrabold py-4 rounded-xl shadow-2xl hover:scale-[1.01] transition flex items-center justify-center gap-2.5 text-base tracking-wide">
-        <i class="fa-brands fa-whatsapp text-xl"></i> {{ agenda_config.cta_text }}
+    <button type="button" onclick="confirmarTurnoDemo()" class="w-full bg-gradient-to-r {{ theme.gradient }} text-slate-950 font-extrabold py-3.5 sm:py-4 px-3 sm:px-6 rounded-xl shadow-2xl hover:scale-[1.01] transition flex items-center justify-center gap-2 text-xs sm:text-sm md:text-base leading-tight tracking-wide">
+        <i class="fa-brands fa-whatsapp text-lg sm:text-xl flex-shrink-0"></i>
+        <span class="text-center">{{ agenda_config.cta_text }}</span>
     </button>
 </div>
 

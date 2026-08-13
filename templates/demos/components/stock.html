@@ -59,10 +59,12 @@
     }
 
     function filtrarStock() {
-        const query = document.getElementById('filter-stock').value.toLowerCase().strip ? document.getElementById('filter-stock').value.toLowerCase().trim() : '';
+        const input = document.getElementById('filter-stock');
+        if (!input) return;
+        const query = input.value.toLowerCase().trim();
         const items = document.querySelectorAll('.stock-item-card');
         items.forEach(card => {
-            const name = card.getAttribute('data-name') || '';
+            const name = (card.getAttribute('data-name') || '').toLowerCase();
             if (!query || name.includes(query)) {
                 card.style.display = 'flex';
             } else {

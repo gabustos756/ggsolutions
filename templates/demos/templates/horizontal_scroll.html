@@ -197,6 +197,22 @@
             <span class="text-xs font-mono uppercase tracking-widest text-cyan-400">[05 / UBICACIÓN PÚBLICA]</span>
             <h2 class="text-3xl sm:text-4xl font-bold text-white editorial-title">Visitanos en {{ demo.ciudad or 'Córdoba' }}</h2>
             <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">{{ demo.direccion or 'Av. Principal 123' }}</p>
+
+            {% if fotos and fotos|length > 0 %}
+            <div class="pt-2 space-y-2">
+                <span class="text-[11px] font-mono font-bold text-slate-300 uppercase tracking-wider block flex items-center gap-1.5">
+                    <i class="fa-solid fa-camera text-cyan-400"></i> Instalaciones Reales del Local:
+                </span>
+                <div class="flex items-center gap-2 overflow-x-auto pb-1">
+                    {% for photo_url in fotos[:5] %}
+                    <div class="h-16 w-24 flex-shrink-0 rounded-xl overflow-hidden border border-white/20 shadow-md group relative">
+                        <img src="{{ photo_url }}" alt="Instalaciones de {{ demo.nombre_negocio }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
             <a href="https://www.google.com/maps/search/?api=1&query={{ maps_embed_query }}" target="_blank" class="inline-flex items-center gap-2 text-xs font-bold text-cyan-400 hover:text-cyan-300 uppercase tracking-wider font-mono">
                 Abrir Mapa Completo ➔
             </a>

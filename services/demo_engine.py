@@ -1362,10 +1362,10 @@ PRODUCTOS_POR_RUBRO = {
 }
 
 
-def generar_copy_negocio(nombre_negocio, rubro_key):
+def generar_copy_negocio(nombre_negocio, rubro_key, dolor_principal=None, objetivo=None):
     """
     Genera titulares y propuestas de valor 100% enfocadas en vender el negocio del cliente
-    a sus propios clientes finales.
+    a sus propios clientes finales, incorporando dolores u objetivos específicos si se proveen.
     """
     nombre = nombre_negocio.strip()
     
@@ -1409,10 +1409,22 @@ def generar_copy_negocio(nombre_negocio, rubro_key):
         headline = f"Calidad, Compromiso & Atención de Excelencia en {nombre}"
         subheadline = f"En {nombre} brindamos soluciones integrales adaptadas a cada cliente, garantizando la máxima eficiencia y satisfacción."
 
+    dolor_clean = (dolor_principal or "").strip()
+    obj_clean = (objetivo or "").strip()
+
+    if obj_clean:
+        obj_fmt = obj_clean.rstrip(".")
+        obj_title = obj_fmt[0].upper() + obj_fmt[1:] if len(obj_fmt) > 0 else obj_fmt
+        headline = f"Solución Digital en {nombre}: {obj_title}"
+
+    if dolor_clean:
+        dolor_fmt = dolor_clean.rstrip(".")
+        subheadline += f" Solucionamos de raíz: {dolor_fmt}."
+
     return headline, subheadline
 
 
-def preparar_contexto_demo(demo_obj, template_override=None) -> dict:
+def preparar_contexto_demo(demo_obj, template_override=None, modo_cliente=False) -> dict:
     """
     Toma una instancia de DemoSolution de la BD y genera el diccionario de contexto
     completo para renderizar `templates/demos/preview.html`.
@@ -1486,8 +1498,15 @@ def preparar_contexto_demo(demo_obj, template_override=None) -> dict:
     modulo_info["icon"] = meta_main["icon"]
     modulo_info["template"] = f"demos/components/{modulo_key}.html"
 
-    # Generar titulares enfocados 100% en el negocio del cliente
-    hero_headline, hero_subheadline = generar_copy_negocio(demo_obj.nombre_negocio, rubro_key)
+    # Generar titulares enfocados 100% en el negocio del cliente e incorporando dolores y objetivos
+    dolor_principal = getattr(demo_obj, "dolor_principal", "") or ""
+    objetivo = getattr(demo_obj, "objetivo", "") or ""
+    hero_headline, hero_subheadline = generar_copy_negocio(
+        demo_obj.nombre_negocio,
+        rubro_key,
+        dolor_principal=dolor_principal,
+        objetivo=objetivo
+    )
 
     # Inyección de Banco de Imágenes y Noticias
     img_data = obtener_imagenes_rubro(rubro_key)
@@ -1608,12 +1627,6 @@ def preparar_contexto_demo(demo_obj, template_override=None) -> dict:
 
     final_layer_images = layer_images_unicas[:5]
 
-    # Si hay fotos reales de Google Places, enriquecer también las tarjetas de pilares
-    if fotos and len(fotos) >= 4:
-        for idx in range(len(pilares_enriquecidos)):
-            if idx < len(fotos):
-                pilares_enriquecidos[idx]["image"] = fotos[idx]
-
     # --- LÓGICA DE CATÁLOGO DE PRODUCTOS Y DOBLE RUBRO ---
     rubro_secundario_key = (getattr(demo_obj, "rubro_secundario", "") or "").lower().strip()
     if rubro_secundario_key and rubro_secundario_key not in THEMES_MAP:
@@ -1639,15 +1652,12 @@ def preparar_contexto_demo(demo_obj, template_override=None) -> dict:
     else:
         productos_combinados = prods_primario
 
-    # Si se extrajeron fotos reales de Google Places, priorizarlas en los productos del catálogo
-    for idx, prod in enumerate(productos_combinados):
-        if fotos and idx < len(fotos) and fotos[idx]:
-            prod["imagen_url"] = fotos[idx]
-
     productos_catalogo = productos_combinados
 
     return {
         "demo": demo_obj,
+        "modo_cliente": modo_cliente,
+        "mostrar_novedades": bool(getattr(demo_obj, "mostrar_novedades", False)),
         "theme": theme_copy,
         "diseno_template": diseno_template,
         "templates_disponibles": templates_disponibles,

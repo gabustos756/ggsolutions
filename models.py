@@ -90,6 +90,7 @@ class DemoSolution(db.Model):
     color_header = db.Column(db.String(30), nullable=True)
     modulos_json = db.Column(db.Text, nullable=True)
     diseno_template = db.Column(db.String(50), nullable=False, default="classic")
+    mostrar_novedades = db.Column(db.Boolean, default=False, nullable=False)
 
     # Datos de Google Maps / Negocio
 
@@ -131,6 +132,7 @@ class DemoSolution(db.Model):
             "color_header": self.color_header or "",
             "modulos_json": self.modulos_json or "",
             "diseno_template": self.diseno_template or "classic",
+            "mostrar_novedades": bool(self.mostrar_novedades),
 
             "direccion": self.direccion or "",
             "ciudad": self.ciudad or "",

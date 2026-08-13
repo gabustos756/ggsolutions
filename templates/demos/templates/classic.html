@@ -156,7 +156,7 @@
 </main>
 
 <!-- 5.B SECCIÓN FOTOGRÁFICA DE NOVEDADES -->
-{% if news %}
+{% if (demo.mostrar_novedades or mostrar_novedades) and news %}
 <section id="novedades" class="py-20 bg-slate-950/80 border-b border-white/5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 classic-reveal">
@@ -287,6 +287,22 @@
                 <p class="text-sm text-slate-200 font-medium leading-relaxed">
                     Te esperamos en <strong>{{ demo.direccion or 'Av. Principal 123' }}</strong>, {{ demo.ciudad or 'Córdoba' }}. Atención personalizada y la mejor calidad.
                 </p>
+
+                {% if fotos and fotos|length > 0 %}
+                <div class="pt-2 space-y-2">
+                    <span class="text-[11px] font-bold text-slate-300 uppercase tracking-wider block flex items-center gap-1.5">
+                        <i class="fa-solid fa-camera text-cyan-400"></i> Fotos Reales del Local
+                    </span>
+                    <div class="flex items-center gap-2 overflow-x-auto pb-2">
+                        {% for photo_url in fotos[:5] %}
+                        <div class="h-16 w-24 flex-shrink-0 rounded-xl overflow-hidden border border-white/20 shadow-md group relative">
+                            <img src="{{ photo_url }}" alt="Instalaciones de {{ demo.nombre_negocio }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
                 <a href="https://www.google.com/maps/search/?api=1&query={{ maps_embed_query }}" target="_blank" class="inline-flex items-center gap-2 text-xs font-bold text-cyan-400 hover:text-cyan-300 transition pt-2">
                     <i class="fa-solid fa-map-location-dot text-sm"></i> Abrir en Google Maps App <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </a>

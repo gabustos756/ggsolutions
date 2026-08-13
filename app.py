@@ -439,6 +439,7 @@ def admin_crear_demo():
     color_header = (request.form.get("color_header") or "").strip()
     logo_url = (request.form.get("logo_url") or "").strip()
     diseno_template = (request.form.get("diseno_template") or "classic").strip().lower()
+    mostrar_novedades = True if request.form.get("mostrar_novedades") in ["1", "true", "on"] else False
 
     # Manejar subida de archivo de logo si se adjuntó
     if "logo_file" in request.files:
@@ -515,6 +516,7 @@ def admin_crear_demo():
             color_header=color_header,
             modulos_json=modulos_json,
             diseno_template=diseno_template,
+            mostrar_novedades=mostrar_novedades,
             google_place_id=datos_lugar.get("google_place_id"),
 
             direccion=datos_lugar.get("direccion"),
@@ -720,6 +722,16 @@ def admin_eliminar_usuario(user_id):
 def ver_demo_publica(slug):
     demo = DemoSolution.query.filter_by(slug=slug).first_or_404()
     template_override = request.args.get("template")
+    modo_param = (request.args.get("modo") or "").lower().strip()
+    vista_param = (request.args.get("vista") or "").lower().strip()
+
+    es_admin_logueado = current_user.is_authenticated if current_user else False
+    es_vista_interna = (vista_param == "interna" or modo_param == "admin")
+
+    if modo_param == "cliente":
+        modo_cliente = True
+    else:
+        modo_cliente = not (es_admin_logueado or es_vista_interna)
 
     # Registrar visualización
     try:
@@ -739,7 +751,7 @@ def ver_demo_publica(slug):
         db.session.rollback()
         print(f"[WARN TRACKING DEMO] {e}")
 
-    context = preparar_contexto_demo(demo, template_override=template_override)
+    context = preparar_contexto_demo(demo, template_override=template_override, modo_cliente=modo_cliente)
     return render_template("demos/preview.html", **context)
 
 

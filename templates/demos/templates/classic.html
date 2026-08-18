@@ -1,17 +1,16 @@
 <!-- PLANTILLA VISUAL: CLASSIC GLASSMORPHISM CON SMOOTH SCROLL REVEAL -->
 <style>
     .classic-reveal {
-        opacity: 0;
-        transform: translateY(28px);
-        transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: opacity, transform;
+        opacity: 1 !important;
+        transform: none !important;
+        transition: opacity 0.6s ease, transform 0.6s ease;
     }
     .classic-reveal.is-visible {
-        opacity: 1;
-        transform: translateY(0);
+        opacity: 1 !important;
+        transform: none !important;
     }
     .classic-reveal-delayed {
-        transition-delay: 0.2s;
+        transition-delay: 0.1s;
     }
 </style>
 

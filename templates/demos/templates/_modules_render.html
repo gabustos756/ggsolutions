@@ -61,17 +61,19 @@
 {% else %}
 <!-- UN SOLO MÓDULO ACTIVO -->
 <div class="max-w-4xl mx-auto">
-    {% if modulo_info.key == 'stock' %}
+    {% if modulo_info.key == 'hostel' or modulo_info.id == 'hostel' %}
+        {% include "demos/components/hostel.html" %}
+    {% elif modulo_info.key == 'stock' or modulo_info.id == 'stock' %}
         {% include "demos/components/stock.html" %}
-    {% elif modulo_info.key == 'logistica' %}
+    {% elif modulo_info.key == 'logistica' or modulo_info.id == 'logistica' %}
         {% include "demos/components/logistica.html" %}
-    {% elif modulo_info.key == 'decisiones' %}
+    {% elif modulo_info.key == 'decisiones' or modulo_info.id == 'decisiones' %}
         {% include "demos/components/decisiones.html" %}
-    {% elif modulo_info.key == 'metricas' %}
+    {% elif modulo_info.key == 'metricas' or modulo_info.id == 'metricas' %}
         {% include "demos/components/metricas.html" %}
-    {% elif modulo_info.key == 'ecommerce' %}
+    {% elif modulo_info.key == 'ecommerce' or modulo_info.id == 'ecommerce' %}
         {% include "demos/components/ecommerce.html" %}
-    {% elif modulo_info.key == 'cotizador' %}
+    {% elif modulo_info.key == 'cotizador' or modulo_info.id == 'cotizador' %}
         {% include "demos/components/cotizador.html" %}
     {% else %}
         {% include "demos/components/agenda.html" %}

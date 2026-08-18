@@ -437,6 +437,8 @@ def admin_crear_demo():
     modulo_solucion_principal = modulos_seleccionados[0]
     modulos_json = json.dumps(modulos_seleccionados, ensure_ascii=False)
 
+    print(f"[ADMIN CREAR DEMO DEBUG] Form modulos_solucion: {request.form.getlist('modulos_solucion')} | Final modulos_seleccionados: {modulos_seleccionados} | Principal: {modulo_solucion_principal}", flush=True)
+
     tipo_software = (request.form.get("tipo_software") or "ambas").strip().lower()
     dolor_principal = (request.form.get("dolor_principal") or "").strip()
     objetivo = (request.form.get("objetivo") or "").strip()

@@ -318,6 +318,11 @@ THEMES_MAP = {
 }
 
 MODULOS_TITULOS = {
+    "hostel": {
+        "badge": "RESERVA DE CAMAS & ESTADÍAS EN VIVO 24/7",
+        "titulo": "Reserva tu Cama & Estadía en Vivo",
+        "subtitulo": "Elegí las fechas de tu viaje, hora aproximada de llegada y el tipo de cama ideal con tarifa directa sin comisiones.",
+    },
     "agenda": {
         "badge": "AGENDA & RESERVAS DIGITALES 24/7",
         "titulo": "Agendá tu Turno o Reserva en 3 Pasos",
@@ -1621,6 +1626,8 @@ def preparar_contexto_demo(demo_obj, template_override=None, modo_cliente=False,
     if not modulos_activos_filtrados:
         modulos_activos_filtrados = ["hostel" if es_rubro_hostel else "agenda"]
 
+    print(f"[DEMO ENGINE DEBUG] Slug: {demo_obj.slug} | Rubro: {demo_obj.rubro} | Modulos Json: {demo_obj.modulos_json} | Modulo Solucion: {demo_obj.modulo_solucion} | Filtrados: {modulos_activos_filtrados}", flush=True)
+
     MODULOS_NOMBRES_ICONOS = {
         "agenda": {"nombre": "Agenda & Reservas", "icon": "fa-calendar-check"},
         "hostel": {"nombre": "Reserva de Camas & Estadías", "icon": "fa-bed"},
@@ -1752,9 +1759,13 @@ def preparar_contexto_demo(demo_obj, template_override=None, modo_cliente=False,
         except Exception:
             fotos = []
 
-    # Seleccionar la imagen Hero HD de más alta definición del banco etiquetado de la carpeta local
-    hero_meta = seleccionar_hero_inteligente(rubro_key, demo_obj.nombre_negocio)
-    hero_bg_url = hero_meta["url"]
+    # Seleccionar la imagen Hero HD (Priorizando foto real de Google Places del negocio si existe)
+    if fotos and len(fotos) > 0 and fotos[0]:
+        hero_bg_url = fotos[0]
+        hero_meta = {"url": fotos[0], "hd": True, "source": "Google Places Real Photo"}
+    else:
+        hero_meta = seleccionar_hero_inteligente(rubro_key, demo_obj.nombre_negocio)
+        hero_bg_url = hero_meta["url"]
 
     # Asignar Hero HD y aplicar Overrides de Colores Personalizados al Tema
     theme_copy = dict(theme)

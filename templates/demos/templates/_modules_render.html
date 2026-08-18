@@ -15,7 +15,9 @@
 <div class="space-y-8">
     {% for minfo in modulos_info_list %}
     <div id="module-container-{{ minfo.key or minfo.id }}" class="module-content-container {% if not loop.first %}hidden{% endif %} animate-fade-in">
-        {% if minfo.key == 'stock' or minfo.id == 'stock' %}
+        {% if minfo.key == 'hostel' or minfo.id == 'hostel' %}
+            {% include "demos/components/hostel.html" %}
+        {% elif minfo.key == 'stock' or minfo.id == 'stock' %}
             {% include "demos/components/stock.html" %}
         {% elif minfo.key == 'logistica' or minfo.id == 'logistica' %}
             {% include "demos/components/logistica.html" %}

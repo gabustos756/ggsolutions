@@ -98,9 +98,9 @@
 <section id="pilares" class="py-20 bg-slate-950/90 border-b border-white/5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         <div class="text-center max-w-2xl mx-auto space-y-2 classic-reveal">
-            <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">Ventajas Competitivas</span>
-            <h3 class="text-2xl sm:text-3xl font-extrabold text-white font-title">¿Por Qué Elegir {{ demo.nombre_negocio }}?</h3>
-            <p class="text-xs sm:text-sm text-slate-300">Infraestructura, atención personalizada y garantía en cada servicio.</p>
+            <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">{{ i18n.nav_pilares or 'Ventajas Competitivas' }}</span>
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-white font-title">{{ i18n.pilares_titulo or ('¿Por Qué Elegir ' ~ demo.nombre_negocio ~ '?') }}</h3>
+            <p class="text-xs sm:text-sm text-slate-300">{{ i18n.pilares_subtitulo or 'Infraestructura, atención personalizada y garantía en cada servicio.' }}</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -161,9 +161,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 classic-reveal">
             <div>
-                <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">Actualidad & Novedades</span>
-                <h3 class="text-2xl sm:text-3xl font-extrabold text-white font-title">Novedades del Sector en {{ demo.nombre_negocio }}</h3>
-                <p class="text-xs sm:text-sm text-slate-300">Artículos, recomendaciones y avisos de interés para nuestros clientes.</p>
+                <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">{{ i18n.nav_novedades or 'Actualidad & Novedades' }}</span>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-white font-title">{{ i18n.novedades_titulo or ('Novedades del Sector en ' ~ demo.nombre_negocio) }}</h3>
+                <p class="text-xs sm:text-sm text-slate-300">{{ i18n.novedades_subtitulo or 'Artículos, recomendaciones y avisos de interés para nuestros clientes.' }}</p>
             </div>
         </div>
 
@@ -211,13 +211,13 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 bg-slate-900/80 border border-white/10 p-6 rounded-2xl backdrop-blur-md shadow-2xl classic-reveal">
             <div class="space-y-1.5">
                 <div class="flex items-center gap-2">
-                    <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">Reseñas Verificadas</span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">{{ i18n.nav_resenas or 'Reseñas Verificadas' }}</span>
                     <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
                         <i class="fa-brands fa-google text-cyan-400 mr-1"></i> Google Places API
                     </span>
                 </div>
-                <h3 class="text-2xl sm:text-3xl font-extrabold text-white font-title">Opiniones Reales de Clientes</h3>
-                <p class="text-xs sm:text-sm text-slate-300 font-medium">Experiencias reales ordenadas de mayor a menor satisfacción.</p>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-white font-title">{{ i18n.resenas_titulo or 'Opiniones Reales de Clientes' }}</h3>
+                <p class="text-xs sm:text-sm text-slate-300 font-medium">{{ i18n.resenas_subtitulo or 'Experiencias reales ordenadas de mayor a menor satisfacción.' }}</p>
             </div>
 
             <div class="flex items-center gap-4 bg-slate-950/90 border border-amber-500/30 px-5 py-3 rounded-2xl shadow-xl">

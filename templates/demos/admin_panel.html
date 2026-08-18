@@ -28,25 +28,25 @@
     <!-- TARJETAS DE KPIS OPERATIVOS REALES POR RUBRO -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="bg-slate-900/80 border border-white/10 rounded-2xl p-4 space-y-1 backdrop-blur-md shadow-lg">
-            <p class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider">Capacidad Operativa</p>
+            <p class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider">{{ admin_config.kpi1_label or 'Capacidad Operativa' }}</p>
             <p class="text-2xl font-extrabold text-white font-title">{{ admin_config.kpi_capacidad }}</p>
             <p class="text-[10px] text-cyan-400 font-bold flex items-center gap-1 mt-1"><i class="fa-solid fa-check-circle"></i> Operación en tiempo real</p>
         </div>
 
         <div class="bg-slate-900/80 border border-white/10 rounded-2xl p-4 space-y-1 backdrop-blur-md shadow-lg">
-            <p class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider">Cola de Pedidos / Turnos</p>
+            <p class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider">{{ admin_config.kpi2_label or 'Cola de Pedidos / Turnos' }}</p>
             <p class="text-2xl font-extrabold text-amber-400 font-title">{{ admin_config.kpi_pedidos }}</p>
             <p class="text-[10px] text-amber-300 font-bold flex items-center gap-1 mt-1"><i class="fa-solid fa-clock"></i> Atención en curso</p>
         </div>
 
         <div class="bg-slate-900/80 border border-white/10 rounded-2xl p-4 space-y-1 backdrop-blur-md shadow-lg">
-            <p class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider">Alertas de Stock</p>
+            <p class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider">{{ admin_config.kpi3_label or 'Alertas de Stock' }}</p>
             <p class="text-2xl font-extrabold text-emerald-400 font-title">{{ admin_config.kpi_stock }}</p>
             <p class="text-[10px] text-emerald-300 font-bold flex items-center gap-1 mt-1"><i class="fa-solid fa-boxes-stacked"></i> Reposición activa</p>
         </div>
 
         <div class="bg-slate-900/80 border border-white/10 rounded-2xl p-4 space-y-1 backdrop-blur-md shadow-lg">
-            <p class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider">Caja & Facturación Hoy</p>
+            <p class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider">{{ admin_config.kpi4_label or 'Caja & Facturación Hoy' }}</p>
             <p class="text-2xl font-extrabold text-indigo-400 font-title">{{ admin_config.kpi_facturacion }}</p>
             <p class="text-[10px] text-indigo-300 font-bold flex items-center gap-1 mt-1"><i class="fa-solid fa-chart-line"></i> +12% vs. promedio diario</p>
         </div>
@@ -55,16 +55,16 @@
     <!-- PESTAÑAS DE NAVEGACIÓN INTERNA -->
     <div class="flex items-center gap-2 border-b border-white/10 pb-3 overflow-x-auto">
         <button type="button" onclick="switchAdminTab('pedidos')" id="tab-admin-pedidos" class="px-4 py-2 rounded-xl text-xs font-bold transition bg-cyan-500 text-slate-950 shadow-md">
-            <i class="fa-solid fa-receipt mr-1.5"></i> 1. Pedidos & Comandas
+            <i class="fa-solid fa-receipt mr-1.5"></i> {{ admin_config.tab1_label or '1. Pedidos & Comandas' }}
         </button>
         <button type="button" onclick="switchAdminTab('stock')" id="tab-admin-stock" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition">
-            <i class="fa-solid fa-boxes-stacked mr-1.5"></i> 2. Control de Stock & Insumos
+            <i class="fa-solid fa-boxes-stacked mr-1.5"></i> {{ admin_config.tab2_label or '2. Control de Stock & Insumos' }}
         </button>
         <button type="button" onclick="switchAdminTab('crm')" id="tab-admin-crm" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition">
-            <i class="fa-solid fa-comments mr-1.5"></i> 3. Mensajes & WhatsApp CRM
+            <i class="fa-solid fa-comments mr-1.5"></i> {{ admin_config.tab3_label or '3. Mensajes & WhatsApp CRM' }}
         </button>
         <button type="button" onclick="switchAdminTab('proveedores')" id="tab-admin-proveedores" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition">
-            <i class="fa-solid fa-truck-field mr-1.5"></i> 4. Proveedores & Facturas
+            <i class="fa-solid fa-truck-field mr-1.5"></i> {{ admin_config.tab4_label or '4. Proveedores & Facturas' }}
         </button>
     </div>
 
@@ -72,7 +72,7 @@
     <div id="admin-sec-pedidos" class="space-y-4">
         <div class="flex justify-between items-center">
             <h4 class="text-sm font-extrabold uppercase tracking-wider text-slate-300 flex items-center gap-2">
-                <i class="fa-solid fa-list-check text-cyan-400"></i> Pedidos Recibidos en Vivo: {{ demo.nombre_negocio }}
+                <i class="fa-solid fa-list-check text-cyan-400"></i> {{ admin_config.tabla1_titulo or ('Pedidos Recibidos en Vivo: ' ~ demo.nombre_negocio) }}
             </h4>
             <span class="text-xs text-emerald-400 font-bold bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded-lg">
                 <i class="fa-solid fa-sync fa-spin text-[10px] mr-1"></i> Actualizado en tiempo real
@@ -83,9 +83,9 @@
             <table class="w-full text-left text-xs text-slate-300">
                 <thead class="bg-slate-900 uppercase text-slate-400 border-b border-white/10 font-bold">
                     <tr>
-                        <th class="py-3 px-4">ID Pedido</th>
-                        <th class="py-3 px-4">Cliente</th>
-                        <th class="py-3 px-4">Detalle / Productos Reales</th>
+                        <th class="py-3 px-4">{{ admin_config.col1_nombre or 'ID Pedido' }}</th>
+                        <th class="py-3 px-4">{{ admin_config.col2_nombre or 'Cliente' }}</th>
+                        <th class="py-3 px-4">{{ admin_config.col3_nombre or 'Detalle / Productos Reales' }}</th>
                         <th class="py-3 px-4">Total</th>
                         <th class="py-3 px-4">Estado</th>
                         <th class="py-3 px-4 text-right">Acción Operativa</th>

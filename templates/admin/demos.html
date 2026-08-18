@@ -739,8 +739,9 @@
                         <!-- Rubro -->
                         <div class="form-group">
                             <label class="form-label">Rubro / Categoría Visual Principal (*)</label>
-                            <select id="rubro_select" name="rubro" class="form-select" required onchange="actualizarDoloresRubro(this.value)">
+                            <select id="rubro_select" name="rubro" class="form-select" required onchange="actualizarDoloresRubro(this.value); sincronizarCheckboxesModuloPorRubro(this.value);">
                                 <option value="pilates_wellness">🧘 Pilates, Yoga & Wellness Studio</option>
+                                <option value="hostel">🏨 Hostels, Hoteles & Turismo</option>
                                 <option value="deportes">🎾 Deportes, Tenis & Clubes</option>
                                 <option value="gastronomia">Gastronomía & Restaurantes</option>
                                 <option value="indumentaria">👗 Indumentaria, Moda & Calzado</option>
@@ -836,10 +837,18 @@
                             
                             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
                                 <label style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: rgba(30, 41, 59, 0.8); border: 1px solid var(--border-hairline); border-radius: 12px; cursor: pointer; transition: all 0.2s;" class="module-checkbox-card">
-                                    <input type="checkbox" name="modulos_solucion" value="agenda" checked style="width: 18px; height: 18px; accent-color: var(--accent-cyan);">
+                                    <input type="checkbox" name="modulos_solucion" value="agenda" id="mod_check_agenda" style="width: 18px; height: 18px; accent-color: var(--accent-cyan);">
                                     <div>
                                         <div style="font-weight: 700; color: #ffffff; font-size: 0.875rem;">🗓️ Agenda & Turnos</div>
                                         <div style="font-size: 0.725rem; color: var(--text-muted);">Agendamiento 24/7</div>
+                                    </div>
+                                </label>
+
+                                <label style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: rgba(30, 41, 59, 0.8); border: 1px solid var(--border-hairline); border-radius: 12px; cursor: pointer; transition: all 0.2s;" class="module-checkbox-card">
+                                    <input type="checkbox" name="modulos_solucion" value="hostel" style="width: 18px; height: 18px; accent-color: var(--accent-cyan);">
+                                    <div>
+                                        <div style="font-weight: 700; color: #ffffff; font-size: 0.875rem;">🛌 Reserva Camas / Estadía</div>
+                                        <div style="font-size: 0.725rem; color: var(--text-muted);">Hostels & Hoteles</div>
                                     </div>
                                 </label>
 
@@ -1137,6 +1146,8 @@
                 especificidad = "la digitalización de catálogo, control de stock y checkout directo a WhatsApp, y sabemos el tiempo y plata que se ahorra evitando consultas repetitivas de precios y talles";
             } else if (r.includes('herramientas') || r.includes('corralon')) {
                 especificidad = "cotizadores de obra express para gremios y presupuestos por WhatsApp, y sabemos el tiempo y plata que se gana al acelerar respuestas en mostrador";
+            } else if (r.includes('hostel') || r.includes('hotel') || r.includes('turismo') || r.includes('posada')) {
+                especificidad = "la reserva online de camas y habitaciones, control de disponibilidad en vivo y cobro directo sin pagar 18-20% de comisión a OTAs como Booking o Hostelworld, y sabemos la cantidad de tiempo y plata que se ahorra al evitar overbooking y consultas manuales";
             } else if (r.includes('deporte') || r.includes('tenis') || r.includes('club')) {
                 especificidad = "la reserva online de canchas y cobro de turnos en horarios clave, y sabemos el tiempo y plata que se ahorra eliminando superposiciones y cubriendo horas valle";
             } else if (r.includes('inmobiliaria')) {
@@ -1145,7 +1156,8 @@
                 especificidad = "la digitalización de procesos de atención, catálogo y captación de clientes por WhatsApp, y sabemos la cantidad de tiempo y plata que se ahorra con herramientas a medida";
             }
 
-            return `Hola! Soy Gabi, de GG Solutions. Venimos trabajando con sistemas del rubro en ${especificidad}. Nos venimos perfeccionando cliente a cliente aprendiendo cada vez más del sector. Hoy me topé con ${nombreNegocio} en Google Maps, me gustó mucho la propuesta y decidí hacer una pequeña demo basada en tus datos para que veas lo que hacemos: ${demoUrl}\n\nSi te interesa implementar alguna de las soluciones o quizás comentar algún otro dolor avísame, me mantengo atento. Gracias!!`;
+            const nombreVendedor = "{{ current_user.nombre.split()[0] if current_user.is_authenticated and current_user.nombre else 'Gabi' }}";
+            return `Hola! Soy ${nombreVendedor}, de GG Solutions. Venimos trabajando con sistemas del rubro en ${especificidad}. Nos venimos perfeccionando cliente a cliente aprendiendo cada vez más del sector. Hoy me topé con ${nombreNegocio} en Google Maps, me gustó mucho la propuesta y decidí hacer una pequeña demo basada en tus datos para que veas lo que hacemos: ${demoUrl}\n\nSi te interesa implementar alguna de las soluciones o quizás comentar algún otro dolor avísame, me mantengo atento. Gracias!!`;
         }
 
         function prospectarWhatsApp(nombreNegocio, rubro, telefono, slug) {
@@ -1486,30 +1498,59 @@
             const rubroSel = document.getElementById('rubro_select');
             const modSel = document.getElementById('modulo_solucion_select');
 
-            if (nameLower.includes('tenis') || nameLower.includes('padel') || nameLower.includes('club') || nameLower.includes('cancha') || nameLower.includes('deport')) {
+            if (nameLower.includes('hostel') || nameLower.includes('hotel') || nameLower.includes('posada') || nameLower.includes('hostal') || nameLower.includes('inn') || nameLower.includes('alojamiento') || nameLower.includes('resort')) {
+                rubroSel.value = 'hostel';
+                if (modSel) modSel.value = 'hostel';
+            } else if (nameLower.includes('tenis') || nameLower.includes('padel') || nameLower.includes('club') || nameLower.includes('cancha') || nameLower.includes('deport')) {
                 rubroSel.value = 'deportes';
-                modSel.value = 'agenda';
+                if (modSel) modSel.value = 'agenda';
             } else if (nameLower.includes('salud') || nameLower.includes('clinica') || nameLower.includes('sanatorio') || nameLower.includes('odontolog') || nameLower.includes('medic') || nameLower.includes('optica')) {
                 rubroSel.value = nameLower.includes('optica') ? 'opticas' : 'salud';
-                modSel.value = 'agenda';
+                if (modSel) modSel.value = 'agenda';
             } else if (nameLower.includes('taller') || nameLower.includes('mecanic') || nameLower.includes('auto') || nameLower.includes('repuesto')) {
                 rubroSel.value = 'automotriz';
-                modSel.value = 'stock';
+                if (modSel) modSel.value = 'stock';
             } else if (nameLower.includes('bar') || nameLower.includes('resto') || nameLower.includes('restaurante') || nameLower.includes('fiambreria') || nameLower.includes('cafe') || nameLower.includes('pizza')) {
                 rubroSel.value = 'gastronomia';
-                modSel.value = 'ecommerce';
+                if (modSel) modSel.value = 'ecommerce';
             } else if (nameLower.includes('ropa') || nameLower.includes('moda') || nameLower.includes('boutique') || nameLower.includes('indumentaria') || nameLower.includes('calzado') || nameLower.includes('vestid')) {
                 rubroSel.value = 'indumentaria';
-                modSel.value = 'ecommerce';
+                if (modSel) modSel.value = 'ecommerce';
             } else if (nameLower.includes('tienda') || nameLower.includes('modas') || nameLower.includes('ropa') || nameLower.includes('boutique')) {
                 rubroSel.value = 'retail';
-                modSel.value = 'ecommerce';
+                if (modSel) modSel.value = 'ecommerce';
             }
 
+            sincronizarCheckboxesModuloPorRubro(rubroSel.value);
             actualizarDoloresRubro(rubroSel.value);
         }
 
+        function sincronizarCheckboxesModuloPorRubro(rubroKey) {
+            const modChecks = document.querySelectorAll('input[name="modulos_solucion"]');
+            if (!modChecks || modChecks.length === 0) return;
+
+            // Determinar módulo por defecto según rubro
+            let defaultMod = 'agenda';
+            if (rubroKey === 'hostel' || rubroKey === 'hoteleria' || rubroKey === 'turismo') {
+                defaultMod = 'hostel';
+            } else if (rubroKey === 'gastronomia' || rubroKey === 'indumentaria' || rubroKey === 'retail') {
+                defaultMod = 'ecommerce';
+            } else if (rubroKey === 'automotriz' || rubroKey === 'herramientas') {
+                defaultMod = 'stock';
+            }
+
+            // Desmarcar todos y marcar sólo el correspondiente
+            modChecks.forEach(chk => {
+                chk.checked = (chk.value === defaultMod);
+            });
+        }
+
         const DOLORES_PRESETS = {
+            hostel: [
+                "Elevadas comisiones pagadas a OTAs (Booking, Hostelworld, Airbnb) de 18-20%",
+                "Descontrol de camas disponibles y riesgo de overbooking al gestionar por WA",
+                "Consultas tardías de tarifas y tipos de cama (mixta, femenina, privada)"
+            ],
             deportes: [
                 "Superposición de turnos y reservas caóticas por WhatsApp",
                 "Canchas vacías en horarios valle (mañanas y mediodías)",

@@ -7,6 +7,7 @@ con diseño ultra-premium, tipografías legibles e imágenes de alta definición
 import json
 import re
 import urllib.parse
+from services.i18n_engine import get_i18n_context, translate_pilares
 
 
 DOLORES_POR_RUBRO = {
@@ -59,6 +60,11 @@ DOLORES_POR_RUBRO = {
         "Consultas repetitivas sobre disponibilidad de talles, colores y medidas por WhatsApp",
         "Dificultad para mostrar la caída, género y detalles de las prendas sin tienda física",
         "Pérdida de carritos de compra por falta de catálogo filtrable por categoría"
+    ],
+    "hostel": [
+        "Elevadas comisiones pagadas a OTAs (Booking, Hostelworld, Airbnb) de hasta 18-20%",
+        "Descontrol de camas disponibles y overbooking al gestionar reservas por WhatsApp",
+        "Consultas tardías de precios y tipos de cama (mixta, femenina, privada)"
     ],
     "general": [
         "Falta de automatización en la captación y filtro de prospectos",
@@ -291,6 +297,23 @@ THEMES_MAP = {
             {"icon": "fa-bolt", "title": "Respuesta Inmediata", "desc": "Atención rápida por WhatsApp", "tag": "Rapidez"},
             {"icon": "fa-users", "title": "Equipo Especializado", "desc": "Profesionales capacitados", "tag": "Experiencia"}
         ]
+    },
+    "hostel": {
+        "bg": "#09131a",
+        "card_bg": "rgba(15, 30, 42, 0.75)",
+        "accent": "#2dd4bf",
+        "gradient": "from-teal-300 via-emerald-400 to-cyan-500",
+        "badge_bg": "bg-teal-500/15 text-teal-300 border-teal-500/30",
+        "font_family": "'Plus Jakarta Sans', sans-serif",
+        "title_font": "'Outfit', sans-serif",
+        "font_google": "https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
+        "hero_bg_image": "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=1200&q=80",
+        "pilares": [
+            {"icon": "fa-bed", "title": "Camas & Lockers", "desc": "Lockers individuales de alta seguridad y enchufes por cama", "tag": "Confort & Seguridad"},
+            {"icon": "fa-location-dot", "title": "Ubicación Central", "desc": "En el corazón de la ciudad, cerca de transportes y tours", "tag": "Ubicación"},
+            {"icon": "fa-people-group", "title": "Ambiente & Eventos", "desc": "Bar, zona social, cenas compartidas y tours grupales", "tag": "Social & Bar"},
+            {"icon": "fa-wifi", "title": "High-Speed Wi-Fi", "desc": "Conexión estable y espacio de trabajo para nómadas digitales", "tag": "Co-Working"}
+        ]
     }
 }
 
@@ -339,7 +362,63 @@ MODULOS_TITULOS = {
         "badge": "SIMULADOR DE PRESUPUESTOS",
         "titulo": "Cotizá Tu Requerimiento al Instante",
         "subtitulo": "Seleccioná las características de tu servicio o proyecto y obtené una estimación transparente.",
+    },
+    "hostel": {
+        "badge": "RESERVA DE CAMAS & ESTADÍAS EN VIVO",
+        "titulo": "Reserva tu Cama & Estadía en Vivo",
+        "subtitulo": "Elegí las fechas de tu viaje, número de huéspedes y tipo de cama ideal con tarifa directa sin comisiones.",
     }
+}
+
+HOSTEL_CONFIG = {
+    "titulo": "Reserva de Camas & Estadías",
+    "subtitulo": "Ingresá tus fechas de entrada/salida y elegí la habitación que mejor se adapte a tu viaje.",
+    "badge": "Disponibilidad Garantizada 100%",
+    "paso1_label": "1. Fechas de Estadía & Huéspedes",
+    "paso2_label": "2. Tipo de Habitación / Cama",
+    "paso3_label": "3. Datos del Huésped & Confirmación",
+    "opciones": [
+        {
+            "id": "dorm_mixto_4",
+            "nombre": "Dormitorio Mixto (4 Camas)",
+            "desc": "Con aire acondicionado, lockers individuales y baño compartido.",
+            "precio_usd": 15,
+            "precio_ars": 18000,
+            "tag": "Más Popular",
+            "badge_color": "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+            "icon": "fa-bed"
+        },
+        {
+            "id": "dorm_fem_6",
+            "nombre": "Dormitorio Femenino (6 Camas)",
+            "desc": "Exclusivo mujeres, secador de pelo, espejo amplio y lockers de seguridad.",
+            "precio_usd": 14,
+            "precio_ars": 16800,
+            "tag": "Exclusivo Mujeres",
+            "badge_color": "bg-purple-500/20 text-purple-300 border-purple-500/30",
+            "icon": "fa-person-dress"
+        },
+        {
+            "id": "dorm_masc_8",
+            "nombre": "Dormitorio Masculino (8 Camas)",
+            "desc": "Habitación espaciosa, enchufes y luz de lectura en cada cama.",
+            "precio_usd": 12,
+            "precio_ars": 14400,
+            "tag": "Económico",
+            "badge_color": "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
+            "icon": "fa-person"
+        },
+        {
+            "id": "privada_doble",
+            "nombre": "Habitación Privada Doble (Baño Privado)",
+            "desc": "Cama Sommier Matrimonial, TV Smart, A/C y baño en suite.",
+            "precio_usd": 35,
+            "precio_ars": 42000,
+            "tag": "Privada & Confort",
+            "badge_color": "bg-amber-500/20 text-amber-300 border-amber-500/30",
+            "icon": "fa-door-closed"
+        }
+    ]
 }
 
 
@@ -648,6 +727,44 @@ AGENDA_CONFIG_POR_RUBRO = {
 
 
 ADMIN_PANEL_POR_RUBRO = {
+    "hostel": {
+        "kpi1_label": "Ocupación Hoy",
+        "kpi2_label": "Check-ins Esperados",
+        "kpi3_label": "Camas Disponibles",
+        "kpi4_label": "Caja & Noche Hoy",
+        "kpi_capacidad": "87% Ocupación Camas",
+        "kpi_pedidos": "6 Huéspedes Arribando",
+        "kpi_stock": "4 Camas Libres Hoy",
+        "kpi_facturacion": "$184.000 Caja Hoy",
+        "tab1_label": "1. Check-ins & Llegadas del Día",
+        "tab2_label": "2. Mapa de Camas & Habitaciones",
+        "tab3_label": "3. Mensajes & WhatsApp CRM",
+        "tab4_label": "4. Proveedores & Lavandería",
+        "tabla1_titulo": "Control de Arribos & Check-ins Esperados",
+        "tabla2_titulo": "Mapa de Ocupación de Camas y Habitaciones Privadas",
+        "col1_nombre": "Código Reserva",
+        "col2_nombre": "Huésped / Origen",
+        "col3_nombre": "Habitación / Cama Asignada",
+        "productos_stock": [
+            {"sku": "HOST-101", "nombre": "Dormitorio Mixto (4 Camas) - Cama 02", "stock": 1, "unidad": "cama libre", "alerta": "Bajo Stock", "precio": "$18.000/noche"},
+            {"sku": "HOST-102", "nombre": "Dormitorio Femenino (6 Camas) - Cama 05", "stock": 2, "unidad": "camas libres", "alerta": "Disponible", "precio": "$16.800/noche"},
+            {"sku": "HOST-103", "nombre": "Dormitorio Masculino (8 Camas) - Cama 01", "stock": 5, "unidad": "camas libres", "alerta": "Disponible", "precio": "$14.400/noche"},
+            {"sku": "HOST-104", "nombre": "Habitación Privada Doble Suite #204", "stock": 1, "unidad": "cuarto libre", "alerta": "Última Disponible", "precio": "$42.000/noche"}
+        ],
+        "pedidos": [
+            {"id": "#RES-801", "cliente": "afQEcqapV8uVD16d (Argentina 🇦🇷)", "detalle": "Reserva Dormitorio Mixto (2 Noches) — Arribo Estimado 16:00 hs", "monto": "$36.000", "hora": "Hoy 16:00 hs", "estado": "LLEGADA HOY"},
+            {"id": "#RES-802", "cliente": "Sophie L. (Francia 🇫🇷)", "detalle": "Reserva Dormitorio Femenino (3 Noches) — Arribo Estimado 18:30 hs", "monto": "$50.400", "hora": "Hoy 18:30 hs", "estado": "CONFIRMADO"},
+            {"id": "#RES-803", "cliente": "Mateo G. (Uruguay 🇺🇾)", "detalle": "Habitación Privada Doble Suite (1 Noche) — Arribo Estimado 14:00 hs", "monto": "$42.000", "hora": "Hoy 14:00 hs", "estado": "EN ESTADÍA"}
+        ],
+        "mensajes": [
+            {"cliente": "Lucas P. (Brasil 🇧🇷)", "tel": "5511988776655", "consulta": "Olá! Gostaria de saber se têm cama em dormitório misto para amanhã e horário de check-in.", "hora": "14:20 hs", "estado": "PENDIENTE"},
+            {"cliente": "Emma W. (EE.UU. 🇺🇸)", "tel": "12025550143", "consulta": "Hi! Can I store my luggage before 14:00 check-in time today?", "hora": "11:05 hs", "estado": "RESPONDIDO"}
+        ],
+        "proveedores": [
+            {"nombre": "Lavandería & Blanco San Martín", "rubro": "Sabanas, Toallas & Lavandería", "deuda": "$45.000", "estado": "Al día"},
+            {"nombre": "Distribuidora Bebidas & Desayunos", "rubro": "Insumos Desayuno & Bar", "deuda": "$32.000", "estado": "Al día"}
+        ]
+    },
     "pilates_wellness": {
         "kpi_capacidad": "88% Ocupación Camas Reformer",
         "kpi_pedidos": "18 Alumnos / Reservas Hoy",
@@ -840,6 +957,29 @@ ADMIN_PANEL_POR_RUBRO = {
         ],
         "proveedores": [
             {"nombre": "Textil Denim Argentina S.A.", "rubro": "Tejidos & Confección", "deuda": "$190.000", "estado": "Al día"}
+        ]
+    },
+    "hostel": {
+        "kpi_capacidad": "92% Camas Ocupadas",
+        "kpi_pedidos": "14 Reservas Activas",
+        "kpi_stock": "6 Check-Outs Hoy",
+        "kpi_facturacion": "$640.000 Caja Hoy",
+        "productos_stock": [
+            {"sku": "HOST-101", "nombre": "Dormitorio Mixto (4 Camas)", "stock": 8, "unidad": "camas libres", "alerta": "Disponible", "precio": "$18.000/noche"},
+            {"sku": "HOST-102", "nombre": "Dormitorio Femenino (6 Camas)", "stock": 3, "unidad": "camas libres", "alerta": "Bajo Stock", "precio": "$16.800/noche"},
+            {"sku": "HOST-103", "nombre": "Dormitorio Masculino (8 Camas)", "stock": 12, "unidad": "camas libres", "alerta": "Disponible", "precio": "$14.400/noche"},
+            {"sku": "HOST-104", "nombre": "Habitación Privada Doble (Baño Privado)", "stock": 1, "unidad": "habitación", "alerta": "Última Disp.", "precio": "$42.000/noche"}
+        ],
+        "pedidos": [
+            {"id": "#RES-801", "cliente": "Mateo G. (España)", "detalle": "3 Noches — Dormitorio Mixto (4 Camas)", "monto": "$54.000 ARS", "hora": "Check-in 14:00 hs", "estado": "CONFIRMADO"},
+            {"id": "#RES-802", "cliente": "Sophie L. (Francia)", "detalle": "4 Noches — Dormitorio Femenino (6 Camas)", "monto": "$67.200 ARS", "hora": "Check-in 15:30 hs", "estado": "CONFIRMADO"},
+            {"id": "#RES-803", "cliente": "Lucas & Camila (Brasil)", "detalle": "2 Noches — Habitación Privada Doble", "monto": "$84.000 ARS", "hora": "Hace 30 min", "estado": "EN CHECK-IN"}
+        ],
+        "mensajes": [
+            {"cliente": "Alexandre Silva (Brasil)", "tel": "551198765432", "consulta": "Olá! Gostaria de saber se vocês têm cama vaga em quarto feminino/misto para o próximo fin de semana.", "hora": "11:45 hs", "estado": "PENDIENTE"}
+        ],
+        "proveedores": [
+            {"nombre": "Lavandería Industrial San Martín", "rubro": "LAVADO DE SÁBANAS & TOALLAS", "deuda": "$45.000", "estado": "Al día"}
         ]
     },
     "general": {
@@ -1402,6 +1542,9 @@ def generar_copy_negocio(nombre_negocio, rubro_key, dolor_principal=None, objeti
     elif rubro_key in ["deportes", "tenis", "club"]:
         headline = f"Reserva de Canchas de Tenis, Clases & Pro Shop en {nombre}"
         subheadline = f"En {nombre} disfrutás del mejor tenis: canchas de polvo de ladrillo en excelente estado, clases con profesores matriculados y encordado profesional de raquetas."
+    elif rubro_key in ["hostel", "hoteleria", "turismo"]:
+        headline = f"Reserva de Camas, Habitaciones & Experiencias en {nombre}"
+        subheadline = f"En {nombre} disfrutás del mejor ambiente viajero: instalaciones modernas, lockers individuales, zonas comunes de trabajo y la ubicación ideal para tu estadía."
     elif rubro_key == "servicios":
         headline = f"Soluciones Profesionales a Medida & Asesoramiento Técnico en {nombre}"
         subheadline = f"En {nombre} transformamos tus requerimientos en resultados concretos con la máxima precisión, calidad y cumplimiento de plazos."
@@ -1424,7 +1567,7 @@ def generar_copy_negocio(nombre_negocio, rubro_key, dolor_principal=None, objeti
     return headline, subheadline
 
 
-def preparar_contexto_demo(demo_obj, template_override=None, modo_cliente=False) -> dict:
+def preparar_contexto_demo(demo_obj, template_override=None, modo_cliente=False, lang="es") -> dict:
     """
     Toma una instancia de DemoSolution de la BD y genera el diccionario de contexto
     completo para renderizar `templates/demos/preview.html`.
@@ -1432,6 +1575,9 @@ def preparar_contexto_demo(demo_obj, template_override=None, modo_cliente=False)
     rubro_key = (demo_obj.rubro or "general").lower()
     if rubro_key not in THEMES_MAP:
         rubro_key = "general"
+
+    # Obtener traducciones i18n según el idioma solicitado
+    i18n_ctx = get_i18n_context(lang, rubro_key, demo_obj.nombre_negocio)
 
     # Determinar plantilla de diseño activa
     raw_template = template_override or getattr(demo_obj, "diseno_template", "classic") or "classic"
@@ -1459,17 +1605,25 @@ def preparar_contexto_demo(demo_obj, template_override=None, modo_cliente=False)
         modulos_activos = [(demo_obj.modulo_solucion or "agenda").lower()]
 
     # Garantizar que los módulos sean válidos y únicos manteniendo orden
-    validos = ["agenda", "stock", "ecommerce", "cotizador", "logistica", "decisiones", "metricas"]
+    validos = ["agenda", "hostel", "stock", "ecommerce", "cotizador", "logistica", "decisiones", "metricas"]
     modulos_activos_filtrados = []
     for m in modulos_activos:
         m_lower = str(m).lower()
         if m_lower in validos and m_lower not in modulos_activos_filtrados:
             modulos_activos_filtrados.append(m_lower)
+    # Forzar el módulo 'hostel' como principal si el rubro o slug es de hostel/hotelería
+    es_rubro_hostel = rubro_key in ["hostel", "hoteleria", "turismo"] or "hostel" in (demo_obj.rubro or "").lower() or "hostel" in (demo_obj.slug or "").lower()
+    if es_rubro_hostel:
+        if "hostel" in modulos_activos_filtrados:
+            modulos_activos_filtrados.remove("hostel")
+        modulos_activos_filtrados.insert(0, "hostel")
+
     if not modulos_activos_filtrados:
-        modulos_activos_filtrados = ["agenda"]
+        modulos_activos_filtrados = ["hostel" if es_rubro_hostel else "agenda"]
 
     MODULOS_NOMBRES_ICONOS = {
         "agenda": {"nombre": "Agenda & Reservas", "icon": "fa-calendar-check"},
+        "hostel": {"nombre": "Reserva de Camas & Estadías", "icon": "fa-bed"},
         "stock": {"nombre": "Catálogo & Stock", "icon": "fa-boxes-stacked"},
         "ecommerce": {"nombre": "E-Commerce / Carta", "icon": "fa-cart-shopping"},
         "cotizador": {"nombre": "Cotizador B2B", "icon": "fa-calculator"},
@@ -1479,6 +1633,9 @@ def preparar_contexto_demo(demo_obj, template_override=None, modo_cliente=False)
     }
 
     modulos_info_list = []
+    i18n_dic = i18n_ctx.get("i18n", {})
+    lang_code = i18n_ctx.get("lang", "es")
+
     for m_key in modulos_activos_filtrados:
         info = dict(MODULOS_TITULOS.get(m_key, MODULOS_TITULOS["agenda"]))
         meta = MODULOS_NOMBRES_ICONOS.get(m_key, {"nombre": m_key.title(), "icon": "fa-cube"})
@@ -1487,6 +1644,15 @@ def preparar_contexto_demo(demo_obj, template_override=None, modo_cliente=False)
         info["nombre"] = meta["nombre"]
         info["icon"] = meta["icon"]
         info["template"] = f"demos/components/{m_key}.html"
+
+        if lang_code != "es":
+            if f"{m_key}_titulo" in i18n_dic:
+                info["titulo"] = i18n_dic[f"{m_key}_titulo"]
+            if f"{m_key}_subtitulo" in i18n_dic:
+                info["subtitulo"] = i18n_dic[f"{m_key}_subtitulo"]
+            if f"{m_key}_badge" in i18n_dic:
+                info["badge"] = i18n_dic[f"{m_key}_badge"]
+
         modulos_info_list.append(info)
 
     modulo_key = modulos_activos_filtrados[0]
@@ -1498,6 +1664,14 @@ def preparar_contexto_demo(demo_obj, template_override=None, modo_cliente=False)
     modulo_info["icon"] = meta_main["icon"]
     modulo_info["template"] = f"demos/components/{modulo_key}.html"
 
+    if lang_code != "es":
+        if f"{modulo_key}_titulo" in i18n_dic:
+            modulo_info["titulo"] = i18n_dic[f"{modulo_key}_titulo"]
+        if f"{modulo_key}_subtitulo" in i18n_dic:
+            modulo_info["subtitulo"] = i18n_dic[f"{modulo_key}_subtitulo"]
+        if f"{modulo_key}_badge" in i18n_dic:
+            modulo_info["badge"] = i18n_dic[f"{modulo_key}_badge"]
+
     # Generar titulares enfocados 100% en el negocio del cliente e incorporando dolores y objetivos
     dolor_principal = getattr(demo_obj, "dolor_principal", "") or ""
     objetivo = getattr(demo_obj, "objetivo", "") or ""
@@ -1507,6 +1681,11 @@ def preparar_contexto_demo(demo_obj, template_override=None, modo_cliente=False)
         dolor_principal=dolor_principal,
         objetivo=objetivo
     )
+
+    if i18n_ctx.get("headline_tr") and not objetivo:
+        hero_headline = i18n_ctx["headline_tr"]
+    if i18n_ctx.get("subheadline_tr") and not dolor_principal:
+        hero_subheadline = i18n_ctx["subheadline_tr"]
 
     # Inyección de Banco de Imágenes y Noticias
     img_data = obtener_imagenes_rubro(rubro_key)
@@ -1521,6 +1700,9 @@ def preparar_contexto_demo(demo_obj, template_override=None, modo_cliente=False)
             p_copy["image"] = theme["hero_bg_image"]
         pilares_enriquecidos.append(p_copy)
 
+    # Traducir los pilares si el idioma es distinto a español
+    pilares_enriquecidos = translate_pilares(pilares_enriquecidos, lang=lang_code, rubro=rubro_key)
+
     # Parsear reseñas de JSON y ordenar de mejor a peor (5★ a 1★)
     reviews = []
     if demo_obj.reviews_json:
@@ -1530,26 +1712,30 @@ def preparar_contexto_demo(demo_obj, template_override=None, modo_cliente=False)
             reviews = []
 
     if not reviews:
-        reviews = [
-            {
-                "author_name": "Gabriel M.",
-                "rating": 5,
-                "text": f"La mejor atención en {demo_obj.nombre_negocio}. Muy satisfecho con el servicio y la rapidez.",
-                "relative_time": "hace 1 semana"
-            },
-            {
-                "author_name": "Ana Clara S.",
-                "rating": 5,
-                "text": f"Rápidos, prolijos y súper recomendables. Excelente experiencia en {demo_obj.nombre_negocio}.",
-                "relative_time": "hace un mes"
-            },
-            {
-                "author_name": "Marcos Rossi",
-                "rating": 5,
-                "text": f"Atención impecable y respuesta inmediata. Volveré sin dudas a {demo_obj.nombre_negocio}.",
-                "relative_time": "hace 2 semanas"
-            }
-        ]
+        if lang_code == "en":
+            reviews = [
+                {"author_name": "Gabriel M.", "rating": 5, "text": f"Best service at {demo_obj.nombre_negocio}. Highly satisfied with the quality and quick attention.", "relative_time": "1 week ago"},
+                {"author_name": "Anna S.", "rating": 5, "text": f"Fast, neat and highly recommended. Excellent experience at {demo_obj.nombre_negocio}.", "relative_time": "1 month ago"},
+                {"author_name": "Mark R.", "rating": 5, "text": f"Flawless service and instant response. Will definitely come back to {demo_obj.nombre_negocio}.", "relative_time": "2 weeks ago"}
+            ]
+        elif lang_code == "pt":
+            reviews = [
+                {"author_name": "Gabriel M.", "rating": 5, "text": f"O melhor atendimento em {demo_obj.nombre_negocio}. Muito satisfeito com a qualidade e rapidez.", "relative_time": "há 1 semana"},
+                {"author_name": "Ana Clara S.", "rating": 5, "text": f"Rápidos, eficientes e super recomendáveis. Excelente experiência em {demo_obj.nombre_negocio}.", "relative_time": "há 1 mês"},
+                {"author_name": "Marcos Rossi", "rating": 5, "text": f"Atendimento impecável e resposta imediata. Voltarei com certeza a {demo_obj.nombre_negocio}.", "relative_time": "há 2 semanas"}
+            ]
+        elif lang_code == "it":
+            reviews = [
+                {"author_name": "Gabriele M.", "rating": 5, "text": f"Il miglior servizio a {demo_obj.nombre_negocio}. Molto soddisfatto per la qualità e la velocità.", "relative_time": "1 settimana fa"},
+                {"author_name": "Anna Chiara S.", "rating": 5, "text": f"Veloci, precisi e super consigliati. Eccellente esperienza a {demo_obj.nombre_negocio}.", "relative_time": "1 mese fa"},
+                {"author_name": "Marco Rossi", "rating": 5, "text": f"Servizio impeccabile e risposta immediata. Tornerò sicuramente a {demo_obj.nombre_negocio}.", "relative_time": "2 settimane fa"}
+            ]
+        else:
+            reviews = [
+                {"author_name": "Gabriel M.", "rating": 5, "text": f"La mejor atención en {demo_obj.nombre_negocio}. Muy satisfecho con el servicio y la rapidez.", "relative_time": "hace 1 semana"},
+                {"author_name": "Ana Clara S.", "rating": 5, "text": f"Rápidos, prolijos y súper recomendables. Excelente experiencia en {demo_obj.nombre_negocio}.", "relative_time": "hace un mes"},
+                {"author_name": "Marcos Rossi", "rating": 5, "text": f"Atención impecable y respuesta inmediata. Volveré sin dudas a {demo_obj.nombre_negocio}.", "relative_time": "hace 2 semanas"}
+            ]
 
     # Ordenar reseñas de mejor a peor (5 estrellas primero) y filtrar valoraciones bajas < 4
     reviews = [r for r in reviews if int(r.get("rating", 5)) >= 4]
@@ -1656,6 +1842,8 @@ def preparar_contexto_demo(demo_obj, template_override=None, modo_cliente=False)
 
     return {
         "demo": demo_obj,
+        "lang": i18n_ctx["lang"],
+        "i18n": i18n_ctx["i18n"],
         "modo_cliente": modo_cliente,
         "mostrar_novedades": bool(getattr(demo_obj, "mostrar_novedades", False)),
         "theme": theme_copy,
@@ -1668,6 +1856,7 @@ def preparar_contexto_demo(demo_obj, template_override=None, modo_cliente=False)
         "modulos_activos": modulos_activos_filtrados,
         "modulos_info_list": modulos_info_list,
         "agenda_config": agenda_config,
+        "hostel_config": HOSTEL_CONFIG,
         "admin_config": admin_config,
         "hero_headline": hero_headline,
         "hero_subheadline": hero_subheadline,

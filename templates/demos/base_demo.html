@@ -123,6 +123,17 @@
                 </select>
             </div>
 
+            <!-- SELECTOR DE IDIOMA MULTILENGUAJE -->
+            <div class="flex items-center gap-1 bg-slate-900/90 border border-white/15 px-2 py-1 rounded-xl shadow-inner text-[11px]">
+                <i class="fa-solid fa-globe text-cyan-400"></i>
+                <select onchange="changeDemoLanguage(this.value)" class="bg-slate-950 border border-white/15 text-slate-200 font-bold text-xs rounded-lg px-1.5 py-0.5 focus:outline-none focus:border-cyan-400 cursor-pointer">
+                    <option value="es" {% if lang == 'es' %}selected{% endif %}>🇪🇸 ES</option>
+                    <option value="en" {% if lang == 'en' %}selected{% endif %}>🇺🇸 EN</option>
+                    <option value="pt" {% if lang == 'pt' %}selected{% endif %}>🇧🇷 PT</option>
+                    <option value="it" {% if lang == 'it' %}selected{% endif %}>🇮🇹 IT</option>
+                </select>
+            </div>
+
             <!-- TAB SWITCHER: EXPOSICIÓN VS GESTIÓN INTERNA -->
             {% if demo.tipo_software == 'ambas' or not demo.tipo_software %}
             <div class="flex items-center gap-1 bg-slate-900/90 border border-white/10 p-1 rounded-xl shadow-inner">
@@ -181,15 +192,15 @@
 
             <!-- DESKTOP NAV -->
             <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-200">
-                <a href="#pilares" onclick="navigateToSection(1)" class="hover:text-cyan-300 transition">Ventajas</a>
-                <a href="#solucion" onclick="navigateToSection(2)" class="hover:text-cyan-300 transition">Catálogo / Servicios</a>
+                <a href="#pilares" onclick="navigateToSection(1)" class="hover:text-cyan-300 transition">{{ i18n.nav_pilares or 'Ventajas' }}</a>
+                <a href="#solucion" onclick="navigateToSection(2)" class="hover:text-cyan-300 transition">{{ i18n.nav_solucion or 'Catálogo / Servicios' }}</a>
                 {% if (demo.mostrar_novedades or mostrar_novedades) and news %}
-                <a href="#novedades" onclick="navigateToSection(3)" class="hover:text-cyan-300 transition">Novedades</a>
+                <a href="#novedades" onclick="navigateToSection(3)" class="hover:text-cyan-300 transition">{{ i18n.nav_novedades or 'Novedades' }}</a>
                 {% endif %}
-                <a href="#testimonios" onclick="navigateToSection(3)" class="hover:text-cyan-300 transition">Opiniones</a>
-                <a href="#ubicacion" onclick="navigateToSection(4)" class="hover:text-cyan-300 transition">Ubicación</a>
+                <a href="#testimonios" onclick="navigateToSection(3)" class="hover:text-cyan-300 transition">{{ i18n.nav_resenas or 'Opiniones' }}</a>
+                <a href="#ubicacion" onclick="navigateToSection(4)" class="hover:text-cyan-300 transition">{{ i18n.nav_galeria or 'Ubicación' }}</a>
                 <a href="{{ wa_link }}" target="_blank" class="bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/30 px-4 py-1.5 rounded-lg transition flex items-center gap-2 font-bold shadow-sm">
-                    <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i> Contactar Negocio
+                    <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i> {{ i18n.btn_contactar or 'Contactar Negocio' }}
                 </a>
             </nav>
 
@@ -203,24 +214,24 @@
         <div id="mobile-menu-drawer" class="hidden md:hidden bg-slate-950/95 border-b border-cyan-500/30 px-5 py-5 space-y-3 backdrop-blur-2xl transition-all duration-300 shadow-2xl">
             <div class="flex flex-col gap-2.5 text-sm font-bold text-slate-200">
                 <a href="#pilares" onclick="navigateToSection(1); closeMobileMenu();" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl bg-slate-900/80 border border-white/10 hover:border-cyan-400/50 hover:text-cyan-300 transition">
-                    <i class="fa-solid fa-star text-amber-400 w-5"></i> Ventajas & Pilares
+                    <i class="fa-solid fa-star text-amber-400 w-5"></i> {{ i18n.nav_pilares or 'Ventajas & Pilares' }}
                 </a>
                 <a href="#solucion" onclick="navigateToSection(2); closeMobileMenu();" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl bg-slate-900/80 border border-white/10 hover:border-cyan-400/50 hover:text-cyan-300 transition">
-                    <i class="fa-solid fa-layer-group text-cyan-400 w-5"></i> Catálogo / Servicios
+                    <i class="fa-solid fa-layer-group text-cyan-400 w-5"></i> {{ i18n.nav_solucion or 'Catálogo / Servicios' }}
                 </a>
                 {% if (demo.mostrar_novedades or mostrar_novedades) and news %}
                 <a href="#novedades" onclick="navigateToSection(3); closeMobileMenu();" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl bg-slate-900/80 border border-white/10 hover:border-cyan-400/50 hover:text-cyan-300 transition">
-                    <i class="fa-solid fa-newspaper text-purple-400 w-5"></i> Novedades
+                    <i class="fa-solid fa-newspaper text-purple-400 w-5"></i> {{ i18n.nav_novedades or 'Novedades' }}
                 </a>
                 {% endif %}
                 <a href="#testimonios" onclick="navigateToSection(3); closeMobileMenu();" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl bg-slate-900/80 border border-white/10 hover:border-cyan-400/50 hover:text-cyan-300 transition">
-                    <i class="fa-solid fa-comments text-emerald-400 w-5"></i> Opiniones de Clientes
+                    <i class="fa-solid fa-comments text-emerald-400 w-5"></i> {{ i18n.nav_resenas or 'Opiniones de Clientes' }}
                 </a>
                 <a href="#ubicacion" onclick="navigateToSection(4); closeMobileMenu();" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl bg-slate-900/80 border border-white/10 hover:border-cyan-400/50 hover:text-cyan-300 transition">
-                    <i class="fa-solid fa-location-dot text-rose-400 w-5"></i> Ubicación & Instalaciones
+                    <i class="fa-solid fa-location-dot text-rose-400 w-5"></i> {{ i18n.nav_galeria or 'Ubicación & Instalaciones' }}
                 </a>
                 <a href="{{ wa_link }}" target="_blank" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black py-3 rounded-xl text-center flex items-center justify-center gap-2 shadow-lg mt-1 text-xs">
-                    <i class="fa-brands fa-whatsapp text-base flex-shrink-0"></i> Contactar por WhatsApp
+                    <i class="fa-brands fa-whatsapp text-base flex-shrink-0"></i> {{ i18n.btn_contactar or 'Contactar por WhatsApp' }}
                 </a>
             </div>
         </div>
@@ -369,6 +380,14 @@
                     setTimeout(() => { if (btnTexto) btnTexto.textContent = "Copiar"; }, 2500);
                 });
             }
+        }
+
+        // CAMBIO MULTILENGUAJE DINÁMICO
+        function changeDemoLanguage(langCode) {
+            const url = new URL(window.location.href);
+            url.searchParams.set('lang', langCode);
+            document.cookie = `demo_lang=${langCode}; path=/; max-age=31536000`;
+            window.location.href = url.toString();
         }
 
         // CONTROL DE MENÚ HAMBURGUESA EN MOBILE

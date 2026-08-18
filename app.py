@@ -425,8 +425,15 @@ def admin_crear_demo():
 
     # Procesar múltiples módulos seleccionados
     modulos_seleccionados = request.form.getlist("modulos_solucion")
+    rubro_ingresado = (request.form.get("rubro") or "").strip().lower()
     if not modulos_seleccionados:
-        modulos_seleccionados = [ (request.form.get("modulo_solucion") or "agenda").strip().lower() ]
+        modulos_seleccionados = [ (request.form.get("modulo_solucion") or ("hostel" if rubro_ingresado in ["hostel", "hoteleria", "turismo"] else "agenda")).strip().lower() ]
+
+    # Si es rubro hostel/hoteleria y hostel está en los seleccionados, garantizar que hostel sea el módulo principal
+    if (rubro_ingresado in ["hostel", "hoteleria", "turismo"] or "hostel" in rubro_ingresado) and "hostel" in modulos_seleccionados:
+        modulos_seleccionados.remove("hostel")
+        modulos_seleccionados.insert(0, "hostel")
+
     modulo_solucion_principal = modulos_seleccionados[0]
     modulos_json = json.dumps(modulos_seleccionados, ensure_ascii=False)
 
@@ -751,7 +758,8 @@ def ver_demo_publica(slug):
         db.session.rollback()
         print(f"[WARN TRACKING DEMO] {e}")
 
-    context = preparar_contexto_demo(demo, template_override=template_override, modo_cliente=modo_cliente)
+    lang = (request.args.get("lang") or request.cookies.get("demo_lang") or "es").lower().strip()
+    context = preparar_contexto_demo(demo, template_override=template_override, modo_cliente=modo_cliente, lang=lang)
     return render_template("demos/preview.html", **context)
 
 

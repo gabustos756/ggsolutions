@@ -1,0 +1,724 @@
+<!-- MÓDULO INTERACTIVO: RESERVA DE CAMAS & HABITACIONES HOSTEL / TURISMO (ESTRUCTURA BOOKING / HOSTELWORLD) -->
+<div class="space-y-12 max-w-7xl mx-auto">
+
+    <!-- BARRA SUB-NAVEGACIÓN SUPERIOR DE SECCIONES DE HOSTEL -->
+    <div class="glass-card rounded-2xl px-5 py-3 border border-white/10 flex flex-wrap items-center justify-between gap-4 text-xs font-semibold text-slate-300 backdrop-blur-md shadow-lg">
+        <div class="flex items-center gap-6 overflow-x-auto py-1">
+            <a href="#hostel-habitaciones" class="text-teal-400 font-extrabold flex items-center gap-1.5 hover:text-teal-300 transition">
+                <i class="fa-solid fa-bed"></i> Habitaciones & Camas
+            </a>
+            <a href="#hostel-servicios" class="hover:text-white transition flex items-center gap-1.5">
+                <i class="fa-solid fa-concierge-bell"></i> Servicios
+            </a>
+            <a href="#hostel-reglas" class="hover:text-white transition flex items-center gap-1.5">
+                <i class="fa-solid fa-clipboard-list"></i> Reglas de la casa
+            </a>
+            <a href="#ubicacion" class="hover:text-white transition flex items-center gap-1.5">
+                <i class="fa-solid fa-location-dot"></i> Ubicación
+            </a>
+            <a href="#hostel-comentarios" class="hover:text-white transition flex items-center gap-1.5">
+                <i class="fa-solid fa-comments"></i> Comentarios de clientes
+            </a>
+        </div>
+        <span class="text-[11px] text-slate-300 flex items-center gap-1 hover:text-rose-400 cursor-pointer transition">
+            <i class="fa-regular fa-flag text-rose-400"></i> Reportar / Denunciar
+        </span>
+    </div>
+
+    <!-- MAIN GRID DE RESERVAS: COLUMNA IZQUIERDA (CATÁLOGO HABITACIONES) + COLUMNA DERECHA (STICKY SUMMARY) -->
+    <div id="hostel-habitaciones" class="grid lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- COLUMNA IZQUIERDA: LISTADO DE HABITACIONES Y CAMAS (8 COLS) -->
+        <div class="lg:col-span-8 space-y-8">
+            <div>
+                <h3 class="text-2xl sm:text-3xl font-black text-white font-title flex items-center gap-3">
+                    Elige tu habitación <span class="text-xs font-sans font-semibold text-teal-400 bg-teal-500/10 border border-teal-500/30 px-3 py-1 rounded-full">Reserva Directa Sin Comisión</span>
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-300 mt-1">Precios por noche con cancelación flexible y desayuno incluido.</p>
+            </div>
+
+            <!-- GRUPO 1: HABITACIONES PRIVADAS -->
+            <div class="space-y-4">
+                <h4 class="text-lg font-bold text-white flex items-center gap-2 border-b border-white/10 pb-2">
+                    <i class="fa-solid fa-door-closed text-amber-400"></i> Habitaciones privadas
+                </h4>
+
+                <!-- CARD 1: ESTÁNDAR 2 CAMAS PRIVADAS BAÑO -->
+                <div class="glass-card rounded-2xl border border-white/15 p-4 sm:p-5 flex flex-col sm:flex-row gap-5 hover:border-teal-400/40 transition group">
+                    <div class="sm:w-56 h-48 sm:h-auto rounded-xl overflow-hidden relative flex-shrink-0 bg-slate-900 border border-white/10">
+                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80" alt="Habitación Privada" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-slate-950/80 rounded-md text-[10px] font-mono text-white backdrop-blur-md">
+                            📷 1/5 fotos
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                    Mejor precio en habitación privada
+                                </span>
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                                    ¡Solo quedan 3 habitaciones!
+                                </span>
+                            </div>
+                            <h5 class="text-base font-extrabold text-white font-title group-hover:text-teal-300 transition">Estándar 2 camas privadas Baño</h5>
+                            <p class="text-xs text-slate-300 line-clamp-2 leading-relaxed">
+                                Habitación espaciosa con aire acondicionado, balcón panorámico, placard, lockers con llave y baño privado en suite.
+                            </p>
+                            <div class="flex flex-wrap gap-2 text-[11px] text-slate-300 pt-1">
+                                <span class="px-2 py-1 bg-slate-900 border border-white/10 rounded-md flex items-center gap-1"><i class="fa-solid fa-user-group text-slate-400"></i> Capacidad de 2 personas</span>
+                                <span class="px-2 py-1 bg-slate-900 border border-white/10 rounded-md flex items-center gap-1"><i class="fa-solid fa-shower text-slate-400"></i> Baño privado</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-t border-white/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                            <div>
+                                <div class="text-lg font-black text-teal-300 font-mono">109.323,70 ARS <span class="text-[11px] text-slate-400 font-normal">(USD $91)</span></div>
+                                <div class="flex items-center gap-3 text-[10px] text-slate-400 mt-0.5">
+                                    <span><i class="fa-solid fa-circle-xmark text-rose-400"></i> No reembolsable</span>
+                                    <span><i class="fa-solid fa-mug-hot text-amber-400"></i> Desayuno incluido</span>
+                                </div>
+                            </div>
+                            <button type="button" onclick="agregarCamaHostelCart('privada_estandar', 'Estándar 2 camas privadas Baño', 109323.70, 91)" class="w-full sm:w-auto px-5 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-extrabold text-xs transition shadow-lg flex items-center justify-center gap-1.5 active:scale-95">
+                                <i class="fa-solid fa-plus"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2: DE LUJO 2 CAMA APARTAMENTO BAÑO -->
+                <div class="glass-card rounded-2xl border border-white/15 p-4 sm:p-5 flex flex-col sm:flex-row gap-5 hover:border-teal-400/40 transition group">
+                    <div class="sm:w-56 h-48 sm:h-auto rounded-xl overflow-hidden relative flex-shrink-0 bg-slate-900 border border-white/10">
+                        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=600&q=80" alt="Habitación Lujo" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-slate-950/80 rounded-md text-[10px] font-mono text-white backdrop-blur-md">
+                            📷 1/5 fotos
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                                    ¡Solo quedan 2 habitaciones!
+                                </span>
+                            </div>
+                            <h5 class="text-base font-extrabold text-white font-title group-hover:text-teal-300 transition">De lujo 2 Cama Apartamento Baño</h5>
+                            <p class="text-xs text-slate-300 line-clamp-2 leading-relaxed">
+                                Alojamiento familiar de lujo con sala de estar, frigobar, escritorio de co-working, balcón privado y baño en suite.
+                            </p>
+                            <div class="flex flex-wrap gap-2 text-[11px] text-slate-300 pt-1">
+                                <span class="px-2 py-1 bg-slate-900 border border-white/10 rounded-md flex items-center gap-1"><i class="fa-solid fa-user-group text-slate-400"></i> Capacidad de 2 personas</span>
+                                <span class="px-2 py-1 bg-slate-900 border border-white/10 rounded-md flex items-center gap-1"><i class="fa-solid fa-bath text-slate-400"></i> Baño de lujo</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-t border-white/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                            <div>
+                                <div class="text-lg font-black text-teal-300 font-mono">137.749,06 ARS <span class="text-[11px] text-slate-400 font-normal">(USD $115)</span></div>
+                                <div class="flex items-center gap-3 text-[10px] text-slate-400 mt-0.5">
+                                    <span><i class="fa-solid fa-circle-xmark text-rose-400"></i> No reembolsable</span>
+                                    <span><i class="fa-solid fa-mug-hot text-amber-400"></i> Desayuno incluido</span>
+                                </div>
+                            </div>
+                            <button type="button" onclick="agregarCamaHostelCart('privada_lujo', 'De lujo 2 Cama Apartamento Baño', 137749.06, 115)" class="w-full sm:w-auto px-5 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-extrabold text-xs transition shadow-lg flex items-center justify-center gap-1.5 active:scale-95">
+                                <i class="fa-solid fa-plus"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GRUPO 2: CAMAS EN DORMITORIOS COMPARTIDOS -->
+            <div class="space-y-4 pt-4">
+                <h4 class="text-lg font-bold text-white flex items-center gap-2 border-b border-white/10 pb-2">
+                    <i class="fa-solid fa-bed text-cyan-400"></i> Camas en dormitorios compartidos
+                </h4>
+
+                <!-- CARD 3: DORMITORIO MIXTO / MASCULINO 9 CAMAS -->
+                <div class="glass-card rounded-2xl border border-white/15 p-4 sm:p-5 flex flex-col sm:flex-row gap-5 hover:border-teal-400/40 transition group">
+                    <div class="sm:w-56 h-48 sm:h-auto rounded-xl overflow-hidden relative flex-shrink-0 bg-slate-900 border border-white/10">
+                        <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80" alt="Dormitorio Masculino" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-slate-950/80 rounded-md text-[10px] font-mono text-white backdrop-blur-md">
+                            📷 1/5 fotos
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                    Mejor precio por cama
+                                </span>
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                                    ¡Solo quedan 5 camas!
+                                </span>
+                            </div>
+                            <h5 class="text-base font-extrabold text-white font-title group-hover:text-teal-300 transition">Estándar 9 Cama Dormitorios masculinos Baño</h5>
+                            <p class="text-xs text-slate-300 line-clamp-2 leading-relaxed">
+                                Dormitorio compartido masculino con aire acondicionado, lockers individuales con llave, cortinas de privacidad y luz de lectura en cada cama.
+                            </p>
+                            <div class="flex flex-wrap gap-2 text-[11px] text-slate-300 pt-1">
+                                <span class="px-2 py-1 bg-slate-900 border border-white/10 rounded-md flex items-center gap-1"><i class="fa-solid fa-user text-slate-400"></i> Capacidad de personas 9</span>
+                                <span class="px-2 py-1 bg-slate-900 border border-white/10 rounded-md flex items-center gap-1"><i class="fa-solid fa-key text-slate-400"></i> Lockers de seguridad</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-t border-white/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                            <div>
+                                <div class="text-lg font-black text-teal-300 font-mono">39.356,87 ARS <span class="text-[11px] text-slate-400 font-normal">(USD $33)</span></div>
+                                <div class="flex items-center gap-3 text-[10px] text-slate-400 mt-0.5">
+                                    <span><i class="fa-solid fa-circle-xmark text-rose-400"></i> No reembolsable</span>
+                                    <span><i class="fa-solid fa-mug-hot text-amber-400"></i> Desayuno incluido</span>
+                                </div>
+                            </div>
+                            <button type="button" onclick="agregarCamaHostelCart('dorm_masculino', 'Cama en Dormitorio Masculino (9 Camas)', 39356.87, 33)" class="w-full sm:w-auto px-5 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-extrabold text-xs transition shadow-lg flex items-center justify-center gap-1.5 active:scale-95">
+                                <i class="fa-solid fa-plus"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 4: DORMITORIO FEMENINO 6 CAMAS -->
+                <div class="glass-card rounded-2xl border border-white/15 p-4 sm:p-5 flex flex-col sm:flex-row gap-5 hover:border-teal-400/40 transition group">
+                    <div class="sm:w-56 h-48 sm:h-auto rounded-xl overflow-hidden relative flex-shrink-0 bg-slate-900 border border-white/10">
+                        <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=600&q=80" alt="Dormitorio Femenino" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute bottom-2 left-2 px-2 py-0.5 bg-slate-950/80 rounded-md text-[10px] font-mono text-white backdrop-blur-md">
+                            📷 1/5 fotos
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 flex flex-col justify-between space-y-3">
+                        <div class="space-y-2">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-pink-500/20 text-pink-300 border border-pink-500/30">
+                                    Exclusivo Mujeres
+                                </span>
+                                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                                    ¡Solo quedan 2 camas!
+                                </span>
+                            </div>
+                            <h5 class="text-base font-extrabold text-white font-title group-hover:text-teal-300 transition">Estándar 6 Cama Dormitorio femenino Baño</h5>
+                            <p class="text-xs text-slate-300 line-clamp-2 leading-relaxed">
+                                Dormitorio compartido exclusivo para mujeres con secador de pelo, espejo de cuerpo entero, lockers con llave y baño privado.
+                            </p>
+                            <div class="flex flex-wrap gap-2 text-[11px] text-slate-300 pt-1">
+                                <span class="px-2 py-1 bg-slate-900 border border-white/10 rounded-md flex items-center gap-1"><i class="fa-solid fa-person-dress text-pink-400"></i> Capacidad de personas 6</span>
+                                <span class="px-2 py-1 bg-slate-900 border border-white/10 rounded-md flex items-center gap-1"><i class="fa-solid fa-wind text-slate-400"></i> Secador de pelo</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-t border-white/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                            <div>
+                                <div class="text-lg font-black text-teal-300 font-mono">35.200,00 ARS <span class="text-[11px] text-slate-400 font-normal">(USD $29)</span></div>
+                                <div class="flex items-center gap-3 text-[10px] text-slate-400 mt-0.5">
+                                    <span><i class="fa-solid fa-circle-xmark text-rose-400"></i> No reembolsable</span>
+                                    <span><i class="fa-solid fa-mug-hot text-amber-400"></i> Desayuno incluido</span>
+                                </div>
+                            </div>
+                            <button type="button" onclick="agregarCamaHostelCart('dorm_femenino', 'Cama en Dormitorio Femenino (6 Camas)', 35200.00, 29)" class="w-full sm:w-auto px-5 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-extrabold text-xs transition shadow-lg flex items-center justify-center gap-1.5 active:scale-95">
+                                <i class="fa-solid fa-plus"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-[11px] text-slate-400 italic text-center sm:text-left">
+                * Los precios son por habitación o cama por noche — Impuestos no incluidos.
+            </p>
+        </div>
+
+        <!-- COLUMNA DERECHA: WIDGET FLOTANTE STICKY DE RESUMEN Y CHECKOUT (4 COLS) -->
+        <div class="lg:col-span-4 sticky top-24 space-y-4">
+            <div class="glass-card rounded-2xl border border-white/20 p-5 space-y-5 backdrop-blur-xl shadow-2xl bg-slate-900/90">
+                
+                <div class="flex items-baseline justify-between border-b border-white/10 pb-4">
+                    <div>
+                        <span class="text-[11px] uppercase tracking-wider text-slate-400 font-bold block">Tarifa desde</span>
+                        <span class="text-2xl font-black text-white font-mono" id="hostel-price-from">39.356,87 ARS</span>
+                    </div>
+                    <button type="button" onclick="scrollToHostelRooms()" class="px-4 py-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 font-extrabold rounded-xl text-xs transition shadow-lg flex-shrink-0">
+                        Elegir habitación
+                    </button>
+                </div>
+
+                <!-- SELECTOR DE FECHAS & PERSONAS EMBEDDED -->
+                <div class="bg-slate-950/80 border border-white/10 rounded-xl p-3 space-y-3">
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="space-y-1">
+                            <label class="text-[10px] text-slate-400 font-bold flex items-center gap-1">
+                                <i class="fa-solid fa-calendar text-teal-400"></i> {{ i18n.hostel_checkin or 'Check-in (Entrada)' }}
+                            </label>
+                            <input type="date" id="hostel-widget-in" onchange="recalcularWidgetHostel()" class="w-full bg-slate-900 border border-white/15 rounded-lg px-2.5 py-1.5 text-white font-mono text-[11px] focus:outline-none focus:border-teal-400">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] text-slate-400 font-bold flex items-center gap-1">
+                                <i class="fa-solid fa-calendar text-teal-400"></i> {{ i18n.hostel_checkout or 'Check-out (Salida)' }}
+                            </label>
+                            <input type="date" id="hostel-widget-out" onchange="recalcularWidgetHostel()" class="w-full bg-slate-900 border border-white/15 rounded-xl px-2.5 py-1.5 text-white font-mono text-[11px] focus:outline-none focus:border-teal-400">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2 text-xs pt-1 border-t border-white/5">
+                        <div class="space-y-1">
+                            <label class="text-[10px] text-slate-400 font-bold flex items-center gap-1">
+                                <i class="fa-solid fa-clock text-amber-400"></i> {{ i18n.hostel_hora_llegada or 'Hora Aprox. Llegada' }}
+                            </label>
+                            <select id="hostel-widget-arrival" class="w-full bg-slate-900 border border-white/15 rounded-lg px-2 py-1.5 text-white font-bold text-xs focus:outline-none focus:border-teal-400">
+                                <option value="12:00 hs">12:00 hs</option>
+                                <option value="14:00 hs" selected>14:00 hs (Check-in)</option>
+                                <option value="16:00 hs">16:00 hs</option>
+                                <option value="18:00 hs">18:00 hs</option>
+                                <option value="20:00 hs">20:00 hs</option>
+                                <option value="22:00 hs">22:00 hs</option>
+                                <option value="00:00+ hs (Madrugada)">Llegada nocturna</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] text-slate-400 font-bold flex items-center justify-between">
+                                <span><i class="fa-solid fa-users text-teal-400"></i> {{ i18n.hostel_huespedes or 'Huéspedes' }}</span>
+                                <span class="text-teal-400 font-mono" id="widget-noches-count">1 noche</span>
+                            </label>
+                            <select id="hostel-widget-guests" onchange="recalcularWidgetHostel()" class="w-full bg-slate-900 border border-white/15 rounded-lg px-2 py-1.5 text-white font-bold text-xs focus:outline-none focus:border-teal-400">
+                                <option value="1">{{ i18n.hostel_1persona or '1 Persona' }}</option>
+                                <option value="2" selected>{{ i18n.hostel_2personas or '2 Personas' }}</option>
+                                <option value="3">{{ i18n.hostel_3personas or '3 Personas' }}</option>
+                                <option value="4">{{ i18n.hostel_4personas or '4+ Personas' }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARRO / DETALLE DE SELECCIÓN -->
+                <div class="space-y-2">
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block">Tus Selecciones</span>
+                    <div id="hostel-cart-items" class="space-y-2 max-h-40 overflow-y-auto pr-1">
+                        <div class="p-3 bg-slate-950/60 border border-dashed border-white/15 rounded-xl text-center text-xs text-slate-400">
+                            Aún no añadiste habitaciones. Haz clic en <strong>+ Añadir</strong>.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DATOS DE CONTACTO PARA WHATSAPP -->
+                <div class="space-y-2 pt-2 border-t border-white/10">
+                    <input type="text" id="hostel-guest-name" placeholder="{{ i18n.agenda_input_nombre or 'Tu Nombre Completo' }}" class="w-full bg-slate-950 border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-teal-400">
+                    <input type="text" id="hostel-guest-origin" placeholder="País / Ciudad de Origen (ej. Argentina, Francia)" class="w-full bg-slate-950 border border-white/15 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-teal-400">
+                </div>
+
+                <!-- RESUMEN FINAL -->
+                <div class="bg-slate-950 border border-teal-500/30 rounded-xl p-3 flex justify-between items-center">
+                    <div>
+                        <span class="text-[10px] text-slate-400 font-bold uppercase block">Total Directo</span>
+                        <span class="text-xs text-emerald-400 font-bold">Sin Comisiones OTAs</span>
+                    </div>
+                    <span class="text-xl font-black text-teal-300 font-mono" id="hostel-cart-total">$0 ARS</span>
+                </div>
+
+                <button type="button" onclick="enviarReservaHostelFinalWA()" class="w-full bg-gradient-to-r from-orange-500 via-amber-500 to-teal-400 text-slate-950 font-black py-3.5 px-4 rounded-xl shadow-2xl hover:scale-[1.02] transition flex items-center justify-center gap-2 text-xs sm:text-sm">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>Confirmar Reserva por WhatsApp</span>
+                </button>
+
+                <!-- ICONOS DE TARJETAS Y GARANTÍA -->
+                <div class="pt-2 space-y-2 border-t border-white/10 text-[11px] text-slate-400">
+                    <div class="flex items-center justify-center gap-3 text-slate-300 text-base">
+                        <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
+                        <i class="fa-brands fa-cc-visa" title="Visa"></i>
+                        <i class="fa-brands fa-whatsapp text-emerald-400" title="WhatsApp"></i>
+                    </div>
+                    <div class="flex items-center justify-center gap-4 text-[10px]">
+                        <span class="flex items-center gap-1"><i class="fa-regular fa-clock text-amber-400"></i> Solo tardarás 2 minutos</span>
+                        <span class="flex items-center gap-1"><i class="fa-solid fa-circle-check text-emerald-400"></i> Confirmación Inmediata</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- SECCIÓN DE SERVICIOS (ESTRUCTURA DE SCREENSHOT 2) -->
+    <div id="hostel-servicios" class="glass-card rounded-2xl p-6 sm:p-8 border border-white/10 space-y-6 backdrop-blur-md">
+        <div class="flex justify-between items-center border-b border-white/10 pb-4">
+            <h3 class="text-2xl font-black text-white font-title flex items-center gap-2.5">
+                <i class="fa-solid fa-concierge-bell text-teal-400"></i> Servicios Incluidos
+            </h3>
+            <a href="#hostel-servicios" class="text-xs font-extrabold text-teal-400 hover:text-teal-300 transition flex items-center gap-1">
+                Ver todos los servicios <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="flex items-center gap-3.5 bg-slate-900/80 border border-white/10 p-3.5 rounded-xl hover:border-teal-400/30 transition">
+                <div class="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 flex items-center justify-center text-lg flex-shrink-0">
+                    ☕
+                </div>
+                <span class="text-xs font-bold text-slate-200">Desayuno gratis</span>
+            </div>
+
+            <div class="flex items-center gap-3.5 bg-slate-900/80 border border-white/10 p-3.5 rounded-xl hover:border-teal-400/30 transition">
+                <div class="w-10 h-10 rounded-xl bg-blue-500/15 border border-blue-500/30 text-blue-300 flex items-center justify-center text-lg flex-shrink-0">
+                    🅿️
+                </div>
+                <span class="text-xs font-bold text-slate-200">Parking gratis</span>
+            </div>
+
+            <div class="flex items-center gap-3.5 bg-slate-900/80 border border-white/10 p-3.5 rounded-xl hover:border-teal-400/30 transition">
+                <div class="w-10 h-10 rounded-xl bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 flex items-center justify-center text-lg flex-shrink-0">
+                    📶
+                </div>
+                <span class="text-xs font-bold text-slate-200">WiFi Gratis</span>
+            </div>
+
+            <div class="flex items-center gap-3.5 bg-slate-900/80 border border-white/10 p-3.5 rounded-xl hover:border-teal-400/30 transition">
+                <div class="w-10 h-10 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-300 flex items-center justify-center text-lg flex-shrink-0">
+                    🌐
+                </div>
+                <span class="text-xs font-bold text-slate-200">Internet de alta velocidad</span>
+            </div>
+
+            <div class="flex items-center gap-3.5 bg-slate-900/80 border border-white/10 p-3.5 rounded-xl hover:border-teal-400/30 transition">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 flex items-center justify-center text-lg flex-shrink-0">
+                    🖥️
+                </div>
+                <span class="text-xs font-bold text-slate-200">Sala de reuniones / Co-Working</span>
+            </div>
+
+            <div class="flex items-center gap-3.5 bg-slate-900/80 border border-white/10 p-3.5 rounded-xl hover:border-teal-400/30 transition">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 flex items-center justify-center text-lg flex-shrink-0">
+                    🧳
+                </div>
+                <span class="text-xs font-bold text-slate-200">Consigna de equipaje</span>
+            </div>
+
+            <div class="flex items-center gap-3.5 bg-slate-900/80 border border-white/10 p-3.5 rounded-xl hover:border-teal-400/30 transition">
+                <div class="w-10 h-10 rounded-xl bg-teal-500/15 border border-teal-500/30 text-teal-300 flex items-center justify-center text-lg flex-shrink-0">
+                    🕒
+                </div>
+                <span class="text-xs font-bold text-slate-200">Recepción 24 horas</span>
+            </div>
+
+            <div class="flex items-center gap-3.5 bg-slate-900/80 border border-white/10 p-3.5 rounded-xl hover:border-teal-400/30 transition">
+                <div class="w-10 h-10 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 flex items-center justify-center text-lg flex-shrink-0">
+                    🗺️
+                </div>
+                <span class="text-xs font-bold text-slate-200">Tours / Información turística</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- SECCIÓN DE COMENTARIOS DE CLIENTES (ESTRUCTURA EXACTA DE SCREENSHOT 2) -->
+    <div id="hostel-comentarios" class="space-y-6">
+        <h3 class="text-2xl font-black text-white font-title flex items-center gap-3">
+            <i class="fa-solid fa-comments text-amber-400"></i> Comentarios de clientes
+        </h3>
+
+        <div class="grid lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- TARJETA IZQUIERDA: PUNTUACIÓN GENERAL Y DESGLOSE (4 COLS) -->
+            <div class="lg:col-span-4 glass-card rounded-2xl p-6 border border-white/15 space-y-6 bg-slate-900/90 shadow-xl">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-400 flex items-center justify-center text-2xl font-black shadow-inner">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-3xl font-black text-white font-title">9.4</span>
+                            <span class="text-sm font-bold text-teal-300">Magnífico</span>
+                        </div>
+                        <span class="text-xs text-slate-400 font-medium">(48 opiniones verificadas)</span>
+                    </div>
+                </div>
+
+                <!-- DESGLOSE DE PUNTUACIONES INDIVIDUALES (BARRA DE PROGRESO 10.0) -->
+                <div class="space-y-3 pt-3 border-t border-white/10 text-xs">
+                    <div class="space-y-1">
+                        <div class="flex justify-between font-bold text-slate-300">
+                            <span>Seguridad</span>
+                            <span class="text-amber-400 font-mono">10.0</span>
+                        </div>
+                        <div class="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-white/10">
+                            <div class="bg-amber-400 h-full rounded-full" style="width: 100%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1">
+                        <div class="flex justify-between font-bold text-slate-300">
+                            <span>Ubicación</span>
+                            <span class="text-amber-400 font-mono">10.0</span>
+                        </div>
+                        <div class="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-white/10">
+                            <div class="bg-amber-400 h-full rounded-full" style="width: 100%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1">
+                        <div class="flex justify-between font-bold text-slate-300">
+                            <span>Personal</span>
+                            <span class="text-amber-400 font-mono">9.5</span>
+                        </div>
+                        <div class="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-white/10">
+                            <div class="bg-amber-400 h-full rounded-full" style="width: 95%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1">
+                        <div class="flex justify-between font-bold text-slate-300">
+                            <span>Atmósfera</span>
+                            <span class="text-amber-400 font-mono">9.2</span>
+                        </div>
+                        <div class="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-white/10">
+                            <div class="bg-amber-400 h-full rounded-full" style="width: 92%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1">
+                        <div class="flex justify-between font-bold text-slate-300">
+                            <span>Limpieza</span>
+                            <span class="text-amber-400 font-mono">9.6</span>
+                        </div>
+                        <div class="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-white/10">
+                            <div class="bg-amber-400 h-full rounded-full" style="width: 96%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1">
+                        <div class="flex justify-between font-bold text-slate-300">
+                            <span>Servicios</span>
+                            <span class="text-amber-400 font-mono">9.1</span>
+                        </div>
+                        <div class="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-white/10">
+                            <div class="bg-amber-400 h-full rounded-full" style="width: 91%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1">
+                        <div class="flex justify-between font-bold text-slate-300">
+                            <span>Calidad Precio</span>
+                            <span class="text-amber-400 font-mono">9.3</span>
+                        </div>
+                        <div class="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-white/10">
+                            <div class="bg-amber-400 h-full rounded-full" style="width: 93%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TARJETAS DERECHA: REVIEWS INDIVIDUALES CON MARCO DORADO/AMBAR (8 COLS) -->
+            <div class="lg:col-span-8 space-y-4">
+                
+                <!-- CARD REVIEW 1 (ESTILO SCREENSHOT 2) -->
+                <div class="bg-slate-900/90 border-2 border-amber-500 rounded-3xl p-6 space-y-4 shadow-2xl relative overflow-hidden">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-400 font-semibold">Alojado en mar 2026</span>
+                        <div class="flex items-center gap-1 bg-amber-500/20 text-amber-300 border border-amber-500/40 px-3 py-1 rounded-full text-xs font-black">
+                            <i class="fa-solid fa-star text-amber-400 text-[10px]"></i> 10
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-full bg-slate-800 border border-white/20 flex items-center justify-center font-bold text-white text-sm shadow-md">
+                            A
+                        </div>
+                        <div>
+                            <h6 class="text-sm font-extrabold text-white">afQEcqapV8uVD16d</h6>
+                            <p class="text-xs text-slate-400 flex items-center gap-1">
+                                Hombre, 25-30, Argentina 🇦🇷
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed italic">
+                        "Great Wifi and coworking space. Really clean and then pool is great. The location is the Best."
+                    </p>
+                </div>
+
+                <!-- CARD REVIEW 2 -->
+                <div class="bg-slate-900/90 border-2 border-amber-500/80 rounded-3xl p-6 space-y-4 shadow-xl relative overflow-hidden">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-400 font-semibold">Alojado en dic 2025</span>
+                        <div class="flex items-center gap-1 bg-amber-500/20 text-amber-300 border border-amber-500/40 px-3 py-1 rounded-full text-xs font-black">
+                            <i class="fa-solid fa-star text-amber-400 text-[10px]"></i> 10
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-full bg-slate-800 border border-white/20 flex items-center justify-center font-bold text-white text-sm shadow-md">
+                            A
+                        </div>
+                        <div>
+                            <h6 class="text-sm font-extrabold text-white">aMpylrW7ZW3RuKhu</h6>
+                            <p class="text-xs text-slate-400 flex items-center gap-1">
+                                Hombre, 41+, Uruguay 🇺🇾
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed italic">
+                        "En mi experiencia de alojamientos en hostels, este calificó como mi mejor estadía. Instalaciones super limpias, excelente ubicación y el personal de 10."
+                    </p>
+                </div>
+
+                <!-- CARD REVIEW 3 -->
+                <div class="bg-slate-900/90 border-2 border-amber-500/60 rounded-3xl p-6 space-y-4 shadow-lg relative overflow-hidden">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-slate-400 font-semibold">Alojado en feb 2026</span>
+                        <div class="flex items-center gap-1 bg-amber-500/20 text-amber-300 border border-amber-500/40 px-3 py-1 rounded-full text-xs font-black">
+                            <i class="fa-solid fa-star text-amber-400 text-[10px]"></i> 9.8
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-full bg-slate-800 border border-white/20 flex items-center justify-center font-bold text-white text-sm shadow-md">
+                            S
+                        </div>
+                        <div>
+                            <h6 class="text-sm font-extrabold text-white">Sophie L.</h6>
+                            <p class="text-xs text-slate-400 flex items-center gap-1">
+                                Mujer, 22-28, Francia 🇫🇷
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed italic">
+                        "Super hostel! Équipe très accueillante, lit confortable et super ambiance dans les espacios comunes. Wi-Fi très rapide pour travailler."
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- SCRIPT INTERACTIVO DE CARRITO Y SELECCIÓN DE HABITACIONES HOSTEL -->
+<script>
+    let hostelCart = [];
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const inInput = document.getElementById('hostel-widget-in');
+        const outInput = document.getElementById('hostel-widget-out');
+        if (inInput && outInput) {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+
+            inInput.value = today.toISOString().split('T')[0];
+            outInput.value = tomorrow.toISOString().split('T')[0];
+            recalcularWidgetHostel();
+        }
+    });
+
+    function scrollToHostelRooms() {
+        const el = document.getElementById('hostel-habitaciones');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function agregarCamaHostelCart(id, nombre, precio_ars, precio_usd) {
+        const itemExistente = hostelCart.find(i => i.id === id);
+        if (itemExistente) {
+            itemExistente.cantidad += 1;
+        } else {
+            hostelCart.push({ id, nombre, precio_ars, precio_usd, cantidad: 1 });
+        }
+        renderHostelCart();
+    }
+
+    function removerCamaHostelCart(id) {
+        hostelCart = hostelCart.filter(i => i.id !== id);
+        renderHostelCart();
+    }
+
+    function recalcularWidgetHostel() {
+        const checkinVal = document.getElementById('hostel-widget-in').value;
+        const checkoutVal = document.getElementById('hostel-widget-out').value;
+        let noches = 1;
+        if (checkinVal && checkoutVal) {
+            const d1 = new Date(checkinVal);
+            const d2 = new Date(checkoutVal);
+            const diffTime = d2 - d1;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            noches = diffDays > 0 ? diffDays : 1;
+        }
+
+        const badgeNoches = document.getElementById('widget-noches-count');
+        if (badgeNoches) {
+            badgeNoches.innerText = `${noches} ${noches === 1 ? 'noche' : 'noches'}`;
+        }
+        renderHostelCart();
+    }
+
+    function renderHostelCart() {
+        const container = document.getElementById('hostel-cart-items');
+        const totalSpan = document.getElementById('hostel-cart-total');
+        if (!container || !totalSpan) return;
+
+        const checkinVal = document.getElementById('hostel-widget-in').value || 'Hoy';
+        const checkoutVal = document.getElementById('hostel-widget-out').value || 'Mañana';
+        let noches = 1;
+        if (checkinVal && checkoutVal) {
+            const d1 = new Date(checkinVal);
+            const d2 = new Date(checkoutVal);
+            const diffTime = d2 - d1;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            noches = diffDays > 0 ? diffDays : 1;
+        }
+
+        if (hostelCart.length === 0) {
+            container.innerHTML = `
+                <div class="p-3 bg-slate-950/60 border border-dashed border-white/15 rounded-xl text-center text-xs text-slate-400">
+                    Aún no añadiste habitaciones. Haz clic en <strong>+ Añadir</strong>.
+                </div>`;
+            totalSpan.innerText = `$0 ARS`;
+            return;
+        }
+
+        let html = '';
+        let totalGeneral = 0;
+
+        hostelCart.forEach(item => {
+            const subtotal = item.precio_ars * item.cantidad * noches;
+            totalGeneral += subtotal;
+            html += `
+                <div class="p-2.5 bg-slate-950 border border-white/10 rounded-xl flex items-center justify-between gap-2 text-xs">
+                    <div class="space-y-0.5 max-w-[180px]">
+                        <span class="font-bold text-white block truncate">${item.nombre}</span>
+                        <span class="text-[10px] text-teal-400 font-mono">${item.cantidad}x &bull; $${item.precio_ars.toLocaleString('es-AR')} ARS/noche</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-black text-white font-mono text-xs">$${subtotal.toLocaleString('es-AR')}</span>
+                        <button type="button" onclick="removerCamaHostelCart('${item.id}')" class="text-rose-400 hover:text-rose-300 p-1 text-xs">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                </div>`;
+        });
+
+        container.innerHTML = html;
+        totalSpan.innerText = `$${totalGeneral.toLocaleString('es-AR')} ARS`;
+    }
+
+    function enviarReservaHostelFinalWA() {
+        const nombre = (document.getElementById('hostel-guest-name').value || '').trim() || 'Viajero';
+        const origen = (document.getElementById('hostel-guest-origin').value || '').trim() || 'No especificado';
+        const checkin = document.getElementById('hostel-widget-in').value || 'Hoy';
+        const checkout = document.getElementById('hostel-widget-out').value || 'Mañana';
+        const arrival = document.getElementById('hostel-widget-arrival').value || '14:00 hs';
+        const huespedes = document.getElementById('hostel-widget-guests').value || '2';
+        const total = document.getElementById('hostel-cart-total').innerText;
+
+        if (hostelCart.length === 0) {
+            alert('Por favor seleccioná al menos una habitación o cama haciendo clic en + Añadir.');
+            return;
+        }
+
+        let detalleSeleccion = hostelCart.map(i => `- ${i.cantidad}x ${i.nombre}`).join('\n');
+
+        const msg = `Hola {{ demo.nombre_negocio }}, mi nombre es ${nombre} (${origen}). Quisiera solicitar reserva directa:\n\n📅 Fechas: Desde el ${checkin} hasta el ${checkout}\n⏰ Hora aprox. de llegada: ${arrival}\n👥 Huéspedes: ${huespedes} personas\n\n🛏️ Habitación / Camas:\n${detalleSeleccion}\n\n💰 Total estimado directo: ${total}.`;
+        const waNum = "{{ demo.whatsapp or demo.telefono or '5493515550199' }}".replace(/\D/g, '') || "5493515550199";
+        window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+</script>

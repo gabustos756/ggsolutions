@@ -6,21 +6,21 @@
         <div class="space-y-1">
             <div class="flex items-center gap-2">
                 <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                    SOFTWARE DE GESTIÓN INTERNA B2B
+                    {{ i18n.admin_software_b2b or 'SOFTWARE DE GESTIÓN INTERNA B2B' }}
                 </span>
-                <span class="text-xs text-slate-400 capitalize font-medium">Rubro: {{ demo.rubro }}</span>
+                <span class="text-xs text-slate-400 capitalize font-medium">{{ i18n.admin_rubro or 'Rubro' }}: {{ demo.rubro }}</span>
             </div>
             <h3 class="text-2xl font-extrabold text-white flex items-center gap-2.5 font-title">
-                <i class="fa-solid fa-sliders text-cyan-400"></i> Panel de Control Operativo: <span class="text-cyan-300">{{ demo.nombre_negocio }}</span>
+                <i class="fa-solid fa-sliders text-cyan-400"></i> {{ i18n.admin_panel_titulo or 'Panel de Control Operativo' }}: <span class="text-cyan-300">{{ demo.nombre_negocio }}</span>
             </h3>
         </div>
         
         <div class="flex items-center gap-3">
             <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-md">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sistema en Vivo
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> {{ i18n.admin_sistema_vivo or 'Sistema en Vivo 24/7' }}
             </span>
             <button onclick="simularExportarReporte()" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs transition shadow-lg flex items-center gap-1.5">
-                <i class="fa-solid fa-file-export"></i> Reporte PDF
+                <i class="fa-solid fa-file-export"></i> {{ i18n.admin_reporte_pdf or 'Reporte PDF' }}
             </button>
         </div>
     </div>
@@ -99,12 +99,28 @@
                         <td class="py-3.5 px-4 text-slate-200">{{ p.detalle }}</td>
                         <td class="py-3.5 px-4 font-extrabold text-amber-400">{{ p.monto }}</td>
                         <td class="py-3.5 px-4">
+                            {% if 'CHECK-IN' in p.estado or p.tipo_accion == 'checkin' %}
                             <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold bg-amber-500/20 text-amber-300 border border-amber-500/30">{{ p.estado }}</span>
+                            {% elif 'CHECK-OUT' in p.estado or p.tipo_accion == 'checkout' %}
+                            <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold bg-rose-500/20 text-rose-300 border border-rose-500/30">{{ p.estado }}</span>
+                            {% else %}
+                            <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">{{ p.estado }}</span>
+                            {% endif %}
                         </td>
                         <td class="py-3.5 px-4 text-right">
+                            {% if 'CHECK-IN' in p.estado or p.tipo_accion == 'checkin' %}
+                            <button onclick="procesarAccionDemo(this, 'CHECK-IN', 'EN ESTADÍA', 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30')" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-3 py-1 rounded-lg text-xs transition flex items-center gap-1 ml-auto">
+                                <i class="fa-solid fa-key text-[11px]"></i> Registrar Check-in
+                            </button>
+                            {% elif 'CHECK-OUT' in p.estado or p.tipo_accion == 'checkout' %}
+                            <button onclick="procesarAccionDemo(this, 'CHECK-OUT', 'LIBERADO / LIMPIEZA', 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30')" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-3 py-1 rounded-lg text-xs transition flex items-center gap-1 ml-auto">
+                                <i class="fa-solid fa-door-open text-[11px]"></i> Registrar Check-out
+                            </button>
+                            {% else %}
                             <button onclick="completarPedidoDemo(this)" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-3 py-1 rounded-lg text-xs transition flex items-center gap-1 ml-auto">
                                 <i class="fa-solid fa-circle-check"></i> Despachar
                             </button>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}
@@ -117,10 +133,10 @@
     <div id="admin-sec-stock" class="space-y-4 hidden">
         <div class="flex justify-between items-center">
             <h4 class="text-sm font-extrabold uppercase tracking-wider text-slate-300 flex items-center gap-2">
-                <i class="fa-solid fa-boxes-stacked text-cyan-400"></i> Inventario de Productos e Insumos en Mostrador
+                <i class="fa-solid fa-boxes-stacked text-cyan-400"></i> {{ admin_config.tabla2_titulo or 'Inventario de Productos e Insumos en Mostrador' }}
             </h4>
             <button onclick="simularAgregarStock()" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-xs transition flex items-center gap-1.5">
-                <i class="fa-solid fa-plus"></i> Cargar Mercadería
+                <i class="fa-solid fa-plus"></i> Cargar Mercadería / Blanco
             </button>
         </div>
 
@@ -131,7 +147,7 @@
                         <th class="py-3 px-4">SKU / Código</th>
                         <th class="py-3 px-4">Producto / Insumo Real</th>
                         <th class="py-3 px-4">Stock Disponible</th>
-                        <th class="py-3 px-4">Precio Mostrador</th>
+                        <th class="py-3 px-4">Precio Mostrador / Costo</th>
                         <th class="py-3 px-4">Estado Alerta</th>
                         <th class="py-3 px-4 text-right">Ajustar</th>
                     </tr>
@@ -144,7 +160,7 @@
                         <td class="py-3.5 px-4 font-extrabold text-cyan-300">{{ st.stock }} {{ st.unidad }}</td>
                         <td class="py-3.5 px-4 font-extrabold text-amber-400">{{ st.precio }}</td>
                         <td class="py-3.5 px-4">
-                            {% if st.alerta == 'Bajo Stock' or st.alerta == 'Reposición' %}
+                            {% if st.alerta == 'Bajo Stock' or st.alerta == 'Reposición' or st.alerta == 'Reposición Lavandería' %}
                             <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold bg-rose-500/20 text-rose-300 border border-rose-500/30">{{ st.alerta }}</span>
                             {% else %}
                             <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">OK Normal</span>
@@ -200,20 +216,23 @@
             <h4 class="text-sm font-extrabold uppercase tracking-wider text-slate-300 flex items-center gap-2">
                 <i class="fa-solid fa-truck-field text-cyan-400"></i> Proveedores Oficiales & Facturación de Insumos
             </h4>
+            <button onclick="simularCargarFactura()" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-xs transition flex items-center gap-1.5 shadow-md">
+                <i class="fa-solid fa-file-circle-plus"></i> {{ i18n.admin_cargar_factura or 'Cargar Factura / Gasto' }}
+            </button>
         </div>
 
         <div class="overflow-x-auto rounded-xl border border-white/10">
             <table class="w-full text-left text-xs text-slate-300">
                 <thead class="bg-slate-900 uppercase text-slate-400 border-b border-white/10 font-bold">
                     <tr>
-                        <th class="py-3 px-4">Proveedor Oficial</th>
+                        <th class="py-3 px-4">Proveedor / Empresa</th>
                         <th class="py-3 px-4">Insumos / Categoría</th>
-                        <th class="py-3 px-4">Saldo Pendiente</th>
+                        <th class="py-3 px-4">Monto Factura / Saldo</th>
                         <th class="py-3 px-4">Estado Cuenta Corriente</th>
                         <th class="py-3 px-4 text-right">Acción</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-white/5 bg-slate-950/40">
+                <tbody id="tabla-proveedores-body" class="divide-y divide-white/5 bg-slate-950/40">
                     {% for prov in admin_config.proveedores %}
                     <tr>
                         <td class="py-3.5 px-4 font-bold text-white">{{ prov.nombre }}</td>
@@ -257,6 +276,44 @@
         const tdAccion = tr.cells[5];
         tdStatus.innerHTML = '<span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">ENTREGADO</span>';
         tdAccion.innerHTML = '<span class="text-emerald-400 font-semibold"><i class="fa-solid fa-circle-check"></i> Despachado</span>';
+    }
+
+    function procesarAccionDemo(btn, tipoActual, nuevoEstado, badgeClass) {
+        const tr = btn.closest('tr');
+        const tdStatus = tr.cells[4];
+        const tdAccion = tr.cells[5];
+        tdStatus.innerHTML = `<span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold ${badgeClass}">${nuevoEstado}</span>`;
+        tdAccion.innerHTML = `<span class="text-emerald-400 font-semibold text-xs"><i class="fa-solid fa-circle-check"></i> ${tipoActual} Procesado</span>`;
+    }
+
+    function simularCargarFactura() {
+        const prov = prompt('Ingresá la Razón Social / Nombre del Proveedor (ej: Lavandería San Martín, EPEC, Distribuidora Bebidas):');
+        if (!prov || !prov.trim()) return;
+
+        const rubro = prompt('Ingresá el rubro / concepto (ej: Lavandería & Blanco, Servicios, Insumos Bar):') || 'Factura de Insumos';
+        const montoStr = prompt('Ingresá el monto de la factura (ej: 45000):') || '25.000';
+        const monto = isNaN(montoStr) ? montoStr : `$${parseInt(montoStr).toLocaleString('es-AR')}`;
+
+        const tbody = document.getElementById('tabla-proveedores-body');
+        if (tbody) {
+            const tr = document.createElement('tr');
+            tr.className = 'bg-cyan-500/10 transition-colors border-l-2 border-cyan-400';
+            tr.innerHTML = `
+                <td class="py-3.5 px-4 font-bold text-white">${prov.trim()} <span class="text-[9px] text-cyan-300 font-mono block">NUEVO GASTO</span></td>
+                <td class="py-3.5 px-4 text-slate-300">${rubro.trim()}</td>
+                <td class="py-3.5 px-4 font-extrabold text-amber-400">${monto}</td>
+                <td class="py-3.5 px-4">
+                    <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Cargada / Pendiente Pago</span>
+                </td>
+                <td class="py-3.5 px-4 text-right">
+                    <button onclick="alert('Generando orden de pago para ${prov.trim()}...')" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-2.5 py-1 rounded text-xs transition">
+                        <i class="fa-solid fa-credit-card mr-1"></i> Orden de Pago
+                    </button>
+                </td>
+            `;
+            tbody.prepend(tr);
+            alert(`✅ Factura de ${prov.trim()} por ${monto} cargada exitosamente en el sistema de gestión.`);
+        }
     }
 
     function simularAgregarStock() {

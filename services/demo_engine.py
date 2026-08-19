@@ -734,35 +734,37 @@ AGENDA_CONFIG_POR_RUBRO = {
 ADMIN_PANEL_POR_RUBRO = {
     "hostel": {
         "kpi1_label": "Ocupación Hoy",
-        "kpi2_label": "Check-ins Esperados",
-        "kpi3_label": "Camas Disponibles",
-        "kpi4_label": "Caja & Noche Hoy",
+        "kpi2_label": "Check-ins / Check-outs",
+        "kpi3_label": "Alerta Blanco & Insumos",
+        "kpi4_label": "Caja & Estadías Hoy",
         "kpi_capacidad": "87% Ocupación Camas",
-        "kpi_pedidos": "6 Huéspedes Arribando",
-        "kpi_stock": "4 Camas Libres Hoy",
+        "kpi_pedidos": "6 Movimientos Hoy",
+        "kpi_stock": "2 Insumos Bajo Stock",
         "kpi_facturacion": "$184.000 Caja Hoy",
-        "tab1_label": "1. Check-ins & Llegadas del Día",
-        "tab2_label": "2. Mapa de Camas & Habitaciones",
-        "tab3_label": "3. Mensajes & WhatsApp CRM",
-        "tab4_label": "4. Proveedores & Lavandería",
-        "tabla1_titulo": "Control de Arribos & Check-ins Esperados",
-        "tabla2_titulo": "Mapa de Ocupación de Camas y Habitaciones Privadas",
-        "col1_nombre": "Código Reserva",
+        "tab1_label": "1. Check-ins & Check-outs del Día",
+        "tab2_label": "2. Control de Insumos & Blanco",
+        "tab3_label": "3. Mensajes & Voluntariados (CRM)",
+        "tab4_label": "4. Proveedores & Carga de Facturas",
+        "tabla1_titulo": "Control de Arribos, Check-outs & Movimientos de Huéspedes",
+        "tabla2_titulo": "Inventario de Blancos, Toallas & Insumos de Desayuno",
+        "col1_nombre": "Código / ID",
         "col2_nombre": "Huésped / Origen",
         "col3_nombre": "Habitación / Cama Asignada",
         "productos_stock": [
-            {"sku": "HOST-101", "nombre": "Dormitorio Mixto (4 Camas) - Cama 02", "stock": 1, "unidad": "cama libre", "alerta": "Bajo Stock", "precio": "$18.000/noche"},
-            {"sku": "HOST-102", "nombre": "Dormitorio Femenino (6 Camas) - Cama 05", "stock": 2, "unidad": "camas libres", "alerta": "Disponible", "precio": "$16.800/noche"},
-            {"sku": "HOST-103", "nombre": "Dormitorio Masculino (8 Camas) - Cama 01", "stock": 5, "unidad": "camas libres", "alerta": "Disponible", "precio": "$14.400/noche"},
-            {"sku": "HOST-104", "nombre": "Habitación Privada Doble Suite #204", "stock": 1, "unidad": "cuarto libre", "alerta": "Última Disponible", "precio": "$42.000/noche"}
+            {"sku": "BLAN-101", "nombre": "Juegos de Sábanas 1 Plaza (Algodón 200 Hilos)", "stock": 48, "unidad": "juegos libres", "alerta": "Disponible", "precio": "$4.500/juego"},
+            {"sku": "BLAN-102", "nombre": "Toallas de Mano & Toallones de Baño", "stock": 12, "unidad": "unidades libres", "alerta": "Reposición Lavandería", "precio": "$2.800/u"},
+            {"sku": "DESA-103", "nombre": "Café en Grano & Té Variedades (Desayuno)", "stock": 5, "unidad": "kg disponibles", "alerta": "Disponible", "precio": "$12.000/kg"},
+            {"sku": "DESA-104", "nombre": "Leche Entera & Medialunas Mediodía", "stock": 8, "unidad": "litros libres", "alerta": "Bajo Stock", "precio": "$1.200/L"},
+            {"sku": "LIMP-105", "nombre": "Kit de Sanitización & Lavandina Concentrada", "stock": 15, "unidad": "litros libres", "alerta": "Disponible", "precio": "$3.500/L"}
         ],
         "pedidos": [
-            {"id": "#RES-801", "cliente": "afQEcqapV8uVD16d (Argentina 🇦🇷)", "detalle": "Reserva Dormitorio Mixto (2 Noches) — Arribo Estimado 16:00 hs", "monto": "$36.000", "hora": "Hoy 16:00 hs", "estado": "LLEGADA HOY"},
-            {"id": "#RES-802", "cliente": "Sophie L. (Francia 🇫🇷)", "detalle": "Reserva Dormitorio Femenino (3 Noches) — Arribo Estimado 18:30 hs", "monto": "$50.400", "hora": "Hoy 18:30 hs", "estado": "CONFIRMADO"},
-            {"id": "#RES-803", "cliente": "Mateo G. (Uruguay 🇺🇾)", "detalle": "Habitación Privada Doble Suite (1 Noche) — Arribo Estimado 14:00 hs", "monto": "$42.000", "hora": "Hoy 14:00 hs", "estado": "EN ESTADÍA"}
+            {"id": "#RES-801", "cliente": "afQEcqapV8uVD16d (Argentina 🇦🇷)", "detalle": "Reserva Dormitorio Mixto (2 Noches) — Arribo Estimado 16:00 hs", "monto": "$36.000", "hora": "Hoy 16:00 hs", "estado": "CHECK-IN PENDIENTE", "tipo_accion": "checkin"},
+            {"id": "#OUT-802", "cliente": "Sophie L. (Francia 🇫🇷)", "detalle": "Reserva Dormitorio Femenino (3 Noches) — Check-out y Salida", "monto": "$50.400", "hora": "Hoy 11:00 hs", "estado": "CHECK-OUT HOY", "tipo_accion": "checkout"},
+            {"id": "#RES-803", "cliente": "Mateo G. (Uruguay 🇺🇾)", "detalle": "Habitación Privada Doble Suite #204 (1 Noche) — En Estadía", "monto": "$42.000", "hora": "En Estadía", "estado": "EN ESTADÍA", "tipo_accion": "estadia"},
+            {"id": "#VOL-804", "cliente": "Lucas P. (Brasil 🇧🇷)", "detalle": "Postulación Voluntariado Recepción — Disponibilidad 15 Sep / 15 Oct", "monto": "$0", "hora": "Hace 2 horas", "estado": "POSTULANTE VOLUNTARIO", "tipo_accion": "voluntario"}
         ],
         "mensajes": [
-            {"cliente": "Lucas P. (Brasil 🇧🇷)", "tel": "5511988776655", "consulta": "Olá! Gostaria de saber se têm cama em dormitório misto para amanhã e horário de check-in.", "hora": "14:20 hs", "estado": "PENDIENTE"},
+            {"cliente": "Lucas P. (Brasil 🇧🇷)", "tel": "5511988776655", "consulta": "Olá! Gostaria de me candidatar para o voluntariado de recepção em setembro.", "hora": "14:20 hs", "estado": "PENDIENTE"},
             {"cliente": "Emma W. (EE.UU. 🇺🇸)", "tel": "12025550143", "consulta": "Hi! Can I store my luggage before 14:00 check-in time today?", "hora": "11:05 hs", "estado": "RESPONDIDO"}
         ],
         "proveedores": [
@@ -771,15 +773,28 @@ ADMIN_PANEL_POR_RUBRO = {
         ]
     },
     "pilates_wellness": {
+        "kpi1_label": "Ocupación Reformers",
+        "kpi2_label": "Alumnos / Turnos Hoy",
+        "kpi3_label": "Pases / Bonos Activos",
+        "kpi4_label": "Caja & Clases Hoy",
         "kpi_capacidad": "88% Ocupación Camas Reformer",
         "kpi_pedidos": "18 Alumnos / Reservas Hoy",
-        "kpi_stock": "4 Bonos de Clases Activos",
+        "kpi_stock": "4 Bonos por Vencer",
         "kpi_facturacion": "$480.000 Caja Hoy",
+        "tab1_label": "1. Reservas de Clases & Alumnos",
+        "tab2_label": "2. Equipamiento & Insumos Wellness",
+        "tab3_label": "3. Consultas & Inscripciones (CRM)",
+        "tab4_label": "4. Proveedores & Carga de Facturas",
+        "tabla1_titulo": "Control de Asistencia & Reservas de Clases",
+        "tabla2_titulo": "Inventario de Mats, Bandas & Insumos de Sanitización",
+        "col1_nombre": "ID Reserva",
+        "col2_nombre": "Alumno / Cliente",
+        "col3_nombre": "Clase / Horario Asignado",
         "productos_stock": [
             {"sku": "WELL-101", "nombre": "Pase Mensual Pilates Reformer (8 Clases)", "stock": 25, "unidad": "pases", "alerta": "Disponible", "precio": "$45.000"},
             {"sku": "WELL-102", "nombre": "Pase Libre Yoga & Meditación (Ilimitado)", "stock": 18, "unidad": "pases", "alerta": "Disponible", "precio": "$38.000"},
             {"sku": "WELL-103", "nombre": "Mat de Yoga Antideslizante Pro Eco-Friendly", "stock": 3, "unidad": "unidades", "alerta": "Bajo Stock", "precio": "$22.000"},
-            {"sku": "WELL-104", "nombre": "Sesión Individual Evaluación Postural", "stock": 10, "unidad": "sesiones", "alerta": "Disponible", "precio": "$18.000"}
+            {"sku": "WELL-104", "nombre": "Sanitizante de Reformer & Toallitas de Limpieza", "stock": 5, "unidad": "litros", "alerta": "Disponible", "precio": "$4.500"}
         ],
         "pedidos": [
             {"id": "#RES-401", "cliente": "Lucía P.", "detalle": "Reserva Clase Pilates Reformer (18:00 hs)", "monto": "$45.000", "hora": "Hoy 18:00 hs", "estado": "CONFIRMADO"},
@@ -793,14 +808,27 @@ ADMIN_PANEL_POR_RUBRO = {
         ]
     },
     "deportes": {
+        "kpi1_label": "Ocupación Canchas",
+        "kpi2_label": "Turnos & Clases Hoy",
+        "kpi3_label": "Encordados Pendientes",
+        "kpi4_label": "Caja & Turnos Hoy",
         "kpi_capacidad": "94% Canchas Ocupadas",
         "kpi_pedidos": "28 Reservas / Turnos",
         "kpi_stock": "3 Encordados Faltantes",
         "kpi_facturacion": "$580.000 Caja Hoy",
+        "tab1_label": "1. Turnos de Canchas & Clases",
+        "tab2_label": "2. Insumos de Tenis, Pádel & Encordados",
+        "tab3_label": "3. Consultas de Alumnos & Turnos (CRM)",
+        "tab4_label": "4. Proveedores & Carga de Facturas",
+        "tabla1_titulo": "Control de Turnos de Cancha & Encordados",
+        "tabla2_titulo": "Inventario de Pelotas, Cuerdas & Grips de Pádel/Tenis",
+        "col1_nombre": "Código Turno",
+        "col2_nombre": "Jugadores / Alumno",
+        "col3_nombre": "Cancha / Horario Reservado",
         "productos_stock": [
-            {"sku": "TEN-101", "nombre": "Tubo de Pelotas Penn Tour Presurizadas (3u)", "stock": 36, "unidad": "tubos", "alerta": "Normal", "precio": "$14.000"},
+            {"sku": "TEN-101", "nombre": "Tubo de Pelotas Penn Tour Presurizadas (3u)", "stock": 36, "unidad": "tubos", "alerta": "Disponible", "precio": "$14.000"},
             {"sku": "TEN-102", "nombre": "Cuerda Luxilon Alu Power 1.25mm (Set)", "stock": 4, "unidad": "sets", "alerta": "Bajo Stock", "precio": "$16.500"},
-            {"sku": "TEN-103", "nombre": "Overgrip Wilson Pro Comfort (Pack x3)", "stock": 25, "unidad": "packs", "alerta": "Normal", "precio": "$6.800"},
+            {"sku": "TEN-103", "nombre": "Overgrip Wilson Pro Comfort (Pack x3)", "stock": 25, "unidad": "packs", "alerta": "Disponible", "precio": "$6.800"},
             {"sku": "TEN-104", "nombre": "Raqueta Wilson Blade 98 V8 (Grip 3)", "stock": 2, "unidad": "unidades", "alerta": "Reposición", "precio": "$320.000"}
         ],
         "pedidos": [
@@ -818,14 +846,27 @@ ADMIN_PANEL_POR_RUBRO = {
         ]
     },
     "gastronomia": {
+        "kpi1_label": "Ocupación Salón",
+        "kpi2_label": "Comandas & Delivery",
+        "kpi3_label": "Insumos de Cocina",
+        "kpi4_label": "Caja & Ventas Hoy",
         "kpi_capacidad": "85% Salón Lleno",
         "kpi_pedidos": "18 Pedidos / Comandas",
         "kpi_stock": "4 Insumos Críticos",
         "kpi_facturacion": "$485.000 Caja Hoy",
+        "tab1_label": "1. Comandas & Pedidos de Cocina",
+        "tab2_label": "2. Insumos de Cocina, Carnes & Bebidas",
+        "tab3_label": "3. Reservas de Mesas & WhatsApp CRM",
+        "tab4_label": "4. Proveedores & Carga de Facturas",
+        "tabla1_titulo": "Control de Comandas de Cocina & Pedidos Online",
+        "tabla2_titulo": "Inventario de Materia Prima, Bebidas & Packaging",
+        "col1_nombre": "Nº Comanda",
+        "col2_nombre": "Cliente / Mesa",
+        "col3_nombre": "Detalle del Pedido",
         "productos_stock": [
-            {"sku": "GAST-101", "nombre": "Materia Prima Smash Burgers (Medallón 120g)", "stock": 42, "unidad": "kg", "alerta": "Normal", "precio": "$8.500/kg"},
+            {"sku": "GAST-101", "nombre": "Materia Prima Smash Burgers (Medallón 120g)", "stock": 42, "unidad": "kg", "alerta": "Disponible", "precio": "$8.500/kg"},
             {"sku": "GAST-102", "nombre": "Pan Brioche de Papa Artesanal", "stock": 8, "unidad": "docenas", "alerta": "Bajo Stock", "precio": "$4.200/doc"},
-            {"sku": "GAST-103", "nombre": "Queso Cheddar Inglés Feteado", "stock": 15, "unidad": "kg", "alerta": "Normal", "precio": "$12.000/kg"},
+            {"sku": "GAST-103", "nombre": "Queso Cheddar Inglés Feteado & Huevos Fresh", "stock": 15, "unidad": "kg", "alerta": "Disponible", "precio": "$12.000/kg"},
             {"sku": "GAST-104", "nombre": "Cerveza IPA Tirada 50L (Barril)", "stock": 3, "unidad": "barriles", "alerta": "Reposición", "precio": "$45.000/u"}
         ],
         "pedidos": [
@@ -843,14 +884,27 @@ ADMIN_PANEL_POR_RUBRO = {
         ]
     },
     "automotriz": {
+        "kpi1_label": "Ocupación Elevadores",
+        "kpi2_label": "Turnos Taller Hoy",
+        "kpi3_label": "Alertas de Aceite / Filtros",
+        "kpi4_label": "Caja & Taller Hoy",
         "kpi_capacidad": "92% Elevadores Ocupados",
         "kpi_pedidos": "12 Turnos Taller",
         "kpi_stock": "3 Aceites / Filtros Bajos",
         "kpi_facturacion": "$890.000 Caja Hoy",
+        "tab1_label": "1. Turnos de Taller & Vehículos",
+        "tab2_label": "2. Repuestos, Lubricantes & Filtros",
+        "tab3_label": "3. Consultas & Presupuestos (CRM)",
+        "tab4_label": "4. Proveedores & Carga de Facturas",
+        "tabla1_titulo": "Control de Órdenes de Trabajo & Vehículos en Taller",
+        "tabla2_titulo": "Inventario de Aceites, Filtros & Pastillas de Freno",
+        "col1_nombre": "Nº Orden",
+        "col2_nombre": "Cliente / Vehículo",
+        "col3_nombre": "Trabajo / Reparación Solicitada",
         "productos_stock": [
-            {"sku": "AUTO-201", "nombre": "Aceite Sintético Shell Helix 5W30 (4L)", "stock": 14, "unidad": "bidones", "alerta": "Normal", "precio": "$38.500"},
+            {"sku": "AUTO-201", "nombre": "Aceite Sintético Shell Helix 5W30 (4L)", "stock": 14, "unidad": "bidones", "alerta": "Disponible", "precio": "$38.500"},
             {"sku": "AUTO-202", "nombre": "Filtro de Aceite Mann W712", "stock": 5, "unidad": "unidades", "alerta": "Bajo Stock", "precio": "$8.200"},
-            {"sku": "AUTO-203", "nombre": "Pastillas de Freno Fras-le VW Gol/Polo", "stock": 8, "unidad": "juegos", "alerta": "Normal", "precio": "$26.000"},
+            {"sku": "AUTO-203", "nombre": "Pastillas de Freno Fras-le VW Gol/Polo", "stock": 8, "unidad": "juegos", "alerta": "Disponible", "precio": "$26.000"},
             {"sku": "AUTO-204", "nombre": "Líquido de Frenos DOT4 Bosch (500ml)", "stock": 2, "unidad": "unidades", "alerta": "Reposición", "precio": "$7.500"}
         ],
         "pedidos": [
@@ -962,29 +1016,6 @@ ADMIN_PANEL_POR_RUBRO = {
         ],
         "proveedores": [
             {"nombre": "Textil Denim Argentina S.A.", "rubro": "Tejidos & Confección", "deuda": "$190.000", "estado": "Al día"}
-        ]
-    },
-    "hostel": {
-        "kpi_capacidad": "92% Camas Ocupadas",
-        "kpi_pedidos": "14 Reservas Activas",
-        "kpi_stock": "6 Check-Outs Hoy",
-        "kpi_facturacion": "$640.000 Caja Hoy",
-        "productos_stock": [
-            {"sku": "HOST-101", "nombre": "Dormitorio Mixto (4 Camas)", "stock": 8, "unidad": "camas libres", "alerta": "Disponible", "precio": "$18.000/noche"},
-            {"sku": "HOST-102", "nombre": "Dormitorio Femenino (6 Camas)", "stock": 3, "unidad": "camas libres", "alerta": "Bajo Stock", "precio": "$16.800/noche"},
-            {"sku": "HOST-103", "nombre": "Dormitorio Masculino (8 Camas)", "stock": 12, "unidad": "camas libres", "alerta": "Disponible", "precio": "$14.400/noche"},
-            {"sku": "HOST-104", "nombre": "Habitación Privada Doble (Baño Privado)", "stock": 1, "unidad": "habitación", "alerta": "Última Disp.", "precio": "$42.000/noche"}
-        ],
-        "pedidos": [
-            {"id": "#RES-801", "cliente": "Mateo G. (España)", "detalle": "3 Noches — Dormitorio Mixto (4 Camas)", "monto": "$54.000 ARS", "hora": "Check-in 14:00 hs", "estado": "CONFIRMADO"},
-            {"id": "#RES-802", "cliente": "Sophie L. (Francia)", "detalle": "4 Noches — Dormitorio Femenino (6 Camas)", "monto": "$67.200 ARS", "hora": "Check-in 15:30 hs", "estado": "CONFIRMADO"},
-            {"id": "#RES-803", "cliente": "Lucas & Camila (Brasil)", "detalle": "2 Noches — Habitación Privada Doble", "monto": "$84.000 ARS", "hora": "Hace 30 min", "estado": "EN CHECK-IN"}
-        ],
-        "mensajes": [
-            {"cliente": "Alexandre Silva (Brasil)", "tel": "551198765432", "consulta": "Olá! Gostaria de saber se vocês têm cama vaga em quarto feminino/misto para o próximo fin de semana.", "hora": "11:45 hs", "estado": "PENDIENTE"}
-        ],
-        "proveedores": [
-            {"nombre": "Lavandería Industrial San Martín", "rubro": "LAVADO DE SÁBANAS & TOALLAS", "deuda": "$45.000", "estado": "Al día"}
         ]
     },
     "general": {

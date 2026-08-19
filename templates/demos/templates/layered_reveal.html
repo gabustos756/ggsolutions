@@ -204,13 +204,31 @@
 
             <div class="grid md:grid-cols-3 gap-6">
                 {% for rev in reviews %}
-                <div class="lr-card-glass rounded-2xl p-6 space-y-4 lr-anim-item delay-{{ loop.index * 100 }}">
-                    <div class="flex justify-between items-center text-xs">
-                        <span class="font-bold text-white">{{ rev.author_name }}</span>
-                        <span class="text-amber-400 font-mono">{{ rev.rating }} ★</span>
+                <div class="lr-card-glass rounded-2xl p-6 space-y-4 lr-anim-item flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-9 h-9 rounded-full bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 font-extrabold text-xs flex items-center justify-center">
+                                    {{ rev.author_name[0]|upper }}
+                                </div>
+                                <div>
+                                    <span class="font-bold text-white text-xs block leading-snug">{{ rev.author_name }}</span>
+                                    <span class="text-[9px] text-emerald-400 font-bold flex items-center gap-1">
+                                        <i class="fa-solid fa-circle-check text-[8px]"></i> Google Verified
+                                    </span>
+                                </div>
+                            </div>
+                            <span class="text-[10px] text-slate-400 font-mono flex items-center gap-1 bg-white/5 border border-white/10 px-2 py-0.5 rounded">
+                                <i class="fa-brands fa-google text-cyan-400"></i> {{ rev.relative_time }}
+                            </span>
+                        </div>
+
+                        <div class="flex text-amber-400 text-xs gap-1">
+                            {% for i in range(rev.rating) %}<i class="fa-solid fa-star text-amber-400 text-[11px]"></i>{% endfor %}
+                        </div>
+
+                        <p class="text-xs text-slate-200 italic leading-relaxed">"{{ rev.text }}"</p>
                     </div>
-                    <p class="text-xs text-slate-200 italic leading-relaxed">"{{ rev.text }}"</p>
-                    <span class="text-[10px] text-slate-400 font-mono block border-t border-white/15 pt-2">{{ rev.relative_time }}</span>
                 </div>
                 {% endfor %}
             </div>

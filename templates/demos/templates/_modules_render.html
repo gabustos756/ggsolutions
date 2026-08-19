@@ -60,7 +60,7 @@
 
 {% else %}
 <!-- UN SOLO MÓDULO ACTIVO -->
-<div class="max-w-4xl mx-auto">
+<div class="{% if modulo_info.key == 'hostel' or modulo_info.id == 'hostel' %}max-w-7xl{% else %}max-w-4xl{% endif %} mx-auto">
     {% if modulo_info.key == 'hostel' or modulo_info.id == 'hostel' %}
         {% include "demos/components/hostel.html" %}
     {% elif modulo_info.key == 'stock' or modulo_info.id == 'stock' %}

@@ -233,13 +233,13 @@
         <div class="lg:col-span-4 sticky top-24 space-y-4">
             <div class="glass-card rounded-2xl border border-white/20 p-5 space-y-5 backdrop-blur-xl shadow-2xl bg-slate-900/90">
                 
-                <div class="flex items-baseline justify-between border-b border-white/10 pb-4">
+                <div class="flex flex-col gap-3 border-b border-white/10 pb-4">
                     <div>
-                        <span class="text-[11px] uppercase tracking-wider text-slate-400 font-bold block">Tarifa desde</span>
-                        <span class="text-2xl font-black text-white font-mono" id="hostel-price-from">39.356,87 ARS</span>
+                        <span class="text-[11px] uppercase tracking-wider text-slate-400 font-extrabold block">Tarifa desde</span>
+                        <span class="text-2xl sm:text-3xl font-black text-teal-300 font-mono tracking-tight block mt-0.5" id="hostel-price-from">39.356,87 ARS</span>
                     </div>
-                    <button type="button" onclick="scrollToHostelRooms()" class="px-4 py-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 font-extrabold rounded-xl text-xs transition shadow-lg flex-shrink-0">
-                        Elegir habitación
+                    <button type="button" onclick="scrollToHostelRooms()" class="w-full py-3 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-400 hover:to-amber-400 text-slate-950 font-black rounded-xl text-xs uppercase tracking-wider transition shadow-xl flex items-center justify-center gap-2 active:scale-98">
+                        <i class="fa-solid fa-bed text-sm"></i> Elegir Habitación
                     </button>
                 </div>
 
@@ -409,186 +409,111 @@
     </div>
 
 
-    <!-- SECCIÓN DE COMENTARIOS DE CLIENTES (ESTRUCTURA EXACTA DE SCREENSHOT 2) -->
-    <div id="hostel-comentarios" class="space-y-6">
-        <h3 class="text-2xl font-black text-white font-title flex items-center gap-3">
-            <i class="fa-solid fa-comments text-amber-400"></i> Comentarios de clientes
-        </h3>
+    <!-- SECCIÓN DE PROGRAMA DE VOLUNTARIADOS & WORK EXCHANGE PARA HOSTELS -->
+    <div id="voluntariado" class="space-y-6 pt-6 border-t border-white/10">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+                <span class="text-[10px] font-mono font-extrabold uppercase tracking-widest text-teal-400 bg-teal-500/10 border border-teal-500/30 px-3 py-1 rounded-full">
+                    WORK EXCHANGE & VOLUNTARIADO
+                </span>
+                <h3 class="text-2xl sm:text-3xl font-black text-white font-title mt-2 flex items-center gap-3">
+                    <i class="fa-solid fa-hands-holding-child text-teal-400"></i> Programa de Voluntariados {{ demo.nombre_negocio }}
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-300 mt-1">Intercambiá tus habilidades por alojamiento gratis, desayuno diario y experiencias increíbles.</p>
+            </div>
+            <button type="button" onclick="abrirModalVoluntariado()" class="px-5 py-2.5 bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-slate-950 font-extrabold text-xs rounded-xl shadow-lg transition flex items-center gap-2 self-start sm:self-auto">
+                <i class="fa-solid fa-paper-plane"></i> Postularme Ahora
+            </button>
+        </div>
 
-        <div class="grid lg:grid-cols-12 gap-8 items-start">
-            
-            <!-- TARJETA IZQUIERDA: PUNTUACIÓN GENERAL Y DESGLOSE (4 COLS) -->
-            <div class="lg:col-span-4 glass-card rounded-2xl p-6 border border-white/15 space-y-6 bg-slate-900/90 shadow-xl">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-400 flex items-center justify-center text-2xl font-black shadow-inner">
-                        <i class="fa-solid fa-star"></i>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- PUESTO 1: RECEPCIÓN -->
+            <div class="glass-card rounded-2xl p-5 border border-white/15 space-y-4 hover:border-teal-400/40 transition group flex flex-col justify-between">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="w-10 h-10 rounded-xl bg-teal-500/20 border border-teal-500/30 text-teal-300 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-bell-concierge"></i>
+                        </span>
+                        <span class="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded-md">2 Vacantes</span>
                     </div>
-                    <div>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-3xl font-black text-white font-title">9.4</span>
-                            <span class="text-sm font-bold text-teal-300">Magnífico</span>
-                        </div>
-                        <span class="text-xs text-slate-400 font-medium">(48 opiniones verificadas)</span>
+                    <h4 class="text-base font-extrabold text-white font-title group-hover:text-teal-300 transition">Recepción & Check-in</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">Atención a viajeros, entrega de llaves e info turística de la ciudad.</p>
+                    <div class="space-y-1.5 text-[11px] text-slate-300 pt-2 border-t border-white/10">
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-clock text-teal-400"></i> 18 hs / semana (3 turnos)</div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-bed text-amber-400"></i> Cama en Dorm + Desayuno</div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-shirt text-cyan-400"></i> Lavandería libre</div>
                     </div>
                 </div>
-
-                <!-- DESGLOSE DE PUNTUACIONES INDIVIDUALES (BARRA DE PROGRESO 10.0) -->
-                <div class="space-y-3 pt-3 border-t border-white/10 text-xs">
-                    <div class="space-y-1">
-                        <div class="flex justify-between font-bold text-slate-300">
-                            <span>Seguridad</span>
-                            <span class="text-amber-400 font-mono">10.0</span>
-                        </div>
-                        <div class="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-white/10">
-                            <div class="bg-amber-400 h-full rounded-full" style="width: 100%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="space-y-1">
-                        <div class="flex justify-between font-bold text-slate-300">
-                            <span>Ubicación</span>
-                            <span class="text-amber-400 font-mono">10.0</span>
-                        </div>
-                        <div class="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-white/10">
-                            <div class="bg-amber-400 h-full rounded-full" style="width: 100%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="space-y-1">
-                        <div class="flex justify-between font-bold text-slate-300">
-                            <span>Personal</span>
-                            <span class="text-amber-400 font-mono">9.5</span>
-                        </div>
-                        <div class="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-white/10">
-                            <div class="bg-amber-400 h-full rounded-full" style="width: 95%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="space-y-1">
-                        <div class="flex justify-between font-bold text-slate-300">
-                            <span>Atmósfera</span>
-                            <span class="text-amber-400 font-mono">9.2</span>
-                        </div>
-                        <div class="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-white/10">
-                            <div class="bg-amber-400 h-full rounded-full" style="width: 92%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="space-y-1">
-                        <div class="flex justify-between font-bold text-slate-300">
-                            <span>Limpieza</span>
-                            <span class="text-amber-400 font-mono">9.6</span>
-                        </div>
-                        <div class="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-white/10">
-                            <div class="bg-amber-400 h-full rounded-full" style="width: 96%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="space-y-1">
-                        <div class="flex justify-between font-bold text-slate-300">
-                            <span>Servicios</span>
-                            <span class="text-amber-400 font-mono">9.1</span>
-                        </div>
-                        <div class="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-white/10">
-                            <div class="bg-amber-400 h-full rounded-full" style="width: 91%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="space-y-1">
-                        <div class="flex justify-between font-bold text-slate-300">
-                            <span>Calidad Precio</span>
-                            <span class="text-amber-400 font-mono">9.3</span>
-                        </div>
-                        <div class="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-white/10">
-                            <div class="bg-amber-400 h-full rounded-full" style="width: 93%;"></div>
-                        </div>
-                    </div>
-                </div>
+                <button type="button" onclick="seleccionarPuestoVoluntariado('Recepción & Check-in')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-xl border border-white/10 transition mt-3">
+                    Aplicar a este puesto
+                </button>
             </div>
 
-            <!-- TARJETAS DERECHA: REVIEWS INDIVIDUALES CON MARCO DORADO/AMBAR (8 COLS) -->
-            <div class="lg:col-span-8 space-y-4">
-                
-                <!-- CARD REVIEW 1 (ESTILO SCREENSHOT 2) -->
-                <div class="bg-slate-900/90 border-2 border-amber-500 rounded-3xl p-6 space-y-4 shadow-2xl relative overflow-hidden">
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs text-slate-400 font-semibold">Alojado en mar 2026</span>
-                        <div class="flex items-center gap-1 bg-amber-500/20 text-amber-300 border border-amber-500/40 px-3 py-1 rounded-full text-xs font-black">
-                            <i class="fa-solid fa-star text-amber-400 text-[10px]"></i> 10
-                        </div>
+            <!-- PUESTO 2: COMMUNITY MANAGER & REDES -->
+            <div class="glass-card rounded-2xl p-5 border border-white/15 space-y-4 hover:border-teal-400/40 transition group flex flex-col justify-between">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/30 text-purple-300 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-camera-retro"></i>
+                        </span>
+                        <span class="text-[10px] font-mono font-bold text-purple-300 bg-purple-500/10 border border-purple-500/30 px-2 py-0.5 rounded-md">1 Vacante</span>
                     </div>
-
-                    <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-full bg-slate-800 border border-white/20 flex items-center justify-center font-bold text-white text-sm shadow-md">
-                            A
-                        </div>
-                        <div>
-                            <h6 class="text-sm font-extrabold text-white">afQEcqapV8uVD16d</h6>
-                            <p class="text-xs text-slate-400 flex items-center gap-1">
-                                Hombre, 25-30, Argentina 🇦🇷
-                            </p>
-                        </div>
+                    <h4 class="text-base font-extrabold text-white font-title group-hover:text-purple-300 transition">Social Media & Fotos</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">Creación de Reels, fotos de actividades y dinamizar las redes del hostel.</p>
+                    <div class="space-y-1.5 text-[11px] text-slate-300 pt-2 border-t border-white/10">
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-clock text-teal-400"></i> 15 hs / semana (Flexible)</div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-bed text-amber-400"></i> Cama + Desayuno</div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-water text-cyan-400"></i> Surf / Tours incluidos</div>
                     </div>
-
-                    <p class="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed italic">
-                        "Great Wifi and coworking space. Really clean and then pool is great. The location is the Best."
-                    </p>
                 </div>
-
-                <!-- CARD REVIEW 2 -->
-                <div class="bg-slate-900/90 border-2 border-amber-500/80 rounded-3xl p-6 space-y-4 shadow-xl relative overflow-hidden">
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs text-slate-400 font-semibold">Alojado en dic 2025</span>
-                        <div class="flex items-center gap-1 bg-amber-500/20 text-amber-300 border border-amber-500/40 px-3 py-1 rounded-full text-xs font-black">
-                            <i class="fa-solid fa-star text-amber-400 text-[10px]"></i> 10
-                        </div>
-                    </div>
-
-                    <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-full bg-slate-800 border border-white/20 flex items-center justify-center font-bold text-white text-sm shadow-md">
-                            A
-                        </div>
-                        <div>
-                            <h6 class="text-sm font-extrabold text-white">aMpylrW7ZW3RuKhu</h6>
-                            <p class="text-xs text-slate-400 flex items-center gap-1">
-                                Hombre, 41+, Uruguay 🇺🇾
-                            </p>
-                        </div>
-                    </div>
-
-                    <p class="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed italic">
-                        "En mi experiencia de alojamientos en hostels, este calificó como mi mejor estadía. Instalaciones super limpias, excelente ubicación y el personal de 10."
-                    </p>
-                </div>
-
-                <!-- CARD REVIEW 3 -->
-                <div class="bg-slate-900/90 border-2 border-amber-500/60 rounded-3xl p-6 space-y-4 shadow-lg relative overflow-hidden">
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs text-slate-400 font-semibold">Alojado en feb 2026</span>
-                        <div class="flex items-center gap-1 bg-amber-500/20 text-amber-300 border border-amber-500/40 px-3 py-1 rounded-full text-xs font-black">
-                            <i class="fa-solid fa-star text-amber-400 text-[10px]"></i> 9.8
-                        </div>
-                    </div>
-
-                    <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-full bg-slate-800 border border-white/20 flex items-center justify-center font-bold text-white text-sm shadow-md">
-                            S
-                        </div>
-                        <div>
-                            <h6 class="text-sm font-extrabold text-white">Sophie L.</h6>
-                            <p class="text-xs text-slate-400 flex items-center gap-1">
-                                Mujer, 22-28, Francia 🇫🇷
-                            </p>
-                        </div>
-                    </div>
-
-                    <p class="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed italic">
-                        "Super hostel! Équipe très accueillante, lit confortable et super ambiance dans les espacios comunes. Wi-Fi très rapide pour travailler."
-                    </p>
-                </div>
-
+                <button type="button" onclick="seleccionarPuestoVoluntariado('Social Media & Fotos')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-xl border border-white/10 transition mt-3">
+                    Aplicar a este puesto
+                </button>
             </div>
 
+            <!-- PUESTO 3: BARMAN & NOCHES SOCIALES -->
+            <div class="glass-card rounded-2xl p-5 border border-white/15 space-y-4 hover:border-teal-400/40 transition group flex flex-col justify-between">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/30 text-amber-300 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-martini-glass-citrus"></i>
+                        </span>
+                        <span class="text-[10px] font-mono font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded-md">2 Vacantes</span>
+                    </div>
+                    <h4 class="text-base font-extrabold text-white font-title group-hover:text-amber-300 transition">Barman & Eventos Social</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">Preparación de tragos en el bar del hostel y organizar cenas o games nights.</p>
+                    <div class="space-y-1.5 text-[11px] text-slate-300 pt-2 border-t border-white/10">
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-clock text-teal-400"></i> 20 hs / semana (Noches)</div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-bed text-amber-400"></i> Cama + Desayuno</div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-beer-mug-empty text-cyan-400"></i> Consumo libre en barra</div>
+                    </div>
+                </div>
+                <button type="button" onclick="seleccionarPuestoVoluntariado('Barman & Eventos')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-xl border border-white/10 transition mt-3">
+                    Aplicar a este puesto
+                </button>
+            </div>
+
+            <!-- PUESTO 4: HOUSEKEEPING & MANTENIMIENTO -->
+            <div class="glass-card rounded-2xl p-5 border border-white/15 space-y-4 hover:border-teal-400/40 transition group flex flex-col justify-between">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-broom"></i>
+                        </span>
+                        <span class="text-[10px] font-mono font-bold text-cyan-300 bg-cyan-500/10 border border-cyan-500/30 px-2 py-0.5 rounded-md">1 Vacante</span>
+                    </div>
+                    <h4 class="text-base font-extrabold text-white font-title group-hover:text-cyan-300 transition">Housekeeping & Mantenimiento</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">Apoyo en orden de dormitorios, áreas comunes y armado de blanco.</p>
+                    <div class="space-y-1.5 text-[11px] text-slate-300 pt-2 border-t border-white/10">
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-clock text-teal-400"></i> 18 hs / semana (Mañanas)</div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-bed text-amber-400"></i> Cama + Desayuno</div>
+                        <div class="flex items-center gap-2"><i class="fa-solid fa-kitchen-set text-cyan-400"></i> Cocina compartida libre</div>
+                    </div>
+                </div>
+                <button type="button" onclick="seleccionarPuestoVoluntariado('Housekeeping & Mantenimiento')" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-xl border border-white/10 transition mt-3">
+                    Aplicar a este puesto
+                </button>
+            </div>
         </div>
     </div>
 
@@ -720,5 +645,19 @@
         const msg = `Hola {{ demo.nombre_negocio }}, mi nombre es ${nombre} (${origen}). Quisiera solicitar reserva directa:\n\n📅 Fechas: Desde el ${checkin} hasta el ${checkout}\n⏰ Hora aprox. de llegada: ${arrival}\n👥 Huéspedes: ${huespedes} personas\n\n🛏️ Habitación / Camas:\n${detalleSeleccion}\n\n💰 Total estimado directo: ${total}.`;
         const waNum = "{{ demo.whatsapp or demo.telefono or '5493515550199' }}".replace(/\D/g, '') || "5493515550199";
         window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function seleccionarPuestoVoluntariado(puesto) {
+        const nombre = prompt('Por favor ingresá tu nombre completo para postularte al puesto de ' + puesto + ':');
+        if (!nombre || !nombre.trim()) return;
+
+        const nacionalidad = prompt('Ingresá tu país o ciudad de origen (ej: Argentina, Francia, Brasil):') || 'No especificada';
+        const msg = `Hola {{ demo.nombre_negocio }}, mi nombre es ${nombre.trim()} (${nacionalidad}). Quisiera postularme al Programa de Voluntariado / Work Exchange para el puesto de: *${puesto}*.\n\nQuedo atento a los pasos para coordinar fechas y entrevista. Gracias!`;
+        const waNum = "{{ demo.whatsapp or demo.telefono or '5493515550199' }}".replace(/\D/g, '') || "5493515550199";
+        window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function abrirModalVoluntariado() {
+        seleccionarPuestoVoluntariado('Voluntario General / Intercambio');
     }
 </script>

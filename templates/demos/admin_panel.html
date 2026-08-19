@@ -99,28 +99,20 @@
                         <td class="py-3.5 px-4 text-slate-200">{{ p.detalle }}</td>
                         <td class="py-3.5 px-4 font-extrabold text-amber-400">{{ p.monto }}</td>
                         <td class="py-3.5 px-4">
-                            {% if 'CHECK-IN' in p.estado or p.tipo_accion == 'checkin' %}
-                            <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold bg-amber-500/20 text-amber-300 border border-amber-500/30">{{ p.estado }}</span>
-                            {% elif 'CHECK-OUT' in p.estado or p.tipo_accion == 'checkout' %}
-                            <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold bg-rose-500/20 text-rose-300 border border-rose-500/30">{{ p.estado }}</span>
-                            {% else %}
-                            <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">{{ p.estado }}</span>
-                            {% endif %}
+                            <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold {{ p.badge_class or 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' }}">
+                                {{ p.estado }}
+                            </span>
                         </td>
                         <td class="py-3.5 px-4 text-right">
-                            {% if 'CHECK-IN' in p.estado or p.tipo_accion == 'checkin' %}
-                            <button onclick="procesarAccionDemo(this, 'CHECK-IN', 'EN ESTADÍA', 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30')" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-3 py-1 rounded-lg text-xs transition flex items-center gap-1 ml-auto">
-                                <i class="fa-solid fa-key text-[11px]"></i> Registrar Check-in
+                            {% set b_texto = p.btn_texto or ('Registrar Check-in' if p.tipo_accion == 'checkin' else ('Registrar Check-out' if p.tipo_accion == 'checkout' else 'Completar')) %}
+                            {% set b_icon = p.btn_icon or ('fa-key' if p.tipo_accion == 'checkin' else ('fa-door-open' if p.tipo_accion == 'checkout' else 'fa-circle-check')) %}
+                            {% set b_class = p.btn_class or ('bg-emerald-500 hover:bg-emerald-400 text-slate-950' if p.tipo_accion == 'checkin' else ('bg-cyan-500 hover:bg-cyan-400 text-slate-950' if p.tipo_accion == 'checkout' else 'bg-slate-800 hover:bg-slate-700 text-white border border-white/10')) %}
+                            {% set b_nuevo = p.nuevo_estado or ('EN ESTADÍA' if p.tipo_accion == 'checkin' else ('LIBERADO / LIMPIEZA' if p.tipo_accion == 'checkout' else 'PROCESADO')) %}
+                            {% set b_badge = p.badge_class or 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' %}
+
+                            <button type="button" onclick="procesarAccionDemo(this, '{{ b_texto }}', '{{ b_nuevo }}', '{{ b_badge }}')" class="{{ b_class }} font-bold px-3 py-1 rounded-lg text-xs transition flex items-center gap-1.5 ml-auto shadow-sm">
+                                <i class="fa-solid {{ b_icon }} text-[11px]"></i> {{ b_texto }}
                             </button>
-                            {% elif 'CHECK-OUT' in p.estado or p.tipo_accion == 'checkout' %}
-                            <button onclick="procesarAccionDemo(this, 'CHECK-OUT', 'LIBERADO / LIMPIEZA', 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30')" class="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-3 py-1 rounded-lg text-xs transition flex items-center gap-1 ml-auto">
-                                <i class="fa-solid fa-door-open text-[11px]"></i> Registrar Check-out
-                            </button>
-                            {% else %}
-                            <button onclick="completarPedidoDemo(this)" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-3 py-1 rounded-lg text-xs transition flex items-center gap-1 ml-auto">
-                                <i class="fa-solid fa-circle-check"></i> Despachar
-                            </button>
-                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}

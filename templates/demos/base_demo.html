@@ -199,6 +199,11 @@
                 {% endif %}
                 <a href="#testimonios" onclick="navigateToSection(3)" class="hover:text-cyan-300 transition">{{ i18n.nav_resenas or 'Opiniones' }}</a>
                 <a href="#ubicacion" onclick="navigateToSection(4)" class="hover:text-cyan-300 transition">{{ i18n.nav_galeria or 'Ubicación' }}</a>
+                {% if demo.rubro == 'zapateria' %}
+                <button type="button" onclick="switchSoftwareView('admin')" class="bg-amber-500/20 border border-amber-500/40 text-amber-300 hover:bg-amber-500/30 px-3.5 py-1.5 rounded-lg transition flex items-center gap-1.5 font-extrabold shadow-sm text-xs cursor-pointer">
+                    <i class="fa-solid fa-user-gear text-amber-400"></i> Acceso Taller (Admin)
+                </button>
+                {% endif %}
                 <a href="{{ wa_link }}" target="_blank" class="bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/30 px-4 py-1.5 rounded-lg transition flex items-center gap-2 font-bold shadow-sm">
                     <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i> {{ i18n.btn_contactar or 'Hablá con Nosotros' }}
                 </a>
@@ -230,6 +235,11 @@
                 <a href="#ubicacion" onclick="navigateToSection(4); closeMobileMenu();" class="flex items-center gap-3 py-2.5 px-3.5 rounded-xl bg-slate-900/80 border border-white/10 hover:border-cyan-400/50 hover:text-cyan-300 transition">
                     <i class="fa-solid fa-location-dot text-rose-400 w-5"></i> {{ i18n.nav_galeria or 'Ubicación & Instalaciones' }}
                 </a>
+                {% if demo.rubro == 'zapateria' %}
+                <button type="button" onclick="switchSoftwareView('admin'); closeMobileMenu();" class="w-full flex items-center gap-3 py-2.5 px-3.5 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 hover:bg-amber-500/30 transition text-left font-bold">
+                    <i class="fa-solid fa-user-gear text-amber-400 w-5"></i> Acceso Taller (Admin)
+                </button>
+                {% endif %}
                 <a href="{{ wa_link }}" target="_blank" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black py-3 rounded-xl text-center flex items-center justify-center gap-2 shadow-lg mt-1 text-xs">
                     <i class="fa-brands fa-whatsapp text-base flex-shrink-0"></i> {{ i18n.btn_contactar or 'Hablá con Nosotros' }}
                 </a>
@@ -243,9 +253,13 @@
     </div>
 
     <!-- BLOQUE 2: VISTA DE GESTIÓN INTERNA B2B (RECURSOS & OPERACIONES) -->
-    <div id="view-software-admin" style="display: {% if demo.tipo_software == 'gestion' %}block{% else %}none{% endif %};" class="py-12">
+    <div id="view-software-admin" style="display: {% if demo.tipo_software == 'gestion' %}block{% else %}none{% endif %};" class="py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {% include "demos/admin_panel.html" %}
+            {% if demo.rubro == 'zapateria' %}
+                {% include "demos/components/zapateria_admin.html" %}
+            {% else %}
+                {% include "demos/admin_panel.html" %}
+            {% endif %}
         </div>
     </div>
 

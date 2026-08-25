@@ -1,0 +1,440 @@
+<!-- SOFTWARE OPERATIVO DE TALLER (PANEL INTERNO ADMINISTRADOR LORIBELL) -->
+<script src="{{ url_for('static', filename='js/zapateria_store.js') }}"></script>
+
+<div id="panel-taller-admin-root" class="glass-card rounded-3xl p-6 sm:p-8 space-y-6 border border-amber-500/30 shadow-2xl bg-stone-950/95 my-6">
+    
+    <!-- HEADER DEL PANEL Y NAVEGACIÓN DE SUB-PESTAÑAS -->
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/10 pb-4">
+        <div>
+            <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                    SOFTWARE OPERATIVO DE TALLER B2B
+                </span>
+                <span class="text-xs text-slate-400 font-medium">Zapatería Loribell — Villa Cabrera</span>
+            </div>
+            <h3 class="text-2xl font-extrabold text-white flex items-center gap-2.5 font-title mt-1">
+                <i class="fa-solid fa-hammer text-amber-400"></i> Control Operativo de Taller & Insumos
+            </h3>
+        </div>
+
+        <div class="flex items-center gap-2">
+            <button onclick="switchSoftwareView('publico')" class="bg-stone-900 hover:bg-stone-800 text-slate-300 border border-white/15 px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+                <i class="fa-solid fa-globe text-cyan-400"></i> Ir a Vista Cliente
+            </button>
+            <div class="flex items-center gap-1.5 bg-slate-900 p-1.5 rounded-2xl border border-white/10">
+                <button id="btn-tab-remitos" onclick="switchAdminSubtab('remitos')" class="px-4 py-2 rounded-xl text-xs font-extrabold transition bg-amber-500 text-slate-950 shadow-md flex items-center gap-1.5">
+                    <i class="fa-solid fa-list-check"></i> Remitos de Taller
+                </button>
+                <button id="btn-tab-insumos" onclick="switchAdminSubtab('insumos')" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-boxes-stacked"></i> Control de Insumos
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- KPIS TALLER -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4" id="kpis-taller-container">
+        <div class="bg-stone-900/90 border border-white/10 rounded-2xl p-4 space-y-1">
+            <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Trabajos Activos</p>
+            <p class="text-2xl font-black text-white font-title" id="kpi-trabajos-activos">0</p>
+            <p class="text-[10px] text-amber-400 font-bold flex items-center gap-1"><i class="fa-solid fa-rotate"></i> En reparación</p>
+        </div>
+
+        <div class="bg-stone-900/90 border border-amber-500/20 rounded-2xl p-4 space-y-1">
+            <p class="text-[10px] font-extrabold text-amber-300 uppercase tracking-wider">👟 División Deportivo</p>
+            <p class="text-2xl font-black text-amber-400 font-title" id="kpi-deportivos-count">0</p>
+            <p class="text-[10px] text-slate-300">Zapatillas & Caucho</p>
+        </div>
+
+        <div class="bg-stone-900/90 border border-orange-500/20 rounded-2xl p-4 space-y-1">
+            <p class="text-[10px] font-extrabold text-orange-300 uppercase tracking-wider">👢 División Calzado Regular / Cuero</p>
+            <p class="text-2xl font-black text-orange-400 font-title" id="kpi-cuero-count">0</p>
+            <p class="text-[10px] text-slate-300">Botas, Cierres & Tapas</p>
+        </div>
+
+        <div class="bg-stone-900/90 border border-emerald-500/20 rounded-2xl p-4 space-y-1">
+            <p class="text-[10px] font-extrabold text-emerald-300 uppercase tracking-wider">Listos para Retirar</p>
+            <p class="text-2xl font-black text-emerald-400 font-title" id="kpi-listos-count">0</p>
+            <p class="text-[10px] text-emerald-300 font-bold flex items-center gap-1"><i class="fa-brands fa-whatsapp"></i> Notificación activa</p>
+        </div>
+    </div>
+
+
+    <!-- SUBTAB 1: TABLERO DE REMITOS Y TRABAJOS -->
+    <div id="subtab-remitos-sec" class="space-y-5">
+        
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-slate-900/90 p-4 rounded-2xl border border-white/10">
+            <div class="flex flex-wrap items-center gap-2 text-xs">
+                <span class="font-bold text-slate-400 uppercase tracking-wider text-[11px] mr-2">Especialidad:</span>
+                <button onclick="filtrarRemitos('todos')" id="filter-esp-todos" class="px-3 py-1.5 rounded-xl font-bold bg-amber-500 text-slate-950 shadow">
+                    Todos
+                </button>
+                <button onclick="filtrarRemitos('deportivo')" id="filter-esp-deportivo" class="px-3 py-1.5 rounded-xl font-semibold text-slate-300 hover:text-white transition">
+                    👟 División Calzado Deportivo
+                </button>
+                <button onclick="filtrarRemitos('cuero')" id="filter-esp-cuero" class="px-3 py-1.5 rounded-xl font-semibold text-slate-300 hover:text-white transition">
+                    👢 División Calzado Regular & Cuero
+                </button>
+            </div>
+
+            <button onclick="abrirModalNuevoRemito()" class="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs transition shadow-lg flex items-center gap-2 self-end sm:self-auto">
+                <i class="fa-solid fa-plus-circle"></i> Nuevo Remito (#10923)
+            </button>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border border-white/10 bg-slate-950/60 shadow-xl">
+            <table class="w-full text-left text-xs text-slate-300">
+                <thead class="bg-stone-900 uppercase text-slate-400 border-b border-white/10 font-bold">
+                    <tr>
+                        <th class="py-3.5 px-4">N° Remito</th>
+                        <th class="py-3.5 px-4">Cliente & Teléfono</th>
+                        <th class="py-3.5 px-4">Calzado & Especialidad</th>
+                        <th class="py-3.5 px-4">Detalle del Arreglo</th>
+                        <th class="py-3.5 px-4">Precio</th>
+                        <th class="py-3.5 px-4">Estado</th>
+                        <th class="py-3.5 px-4 text-right">Acción Operativa</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-remitos-body" class="divide-y divide-white/5">
+                    <!-- Renderizado dinámico desde sessionStorage -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!-- SUBTAB 2: CONTROL DE INSUMOS -->
+    <div id="subtab-insumos-sec" class="space-y-5 hidden">
+        <div class="border-b border-white/10 pb-3 flex justify-between items-center">
+            <div>
+                <h4 class="text-lg font-extrabold text-white font-title flex items-center gap-2">
+                    <i class="fa-solid fa-boxes-stacked text-amber-400"></i> Inventario de Insumos de Taller
+                </h4>
+                <p class="text-xs text-slate-300">Control de stock de materias primas para calzado deportivo y cuero.</p>
+            </div>
+            <span class="text-xs text-slate-400">Actualización en vivo</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="insumos-grid-container">
+            <!-- Renderizado dinámico de tarjetas de insumos -->
+        </div>
+    </div>
+</div>
+
+
+<!-- MODAL 1: REGISTRAR NUEVO REMITO EN LOCAL -->
+<div id="modal-nuevo-remito" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+    <div class="glass-card rounded-3xl p-6 max-w-lg w-full border border-amber-500/30 space-y-5 shadow-2xl">
+        <div class="flex justify-between items-center border-b border-white/10 pb-3">
+            <h4 class="font-extrabold text-white text-lg font-title flex items-center gap-2">
+                <i class="fa-solid fa-receipt text-amber-400"></i> Registrar Nuevo Remito de Taller
+            </h4>
+            <button onclick="cerrarModalNuevoRemito()" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-times"></i></button>
+        </div>
+
+        <form id="form-nuevo-remito" onsubmit="guardarNuevoRemito(event)" class="space-y-4 text-xs">
+            <div>
+                <label class="block font-bold text-slate-300 mb-1">Nombre Completo del Cliente</label>
+                <input type="text" id="new-remito-cliente" required placeholder="Ej: Lucas Fernández" class="w-full bg-slate-900 border border-white/15 rounded-xl p-2.5 text-white focus:outline-none focus:border-amber-400">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block font-bold text-slate-300 mb-1">Celular / WhatsApp</label>
+                    <input type="text" id="new-remito-telefono" required placeholder="Ej: 3518905152" value="3518905152" class="w-full bg-slate-900 border border-white/15 rounded-xl p-2.5 text-white focus:outline-none focus:border-amber-400">
+                </div>
+                <div>
+                    <label class="block font-bold text-slate-300 mb-1">Especialidad / División</label>
+                    <select id="new-remito-categoria" class="w-full bg-slate-900 border border-white/15 rounded-xl p-2.5 text-white focus:outline-none focus:border-amber-400">
+                        <option value="deportivo">👟 División Calzado Deportivo</option>
+                        <option value="cuero">👢 División Calzado Regular & Cuero</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="block font-bold text-slate-300 mb-1">Descripción del Calzado</label>
+                <input type="text" id="new-remito-calzado" required placeholder="Ej: Zapatillas Adidas Terrex Talle 42" class="w-full bg-slate-900 border border-white/15 rounded-xl p-2.5 text-white focus:outline-none focus:border-amber-400">
+            </div>
+
+            <div>
+                <label class="block font-bold text-slate-300 mb-1">Trabajo a Realizar</label>
+                <textarea id="new-remito-trabajo" required rows="2" placeholder="Ej: Pegado de suelín de goma y costura de refuerzo..." class="w-full bg-slate-900 border border-white/15 rounded-xl p-2.5 text-white focus:outline-none focus:border-amber-400 resize-none"></textarea>
+            </div>
+
+            <div>
+                <label class="block font-bold text-slate-300 mb-1">Precio Estimado ($ ARS)</label>
+                <input type="number" id="new-remito-precio" required placeholder="Ej: 16000" class="w-full bg-slate-900 border border-white/15 rounded-xl p-2.5 text-white font-mono focus:outline-none focus:border-amber-400">
+            </div>
+
+            <div class="pt-3 flex gap-3">
+                <button type="button" onclick="cerrarModalNuevoRemito()" class="w-1/2 bg-slate-800 hover:bg-slate-700 text-white font-bold py-2.5 rounded-xl">Cancelar</button>
+                <button type="submit" class="w-1/2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold py-2.5 rounded-xl">Guardar Remito</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- MODAL 2: CARGA DE FOTO AL MARCAR TRABAJO COMO LISTO -->
+<div id="modal-foto-listo" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+    <div class="glass-card rounded-3xl p-6 max-w-lg w-full border border-emerald-500/40 space-y-5 shadow-2xl">
+        <div class="flex justify-between items-center border-b border-white/10 pb-3">
+            <h4 class="font-extrabold text-white text-lg font-title flex items-center gap-2">
+                <i class="fa-solid fa-camera text-emerald-400"></i> Evidencia de Trabajo Terminado
+            </h4>
+            <button onclick="cerrarModalFotoListo()" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-times"></i></button>
+        </div>
+
+        <div class="space-y-4 text-xs">
+            <p class="text-slate-300">
+                Seleccioná o ingresá la foto del calzado listo para adjuntar a la notificación de retiro del cliente.
+            </p>
+            <input type="hidden" id="modal-foto-remito-id">
+
+            <div class="space-y-2">
+                <label class="block font-bold text-slate-300">Seleccionar Foto de Muestra HD:</label>
+                <div class="grid grid-cols-2 gap-3">
+                    <button type="button" onclick="seleccionarFotoMuestra('/static/img/zapateria/antes_despues_botas.png')" class="border border-white/10 rounded-xl overflow-hidden group focus:ring-2 focus:ring-emerald-400">
+                        <img src="/static/img/zapateria/antes_despues_botas.png" class="h-24 w-full object-cover group-hover:scale-105 transition">
+                        <span class="block text-[10px] bg-slate-900 text-slate-300 p-1 font-semibold">Botas / Cuero Terminado</span>
+                    </button>
+                    <button type="button" onclick="seleccionarFotoMuestra('/static/img/zapateria/deportivas_repair.png')" class="border border-white/10 rounded-xl overflow-hidden group focus:ring-2 focus:ring-emerald-400">
+                        <img src="/static/img/zapateria/deportivas_repair.png" class="h-24 w-full object-cover group-hover:scale-105 transition">
+                        <span class="block text-[10px] bg-slate-900 text-slate-300 p-1 font-semibold">Zapatillas Limpias & Pegadas</span>
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <label class="block font-bold text-slate-300 mb-1">O pegar URL personalizada de foto:</label>
+                <input type="text" id="modal-foto-custom-url" placeholder="https://..." class="w-full bg-slate-900 border border-white/15 rounded-xl p-2.5 text-white text-xs">
+            </div>
+
+            <div class="pt-3 flex gap-3">
+                <button type="button" onclick="cerrarModalFotoListo()" class="w-1/2 bg-slate-800 text-white font-bold py-2.5 rounded-xl">Cancelar</button>
+                <button type="button" onclick="confirmarTrabajoListoConFoto()" class="w-1/2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-2.5 rounded-xl">
+                    <i class="fa-solid fa-check"></i> Marcar Listo & Adjuntar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- LÓGICA DE INTERACCIÓN ADMIN -->
+<script>
+    let categoriaFiltroActual = "todos";
+    let subtabAdminActual = "remitos";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        renderizarAdminTodo();
+        window.addEventListener("zapateriaStateChanged", () => {
+            renderizarAdminTodo();
+        });
+    });
+
+    function renderizarAdminTodo() {
+        renderizarKPIs();
+        renderizarTablaRemitos();
+        renderizarInsumos();
+    }
+
+    function renderizarKPIs() {
+        if (!window.zapateriaStore) return;
+        const remitos = window.zapateriaStore.getRemitos();
+        const activos = remitos.filter(r => r.estado !== "entregado").length;
+        const depCount = remitos.filter(r => r.categoria === "deportivo" && r.estado !== "entregado").length;
+        const cueroCount = remitos.filter(r => r.categoria === "cuero" && r.estado !== "entregado").length;
+        const listosCount = remitos.filter(r => r.estado === "listo").length;
+
+        const kActive = document.getElementById("kpi-trabajos-activos");
+        const kDep = document.getElementById("kpi-deportivos-count");
+        const kCue = document.getElementById("kpi-cuero-count");
+        const kLis = document.getElementById("kpi-listos-count");
+
+        if (kActive) kActive.innerText = activos;
+        if (kDep) kDep.innerText = depCount;
+        if (kCue) kCue.innerText = cueroCount;
+        if (kLis) kLis.innerText = listosCount;
+    }
+
+    function renderizarTablaRemitos() {
+        const tbody = document.getElementById("tabla-remitos-body");
+        if (!tbody || !window.zapateriaStore) return;
+        const list = window.zapateriaStore.getRemitos(categoriaFiltroActual);
+
+        if (!list || list.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" class="text-center py-6 text-slate-400">No hay remitos registrados en esta categoría.</td></tr>`;
+            return;
+        }
+
+        tbody.innerHTML = list.map(r => {
+            let badgeEstado = "";
+            if (r.estado === "pendiente") {
+                badgeEstado = `<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">Pendiente</span>`;
+            } else if (r.estado === "en_proceso") {
+                badgeEstado = `<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center gap-1 w-fit"><i class="fa-solid fa-spin fa-gear text-[9px]"></i> En Proceso</span>`;
+            } else if (r.estado === "listo") {
+                badgeEstado = `<span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1 w-fit"><i class="fa-solid fa-check"></i> LISTO P/ RETIRO</span>`;
+            } else {
+                badgeEstado = `<span class="px-2.5 py-1 rounded-full text-[10px] font-semibold bg-slate-800 text-slate-400 border border-white/10">Entregado</span>`;
+            }
+
+            const waUrl = window.zapateriaStore.generarMensajeWhatsApp(r.id);
+
+            return `
+                <tr class="hover:bg-white/5 transition">
+                    <td class="py-3.5 px-4 font-mono font-extrabold text-amber-400">#${r.id}<br><span class="text-[10px] text-slate-400 font-normal">${r.fecha}</span></td>
+                    <td class="py-3.5 px-4 font-bold text-white">${r.cliente}<br><span class="text-[10px] text-slate-400 font-mono font-normal">📱 ${r.telefono}</span></td>
+                    <td class="py-3.5 px-4">
+                        <span class="font-semibold text-slate-200 block">${r.calzado}</span>
+                        <span class="text-[10px] text-amber-300 font-medium">${r.especialista}</span>
+                    </td>
+                    <td class="py-3.5 px-4 text-slate-300 max-w-xs leading-relaxed">
+                        ${r.trabajo}
+                        ${r.foto ? `<a href="${r.foto}" target="_blank" class="block text-[10px] text-emerald-400 underline font-semibold mt-1"><i class="fa-solid fa-image mr-1"></i>Ver Foto Trabajo</a>` : ''}
+                    </td>
+                    <td class="py-3.5 px-4 font-extrabold text-amber-400 font-mono">$${r.precio.toLocaleString("es-AR")}</td>
+                    <td class="py-3.5 px-4">${badgeEstado}</td>
+                    <td class="py-3.5 px-4 text-right space-y-1">
+                        ${r.estado === 'pendiente' ? `
+                            <button onclick="cambiarEstadoAccion(${r.id}, 'en_proceso')" class="bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 px-2.5 py-1 rounded-lg text-[10px] font-bold hover:bg-cyan-500/30 transition">
+                                <i class="fa-solid fa-play"></i> Iniciar
+                            </button>
+                        ` : ''}
+                        
+                        ${r.estado === 'en_proceso' ? `
+                            <button onclick="abrirModalFotoListo(${r.id})" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold px-2.5 py-1 rounded-lg text-[10px] transition shadow-md">
+                                <i class="fa-solid fa-camera"></i> Marcar LISTO
+                            </button>
+                        ` : ''}
+
+                        ${r.estado === 'listo' ? `
+                            <div class="flex items-center justify-end gap-1.5">
+                                <a href="${waUrl}" target="_blank" class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 px-2.5 py-1 rounded-lg text-[10px] font-bold transition flex items-center gap-1">
+                                    <i class="fa-brands fa-whatsapp"></i> Notificar WA
+                                </a>
+                                <button onclick="cambiarEstadoAccion(${r.id}, 'entregado')" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-1 rounded-lg text-[10px] font-semibold transition">
+                                    Entregar
+                                </button>
+                            </div>
+                        ` : ''}
+                    </td>
+                </tr>
+            `;
+        }).join("");
+    }
+
+    function renderizarInsumos() {
+        const grid = document.getElementById("insumos-grid-container");
+        if (!grid || !window.zapateriaStore) return;
+        const insumos = window.zapateriaStore.getData().insumos;
+
+        grid.innerHTML = insumos.map(i => {
+            let badge = `<span class="px-2 py-0.5 rounded text-[10px] font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">OK</span>`;
+            if (i.estado === "bajo") {
+                badge = `<span class="px-2 py-0.5 rounded text-[10px] font-extrabold bg-amber-500/20 text-amber-300 border border-amber-500/30">STOCK BAJO</span>`;
+            } else if (i.estado === "critico") {
+                badge = `<span class="px-2 py-0.5 rounded text-[10px] font-extrabold bg-rose-500/20 text-rose-300 border border-rose-500/30 animate-pulse">REPOSICIÓN URGENTE</span>`;
+            }
+
+            return `
+                <div class="bg-stone-900/90 border border-white/10 rounded-2xl p-4 space-y-3 shadow-lg">
+                    <div class="flex justify-between items-start gap-2">
+                        <h5 class="font-bold text-white text-xs font-title">${i.nombre}</h5>
+                        ${badge}
+                    </div>
+
+                    <div class="flex justify-between items-baseline pt-2 border-t border-white/5">
+                        <span class="text-2xl font-black text-amber-400 font-mono">${i.cantidad} <span class="text-xs text-slate-400 font-normal">${i.unidad}</span></span>
+                        <span class="text-[10px] text-slate-400">Min: ${i.minimo} ${i.unidad}</span>
+                    </div>
+
+                    <div class="flex items-center justify-end gap-2 pt-1">
+                        <button onclick="modificarInsumo(${i.id}, -1)" class="w-7 h-7 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-bold text-xs flex items-center justify-center border border-white/10">-</button>
+                        <button onclick="modificarInsumo(${i.id}, 1)" class="w-7 h-7 bg-amber-500 hover:bg-amber-400 text-slate-950 rounded-lg font-bold text-xs flex items-center justify-center">+</button>
+                    </div>
+                </div>
+            `;
+        }).join("");
+    }
+
+    function cambiarEstadoAccion(id, nuevoEstado) {
+        window.zapateriaStore.actualizarEstadoRemito(id, nuevoEstado);
+    }
+
+    function abrirModalFotoListo(id) {
+        document.getElementById("modal-foto-remito-id").value = id;
+        document.getElementById("modal-foto-custom-url").value = "";
+        document.getElementById("modal-foto-listo").classList.remove("hidden");
+    }
+
+    function cerrarModalFotoListo() {
+        document.getElementById("modal-foto-listo").classList.add("hidden");
+    }
+
+    function seleccionarFotoMuestra(url) {
+        document.getElementById("modal-foto-custom-url").value = url;
+    }
+
+    function confirmarTrabajoListoConFoto() {
+        const id = document.getElementById("modal-foto-remito-id").value;
+        const customUrl = document.getElementById("modal-foto-custom-url").value || "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=80";
+        
+        window.zapateriaStore.actualizarEstadoRemito(id, "listo", customUrl);
+        cerrarModalFotoListo();
+    }
+
+    function abrirModalNuevoRemito() {
+        document.getElementById("modal-nuevo-remito").classList.remove("hidden");
+    }
+
+    function cerrarModalNuevoRemito() {
+        document.getElementById("modal-nuevo-remito").classList.add("hidden");
+    }
+
+    function guardarNuevoRemito(e) {
+        e.preventDefault();
+        const data = {
+            cliente: document.getElementById("new-remito-cliente").value,
+            telefono: document.getElementById("new-remito-telefono").value,
+            categoria: document.getElementById("new-remito-categoria").value,
+            calzado: document.getElementById("new-remito-calzado").value,
+            trabajo: document.getElementById("new-remito-trabajo").value,
+            precio: document.getElementById("new-remito-precio").value
+        };
+
+        window.zapateriaStore.crearRemito(data);
+        cerrarModalNuevoRemito();
+    }
+
+    function filtrarRemitos(cat) {
+        categoriaFiltroActual = cat;
+        document.querySelectorAll("[id^='filter-esp-']").forEach(btn => {
+            btn.className = "px-3 py-1.5 rounded-xl font-semibold text-slate-300 hover:text-white transition";
+        });
+        const btn = document.getElementById(`filter-esp-${cat}`);
+        if (btn) btn.className = "px-3 py-1.5 rounded-xl font-bold bg-amber-500 text-slate-950 shadow";
+        renderizarTablaRemitos();
+    }
+
+    function switchAdminSubtab(tab) {
+        subtabAdminActual = tab;
+        if (tab === "remitos") {
+            document.getElementById("subtab-remitos-sec").classList.remove("hidden");
+            document.getElementById("subtab-insumos-sec").classList.add("hidden");
+            document.getElementById("btn-tab-remitos").className = "px-4 py-2 rounded-xl text-xs font-extrabold transition bg-amber-500 text-slate-950 shadow-md flex items-center gap-1.5";
+            document.getElementById("btn-tab-insumos").className = "px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition flex items-center gap-1.5";
+        } else {
+            document.getElementById("subtab-remitos-sec").classList.add("hidden");
+            document.getElementById("subtab-insumos-sec").classList.remove("hidden");
+            document.getElementById("btn-tab-insumos").className = "px-4 py-2 rounded-xl text-xs font-extrabold transition bg-amber-500 text-slate-950 shadow-md flex items-center gap-1.5";
+            document.getElementById("btn-tab-remitos").className = "px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition flex items-center gap-1.5";
+        }
+    }
+
+    function modificarInsumo(id, delta) {
+        window.zapateriaStore.actualizarInsumo(id, delta);
+    }
+</script>

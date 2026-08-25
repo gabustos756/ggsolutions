@@ -33,6 +33,15 @@ def extraer_place_id_o_busqueda(map_url_o_query: str) -> dict:
     """
     text = (map_url_o_query or "").strip()
     
+    # 0. Resolver redirección para URLs cortas de Google Maps (ej: https://maps.app.goo.gl/...)
+    if "maps.app.goo.gl" in text or "goo.gl/maps" in text:
+        try:
+            req = urllib.request.Request(text, headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"})
+            with urllib.request.urlopen(req, timeout=5) as resp:
+                text = resp.geturl()
+        except Exception as e:
+            print(f"[GOOGLE PLACES WARN] No se pudo resolver URL corta '{map_url_o_query}': {e}")
+
     # 1. Detectar si es un Place ID directo (ej: ChIJ...)
     if text.startswith("ChIJ") and len(text) > 20:
         return {"place_id": text, "query": None}

@@ -1,0 +1,440 @@
+<!-- MÓDULO ESPECIALIZADO: ZAPATERÍA LORIBELL — PRESENTACIÓN & SISTEMA DE DIAGNÓSTICO & PANEL DE TALLER -->
+<script src="{{ url_for('static', filename='js/zapateria_store.js') }}"></script>
+
+<div class="space-y-12 max-w-7xl mx-auto" id="zapateria-app-root">
+
+    <!-- 1. BANNER DESTACADO: PROTOCOLO OBLIGATORIO DE RECEPCIÓN EN LOCAL -->
+    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-amber-500/30 bg-gradient-to-r from-stone-950 via-amber-950/40 to-stone-950 shadow-2xl relative overflow-hidden">
+        <div class="absolute -right-12 -bottom-12 opacity-10 text-amber-400 pointer-events-none">
+            <i class="fa-solid fa-shoe-prints text-9xl"></i>
+        </div>
+        
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
+            <div class="space-y-2 max-w-3xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                    <i class="fa-solid fa-broom text-amber-400"></i> Protocolo Oficial de Entrega de Calzado
+                </div>
+                <h3 class="text-2xl sm:text-3xl font-black text-white font-title leading-tight">
+                    Requisitos Obligatorios para la Recepción en Taller
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-300">
+                    Para garantizar la higiene de nuestros artesanos y acelerar los tiempos de costura y pegado estructural, solicitamos cumplir con las siguientes 3 condiciones sin excepción:
+                </p>
+            </div>
+
+            <button onclick="resetearZapateriaDemo()" class="self-start lg:self-center bg-stone-900/90 hover:bg-stone-800 text-slate-300 border border-white/15 px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 shadow-md">
+                <i class="fa-solid fa-rotate-left text-amber-400"></i> Resetear Demo
+            </button>
+        </div>
+
+        <!-- TARJETAS REGLAS DE ENTREGA -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+            <div class="bg-stone-900/90 border border-amber-500/20 rounded-2xl p-4 flex items-start gap-3.5 shadow-lg">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg flex-shrink-0 border border-amber-500/30">
+                    <i class="fa-solid fa-soap"></i>
+                </div>
+                <div>
+                    <h4 class="font-extrabold text-white text-sm font-title">1. 100% Limpio</h4>
+                    <p class="text-xs text-slate-300 mt-0.5">Capelladas y suelas libres de barro, tierra o suciedad acumulada.</p>
+                </div>
+            </div>
+
+            <div class="bg-stone-900/90 border border-amber-500/20 rounded-2xl p-4 flex items-start gap-3.5 shadow-lg">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg flex-shrink-0 border border-amber-500/30">
+                    <i class="fa-solid fa-ring"></i>
+                </div>
+                <div>
+                    <h4 class="font-extrabold text-white text-sm font-title">2. Sin Cordones</h4>
+                    <p class="text-xs text-slate-300 mt-0.5">Retirar cordones antes de entregar en mostrador.</p>
+                </div>
+            </div>
+
+            <div class="bg-stone-900/90 border border-amber-500/20 rounded-2xl p-4 flex items-start gap-3.5 shadow-lg">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg flex-shrink-0 border border-amber-500/30">
+                    <i class="fa-solid fa-shoe-prints"></i>
+                </div>
+                <div>
+                    <h4 class="font-extrabold text-white text-sm font-title">3. Sin Plantillas</h4>
+                    <p class="text-xs text-slate-300 mt-0.5">Extraer plantillas internas u ortopédicas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 1.B MÓDULO INSTAGRAM & IDENTIDAD DE MARCA DE ZAPATERÍA LORIBELL -->
+    <div class="glass-card rounded-3xl p-6 sm:p-8 border border-amber-500/30 bg-gradient-to-br from-stone-950 via-stone-900 to-amber-950/60 shadow-2xl space-y-6">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/10 pb-4">
+            <div class="flex items-center gap-3.5">
+                <!-- Monograma ZL de Cuero -->
+                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-amber-900 to-stone-950 border-2 border-amber-500/60 flex flex-col items-center justify-center shadow-xl text-amber-400 font-serif leading-none flex-shrink-0">
+                    <span class="text-xl font-bold italic tracking-tighter">ZL</span>
+                    <span class="text-[7px] uppercase tracking-widest text-amber-300 font-sans mt-0.5">Loribell</span>
+                </div>
+                <div>
+                    <h4 class="text-xl font-extrabold text-white font-title flex items-center gap-2">
+                        <i class="fa-brands fa-instagram text-pink-500"></i> @zapaterialoribell
+                    </h4>
+                    <p class="text-xs text-slate-300">Restauración de artículos de cuero con técnica, criterio y 50 años de oficio en Villa Cabrera.</p>
+                </div>
+            </div>
+
+            <a href="https://www.instagram.com/zapaterialoribell/" target="_blank" class="bg-gradient-to-r from-pink-600 via-purple-600 to-amber-500 hover:from-pink-500 hover:to-amber-400 text-white font-extrabold px-5 py-2.5 rounded-2xl text-xs transition flex items-center gap-2 shadow-lg flex-shrink-0">
+                <i class="fa-brands fa-instagram text-sm"></i> Seguinos en Instagram
+            </a>
+        </div>
+
+        <!-- TARJETAS DE HISTORIAS DE INSTAGRAM (PUBLICACIONES REALES CON FOTOS AUTÉNTICAS) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            
+            <!-- CARD 1: CALZADO DEPORTIVO -->
+            <div class="bg-stone-900/90 border border-amber-500/20 rounded-2xl p-5 space-y-3 shadow-lg flex flex-col justify-between group hover:border-amber-400/50 transition">
+                <div class="space-y-3">
+                    <div class="h-48 rounded-xl overflow-hidden relative border border-white/10 bg-stone-950">
+                        <img src="{{ url_for('static', filename='img/zapateria/deportivas_repair.png') }}" alt="Reparación Calzado Deportivo" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                        <span class="absolute bottom-2 left-2 text-[10px] font-extrabold bg-cyan-500 text-slate-950 px-2.5 py-1 rounded-full shadow">
+                            👟 División Calzado Deportivo
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-200 italic leading-relaxed">
+                        "Pegado estructural de suelas, vulcanizado de talón y recostura de mallas. Volvé a entrenar con tus zapatillas como nuevas."
+                    </p>
+                </div>
+                <div class="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] text-slate-400 font-mono">
+                    <span>#calzadodeportivo #reparacionzapatillas</span>
+                    <i class="fa-solid fa-heart text-pink-500"></i>
+                </div>
+            </div>
+
+            <!-- CARD 2: ANTES & DESPUÉS DE BOTAS ARTESANALES -->
+            <div class="bg-stone-900/90 border border-amber-500/20 rounded-2xl p-5 space-y-3 shadow-lg flex flex-col justify-between group hover:border-amber-400/50 transition">
+                <div class="space-y-3">
+                    <div class="h-48 rounded-xl overflow-hidden relative border border-white/10 bg-stone-950">
+                        <img src="{{ url_for('static', filename='img/zapateria/antes_despues_botas.png') }}" alt="Antes y Después Restauración Botas" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                        <span class="absolute bottom-2 left-2 text-[10px] font-extrabold bg-amber-500 text-slate-950 px-2.5 py-1 rounded-full shadow">
+                            ✨ Antes & Después (Artesanal)
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-200 italic leading-relaxed">
+                        "¿Tu cartera o tus zapatos favoritos ya no lucen como antes? Antes parecía perdido... después volvió a tener vida. Así es el arte de restaurar con amor y experiencia."
+                    </p>
+                </div>
+                <div class="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] text-slate-400 font-mono">
+                    <span>#cuerorenovado #zapaterialoribell</span>
+                    <i class="fa-solid fa-heart text-pink-500"></i>
+                </div>
+            </div>
+
+            <!-- CARD 3: CONVERSIÓN DE GAMUZA A CUERO TRADICIONAL -->
+            <div class="bg-stone-900/90 border border-amber-500/20 rounded-2xl p-5 space-y-3 shadow-lg flex flex-col justify-between group hover:border-amber-400/50 transition">
+                <div class="space-y-3">
+                    <div class="h-48 rounded-xl overflow-hidden relative border border-white/10 bg-stone-950">
+                        <img src="{{ url_for('static', filename='img/zapateria/restauracion_borcegos.png') }}" alt="Conversión a Cuero Tradicional Borcegos" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                        <span class="absolute bottom-2 left-2 text-[10px] font-extrabold bg-orange-500 text-slate-950 px-2.5 py-1 rounded-full shadow">
+                            👢 Conversión a Cuero Tradicional
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-200 italic leading-relaxed">
+                        "El cuero es noble y merece una segunda oportunidad. Conversión de gamuza desgastada a cuero graso tradicional... ¡Tu calzado lo agradece y tu bolsillo también! (Yohana Molina)"
+                    </p>
+                </div>
+                <div class="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] text-slate-400 font-mono">
+                    <span>#restauracionartesanal #cuero</span>
+                    <i class="fa-solid fa-heart text-pink-500"></i>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- 2. DIAGNÓSTICO DE RESTAURACIÓN & BUSCADOR DE REMITOS (SECTOR CLIENTE / PRESENTACIÓN) -->
+    <div class="grid lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- FORMULARIO DE DIAGNÓSTICO Y COTIZACIÓN — RESTAURACIÓN DE CUERO (7 COLS) -->
+        <div class="lg:col-span-7 glass-card rounded-3xl p-6 sm:p-8 space-y-6 border border-white/15 shadow-2xl bg-stone-950/80">
+            <div class="border-b border-white/10 pb-4 space-y-1">
+                <div class="flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                        MI LIENZO EN BLANCO 🖌️
+                    </span>
+                    <span class="text-xs text-slate-400 font-semibold">Taller Especializado Loribell</span>
+                </div>
+                <h3 class="text-2xl font-black text-white font-title flex items-center gap-2.5">
+                    <i class="fa-solid fa-paint-roller text-amber-400"></i> Formulario de Diagnóstico — Restauración
+                </h3>
+                <p class="text-xs text-slate-300">
+                    Completá los datos a continuación para que podamos brindarte un presupuesto adecuado para tu artículo de cuero o calzado deportivo.
+                </p>
+            </div>
+
+            <form id="form-diagnostico-restauracion" onsubmit="enviarDiagnosticoWhatsApp(event)" class="space-y-5 text-xs">
+                
+                <!-- 1. NOMBRE Y TELÉFONO -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-bold text-slate-200 mb-1">1. Nombre Completo *</label>
+                        <input type="text" id="diag-nombre" required placeholder="Ej: Gabriel Bustos" class="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-amber-400">
+                    </div>
+                    <div>
+                        <label class="block font-bold text-slate-200 mb-1">2. Teléfono / WhatsApp *</label>
+                        <input type="text" id="diag-telefono" required placeholder="Ej: 3518905152" value="3518905152" class="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-amber-400 font-mono">
+                    </div>
+                </div>
+
+                <!-- 3. TIPO DE ARTÍCULO & MATERIAL -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-bold text-slate-200 mb-1">3. ¿Qué tipo de artículo querés restaurar? *</label>
+                        <select id="diag-articulo" required class="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-amber-400">
+                            <option value="Zapatos / Zapatillas">👟 Zapatos / Zapatillas Deportivas</option>
+                            <option value="Botas / Borcegos">👢 Botas / Borcegos de Cuero</option>
+                            <option value="Cartera / Bolso">👜 Cartera / Bolso / Mochila</option>
+                            <option value="Campera / Indumentaria">🧥 Campera / Prenda de Cuero</option>
+                            <option value="Cinturón / Accesorio">🎗️ Cinturón / Accesorio</option>
+                            <option value="Otro artículo">📦 Otro artículo de cuero</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-slate-200 mb-1">4. ¿De qué material está hecho? (Si lo sabés)</label>
+                        <select id="diag-material" class="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-amber-400">
+                            <option value="Cuero vacuno / Napa">Cuero Vacuno / Napa</option>
+                            <option value="Gamuza / Suede / Gamuzón">Gamuza / Suede / Gamuzón</option>
+                            <option value="Charol">Charol</option>
+                            <option value="Sintético / Ecocuero">Sintético / Ecocuero</option>
+                            <option value="Tela / Mesh Deportivo">Tela / Mesh Deportivo</option>
+                            <option value="No estoy segur@">No estoy segur@</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 5. PROBLEMA QUE PRESENTA -->
+                <div>
+                    <label class="block font-bold text-slate-200 mb-1">5. ¿Qué problema presenta? *</label>
+                    <textarea id="diag-problema" required rows="2" placeholder="Contanos si tiene desgaste, manchas, decoloración, roturas, cierre roto, suela despegada..." class="w-full bg-slate-900 border border-white/15 rounded-xl p-3 text-white focus:outline-none focus:border-amber-400 resize-none"></textarea>
+                </div>
+
+                <!-- 6. CAMBIO DE COLOR -->
+                <div>
+                    <label class="block font-bold text-slate-200 mb-2">6. ¿Querés que le hagamos cambio de color?</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900 border border-white/10 hover:border-amber-400 cursor-pointer transition">
+                            <input type="radio" name="diag_color" value="Sí, quiero cambiar de color" class="accent-amber-500">
+                            <span class="text-white font-semibold">Sí</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900 border border-white/10 hover:border-amber-400 cursor-pointer transition">
+                            <input type="radio" name="diag_color" value="No, mantener color original" checked class="accent-amber-500">
+                            <span class="text-white font-semibold">No</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900 border border-white/10 hover:border-amber-400 cursor-pointer transition">
+                            <input type="radio" name="diag_color" value="No estoy segur@, necesito asesoramiento" class="accent-amber-500">
+                            <span class="text-slate-300">Necesito asesoramiento</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 7. FECHA ESTIMADA & URGENCIA -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-bold text-slate-200 mb-1">7. ¿Hay una fecha estimada que lo necesites listo?</label>
+                        <input type="text" id="diag-fecha-estimada" placeholder="Ej: Para el viernes 28/08 o sin apuro" class="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-amber-400">
+                    </div>
+
+                    <!-- 8. ADJUNTAR FOTO -->
+                    <div>
+                        <label class="block font-bold text-slate-200 mb-1">8. Adjuntá una o más fotos del artículo</label>
+                        <div class="relative bg-slate-900 border border-dashed border-white/20 rounded-xl p-2.5 text-center hover:border-amber-400 transition cursor-pointer" onclick="simularUploadFotoDiag()">
+                            <p class="text-slate-400 text-[11px]" id="diag-foto-filename">
+                                <i class="fa-solid fa-cloud-arrow-up text-amber-400 mr-1"></i> Haga clic aquí / soltar archivo aquí
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. COMENTARIOS ADICIONALES -->
+                <div>
+                    <label class="block font-bold text-slate-200 mb-1">9. Comentarios adicionales</label>
+                    <textarea id="diag-comentarios" rows="2" placeholder="Cualquier detalle extra que quieras aclarar..." class="w-full bg-slate-900 border border-white/15 rounded-xl p-3 text-white focus:outline-none focus:border-amber-400 resize-none"></textarea>
+                </div>
+
+                <!-- 10. BOTÓN DE ENVÍO DIRECTO -->
+                <button type="submit" class="w-full bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-slate-950 font-black py-4 px-6 rounded-2xl text-sm transition shadow-xl flex items-center justify-center gap-2 tracking-wide uppercase">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Enviar Diagnóstico & Solicitar Presupuesto
+                </button>
+            </form>
+        </div>
+
+
+        <!-- COLUMNA DERECHA: CONSULTA DE REMITOS CLIENTE & FICHA DE LOCAL (5 COLS) -->
+        <div class="lg:col-span-5 space-y-6">
+            
+            <!-- BUSCADOR DE REMITO DIGITAL CLIENTE -->
+            <div class="glass-card rounded-3xl p-6 space-y-4 border border-white/15 shadow-xl bg-stone-950/80">
+                <div class="border-b border-white/10 pb-3">
+                    <h4 class="text-lg font-extrabold text-white font-title flex items-center gap-2">
+                        <i class="fa-solid fa-receipt text-amber-400"></i> Consultá el Estado de Tu Remito
+                    </h4>
+                    <p class="text-xs text-slate-300">Ingresá el N° de comprobante entregado en Obispo Lascano 2959, Villa Cabrera.</p>
+                </div>
+
+                <div class="flex gap-2">
+                    <input type="number" id="input-buscar-remito" placeholder="Ej: 10922" value="10922" class="w-full bg-slate-900 border border-white/20 rounded-xl px-3 py-2.5 text-xs text-white font-mono focus:outline-none focus:border-amber-400">
+                    <button onclick="buscarRemitoCliente()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs transition flex-shrink-0">
+                        <i class="fa-solid fa-search"></i>
+                    </button>
+                </div>
+
+                <!-- CARD DE ESTADO RESULTADO -->
+                <div id="resultado-remito-card" class="bg-stone-900/90 border border-amber-500/30 rounded-2xl p-4 space-y-3">
+                    <!-- Se llena dinámicamente -->
+                </div>
+            </div>
+
+            <!-- FICHA TALLER ARTESANAL LORIBELL -->
+            <div class="glass-card rounded-3xl p-6 space-y-4 border border-amber-500/20 shadow-xl bg-stone-950/80">
+                <h4 class="font-extrabold text-white text-sm font-title flex items-center gap-2">
+                    <i class="fa-solid fa-location-dot text-amber-400"></i> Zapatería Loribell — Taller Villa Cabrera
+                </h4>
+                <div class="text-xs space-y-2 text-slate-300 leading-relaxed">
+                    <p><strong class="text-white">📍 Dirección:</strong> Obispo Lascano 2959, Villa Cabrera, Córdoba.</p>
+                    <p><strong class="text-white">📱 WhatsApp / Cel:</strong> 3518905152</p>
+                    <p><strong class="text-white">⏰ Horarios:</strong> Lunes a Viernes 9 a 13 y 15 a 18 hs | Sábados 9 a 13 hs.</p>
+                    <p><strong class="text-amber-300">⭐ Calificación Google:</strong> {{ demo.rating or 4.4 }} ★ ({{ demo.reviews_count or 38 }} reseñas)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- LÓGICA DE INTERACCIÓN CLIENTE JS -->
+<script>
+    let fotoSimuladaCargada = null;
+
+    document.addEventListener("DOMContentLoaded", () => {
+        buscarRemitoCliente();
+        window.addEventListener("zapateriaStateChanged", () => {
+            buscarRemitoCliente();
+        });
+    });
+
+    function simularUploadFotoDiag() {
+        fotoSimuladaCargada = "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80";
+        document.getElementById("diag-foto-filename").innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400 mr-1"></i> Foto de artículo cargada correctamente (1 archivo)`;
+    }
+
+    function enviarDiagnosticoWhatsApp(e) {
+        e.preventDefault();
+        const nombre = document.getElementById("diag-nombre").value;
+        const tel = document.getElementById("diag-telefono").value;
+        const articulo = document.getElementById("diag-articulo").value;
+        const material = document.getElementById("diag-material").value;
+        const problema = document.getElementById("diag-problema").value;
+        const colorRadio = document.querySelector('input[name="diag_color"]:checked');
+        const cambioColor = colorRadio ? colorRadio.value : "No especificado";
+        const fechaEst = document.getElementById("diag-fecha-estimada").value || "Sin fecha urgente";
+        const comentarios = document.getElementById("diag-comentarios").value || "Sin comentarios adicionales";
+
+        let msg = `*Zapatería Loribell — Formulario de Diagnóstico de Restauración* 🖌️👟\n\n`;
+        msg += `Hola! Quisiera solicitar un presupuesto de restauración:\n\n`;
+        msg += `👤 *Nombre:* ${nombre}\n`;
+        msg += `📱 *Teléfono:* ${tel}\n`;
+        msg += `📦 *Artículo:* ${articulo}\n`;
+        msg += `🧵 *Material:* ${material}\n`;
+        msg += `🛠️ *Problema:* ${problema}\n`;
+        msg += `🎨 *Cambio de Color:* ${cambioColor}\n`;
+        msg += `📅 *Fecha estimada requerida:* ${fechaEst}\n`;
+        if (fotoSimuladaCargada) {
+            msg += `📷 *Foto adjunta:* ${fotoSimuladaCargada}\n`;
+        }
+        msg += `💬 *Comentarios:* ${comentarios}\n\n`;
+        msg += `_Espero sus comentarios y presupuesto. Muchas gracias!_`;
+
+        window.open(`https://wa.me/5493518905152?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function buscarRemitoCliente() {
+        const inputElem = document.getElementById("input-buscar-remito");
+        if (!inputElem || !window.zapateriaStore) return;
+        const inputVal = inputElem.value;
+        const remito = window.zapateriaStore.getRemitoById(inputVal);
+        const container = document.getElementById("resultado-remito-card");
+        if (!container) return;
+
+        if (!remito) {
+            container.innerHTML = `
+                <div class="text-center py-3 space-y-1">
+                    <p class="text-xs font-bold text-rose-400">No encontramos un remito con el N° #${inputVal}</p>
+                    <p class="text-[11px] text-slate-400">Verificá tu comprobante entregado en Obispo Lascano 2959.</p>
+                </div>
+            `;
+            return;
+        }
+
+        let estadoColor = "text-amber-400";
+        let estadoLabel = "En proceso en taller";
+        if (remito.estado === "listo") {
+            estadoColor = "text-emerald-400";
+            estadoLabel = "¡LISTO PARA RETIRAR EN LOCAL!";
+        } else if (remito.estado === "entregado") {
+            estadoColor = "text-slate-400";
+            estadoLabel = "Entregado a cliente";
+        }
+
+        const waUrl = window.zapateriaStore.generarMensajeWhatsApp(remito.id);
+
+        container.innerHTML = `
+            <div class="flex justify-between items-start border-b border-white/10 pb-2.5">
+                <div>
+                    <span class="text-[10px] uppercase font-bold text-slate-400">Remito Oficial</span>
+                    <h5 class="text-xl font-extrabold text-white font-mono">#${remito.id}</h5>
+                </div>
+                <div class="text-right">
+                    <span class="text-[10px] text-slate-400 font-mono">${remito.fecha}</span>
+                    <p class="text-xs font-extrabold ${estadoColor} uppercase tracking-wider mt-0.5">${estadoLabel}</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 text-xs">
+                <div>
+                    <span class="text-[10px] text-slate-400 block">Cliente</span>
+                    <span class="font-bold text-white">${remito.cliente}</span>
+                </div>
+                <div>
+                    <span class="text-[10px] text-slate-400 block">Especialidad</span>
+                    <span class="font-bold text-amber-300">${remito.especialista}</span>
+                </div>
+            </div>
+
+            <div class="bg-slate-950/80 p-2.5 rounded-xl border border-white/5 text-xs">
+                <span class="text-[10px] text-slate-400 block uppercase font-bold">Detalle del Arreglo</span>
+                <p class="text-slate-200 mt-0.5">${remito.calzado} — ${remito.trabajo}</p>
+            </div>
+
+            ${remito.foto ? `
+                <div class="space-y-1">
+                    <span class="text-[10px] text-slate-400 block font-bold uppercase">Foto del Trabajo Realizado</span>
+                    <div class="h-36 rounded-xl overflow-hidden border border-emerald-500/30 relative">
+                        <img src="${remito.foto}" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            ` : ''}
+
+            ${remito.estado === 'listo' ? `
+                <a href="${waUrl}" target="_blank" class="w-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold py-2.5 px-3 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-lg">
+                    <i class="fa-brands fa-whatsapp"></i> Coordinar Retiro por WhatsApp
+                </a>
+            ` : ''}
+        `;
+    }
+
+    function resetearZapateriaDemo() {
+        if (confirm("¿Querés reiniciar los remitos y el stock de insumos a su estado inicial de demostración?")) {
+            window.zapateriaStore.reset();
+        }
+    }
+</script>

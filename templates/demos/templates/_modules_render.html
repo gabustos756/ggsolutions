@@ -15,7 +15,9 @@
 <div class="space-y-8">
     {% for minfo in modulos_info_list %}
     <div id="module-container-{{ minfo.key or minfo.id }}" class="module-content-container {% if not loop.first %}hidden{% endif %} animate-fade-in">
-        {% if minfo.key == 'hostel' or minfo.id == 'hostel' %}
+        {% if minfo.key == 'zapateria' or minfo.id == 'zapateria' %}
+            {% include "demos/components/zapateria.html" %}
+        {% elif minfo.key == 'hostel' or minfo.id == 'hostel' %}
             {% include "demos/components/hostel.html" %}
         {% elif minfo.key == 'stock' or minfo.id == 'stock' %}
             {% include "demos/components/stock.html" %}
@@ -60,8 +62,10 @@
 
 {% else %}
 <!-- UN SOLO MÓDULO ACTIVO -->
-<div class="{% if modulo_info.key == 'hostel' or modulo_info.id == 'hostel' %}max-w-7xl{% else %}max-w-4xl{% endif %} mx-auto">
-    {% if modulo_info.key == 'hostel' or modulo_info.id == 'hostel' %}
+<div class="{% if modulo_info.key == 'hostel' or modulo_info.id == 'hostel' or modulo_info.key == 'zapateria' or modulo_info.id == 'zapateria' %}max-w-7xl{% else %}max-w-4xl{% endif %} mx-auto">
+    {% if modulo_info.key == 'zapateria' or modulo_info.id == 'zapateria' %}
+        {% include "demos/components/zapateria.html" %}
+    {% elif modulo_info.key == 'hostel' or modulo_info.id == 'hostel' %}
         {% include "demos/components/hostel.html" %}
     {% elif modulo_info.key == 'stock' or modulo_info.id == 'stock' %}
         {% include "demos/components/stock.html" %}

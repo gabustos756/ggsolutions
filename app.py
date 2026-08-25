@@ -63,10 +63,62 @@ def load_user(user_id):
 
 
 
+def seed_zapateria_demo(app):
+    with app.app_context():
+        try:
+            demo = DemoSolution.query.filter_by(slug="zapateria-loribell").first()
+            if not demo:
+                print("[SEED DEMO] Generando Demo Especializada 'zapateria-loribell' desde Google Places...")
+                datos_google = obtener_datos_lugar_google("https://maps.app.goo.gl/3Yf8QZ396k19cNrcA")
+                
+                reviews_json = json.dumps(datos_google.get("reviews", [])) if datos_google.get("reviews") else ""
+                fotos_json = json.dumps(datos_google.get("fotos", [])) if datos_google.get("fotos") else ""
+                
+                demo = DemoSolution(
+                    slug="zapateria-loribell",
+                    nombre_negocio="Zapatería Loribell",
+                    rubro="zapateria",
+                    enfoque="Restauración Artesanal de Cuero & Calzado Deportivo",
+                    dolor_principal="¿Tu cartera o tus zapatos favoritos ya no lucen como antes?",
+                    objetivo="Restauración con amor, técnica y 50 años de experiencia",
+                    modulo_solucion="zapateria",
+                    tipo_software="ambas",
+                    modulos_json=json.dumps(["zapateria"]),
+                    diseno_template="layered-reveal",
+                    mostrar_novedades=False,
+                    google_place_id=datos_google.get("google_place_id"),
+                    direccion=datos_google.get("direccion") or "Obispo Lascano 2959, Villa Cabrera, Córdoba",
+                    ciudad=datos_google.get("ciudad") or "Córdoba",
+                    telefono="3518905152",
+                    whatsapp="5493518905152",
+                    rating=datos_google.get("rating") or 4.4,
+                    reviews_count=datos_google.get("reviews_count") or 38,
+                    reviews_json=reviews_json,
+                    fotos_json=fotos_json,
+                    sitio_web_original=datos_google.get("sitio_web_original") or ""
+                )
+                db.session.add(demo)
+            else:
+                demo.diseno_template = "layered-reveal"
+                demo.mostrar_novedades = False
+                demo.rubro = "zapateria"
+                demo.enfoque = "Restauración Artesanal de Cuero & Calzado Deportivo"
+                demo.dolor_principal = "¿Tu cartera o tus zapatos favoritos ya no lucen como antes?"
+                demo.objetivo = "Restauración con amor, técnica y 50 años de experiencia"
+                demo.modulos_json = json.dumps(["zapateria"])
+            
+            db.session.commit()
+            print("[SEED DEMO] Demo 'zapateria-loribell' configurada con Layered Reveal exitosamente.")
+        except Exception as e:
+            db.session.rollback()
+            print(f"[SEED DEMO WARN] Error al sembrar demo zapateria-loribell: {e}")
+
+
 # Inicialización de tablas, migración automática de columnas y seed de administrador
 with app.app_context():
     asegurar_esquema_bd(app)
     seed_admin_user(app)
+    seed_zapateria_demo(app)
 
 
 # Context Processor para inyectar token CSRF en Jinja2

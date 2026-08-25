@@ -66,6 +66,11 @@ DOLORES_POR_RUBRO = {
         "Descontrol de camas disponibles y overbooking al gestionar reservas por WhatsApp",
         "Consultas tardías de precios y tipos de cama (mixta, femenina, privada)"
     ],
+    "zapateria": [
+        "Falta de comunicación de reglas de entrega (calzado sucio, con cordones o plantillas)",
+        "Descontrol en la separación de trabajos entre Calzado Deportivo y Cuero/Botas",
+        "Demoras y desorganización al notificar a clientes cuando el trabajo está listo"
+    ],
     "general": [
         "Falta de automatización en la captación y filtro de prospectos",
         "Procesos operativos en hojas de cálculo desactualizadas",
@@ -314,10 +319,32 @@ THEMES_MAP = {
             {"icon": "fa-people-group", "title": "Ambiente & Eventos", "desc": "Bar, zona social, cenas compartidas y tours grupales", "tag": "Social & Bar"},
             {"icon": "fa-wifi", "title": "High-Speed Wi-Fi", "desc": "Conexión estable y espacio de trabajo para nómadas digitales", "tag": "Co-Working"}
         ]
+    },
+    "zapateria": {
+        "bg": "#0c0a08",
+        "card_bg": "rgba(28, 22, 17, 0.8)",
+        "accent": "#d97706",
+        "gradient": "from-amber-400 via-orange-500 to-yellow-600",
+        "badge_bg": "bg-amber-500/15 text-amber-300 border-amber-500/30",
+        "font_family": "'Plus Jakarta Sans', sans-serif",
+        "title_font": "'Outfit', sans-serif",
+        "font_google": "https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap",
+        "hero_bg_image": "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=1200&q=80",
+        "pilares": [
+            {"icon": "fa-shoe-prints", "title": "Especialistas en Deportivo & Cuero", "desc": "Tratamiento técnico diferenciado para zapatillas y botas de cuero", "tag": "Taller Especializado"},
+            {"icon": "fa-receipt", "title": "Seguimiento por N° de Remito", "desc": "Transparencia total en el estado de tu arreglo desde tu celular", "tag": "Remito Digital"},
+            {"icon": "fa-broom", "title": "Recepción Protocolar", "desc": "Entrega tu calzado limpio, sin cordones y sin plantillas", "tag": "Protocolo Taller"},
+            {"icon": "fa-paper-plane", "title": "Aviso con Foto por WA", "desc": "Recibí la foto del trabajo listo y aviso de retiro al instante", "tag": "Notificación Instantánea"}
+        ]
     }
 }
 
 MODULOS_TITULOS = {
+    "zapateria": {
+        "badge": "GESTIÓN OPERATIVA DE TALLER & REMITOS DIGITALES",
+        "titulo": "Taller Especializado de Reparación de Calzado",
+        "subtitulo": "Consultá el estado de tu remito, cotizá tu arreglo y conocé las reglas de entrega de calzado.",
+    },
     "hostel": {
         "badge": "RESERVA DE CAMAS & ESTADÍAS EN VIVO 24/7",
         "titulo": "Reserva tu Cama & Estadía en Vivo",
@@ -1575,6 +1602,9 @@ def generar_copy_negocio(nombre_negocio, rubro_key, dolor_principal=None, objeti
     elif rubro_key == "indumentaria":
         headline = f"Colecciones Exclusivas, Tendencia & Talles Reales en {nombre}"
         subheadline = f"En {nombre} combinamos diseño de autor, géneros seleccionados y envíos rápidos a todo el país. Conocé nuestro catálogo y consultá por WhatsApp."
+    elif rubro_key == "zapateria":
+        headline = f"¿Tu cartera o tus zapatos favoritos ya no lucen como antes?"
+        subheadline = f"Restauramos artículos de cuero y calzado deportivo con técnica, criterio y 50 años de experiencia artesanal en teñidos, limpiezas y reparación en Villa Cabrera, Córdoba."
     elif rubro_key in ["deportes", "tenis", "club"]:
         headline = f"Reserva de Canchas de Tenis, Clases & Pro Shop en {nombre}"
         subheadline = f"En {nombre} disfrutás del mejor tenis: canchas de polvo de ladrillo en excelente estado, clases con profesores matriculados y encordado profesional de raquetas."
@@ -1591,14 +1621,15 @@ def generar_copy_negocio(nombre_negocio, rubro_key, dolor_principal=None, objeti
     dolor_clean = (dolor_principal or "").strip()
     obj_clean = (objetivo or "").strip()
 
-    if obj_clean:
-        obj_fmt = obj_clean.rstrip(".")
-        obj_title = obj_fmt[0].upper() + obj_fmt[1:] if len(obj_fmt) > 0 else obj_fmt
-        headline = f"Solución Digital en {nombre}: {obj_title}"
+    if rubro_key != "zapateria":
+        if obj_clean:
+            obj_fmt = obj_clean.rstrip(".")
+            obj_title = obj_fmt[0].upper() + obj_fmt[1:] if len(obj_fmt) > 0 else obj_fmt
+            headline = f"Solución Digital en {nombre}: {obj_title}"
 
-    if dolor_clean:
-        dolor_fmt = dolor_clean.rstrip(".")
-        subheadline += f" Solucionamos de raíz: {dolor_fmt}."
+        if dolor_clean:
+            dolor_fmt = dolor_clean.rstrip(".")
+            subheadline += f" Solucionamos de raíz: {dolor_fmt}."
 
     return headline, subheadline
 
@@ -1641,25 +1672,37 @@ def preparar_contexto_demo(demo_obj, template_override=None, modo_cliente=False,
         modulos_activos = [(demo_obj.modulo_solucion or "agenda").lower()]
 
     # Garantizar que los módulos sean válidos y únicos manteniendo orden
-    validos = ["agenda", "hostel", "stock", "ecommerce", "cotizador", "logistica", "decisiones", "metricas"]
+    validos = ["agenda", "hostel", "stock", "ecommerce", "cotizador", "logistica", "decisiones", "metricas", "zapateria"]
     modulos_activos_filtrados = []
     for m in modulos_activos:
         m_lower = str(m).lower()
         if m_lower in validos and m_lower not in modulos_activos_filtrados:
             modulos_activos_filtrados.append(m_lower)
-    # Forzar el módulo 'hostel' como principal si el rubro o slug es de hostel/hotelería
+    # Forzar módulos principales por rubro
     es_rubro_hostel = rubro_key in ["hostel", "hoteleria", "turismo"] or "hostel" in (demo_obj.rubro or "").lower() or "hostel" in (demo_obj.slug or "").lower()
+    es_rubro_zapateria = rubro_key in ["zapateria", "calzado", "reparacion_calzado"] or "zapateria" in (demo_obj.rubro or "").lower() or "zapateria" in (demo_obj.slug or "").lower()
+    
     if es_rubro_hostel:
         if "hostel" in modulos_activos_filtrados:
             modulos_activos_filtrados.remove("hostel")
         modulos_activos_filtrados.insert(0, "hostel")
+    elif es_rubro_zapateria:
+        if "zapateria" in modulos_activos_filtrados:
+            modulos_activos_filtrados.remove("zapateria")
+        modulos_activos_filtrados.insert(0, "zapateria")
 
     if not modulos_activos_filtrados:
-        modulos_activos_filtrados = ["hostel" if es_rubro_hostel else "agenda"]
+        if es_rubro_hostel:
+            modulos_activos_filtrados = ["hostel"]
+        elif es_rubro_zapateria:
+            modulos_activos_filtrados = ["zapateria"]
+        else:
+            modulos_activos_filtrados = ["agenda"]
 
     print(f"[DEMO ENGINE DEBUG] Slug: {demo_obj.slug} | Rubro: {demo_obj.rubro} | Modulos Json: {demo_obj.modulos_json} | Modulo Solucion: {demo_obj.modulo_solucion} | Filtrados: {modulos_activos_filtrados}", flush=True)
 
     MODULOS_NOMBRES_ICONOS = {
+        "zapateria": {"nombre": "Taller de Reparación & Remitos", "icon": "fa-hammer"},
         "agenda": {"nombre": "Agenda & Reservas", "icon": "fa-calendar-check"},
         "hostel": {"nombre": "Reserva de Camas & Estadías", "icon": "fa-bed"},
         "stock": {"nombre": "Catálogo & Stock", "icon": "fa-boxes-stacked"},

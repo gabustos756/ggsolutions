@@ -1,43 +1,594 @@
 <section id="cases" class="section cases-section">
     <div class="container">
-        <div class="section-header">
-            <span class="section-label">Casos en acción</span>
-            <h2 class="section-title">Lo que construimos</h2>
-            <p class="section-subtitle">Demostración directa de nuestra capacidad técnica: plataformas comerciales orientadas a conversión, telemetría de datos en tiempo real y motores de automatización táctica.</p>
-        </div>
-        
-        <div class="cases-grid">
-            {% for case in built_cases %}
-            <article class="case-card">
-                <!-- Marco del Video -->
-                <div class="case-video-wrapper">
-                    <video 
-                        autoplay 
-                        loop 
-                        muted 
-                        playsinline 
-                        preload="metadata"
-                        class="case-video"
-                        title="{{ case.title }}"
-                    >
-                        <source src="{{ url_for('static', filename=case.video) }}" type="video/quicktime">
-                        <source src="{{ url_for('static', filename=case.video) }}" type="video/mp4">
-                        Tu navegador no soporta la reproducción de video HTML5.
-                    </video>
-                    <div class="case-video-badge">
-                        <span class="dot-live-green"></span>
-                        <span>DEMO EN VIVO</span>
-                    </div>
-                </div>
+        <!-- Encabezado de la sección -->
+        <div class="cases-header-flex">
+            <div class="section-header-compact">
+                <span class="section-label">Ecosistema & Casos Reales</span>
+                <h2 class="section-title">Lo que construimos.</h2>
+                <p class="section-subtitle">Sistemas en producción desarrollados por nuestro estudio: plataformas comerciales de alta conversión, SaaS inmobiliario con motores de permutas, ERP agropecuario con satélite Sentinel-2 y telemetría de competición en tiempo real.</p>
+            </div>
 
-                <!-- Contenido de la Tarjeta -->
-                <div class="case-card-body">
-                    <div class="case-pill">{{ case.badge }}</div>
-                    <h3 class="case-card-title">{{ case.title }}</h3>
-                    <p class="case-card-desc">{{ case.desc }}</p>
+            <!-- Controles de Navegación del Carrusel -->
+            <div class="carousel-controls" aria-label="Controles del carrusel de productos">
+                <div class="carousel-counter">
+                    <span id="carousel-current-index" class="counter-active">01</span>
+                    <span class="counter-sep">/</span>
+                    <span class="counter-total">05</span>
                 </div>
-            </article>
-            {% endfor %}
+                <div class="carousel-buttons">
+                    <button type="button" id="carousel-prev-btn" class="carousel-nav-btn" aria-label="Producto anterior">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                    </button>
+                    <button type="button" id="carousel-next-btn" class="carousel-nav-btn" aria-label="Siguiente producto">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Track del Carrusel Horizontal -->
+        <div class="carousel-track-wrapper" id="ecosystem-carousel-wrapper">
+            <div class="carousel-track" id="ecosystem-carousel-track">
+                
+                <!-- 1. OPPORTUNITY -->
+                <article class="carousel-card" data-index="0" data-product="opportunity">
+                    <div class="sim-window">
+                        <div class="sim-window-header">
+                            <div class="sim-window-dots">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                            </div>
+                            <span class="sim-window-title">opportunity.ggsolutions.com.ar</span>
+                            <div class="sim-live-badge badge-opportunity">
+                                <span class="dot-pulse"></span>
+                                <span>EN EJECUCIÓN VIVO</span>
+                            </div>
+                        </div>
+
+                        <!-- Micro-pantalla interactiva Opportunity (1:1 Screenshot Real) -->
+                        <div class="sim-screen sim-opportunity-real">
+                            <div class="opp-top-stages">
+                                <span class="opp-stage-tab active">👤 1. Perfil Ricardo Tapia</span>
+                                <span class="opp-stage-tab">🌐 2. Radar AI Matcher</span>
+                                <span class="opp-stage-tab">⚡ 3. Oportunidades 100%</span>
+                                <span class="opp-stage-tab">📋 4. Tasador ACM</span>
+                                <span class="opp-stage-tab">💬 5. WhatsApp</span>
+                            </div>
+
+                            <div class="opp-canvas-card">
+                                <div class="opp-header-row">
+                                    <div class="opp-profile-col">
+                                        <span class="opp-badge-real">CASO DE NEGOCIO REAL</span>
+                                        <h4 class="opp-profile-title">Ricardo Tapia</h4>
+                                        <div class="opp-profile-meta">
+                                            <span>👤 Inversionista</span>
+                                            <span>👥 Casado (4 int.)</span>
+                                            <span>📞 +54 9 351 445-9820</span>
+                                        </div>
+                                    </div>
+                                    <div class="opp-financial-card">
+                                        <span class="opp-fin-label">CAPACIDAD FINANCIERA</span>
+                                        <div class="opp-fin-val">U$S 130.000</div>
+                                    </div>
+                                </div>
+
+                                <div class="opp-details-grid">
+                                    <div class="opp-funds-box">
+                                        <div class="opp-box-heading">📁 FONDOS & PERMUTAS</div>
+                                        <div class="opp-fund-row">
+                                            <span class="lbl">💵 Efectivo Propio:</span>
+                                            <span class="val green">U$S 60.000</span>
+                                        </div>
+                                        <div class="opp-fund-row">
+                                            <span class="lbl">🏢 Depto 2D Nueva Cba:</span>
+                                            <span class="val orange">U$S 45.000</span>
+                                        </div>
+                                        <div class="opp-fund-row">
+                                            <span class="lbl">🛻 Toyota Hilux SRV:</span>
+                                            <span class="val orange">U$S 25.000</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="opp-search-box">
+                                        <div class="opp-box-heading">🔍 BÚSQUEDA</div>
+                                        <div class="opp-pref-row">
+                                            <strong>Zonas:</strong> Cerro de las Rosas
+                                        </div>
+                                        <div class="opp-pref-row">
+                                            <strong>Tipo:</strong> Casa 3D con Cochera
+                                        </div>
+                                        <div class="opp-pref-row">
+                                            <strong>Req:</strong> Patio, quincho, asador
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="opp-action-row">
+                                    <button type="button" class="opp-matcher-trigger-btn">
+                                        <span>⚡ Disparando Matcher AI sobre +80.000 Avisos...</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-card-body">
+                        <div class="card-meta">
+                            <span class="card-pill pill-opportunity">Proptech & Algoritmos</span>
+                            <span class="card-status-text">SaaS Multi-Tenant</span>
+                        </div>
+                        <h3 class="card-product-title">Opportunity</h3>
+                        <p class="card-product-tagline">Inteligencia Inmobiliaria & Motor de Permutas SaaS</p>
+                        <p class="card-product-desc">Sistema operativo inmobiliario SaaS con ingesta de +80.000 inmuebles en tiempo real (Zonaprop y La Voz), radar de valuación de m² y motor NLP matcher para cruzar clientes con bienes en permuta (efectivo + inmuebles + vehículos).</p>
+                        
+                        <div class="card-metrics-grid">
+                            <div class="card-metric-item">
+                                <span class="metric-val">+80.000</span>
+                                <span class="metric-label">Inmuebles en Tiempo Real</span>
+                            </div>
+                            <div class="card-metric-item">
+                                <span class="metric-val">NLP Matcher</span>
+                                <span class="metric-label">Efectivo + Permutas</span>
+                            </div>
+                        </div>
+
+                        <a href="https://opportunity.ggsolutions.com.ar" target="_blank" rel="noopener noreferrer" class="card-cta-btn btn-opportunity">
+                            <span>Explorar Sistema</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="7" y1="17" x2="17" y2="7"></line>
+                                <polyline points="7 7 17 7 17 17"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 2. CLUB DRS (PORTAL DE NOTICIAS, VIAJES Y CAMPEONATO) -->
+                <article class="carousel-card" data-index="1" data-product="clubdrs">
+                    <div class="sim-window">
+                        <div class="sim-window-header">
+                            <div class="sim-window-dots">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                            </div>
+                            <span class="sim-window-title">clubdrs.com</span>
+                            <div class="sim-live-badge badge-drs">
+                                <span class="dot-pulse"></span>
+                                <span>PORTAL F1 LIVE</span>
+                            </div>
+                        </div>
+
+                        <!-- Micro-pantalla interactiva Club DRS (Screenshot Real Portada Editorial) -->
+                        <div class="sim-screen sim-drs-editorial-clean">
+                            <img src="/static/images/clubdrs_mike_elliott.jpg" alt="Club DRS — Noticia Alpine F1 Mike Elliott" class="drs-news-card-img">
+                        </div>
+                    </div>
+
+                    <div class="carousel-card-body">
+                        <div class="card-meta">
+                            <span class="card-pill pill-drs">Portal F1 & Comunidad</span>
+                            <span class="card-status-text">Producción Activa</span>
+                        </div>
+                        <h3 class="card-product-title">Club DRS</h3>
+                        <p class="card-product-tagline">Portal de Noticias, Viajes a la F1 & Campeonato</p>
+                        <p class="card-product-desc">Portal y comunidad oficial de Fórmula 1 en español: cobertura periodística técnica, cronograma y cuenta regresiva de Grandes Premios en vivo, seguimiento de Franco Colapinto y paquetes de viaje al GP de San Pablo (Interlagos).</p>
+                        
+                        <div class="card-metrics-grid">
+                            <div class="card-metric-item">
+                                <span class="metric-val">10 Escuderías</span>
+                                <span class="metric-label">Cobertura F1 en Vivo</span>
+                            </div>
+                            <div class="card-metric-item">
+                                <span class="metric-val">Viajes a GP</span>
+                                <span class="metric-label">Paquetes Interlagos</span>
+                            </div>
+                        </div>
+
+                        <a href="https://clubdrs.com" target="_blank" rel="noopener noreferrer" class="card-cta-btn btn-drs">
+                            <span>Ingresar al Portal F1</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="7" y1="17" x2="17" y2="7"></line>
+                                <polyline points="7 7 17 7 17 17"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 3. DRS TELEMETRÍAS -->
+                <article class="carousel-card" data-index="2" data-product="drs_telemetry">
+                    <div class="sim-window">
+                        <div class="sim-window-header">
+                            <div class="sim-window-dots">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                            </div>
+                            <span class="sim-window-title">clubdrs.com/telemetrias</span>
+                            <div class="sim-live-badge badge-telemetry">
+                                <span class="dot-pulse"></span>
+                                <span>FASTF1 TELEMETRY LIVE</span>
+                            </div>
+                        </div>
+
+                        <!-- Micro-pantalla interactiva Telemetría F1 Real (1:1 Screenshot Telemetría) -->
+                        <div class="sim-screen sim-drs-telemetry-real">
+                            <!-- Barra superior del módulo -->
+                            <div class="tel-top-nav">
+                                <span class="tel-nav-link">INICIO</span>
+                                <span class="tel-nav-link">VIAJA A LA F1</span>
+                                <span class="tel-nav-link">TIENDA</span>
+                                <span class="tel-nav-link active">TELEMETRÍA</span>
+                                <span class="tel-nav-link">CAMPEONATO</span>
+                            </div>
+
+                            <!-- Split de 2 columnas: Clasificación vs Ritmo de Carrera -->
+                            <div class="tel-dual-split">
+                                <!-- Columna Izquierda: Tabla Clasificación Oficial -->
+                                <div class="tel-col-table">
+                                    <div class="tel-col-title">Clasificación Oficial</div>
+                                    <div class="tel-table-header">
+                                        <span class="th-pos">POS</span>
+                                        <span class="th-driver">PILOTO</span>
+                                        <span class="th-team">ESC</span>
+                                        <span class="th-gap">DIF</span>
+                                        <span class="th-act">ACCIÓN</span>
+                                    </div>
+                                    <div class="tel-table-body">
+                                        <div class="tel-row">
+                                            <span class="pos-box red">1</span>
+                                            <span class="driver-code"><strong class="c-code mer-c">ANT</strong> Antonelli</span>
+                                            <span class="team-lbl mer">Mercedes</span>
+                                            <span class="gap-pill leader">LÍDER</span>
+                                            <span class="btn-compare">+ Comparar</span>
+                                        </div>
+                                        <div class="tel-row">
+                                            <span class="pos-box red">2</span>
+                                            <span class="driver-code"><strong class="c-code rbr-c">VER</strong> Verstappen</span>
+                                            <span class="team-lbl rbr">Red Bull</span>
+                                            <span class="gap-txt">+4.351</span>
+                                            <span class="btn-compare">+ Comparar</span>
+                                        </div>
+                                        <div class="tel-row">
+                                            <span class="pos-box red">3</span>
+                                            <span class="driver-code"><strong class="c-code mcl-c">NOR</strong> Norris</span>
+                                            <span class="team-lbl mcl">McLaren</span>
+                                            <span class="gap-txt">+5.089</span>
+                                            <span class="btn-compare">+ Comparar</span>
+                                        </div>
+                                        <div class="tel-row highlight-col">
+                                            <span class="pos-box dark">7</span>
+                                            <span class="driver-code"><strong class="c-code col-c">COL</strong> Colapinto 🇦🇷</span>
+                                            <span class="team-lbl alp">Alpine</span>
+                                            <span class="gap-txt">+1:34.281</span>
+                                            <span class="btn-quit">Quitar</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Columna Derecha: Gráfico Ritmo de Carrera por Vuelta -->
+                                <div class="tel-col-chart">
+                                    <div class="tel-chart-head">
+                                        <span class="tel-chart-title">Ritmo de Carrera por Vuelta</span>
+                                        <div class="tel-driver-legend">
+                                            <span class="leg-dot gas">● GAS</span>
+                                            <span class="leg-dot col">● COL</span>
+                                        </div>
+                                    </div>
+                                    <div class="tel-tyres-pills">
+                                        <span>🔴 Soft</span>
+                                        <span>🟡 Medium</span>
+                                        <span>⚪ Hard</span>
+                                        <span class="tel-badge-brand">DRS</span>
+                                    </div>
+
+                                    <!-- SVG Telemetry Graph con curvas reales y dots -->
+                                    <div class="tel-graph-canvas">
+                                        <svg viewBox="0 0 200 70" class="tel-svg-real" preserveAspectRatio="none">
+                                            <line x1="0" y1="15" x2="200" y2="15" stroke="rgba(255,255,255,0.06)" stroke-dasharray="2,2"/>
+                                            <line x1="0" y1="35" x2="200" y2="35" stroke="rgba(255,255,255,0.06)" stroke-dasharray="2,2"/>
+                                            <line x1="0" y1="55" x2="200" y2="55" stroke="rgba(255,255,255,0.06)" stroke-dasharray="2,2"/>
+                                            
+                                            <!-- Curva GAS (rosa discontinua) -->
+                                            <path d="M 10,22 Q 35,50 65,42 T 115,48 T 155,44 T 190,18" fill="none" stroke="#f472b6" stroke-width="1.8" stroke-dasharray="3,2"/>
+                                            
+                                            <!-- Curva COL (celeste/verde sólida con puntos) -->
+                                            <path class="tel-path-live" d="M 10,28 Q 35,12 65,38 T 115,42 T 155,54 T 190,34" fill="none" stroke="#00e5ff" stroke-width="2"/>
+                                            
+                                            <!-- Puntos de compuestos -->
+                                            <circle cx="10" cy="28" r="2.5" fill="#facc15"/>
+                                            <circle cx="35" cy="12" r="2.5" fill="#00e5ff"/>
+                                            <circle cx="65" cy="38" r="2.5" fill="#ef4444"/>
+                                            <circle cx="115" cy="42" r="2.5" fill="#ffffff"/>
+                                            <circle cx="155" cy="54" r="2.5" fill="#00e5ff"/>
+                                            <circle cx="190" cy="34" r="2.5" fill="#facc15"/>
+                                        </svg>
+                                    </div>
+
+                                    <div class="tel-scrubber-bar">
+                                        <span class="scrub-btn">⏸</span>
+                                        <div class="scrub-track"><div class="scrub-progress"></div></div>
+                                        <span class="scrub-time">Vta 43/60</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-card-body">
+                        <div class="card-meta">
+                            <span class="card-pill pill-telemetry">Data Streaming & Telemetría</span>
+                            <span class="card-status-text">Datos en Tiempo Real</span>
+                        </div>
+                        <h3 class="card-product-title">Club DRS Telemetrías</h3>
+                        <p class="card-product-tagline">Telemetría F1 en Tiempo Real & FastF1 Engine</p>
+                        <p class="card-product-desc">Sistema de telemetría y comparativa sincrónica de Fórmula 1 vuelta a vuelta mediante microservicios FastF1 y OpenF1. Visualización de curvas de velocidad, acelerador, frenado, RPM y delta de tiempos.</p>
+                        
+                        <div class="card-metrics-grid">
+                            <div class="card-metric-item">
+                                <span class="metric-val">+340 km/h</span>
+                                <span class="metric-label">Captura en Pista</span>
+                            </div>
+                            <div class="card-metric-item">
+                                <span class="metric-val">FastF1 API</span>
+                                <span class="metric-label">Sincronización GPS</span>
+                            </div>
+                        </div>
+
+                        <a href="https://clubdrs.com/telemetrias" target="_blank" rel="noopener noreferrer" class="card-cta-btn btn-telemetry">
+                            <span>Ver Telemetría en Vivo</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="7" y1="17" x2="17" y2="7"></line>
+                                <polyline points="7 7 17 7 17 17"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 4. EDUAGRO -->
+                <article class="carousel-card" data-index="3" data-product="eduagro">
+                    <div class="sim-window">
+                        <div class="sim-window-header">
+                            <div class="sim-window-dots">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                            </div>
+                            <span class="sim-window-title">EduAgro — Gestión de Campo & Cosecha</span>
+                            <div class="sim-live-badge badge-eduagro">
+                                <span class="dot-pulse"></span>
+                                <span>SATÉLITE SENTINEL-2</span>
+                            </div>
+                        </div>
+
+                        <!-- Micro-pantalla interactiva EduAgro (1:1 Screenshot Mapa y Lotes) -->
+                        <div class="sim-screen sim-eduagro-real">
+                            <!-- Barra de navegación EduAgro -->
+                            <div class="edu-app-nav">
+                                <div class="edu-nav-brand">
+                                    <span class="edu-leaf-icon">🌾</span>
+                                    <span class="edu-logo-text">EduAgro</span>
+                                    <span class="edu-nav-pill">Gestión de Campo & Cosecha</span>
+                                </div>
+                                <div class="edu-nav-links">
+                                    <span class="active">Satélite & Lotes</span>
+                                    <span>Módulos</span>
+                                    <span class="edu-btn-field">Ir a Mi Campo</span>
+                                </div>
+                            </div>
+
+                            <!-- Subheader establecimiento -->
+                            <div class="edu-est-bar">
+                                <span class="edu-est-name">Establecimiento: <strong>La Paulina</strong> <small>840 ha</small></span>
+                                <div class="edu-est-tabs">
+                                    <span class="tab">Lote 4 (Soja 1ra)</span>
+                                    <span class="tab active">Lote 2 (Maíz)</span>
+                                    <span class="tab">Lote 7 (Trigo)</span>
+                                </div>
+                            </div>
+
+                            <!-- Mapa catastral interactivo con polígonos -->
+                            <div class="edu-map-viewport">
+                                <!-- Polígonos de lotes satelitales -->
+                                <div class="edu-lot-polygon lot-1">
+                                    <span class="lot-title">Lote 1 · 90 ha</span>
+                                    <span class="lot-sub">(Barbecho)</span>
+                                </div>
+
+                                <div class="edu-lot-polygon lot-2 active-lot">
+                                    <span class="lot-title">Lote 2 · 185 ha · Maíz</span>
+                                    <span class="lot-glow-indicator">● EN SEGUIMIENTO</span>
+                                </div>
+
+                                <div class="edu-lot-polygon lot-7">
+                                    <span class="lot-title">Lote 7 · 140 ha · Trigo</span>
+                                </div>
+
+                                <!-- Floating Card Lote 2 "Bajo Este" -->
+                                <div class="edu-floating-card">
+                                    <div class="edu-fc-head">
+                                        <div class="edu-fc-badges">
+                                            <span class="badge-blue">CUADRO CENTRAL · ALQUILADO</span>
+                                            <span class="badge-amber">EN CRECIMIENTO</span>
+                                        </div>
+                                        <div class="edu-fc-hectares">
+                                            <strong>185</strong> <small>Hectáreas</small>
+                                        </div>
+                                    </div>
+
+                                    <h5 class="edu-fc-title">Lote 2 - "Bajo Este"</h5>
+
+                                    <div class="edu-fc-grid">
+                                        <div class="fc-item">
+                                            <span class="lbl">Cultivo en Pie</span>
+                                            <span class="val">Maíz Tardío (DK 72-10)</span>
+                                        </div>
+                                        <div class="fc-item">
+                                            <span class="lbl">Rinde Estimado</span>
+                                            <span class="val green">88.0 qq/ha</span>
+                                        </div>
+                                        <div class="fc-item">
+                                            <span class="lbl">Volumen Total</span>
+                                            <span class="val amber">1.628 Tn</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="edu-alert-box">
+                                        <div class="edu-ab-head">
+                                            <span>⚠️ Ventana de Secado Natural Favorable</span>
+                                            <span class="risk-pill">Riesgo Piso</span>
+                                        </div>
+                                        <p class="edu-ab-text">Humedad actual: 17.5%. Lluvias nulas en los próximos 7 días. Esperar secado en pie ahorra US$ 2.50/Tn/punto.</p>
+                                        <div class="edu-ab-saving">💰 Ahorro estimado por esperar secado: <strong>US$ 4.070</strong></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-card-body">
+                        <div class="card-meta">
+                            <span class="card-pill pill-eduagro">Agro-Tech & ERP</span>
+                            <span class="card-status-text">Gestión Rural Integral</span>
+                        </div>
+                        <h3 class="card-product-title">EduAgro</h3>
+                        <p class="card-product-tagline">ERP Agropecuario & Motor de Decisiones</p>
+                        <p class="card-product-desc">Software ERP integral para productores agrícolas que conecta el trabajo del campo con la administración: trazabilidad de granos en silobolsas, cartas de porte, monitoreo satelital Copernicus NDVI y motor de decisiones para comercialización.</p>
+                        
+                        <div class="card-metrics-grid">
+                            <div class="card-metric-item">
+                                <span class="metric-val">Sentinel-2</span>
+                                <span class="metric-label">Satélite Multiespectral</span>
+                            </div>
+                            <div class="card-metric-item">
+                                <span class="metric-val">Decision Engine</span>
+                                <span class="metric-label">Lógica Comercial</span>
+                            </div>
+                        </div>
+
+                        <a href="https://eduagro.ggsolutions.com.ar" target="_blank" rel="noopener noreferrer" class="card-cta-btn btn-eduagro">
+                            <span>Ingresar a EduAgro</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="7" y1="17" x2="17" y2="7"></line>
+                                <polyline points="7 7 17 7 17 17"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 5. PILATES CON GABI -->
+                <article class="carousel-card" data-index="4" data-product="pilates">
+                    <div class="sim-window">
+                        <div class="sim-window-header">
+                            <div class="sim-window-dots">
+                                <span class="dot dot-red"></span>
+                                <span class="dot dot-yellow"></span>
+                                <span class="dot dot-green"></span>
+                            </div>
+                            <span class="sim-window-title">pilates.ggsolutions.com.ar</span>
+                            <div class="sim-live-badge badge-pilates">
+                                <span class="dot-pulse"></span>
+                                <span>ESTUDIO BOUTIQUE</span>
+                            </div>
+                        </div>
+
+                        <!-- Micro-pantalla interactiva Pilates con Gabi (1:1 Screenshot Hero Real) -->
+                        <div class="sim-screen sim-pilates-boutique">
+                            <!-- Barra superior fucsia/berry -->
+                            <div class="pcg-top-ribbon">
+                                <span>💖 Pilates con Gabi · Avise ausencias 3hs antes | 🐕 Atendido por La Chunny 🐾</span>
+                            </div>
+
+                            <!-- Navbar -->
+                            <div class="pcg-navbar">
+                                <div class="pcg-brand">
+                                    <img src="/static/images/pcg_logo_chunny.jpg" alt="Logo Pilates con Gabi" class="pcg-mini-logo">
+                                    <div class="pcg-brand-text">
+                                        <span class="pcg-name">Pilates con Gabi</span>
+                                        <span class="pcg-sub">ESTUDIO REFORMER</span>
+                                    </div>
+                                </div>
+                                <div class="pcg-nav-actions">
+                                    <span class="pcg-nav-pill-btn pink">🔑 Acceso Alumnos</span>
+                                    <span class="pcg-nav-pill-btn outline">Acceso Profesoras</span>
+                                </div>
+                            </div>
+
+                            <!-- Hero editorial -->
+                            <div class="pcg-hero-content">
+                                <div class="pcg-hero-left">
+                                    <span class="pcg-eyebrow">✨ SEDE BOUTIQUE EN CERRO DE LAS ROSAS · 🐾 CUSTODIADO POR LA CHUNNY</span>
+                                    <h4 class="pcg-editorial-headline">
+                                        Mueve tu cuerpo,<br>
+                                        libera tu mente en<br>
+                                        <em>Pilates con Gabi.</em>
+                                    </h4>
+                                    <p class="pcg-editorial-desc">
+                                        Clases guiadas en máquinas reformer para grupos reducidos de máximo 5 alumnos por turno. Atención postural personalizada, rehabilitación y entrenamiento consciente adaptado a tu ritmo.
+                                    </p>
+                                    <div class="pcg-chunny-badge">
+                                        <span>🐕 Con la compañía de La Chunny, nuestra salchichita 🐾</span>
+                                    </div>
+                                    <div class="pcg-buttons-row">
+                                        <span class="pcg-btn-rose">🔑 Acceso Alumnos</span>
+                                        <span class="pcg-btn-dark">Conocer Disciplinas</span>
+                                    </div>
+                                </div>
+                                <div class="pcg-hero-right">
+                                    <div class="pcg-seal-wrapper">
+                                        <img src="/static/images/pcg_logo_chunny.jpg" alt="Sello P.C.G Pilates Reformer" class="pcg-seal-img">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-card-body">
+                        <div class="card-meta">
+                            <span class="card-pill pill-pilates">Wellness & Automatización</span>
+                            <span class="card-status-text">Turnero Modular</span>
+                        </div>
+                        <h3 class="card-product-title">Pilates con Gabi</h3>
+                        <p class="card-product-tagline">Estudio Boutique & Turnero de Reformers</p>
+                        <p class="card-product-desc">Plataforma web boutique y sistema de turnero modular para estudio de Pilates en Cerro de las Rosas. Control de capacidad de reformers por horario, lista de espera dinámica, membresías y recordatorios automáticos de asistencia vía WhatsApp.</p>
+                        
+                        <div class="card-metrics-grid">
+                            <div class="card-metric-item">
+                                <span class="metric-val">6 Reformers</span>
+                                <span class="metric-label">Capacidad en Vivo</span>
+                            </div>
+                            <div class="card-metric-item">
+                                <span class="metric-val">WhatsApp Sync</span>
+                                <span class="metric-label">Avisos Inmediatos</span>
+                            </div>
+                        </div>
+
+                        <a href="https://pilates.ggsolutions.com.ar" target="_blank" rel="noopener noreferrer" class="card-cta-btn btn-pilates">
+                            <span>Ver Turnero Web</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="7" y1="17" x2="17" y2="7"></line>
+                                <polyline points="7 7 17 7 17 17"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+
+        <!-- Indicador de Paginación / Puntos del Carrusel -->
+        <div class="carousel-pagination" id="carousel-pagination" aria-label="Paginación de productos">
+            <button type="button" class="page-dot active" data-index="0" aria-label="Ir a Opportunity"></button>
+            <button type="button" class="page-dot" data-index="1" aria-label="Ir a Club DRS"></button>
+            <button type="button" class="page-dot" data-index="2" aria-label="Ir a Club DRS Telemetrías"></button>
+            <button type="button" class="page-dot" data-index="3" aria-label="Ir a EduAgro"></button>
+            <button type="button" class="page-dot" data-index="4" aria-label="Ir a Pilates con Gabi"></button>
         </div>
     </div>
 </section>

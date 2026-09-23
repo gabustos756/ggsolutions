@@ -198,6 +198,78 @@ def home():
             }
         ],
         
+        "ecosystem_products": [
+            {
+                "id": "opportunity",
+                "name": "Opportunity",
+                "tagline": "Inteligencia Inmobiliaria & Motor de Permutas SaaS",
+                "badge": "Proptech & Algoritmos",
+                "desc": "Sistema operativo inmobiliario SaaS con ingesta de +80.000 inmuebles en tiempo real (Zonaprop y La Voz), radar de valuación de m² y motor NLP matcher para cruzar clientes con bienes en permuta (efectivo + inmuebles + vehículos).",
+                "url": "https://opportunity.ggsolutions.com.ar",
+                "metrics": [
+                    {"label": "Mercado Activo", "val": "+80.000 Inmuebles"},
+                    {"label": "Cálculo Matcher", "val": "Efectivo + Permutas"}
+                ],
+                "accent": "#06B6D4",
+                "status_text": "SaaS Multi-Tenant"
+            },
+            {
+                "id": "clubdrs",
+                "name": "Club DRS",
+                "tagline": "Portal de Noticias, Viajes a la F1 & Campeonato",
+                "badge": "Portal F1 & Comunidad",
+                "desc": "Portal y comunidad oficial de Fórmula 1 en español: cobertura periodística técnica, cronograma y cuenta regresiva de Grandes Premios en vivo, seguimiento de Franco Colapinto y paquetes de viaje al GP de San Pablo (Interlagos).",
+                "url": "https://clubdrs.com",
+                "metrics": [
+                    {"label": "Cobertura F1", "val": "10 Escuderías"},
+                    {"label": "Grandes Premios", "val": "Viajes a Interlagos"}
+                ],
+                "accent": "#E10600",
+                "status_text": "En Producción Activa"
+            },
+            {
+                "id": "drs_telemetry",
+                "name": "Club DRS Telemetrías",
+                "tagline": "Telemetría F1 en Tiempo Real & FastF1 Engine",
+                "badge": "Data Streaming & Telemetría",
+                "desc": "Sistema de telemetría y telemetría comparativa sincrónica de Fórmula 1 vuelta a vuelta mediante microservicios FastF1 y OpenF1. Visualización de curvas de velocidad, acelerador, frenado, RPM y delta de tiempos.",
+                "url": "https://clubdrs.com/telemetrias",
+                "metrics": [
+                    {"label": "Velocidad Muestreo", "val": "+340 km/h Live"},
+                    {"label": "Motor de Datos", "val": "FastF1 & WebSockets"}
+                ],
+                "accent": "#00FF87",
+                "status_text": "Datos en Tiempo Real"
+            },
+            {
+                "id": "eduagro",
+                "name": "EduAgro",
+                "tagline": "ERP Agropecuario & Motor de Decisiones",
+                "badge": "Agro-Tech & ERP",
+                "desc": "Software ERP integral para productores agrícolas que conecta el trabajo del campo con la administración: trazabilidad de granos en silobolsas, cartas de porte, monitoreo satelital Copernicus NDVI y motor de decisiones para comercialización.",
+                "url": "https://eduagro.ggsolutions.com.ar",
+                "metrics": [
+                    {"label": "Monitoreo", "val": "Satélite Sentinel-2"},
+                    {"label": "Lógica Negocio", "val": "Motor Determinístico"}
+                ],
+                "accent": "#10B981",
+                "status_text": "Gestión Rural Integral"
+            },
+            {
+                "id": "pilates",
+                "name": "Pilates con Gabi",
+                "tagline": "Estudio Boutique & Turnero de Reformers",
+                "badge": "Wellness & Automatización",
+                "desc": "Plataforma web boutique y sistema de turnero modular para estudio de Pilates en Cerro de las Rosas. Control de capacidad de reformers por horario, lista de espera dinámica, membresías y recordatorios automáticos de asistencia vía WhatsApp.",
+                "url": "https://pilates.ggsolutions.com.ar",
+                "metrics": [
+                    {"label": "Gestión Cupos", "val": "Reformers en Vivo"},
+                    {"label": "Comunicaciones", "val": "WhatsApp Sync"}
+                ],
+                "accent": "#C87D65",
+                "status_text": "Turnero Automatizado"
+            }
+        ],
         "built_cases": [
             {
                 "id": "ecommerce",

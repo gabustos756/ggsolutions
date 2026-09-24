@@ -3,16 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ description }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    <!-- OpenGraph / Social Media -->
+    <!-- SEO Primario -->
+    <title>{{ page_title | default(company_name ~ ' — ' ~ tagline ~ ' | Córdoba, Argentina') }}</title>
+    <meta name="description" content="{{ description | default('Diseñamos y desarrollamos software a medida, sistemas internos, dashboards y automatización de procesos en Córdoba, Argentina. Código con criterio, sin sobreingeniería.') }}">
+    <meta name="keywords" content="desarrollo de software a medida, software factory córdoba, sistemas web a medida, dashboards empresariales, desarrollo plataformas saas, arquitectura de software, mvp startups, integraciones api, gg solutions córdoba">
+    <meta name="author" content="GG Solutions">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    
+    <!-- URL Canónica -->
+    <link rel="canonical" href="{{ canonical_url | default('https://ggsolutions.com.ar/') }}">
+
+    <!-- Geolocalización & Local SEO (Córdoba, Argentina) -->
+    <meta name="geo.region" content="AR-X">
+    <meta name="geo.placename" content="Córdoba, Argentina">
+    <meta name="geo.position" content="-31.4201;-64.1888">
+    <meta name="ICBM" content="-31.4201, -64.1888">
+
+    <!-- Favicon & PWA Suite Completa -->
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
+    
+    <!-- Tema de Color para Navegadores Móviles & Safari -->
+    <meta name="theme-color" content="#0F172A">
+    <meta name="msapplication-TileColor" content="#0F172A">
+
+    <!-- OpenGraph / Social Media (Facebook, LinkedIn, WhatsApp) -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ company_name }} — {{ tagline }}">
+    <meta property="og:site_name" content="GG Solutions">
+    <meta property="og:title" content="{{ page_title | default(company_name ~ ' — ' ~ tagline) }}">
     <meta property="og:description" content="{{ description }}">
+    <meta property="og:url" content="{{ canonical_url | default('https://ggsolutions.com.ar/') }}">
+    <meta property="og:image" content="{{ og_image | default(url_for('static', filename='images/og-image.png', _external=True)) }}">
+    <meta property="og:image:secure_url" content="{{ og_image | default(url_for('static', filename='images/og-image.png', _external=True)) }}">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="GG Solutions — Estudio de Software & Consultoría Técnica">
+    <meta property="og:locale" content="es_AR">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page_title | default(company_name ~ ' — ' ~ tagline) }}">
+    <meta name="twitter:description" content="{{ description }}">
+    <meta name="twitter:image" content="{{ og_image | default(url_for('static', filename='images/og-image.png', _external=True)) }}">
+    <meta name="twitter:image:alt" content="GG Solutions — Software pensado para resolver problemas reales">
+
+    <!-- Schema.org JSON-LD Structured Data (Rich Snippets & Google Knowledge Graph) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://ggsolutions.com.ar/#organization",
+          "name": "GG Solutions",
+          "alternateName": "GG Solutions — Estudio de Software & Consultoría Técnica",
+          "url": "https://ggsolutions.com.ar/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://ggsolutions.com.ar/static/images/logo.svg",
+            "width": 240,
+            "height": 50
+          },
+          "image": "https://ggsolutions.com.ar/static/images/og-image.png",
+          "description": "Estudio de desarrollo de software a medida, sistemas internos, dashboards y consultoría técnica de arquitectura en Córdoba, Argentina.",
+          "email": "contacto@ggsolutions.com.ar",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Córdoba",
+            "addressRegion": "Córdoba",
+            "addressCountry": "AR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -31.4201,
+            "longitude": -64.1888
+          },
+          "areaServed": [
+            {
+              "@type": "Country",
+              "name": "Argentina"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Córdoba"
+            }
+          ],
+          "priceRange": "$$",
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Servicios de Software & Consultoría",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Desarrollo Web a Medida",
+                  "description": "Construcción de aplicaciones y plataformas web desde cero, optimizadas para velocidad, seguridad y escalabilidad."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Sistemas Internos & Dashboards",
+                  "description": "Paneles de control y software de gestión adaptados a la dinámica y flujos de trabajo específicos de la empresa."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Automatización & Arquitectura API",
+                  "description": "Integración de servicios de terceros, microservicios y sincronización de datos en tiempo real."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Consultoría Técnica & MVPs",
+                  "description": "Diagnóstico de arquitectura, evaluación de código y desarrollo rápido de productos mínimos viables orientados a tracción comercial."
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://ggsolutions.com.ar/#website",
+          "url": "https://ggsolutions.com.ar/",
+          "name": "GG Solutions",
+          "publisher": {
+            "@id": "https://ggsolutions.com.ar/#organization"
+          },
+          "inLanguage": "es"
+        }
+      ]
+    }
+    </script>
     
-    <title>{{ company_name }} — {{ tagline }}</title>
-    
-    <!-- Fonts: Inter & Plus Jakarta Sans -->
+    <!-- DNS Preconnect & Preload Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -23,7 +160,7 @@
 <body>
     {% include 'sections/navbar.html' %}
 
-    <main>
+    <main id="main-content">
         {% block content %}{% endblock %}
     </main>
 

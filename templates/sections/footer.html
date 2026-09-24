@@ -1,13 +1,17 @@
 <footer class="site-footer">
     <div class="container footer-content">
         <div class="footer-brand">
-            <span class="brand-mark">GG</span> Solutions &copy; 2026. Estudio & Consultoría de Software.
+            <a href="#hero" class="footer-logo-link" aria-label="GG Solutions — Inicio">
+                <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="GG Solutions — Estudio de Software" class="footer-logo-img" width="165" height="34">
+            </a>
+            <p class="footer-copy">Estudio de Software &amp; Consultoría Técnica &copy; 2026. Córdoba, Argentina.</p>
         </div>
-        <div class="footer-links">
+        <nav class="footer-links" aria-label="Enlaces del pie de página">
+            <a href="#methodology">Cómo trabajamos</a>
             <a href="#services">Qué hacemos</a>
+            <a href="#cases">Lo que construimos</a>
             <a href="#differentials">Enfoque</a>
-            <a href="#projects">Proyectos</a>
             <a href="#contact">Contacto</a>
-        </div>
+        </nav>
     </div>
 </footer>

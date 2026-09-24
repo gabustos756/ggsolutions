@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso Administrador — GG Solutions</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon-32x32.png') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -148,9 +153,8 @@
 
     <div class="login-card">
         <div class="brand-header">
-            <div class="brand-logo">
-                <span class="brand-mark">GG</span>
-                <span>Solutions</span>
+            <div class="brand-logo" style="margin-bottom: 12px;">
+                <img src="{{ url_for('static', filename='images/logo-dark.svg') }}" alt="GG Solutions" style="height: 42px; width: auto; margin: 0 auto; display: block;">
             </div>
             <p class="login-title">Panel Privado de Administración</p>
         </div>

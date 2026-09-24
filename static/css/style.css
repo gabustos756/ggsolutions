@@ -213,11 +213,23 @@ a {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--text-headline);
+  text-decoration: none;
+  transition: opacity var(--transition-normal);
+}
+
+.brand:hover {
+  opacity: 0.94;
+}
+
+.brand-logo-img {
+  height: 38px;
+  width: auto;
+  display: block;
+  transition: transform var(--transition-normal);
+}
+
+.brand:hover .brand-logo-img {
+  transform: translateY(-1px);
 }
 
 .brand-mark {
@@ -854,6 +866,35 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 32px;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-logo-link {
+  display: inline-flex;
+  align-items: center;
+  transition: opacity var(--transition-normal);
+}
+
+.footer-logo-link:hover {
+  opacity: 0.9;
+}
+
+.footer-logo-img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+.footer-copy {
+  color: var(--text-dim);
+  font-size: 0.85rem;
 }
 
 .footer-links {
@@ -2277,7 +2318,18 @@ a {
 
   .footer-content {
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
     text-align: center;
+    align-items: center;
+  }
+
+  .footer-brand {
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .brand-logo-img {
+    height: 34px;
   }
 }

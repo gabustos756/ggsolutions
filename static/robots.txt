@@ -1,0 +1,10 @@
+# Robots.txt for GG Solutions (https://ggsolutions.com.ar)
+User-agent: *
+Allow: /
+Allow: /static/
+Disallow: /admin/
+Disallow: /api/
+Disallow: /instance/
+
+# Crawl Delay & Sitemap
+Sitemap: https://ggsolutions.com.ar/sitemap.xml

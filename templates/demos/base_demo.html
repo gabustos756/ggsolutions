@@ -6,6 +6,10 @@
     <title>{{ demo.nombre_negocio }} | Sitio Oficial</title>
     <meta name="description" content="Plataforma digital oficial de {{ demo.nombre_negocio }}. Productos, servicios, turnos y ubicación en {{ demo.ciudad or 'Córdoba' }}.">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    
     <!-- Google Fonts dinámicas por rubro -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

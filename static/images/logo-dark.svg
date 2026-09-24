@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 48" width="250" height="48" fill="none">
+  <defs>
+    <linearGradient id="apple-logo-green-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#34D399" />
+    </linearGradient>
+  </defs>
+
+  <!-- ISOTIPO G. APPLE STYLE -->
+  <g transform="translate(2, 4)">
+    <rect width="40" height="40" rx="10" fill="#182234" />
+    <rect x="0.5" y="0.5" width="39" height="39" rx="9.5" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+    
+    <!-- G glifo estilizado -->
+    <path 
+      d="M26.5 14.5
+         C24.5 12 21.6 10.8 18.2 10.8
+         C12 10.8 7.5 15.2 7.5 21.5
+         C7.5 27.8 12 32.2 18.4 32.2
+         C24.4 32.2 28.8 28.2 28.8 22.2
+         V20.2
+         H18.5
+         C17.6 20.2 16.8 21 16.8 22
+         C16.8 22.9 17.6 23.7 18.5 23.7
+         H25
+         C24.5 27 21.8 28.8 18.4 28.8
+         C14.2 28.8 11 25.6 11 21.5
+         C11 17.3 14.2 14.2 18.2 14.2
+         C20.6 14.2 22.6 15.2 24.1 17
+         C24.7 17.7 25.7 17.9 26.4 17.2
+         C27.1 16.5 27 15.2 26.5 14.5 Z" 
+      fill="url(#apple-logo-green-dark)" 
+    />
+    
+    <!-- Punto verde tecnológico Apple -->
+    <circle cx="31.5" cy="30" r="1.8" fill="#34D399" />
+  </g>
+
+  <!-- TIPOGRAFÍA APPLE STYLE DARK -->
+  <g transform="translate(54, 11)">
+    <!-- Wordmark Principal Blanco / Gris Claro -->
+    <text x="0" y="19" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Plus Jakarta Sans', sans-serif" font-size="20" font-weight="700" fill="#FFFFFF" letter-spacing="-0.035em">
+      GG <tspan font-weight="400" fill="#94A3B8">Solutions</tspan>
+    </text>
+
+    <!-- Subtítulo de Estudio Minimalista -->
+    <text x="1" y="32" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', sans-serif" font-size="8" font-weight="600" fill="#34D399" letter-spacing="0.14em">
+      SOFTWARE STUDIO
+    </text>
+  </g>
+</svg>

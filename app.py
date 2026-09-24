@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from functools import wraps
-from flask import Flask, render_template, request, jsonify, redirect, url_for, session, abort
+from flask import Flask, render_template, request, jsonify, redirect, url_for, session, abort, send_from_directory
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
@@ -140,6 +140,26 @@ def solo_superadmin(f):
 
 
 # ==============================================================================
+# RUTAS DE SEO, MOTORES DE BÚSQUEDA Y FAVICON
+# ==============================================================================
+@app.route("/robots.txt")
+def robots_txt():
+    return send_from_directory(os.path.join(app.root_path, "static"), "robots.txt", mimetype="text/plain")
+
+@app.route("/sitemap.xml")
+def sitemap_xml():
+    return send_from_directory(os.path.join(app.root_path, "static"), "sitemap.xml", mimetype="application/xml")
+
+@app.route("/favicon.ico")
+def favicon_ico():
+    return send_from_directory(os.path.join(app.root_path, "static", "images"), "favicon.ico", mimetype="image/vnd.microsoft.icon")
+
+@app.route("/site.webmanifest")
+def site_webmanifest():
+    return send_from_directory(os.path.join(app.root_path, "static"), "site.webmanifest", mimetype="application/manifest+json")
+
+
+# ==============================================================================
 # RUTA PÚBLICA (LANDING PAGE)
 # ==============================================================================
 @app.route("/")
@@ -147,7 +167,10 @@ def home():
     context = {
         "company_name": "GG Solutions",
         "tagline": "Estudio de Software & Consultoría Técnica",
-        "description": "Diseñamos y desarrollamos software a medida para empresas que buscan claridad, arquitectura sólida y precisión técnica.",
+        "page_title": "GG Solutions — Estudio de Software & Consultoría Técnica | Córdoba, Argentina",
+        "description": "Diseñamos y desarrollamos software a medida, sistemas internos, dashboards y automatización de procesos para empresas en Córdoba y toda la región. Código con criterio, sin sobreingeniería.",
+        "canonical_url": "https://ggsolutions.com.ar/",
+        "og_image": "https://ggsolutions.com.ar/static/images/og-image.png",
         "badge_text": "Estudio & Consultoría de Software",
         
         "hero_title": "Software pensado para resolver problemas reales.",

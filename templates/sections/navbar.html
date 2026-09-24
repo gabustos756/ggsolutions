@@ -1,14 +1,13 @@
 <header class="site-header">
     <div class="container nav-container">
-        <a href="#hero" class="brand">
-            <span class="brand-mark">GG</span>
-            <span class="brand-text">Solutions</span>
+        <a href="#hero" class="brand" aria-label="GG Solutions — Estudio de Software">
+            <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="GG Solutions — Estudio de Software" class="brand-logo-img" width="185" height="38">
         </a>
-        <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <button class="nav-toggle" aria-label="Abrir menú de navegación" aria-expanded="false">
             <span></span>
             <span></span>
         </button>
-        <nav class="nav-links">
+        <nav class="nav-links" aria-label="Navegación principal">
             <a href="#methodology">Cómo trabajamos</a>
             <a href="#services">Qué hacemos</a>
             <a href="#cases">Lo que construimos</a>
